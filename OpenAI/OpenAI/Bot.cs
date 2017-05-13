@@ -504,26 +504,26 @@ namespace OpenAI
             return ranger_action;
         }
 
-        private HSRangerLib.BotActionType GetRangerActionType(Entity actor, Entity target, actionEnum sf_action_type)
+        private HSRangerLib.BotActionType GetRangerActionType(Entity actor, Entity target, ActionType sf_action_type)
         {
             
-            if (sf_action_type == actionEnum.endturn)
+            if (sf_action_type == ActionType.END_TURN)
             {
                 if (POWERFULSINGLEACTION >= 1) POWERFULSINGLEACTION = 0;
                 return BotActionType.END_TURN;
             }
 
-            if (sf_action_type == actionEnum.useHeroPower)
+            if (sf_action_type == ActionType.USE_HERO_POWER)
             {
                 return BotActionType.CAST_ABILITY;
             }
 
-            if (sf_action_type == actionEnum.attackWithHero)
+            if (sf_action_type == ActionType.ATTACK_WITH_HERO)
             {
                 return BotActionType.HERO_ATTACK;
             }
 
-            if (sf_action_type == actionEnum.attackWithMinion)
+            if (sf_action_type == ActionType.ATTACK_WITH_MINION)
             {
                 if (actor.Zone == HSRangerLib.TAG_ZONE.HAND && actor.IsMinion)
                 {
@@ -534,7 +534,7 @@ namespace OpenAI
                 }
             }
 
-            if (sf_action_type == actionEnum.playcard)
+            if (sf_action_type == ActionType.PLAY_CARD)
             {
                 if (actor.Zone == HSRangerLib.TAG_ZONE.HAND)
                 {
@@ -583,9 +583,9 @@ namespace OpenAI
             
             switch (moveTodo.actionType)
             {
-                case actionEnum.endturn:
+                case ActionType.END_TURN:
                     break;
-                case actionEnum.playcard:
+                case ActionType.PLAY_CARD:
                     ranger_action.Actor = getCardWithNumber(moveTodo.card.entity);
 
                     lastplayedcard = CardDB.Instance.cardIdstringToEnum(ranger_action.Actor.CardId);
@@ -595,7 +595,7 @@ namespace OpenAI
                     Hrtprozis.Instance.updateLastPlayedCard(lastplayedcard, targetentity);
                     Ai.Instance.playedlastcard = lastplayedcard;
 
-                    if (daum.bestmove.actionType == actionEnum.playcard && daum.bestmove != null)
+                    if (daum.bestmove.actionType == ActionType.PLAY_CARD && daum.bestmove != null)
                     {
                         if (daum.IsPlayRandomEffect(daum.bestmove.card.card, daum.oldMoveGuess, daum.nextMoveGuess))
                         {
@@ -850,7 +850,7 @@ namespace OpenAI
 
                     if (ranger_action.Actor == null) return null;  // missing entity likely because new spawned minion
                     break;
-                case actionEnum.attackWithHero:
+                case ActionType.ATTACK_WITH_HERO:
                     ranger_action.Actor = base.FriendHero;
                     //System.Threading.Thread.Sleep(1100);
 
@@ -864,10 +864,10 @@ namespace OpenAI
                     //}
 
                     break;
-                case actionEnum.useHeroPower:
+                case ActionType.USE_HERO_POWER:
                     ranger_action.Actor = base.FriendHeroPower;
                     break;
-                case actionEnum.attackWithMinion:
+                case ActionType.ATTACK_WITH_MINION:
                     ranger_action.Actor = getEntityWithNumber(moveTodo.own.entityID);
 
                     if (daum.bestmove.own.name == CardDB.cardName.viciousfledgling && daum.bestmove.target.isHero && !daum.bestmove.target.own)
@@ -942,7 +942,7 @@ namespace OpenAI
 
 
 
-            if (moveTodo.actionType == actionEnum.attackWithMinion)
+            if (moveTodo.actionType == ActionType.ATTACK_WITH_MINION)
             {
                 bool hashyena = false;
                 bool cultmaster = false;
@@ -1019,7 +1019,7 @@ namespace OpenAI
 
             if (this.EnemySecrets.Count >= 1)
             {
-                if (moveTodo.actionType == actionEnum.attackWithHero)
+                if (moveTodo.actionType == ActionType.ATTACK_WITH_HERO)
                 {
                     foreach (SecretItem si in Probabilitymaker.Instance.enemySecrets)
                     {
@@ -1069,7 +1069,7 @@ namespace OpenAI
                     }
                 }
 
-                else if (moveTodo.actionType == actionEnum.attackWithMinion)
+                else if (moveTodo.actionType == ActionType.ATTACK_WITH_MINION)
                 {
                     foreach (SecretItem si in Probabilitymaker.Instance.enemySecrets)
                     {
@@ -1123,7 +1123,7 @@ namespace OpenAI
 
                 }
 
-                if (moveTodo.actionType == actionEnum.playcard)
+                if (moveTodo.actionType == ActionType.PLAY_CARD)
                 {
                     foreach (SecretItem si in Probabilitymaker.Instance.enemySecrets)
                     {
@@ -1174,7 +1174,7 @@ namespace OpenAI
             }
 
 
-            if (moveTodo.actionType == actionEnum.attackWithMinion && ranger_action.Target.IsHero && this.EnemyMinion.Count == 0)
+            if (moveTodo.actionType == ActionType.ATTACK_WITH_MINION && ranger_action.Target.IsHero && this.EnemyMinion.Count == 0)
             {
                 this.doMultipleThingsAtATime = true;
                 this.dontmultiactioncount = 0;
@@ -1333,7 +1333,7 @@ namespace OpenAI
                     //this is used if you cant queue actions (so ai is just sending one action at a time)
                     Action moveTodo = Ai.Instance.bestmove;
                     //Helpfunctions.Instance.ErrorLog("dontmultiactioncount " + dontmultiactioncount);
-                    if (moveTodo == null || moveTodo.actionType == actionEnum.endturn)
+                    if (moveTodo == null || moveTodo.actionType == ActionType.END_TURN)
                     {
                         //simply clear action list, hearthranger bot will endturn if no action can do.
                         e.action_list.Clear();
@@ -1388,7 +1388,7 @@ namespace OpenAI
                         HelpFunctions.Instance.ErrorLog("play action..." + (e.action_list.Count() + 1));
                         Action moveTodo = Ai.Instance.bestmove;
 
-                        if (!hasMoreActions && (moveTodo == null || moveTodo.actionType == actionEnum.endturn))
+                        if (!hasMoreActions && (moveTodo == null || moveTodo.actionType == ActionType.END_TURN))
                         {
                             if (Settings.Instance.enemyConcede) HelpFunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
 
@@ -1499,7 +1499,7 @@ namespace OpenAI
 
             // HearthRanger will re-query bestmove after a targeted minion buff. So even though we can queue moves after,
             // there's no point because we'll just print error messages when HearthRanger ignores them.
-            if (Ai.Instance.bestmove.actionType == actionEnum.playcard)
+            if (Ai.Instance.bestmove.actionType == ActionType.PLAY_CARD)
             {
                 CardDB.cardName card = Ai.Instance.bestmove.card.card.name;
 

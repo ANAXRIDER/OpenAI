@@ -104,7 +104,7 @@
                     foreach (Minion trgt in trgts)
                     {
                         if (trgt.isHero) continue;//do play his ability in basics
-                        Action a = new Action(actionEnum.useHeroPower, posmoves[0].enemyHeroAblility, null, 0, trgt, abilityPenality, 0);
+                        Action a = new Action(ActionType.USE_HERO_POWER, posmoves[0].enemyHeroAblility, null, 0, trgt, abilityPenality, 0);
                         Playfield pf = new Playfield(posmoves[0]);
                         pf.doAction(a);
                         posmoves.Add(pf);
@@ -120,7 +120,7 @@
                     // the other classes dont have to target####################################################
                     if ((rootfield.enemyHeroName == HeroEnum.thief && rootfield.enemyWeaponDurability == 0) || rootfield.enemyHeroName != HeroEnum.thief || hasinspire)
                     {
-                        Action a = new Action(actionEnum.useHeroPower, posmoves[0].enemyHeroAblility, null, 0, null, abilityPenality, 0);
+                        Action a = new Action(ActionType.USE_HERO_POWER, posmoves[0].enemyHeroAblility, null, 0, null, abilityPenality, 0);
                         Playfield pf = new Playfield(posmoves[0]);
                         pf.doAction(a);
                         posmoves.Add(pf);

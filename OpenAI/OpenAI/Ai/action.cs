@@ -1,31 +1,22 @@
-﻿
- //TODO:
+﻿/*
+ * TODO:
+ * - Make structured
+ * - cardids of duplicate + avenge
+ * - nozdormu (for computing time :D)
+ * - faehrtenlesen (tracking)
+ * - lehrensucher cho
+ * - scharmuetzel kills all :D
+ * - deathlord-guessing
+ * - kelthuzad dont know which minion died this turn in rl
+ */
 
-//cardids of duplicate + avenge
-//nozdormu (for computing time :D)
-//faehrtenlesen (tracking)
-// lehrensucher cho
-//scharmuetzel kills all :D
-//todo deathlord-guessing
-//todo kelthuzad dont know which minion died this turn in rl
+using System;
+
 namespace OpenAI
 {
-    using System;
-
-    public enum actionEnum
-    {
-        endturn = 0,
-        playcard,
-        attackWithHero,
-        useHeroPower,
-        attackWithMinion
-    }
-    //todo make to struct
-
     public class Action
     {
-
-        public actionEnum actionType;
+        public ActionType actionType;
         public Handmanager.Handcard card;
         //public int cardEntitiy;
         public int place; //= target where card/minion is placed
@@ -46,7 +37,7 @@ namespace OpenAI
             }
         }
 
-        public Action(actionEnum type, Handmanager.Handcard hc, Minion ownCardEntity, int place, Minion target, float pen, int choice, int track = 0)
+        public Action(ActionType type, Handmanager.Handcard hc, Minion ownCardEntity, int place, Minion target, float pen, int choice, int track = 0)
         {
             this.actionType = type;
             this.card = hc;
@@ -63,7 +54,7 @@ namespace OpenAI
         {
             if (s.StartsWith("play "))
             {
-                this.actionType = actionEnum.playcard;
+                this.actionType = ActionType.PLAY_CARD;
 
                 int cardEnt = Convert.ToInt32(s.Split(new string[] { "id " }, StringSplitOptions.RemoveEmptyEntries)[1].Split(' ')[0]);
                 int targetEnt = -1;
@@ -94,7 +85,7 @@ namespace OpenAI
 
             if (s.StartsWith("attack "))
             {
-                this.actionType = actionEnum.attackWithMinion;
+                this.actionType = ActionType.ATTACK_WITH_MINION;
 
                 int ownEnt = Convert.ToInt32(s.Split(' ')[1].Split(' ')[0]);
                 int targetEnt = Convert.ToInt32(s.Split(' ')[3].Split(' ')[0]);
@@ -113,7 +104,7 @@ namespace OpenAI
 
             if (s.StartsWith("heroattack "))
             {
-                this.actionType = actionEnum.attackWithHero;
+                this.actionType = ActionType.ATTACK_WITH_HERO;
 
                 int targetEnt = Convert.ToInt32(s.Split(' ')[1].Split(' ')[0]);
 
@@ -131,7 +122,7 @@ namespace OpenAI
 
             if (s.StartsWith("useability on target "))
             {
-                this.actionType = actionEnum.useHeroPower;
+                this.actionType = ActionType.USE_HERO_POWER;
 
                 int targetEnt = Convert.ToInt32(s.Split(' ')[3].Split(' ')[0]);
 
@@ -149,7 +140,7 @@ namespace OpenAI
 
             if (s == "useability")
             {
-                this.actionType = actionEnum.useHeroPower;
+                this.actionType = ActionType.USE_HERO_POWER;
                 this.place = 0;
                 this.druidchoice = 0;
                 this.card = null;
@@ -184,7 +175,7 @@ namespace OpenAI
             if (this.tracking >= 1) discover = " discover " + tracking;
             if (tobuffer)
             {
-                if (this.actionType == actionEnum.playcard)
+                if (this.actionType == ActionType.PLAY_CARD)
                 {
                     string playaction = "play ";
 
@@ -203,15 +194,15 @@ namespace OpenAI
 
                     help.writeToBuffer(playaction + discover);
                 }
-                if (this.actionType == actionEnum.attackWithMinion && this.target != null)
+                if (this.actionType == ActionType.ATTACK_WITH_MINION && this.target != null)
                 {
                     help.writeToBuffer("attack " + this.own.entityID + " enemy " + this.target.entityID + discover);
                 }
-                if (this.actionType == actionEnum.attackWithHero && this.target != null)
+                if (this.actionType == ActionType.ATTACK_WITH_HERO && this.target != null)
                 {
                     help.writeToBuffer("heroattack " + this.target.entityID + discover);
                 }
-                if (this.actionType == actionEnum.useHeroPower)
+                if (this.actionType == ActionType.USE_HERO_POWER)
                 {
 
                     if (this.target != null)
@@ -252,7 +243,7 @@ namespace OpenAI
             }
 
 
-            if (this.actionType == actionEnum.playcard && this.card != null)
+            if (this.actionType == ActionType.PLAY_CARD && this.card != null)
             {
                 string playaction = "play ";
                 playaction += cardname;
@@ -266,15 +257,15 @@ namespace OpenAI
 
                 help.logg(playaction + discover);
             }
-            if (this.actionType == actionEnum.attackWithMinion && this.target != null && this.own != null)
+            if (this.actionType == ActionType.ATTACK_WITH_MINION && this.target != null && this.own != null)
             {
                 help.logg("attacker: " + cardname + " id " + this.own.entityID + ", enemy: " + targetname + " id " + this.target.entityID + discover);
             }
-            if (this.actionType == actionEnum.attackWithHero && this.target != null)
+            if (this.actionType == ActionType.ATTACK_WITH_HERO && this.target != null)
             {
                 help.logg("attack with hero, enemy: " + targetname + " id " + this.target.entityID + discover);
             }
-            if (this.actionType == actionEnum.useHeroPower)
+            if (this.actionType == ActionType.USE_HERO_POWER)
             {
                 help.logg("useability " + discover);
                 if (this.target != null)

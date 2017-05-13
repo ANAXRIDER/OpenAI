@@ -188,10 +188,10 @@ namespace OpenAI
             {
                 switch (daum.bestmove.actionType)
                 {
-                    case actionEnum.endturn:
+                    case ActionType.END_TURN:
                         //Helpfunctions.Instance.logg("엔드턴 확인  ");
                         break;
-                    case actionEnum.attackWithHero:
+                    case ActionType.ATTACK_WITH_HERO:
                         {
                             if (rangerbot.gameState.TimerState != TurnTimerState.COUNTDOWN)
                             {
@@ -294,7 +294,7 @@ namespace OpenAI
                             }
                             break;
                         }
-                    case actionEnum.attackWithMinion:
+                    case ActionType.ATTACK_WITH_MINION:
                         {
                             //System.Threading.Thread.Sleep(55);
                             //Helpfunctions.Instance.logg("미니언공격 확인  " + daum.bestmove.own.name + " 으로 공격 " + daum.bestmove.target.name);
@@ -513,7 +513,7 @@ namespace OpenAI
 
                             break;
                         }
-                    case actionEnum.playcard:
+                    case ActionType.PLAY_CARD:
 
                         if (rangerbot.gameState.TimerState != TurnTimerState.COUNTDOWN)
                         {
@@ -777,7 +777,7 @@ namespace OpenAI
 
 
                         break;
-                    case actionEnum.useHeroPower:
+                    case ActionType.USE_HERO_POWER:
                         //if (this.enemySecretCount >= 1)
                         //{
                         //    int time = 6000 / this.enemySecretCount;

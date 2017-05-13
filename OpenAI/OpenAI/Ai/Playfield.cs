@@ -1778,20 +1778,20 @@ namespace OpenAI
                 {
                     switch (a.actionType)
                     {
-                        case actionEnum.playcard:
+                        case ActionType.PLAY_CARD:
                             retval += a.card.entity;
                             if (a.target != null)
                             {
                                 retval += a.target.entityID;
                             }
                             continue;
-                        case actionEnum.attackWithMinion:
+                        case ActionType.ATTACK_WITH_MINION:
                             retval += a.own.entityID + a.target.entityID;
                             continue;
-                        case actionEnum.attackWithHero:
+                        case ActionType.ATTACK_WITH_HERO:
                             retval += a.target.entityID;
                             continue;
-                        case actionEnum.useHeroPower:
+                        case ActionType.USE_HERO_POWER:
                             retval += 100;
                             if (a.target != null)
                             {
@@ -3523,7 +3523,7 @@ namespace OpenAI
                 {
                     ha = Handmanager.Instance.getCardChoice(aa.tracking - 1);
                 }
-                if (aa.actionType == actionEnum.useHeroPower)
+                if (aa.actionType == ActionType.USE_HERO_POWER)
                 {
                     ha = this.isOwnTurn ? this.ownHeroAblility : this.enemyHeroAblility;
                 }
@@ -3617,7 +3617,7 @@ namespace OpenAI
             //if (this.isOwnTurn) this.playactions.Add(a);
 
             // its a minion attack--------------------------------
-            if (a.actionType == actionEnum.attackWithMinion)
+            if (a.actionType == ActionType.ATTACK_WITH_MINION)
             {
                 this.evaluatePenality += a.penalty;
                 Minion target = a.target;
@@ -3652,7 +3652,7 @@ namespace OpenAI
             else
             {
                 // its an hero attack--------------------------------
-                if (a.actionType == actionEnum.attackWithHero)
+                if (a.actionType == ActionType.ATTACK_WITH_HERO)
                 {
                     //secret trigger is inside
                     //Console.WriteLine("HERO ATTACK:::::::::::::###################################");
@@ -3662,7 +3662,7 @@ namespace OpenAI
                 else
                 {
                     // its an playing-card--------------------------------
-                    if (a.actionType == actionEnum.playcard)
+                    if (a.actionType == ActionType.PLAY_CARD)
                     {
                         if (this.isOwnTurn)
                         {
@@ -3681,7 +3681,7 @@ namespace OpenAI
                     else
                     {
                         // its using the hero power--------------------------------
-                        if (a.actionType == actionEnum.useHeroPower)
+                        if (a.actionType == ActionType.USE_HERO_POWER)
                         {
                             playHeroPower(a.target, a.penalty, this.isOwnTurn);
                         }
@@ -8782,7 +8782,7 @@ namespace OpenAI
 
         public void printActionforDummies(Action a)
         {
-            if (a.actionType == actionEnum.playcard)
+            if (a.actionType == ActionType.PLAY_CARD)
             {
                 HelpFunctions.Instance.ErrorLog("play " + a.card.card.name);
                 if (a.druidchoice >= 1)
@@ -8820,7 +8820,7 @@ namespace OpenAI
                 }
 
             }
-            if (a.actionType == actionEnum.attackWithMinion && a.target != null)
+            if (a.actionType == ActionType.ATTACK_WITH_MINION && a.target != null)
             {
                 string name = "" + a.own.name;
                 if (a.target.isHero)
@@ -8835,7 +8835,7 @@ namespace OpenAI
 
             }
 
-            if (a.actionType == actionEnum.attackWithHero && a.target != null)
+            if (a.actionType == ActionType.ATTACK_WITH_HERO && a.target != null)
             {
                 if (a.target.isHero)
                 {
@@ -8847,7 +8847,7 @@ namespace OpenAI
                     HelpFunctions.Instance.ErrorLog("attack with the hero, and choose the enemy: " + ename);
                 }
             }
-            if (a.actionType == actionEnum.useHeroPower)
+            if (a.actionType == ActionType.USE_HERO_POWER)
             {
                 HelpFunctions.Instance.ErrorLog("use your Heropower ");
                 if (a.target != null)

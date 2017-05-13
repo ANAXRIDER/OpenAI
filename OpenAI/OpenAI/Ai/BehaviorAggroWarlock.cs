@@ -437,12 +437,12 @@
             int usecoin = 0;
             foreach (Action a in p.playactions)
             {
-                if (a.actionType == actionEnum.playcard && a.card.card.Secret && hassecretkeeper) retval += 4;
+                if (a.actionType == ActionType.PLAY_CARD && a.card.card.Secret && hassecretkeeper) retval += 4;
                 //if (a.actionType == actionEnum.attackWithHero && p.enemyHero.Hp <= p.attackFaceHP) retval++;
-                if (a.actionType == actionEnum.useHeroPower) useAbili = true;
-                if (p.ownHeroName == HeroEnum.warrior && a.actionType == actionEnum.attackWithHero && useAbili) retval -= 1;
+                if (a.actionType == ActionType.USE_HERO_POWER) useAbili = true;
+                if (p.ownHeroName == HeroEnum.warrior && a.actionType == ActionType.ATTACK_WITH_HERO && useAbili) retval -= 1;
                 //if (a.actionType == actionEnum.useHeroPower && a.card.card.name == CardDB.cardName.lesserheal && (!a.target.own)) retval -= 5;
-                if (a.actionType != actionEnum.playcard) continue;
+                if (a.actionType != ActionType.PLAY_CARD) continue;
                 if (a.card.card.name == CardDB.cardName.thecoin)
                 {
                     usecoin = 1;
@@ -507,13 +507,13 @@
 
 
             //rockbiter
-            bool rockbiterHero = p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null;
+            bool rockbiterHero = p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null;
             if (rockbiterHero && p.ownHero.Ready) retval -= 30;
             //if (rockbiterHero) Helpfunctions.Instance.ErrorLog("rockbiterHero " + rockbiterHero + " ");
             bool rockbiterMinion = false;
             foreach (Minion m in p.ownMinions)
             {
-                if (p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == m.entityID) != null) rockbiterMinion = true;
+                if (p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == m.entityID) != null) rockbiterMinion = true;
                 if (rockbiterMinion && m.Ready) { retval -= 30; break; }
             }
             //if (rockbiterMinion) Helpfunctions.Instance.ErrorLog("rockbiterMinion " + rockbiterMinion + " ");
