@@ -81,8 +81,6 @@ namespace OpenAI
         public int dontmultiactioncount = 0;
         public int POWERFULSINGLEACTION = 0;
 
-        //private int stopAfterWins = 30;
-        private int concedeLvl = 5; // the rank, till you want to concede
         OpenAI sf;
 
         public Behavior behave = new BehaviorControl();
@@ -1565,15 +1563,6 @@ namespace OpenAI
             }*/
 
 
-
-            int curlvl = gameState.CurrentRank;
-
-            if (curlvl > this.concedeLvl)
-            {
-                this.lossedtodo = 0;
-                return false;
-            }
-
             if (this.oldwin != totalwin)
             {
                 this.oldwin = totalwin;
@@ -1594,14 +1583,6 @@ namespace OpenAI
                 return true;
             }
 
-            if (curlvl < this.concedeLvl)
-            {
-                this.lossedtodo = 3;
-                HelpFunctions.Instance.ErrorLog("your rank is " + curlvl + " targeted rank is " + this.concedeLvl + " -> concede!");
-                HelpFunctions.Instance.ErrorLog("not today!!!");
-                this.IsGoingToConcede = true;
-                return true;
-            }
             return false;
         }
 
