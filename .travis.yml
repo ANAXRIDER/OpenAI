@@ -1,0 +1,8 @@
+language: csharp
+solution: ./OpenAI/OpenAI.sln
+install:
+  - nuget restore ./OpenAI/OpenAI.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release ./OpenAI/OpenAI.sln
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./OpenAI/OpenAI/bin/Release/OpenAI.dll
