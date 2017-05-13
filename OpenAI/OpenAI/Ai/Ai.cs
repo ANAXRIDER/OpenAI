@@ -488,7 +488,7 @@ namespace OpenAI
                     List<Handmanager.Handcard> newcards = posmoves[0].getNewHandCards(Ai.Instance.nextMoveGuess);
                     foreach (var card in newcards)
                     {
-                        if (!OpenAI.Instance.isCardCreated(card)) Hrtprozis.Instance.removeCardFromTurnDeck(card.card.cardIDenum);
+                        if (!OpenAI.Instance.IsCardCreated(card)) Hrtprozis.Instance.removeCardFromTurnDeck(card.card.cardIDenum);
                     }
 
                     help.logg("no lethal, do something random######");

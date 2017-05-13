@@ -66,6 +66,7 @@ namespace OpenAI
 
         public bool DoMultipleThingsAtATime { get; set; } = true;
         public bool IsGoingToConcede { get; set; } = false;
+        public bool ShouldSendActions { get; set; } = true;
         public DateTime StartTime { get; set; }
         public int NumConcedes { get; set; } = 0;
         public int NumLoses { get; set; } = 0;
@@ -78,29 +79,17 @@ namespace OpenAI
         
         /*** Cleaned ***/
 
+
         public int dontmultiactioncount = 0;
         public int POWERFULSINGLEACTION = 0;
-
         OpenAI sf;
-
         public Behavior behave = new BehaviorControl();
-
-        //stuff for attack queueing :D
-
-        public bool shouldSendActions = true;
         public List<Playfield> queuedMoveGuesses = new List<Playfield>();
-        
-
-
         int discovercounter = 0;
-
         CardDB.cardIDEnum lastplayedcard = CardDB.cardIDEnum.None;
         int targetentity = 0;
 
         //
-        
-
-  
 
 
         public Bot()
@@ -112,7 +101,7 @@ namespace OpenAI
             Settings set = Settings.Instance;
             this.sf = OpenAI.Instance;
             behave = set.behave;
-            sf.setnewLoggFile();
+            sf.SetnewLogFile();
             CardDB cdb = CardDB.Instance;
             if (cdb.installedWrong)
             {
@@ -241,7 +230,7 @@ namespace OpenAI
                 behave = Settings.Instance.updateInstance();
             }
             
-            sf.setnewLoggFile();
+            sf.SetnewLogFile();
             Settings.Instance.loggCleanPath();
             Mulligan.Instance.loggCleanPath();
             Discovery.Instance.loggCleanPath();
@@ -321,9 +310,9 @@ namespace OpenAI
 
             if (Mulligan.Instance.loserLoserLoser)
             {
-                if (!autoconcede())
+                if (!AutoConcede())
                 {
-                    concedeVSenemy(ownName, enemName);
+                    ConcedeVSenemy(ownName, enemName);
                 }
 
                 //set concede flag
@@ -589,7 +578,7 @@ namespace OpenAI
                 case ActionType.END_TURN:
                     break;
                 case ActionType.PLAY_CARD:
-                    ranger_action.Actor = getCardWithNumber(moveTodo.card.entity);
+                    ranger_action.Actor = GetCardWithNumber(moveTodo.card.entity);
 
                     lastplayedcard = CardDB.Instance.cardIdstringToEnum(ranger_action.Actor.CardId);
                     if (daum.bestmove.target != null) targetentity = daum.bestmove.target.entityID;
@@ -871,7 +860,7 @@ namespace OpenAI
                     ranger_action.Actor = base.FriendHeroPower;
                     break;
                 case ActionType.ATTACK_WITH_MINION:
-                    ranger_action.Actor = getEntityWithNumber(moveTodo.own.entityID);
+                    ranger_action.Actor = GetEntityWithNumber(moveTodo.own.entityID);
 
                     if (daum.bestmove.own.name == CardDB.cardName.viciousfledgling && daum.bestmove.target.isHero && !daum.bestmove.target.own)
                     {
@@ -902,7 +891,7 @@ namespace OpenAI
 
             if (moveTodo.target != null)
             {
-                ranger_action.Target = getEntityWithNumber(moveTodo.target.entityID);
+                ranger_action.Target = GetEntityWithNumber(moveTodo.target.entityID);
                 if (ranger_action.Target == null) return null;  // missing entity likely because new spawned minion
             }
 
@@ -1249,15 +1238,15 @@ namespace OpenAI
                 }
 
                 HelpFunctions.Instance.ErrorLog("update everything...");
-                bool templearn = sf.updateEverything(this, behave, DoMultipleThingsAtATime, Settings.Instance.useExternalProcess, false); // cant use passive waiting (in this mode i return nothing)
+                bool templearn = sf.UpdateEverything(this, behave, DoMultipleThingsAtATime, Settings.Instance.useExternalProcess, false); // cant use passive waiting (in this mode i return nothing)
                 if (templearn == true) Settings.Instance.printlearnmode = true;
 
                 // actions-queue-stuff
                 //  AI has requested to ignore this update, so return without setting any actions.
-                if (!shouldSendActions)
+                if (!ShouldSendActions)
                 {
                     //Helpfunctions.Instance.ErrorLog("shouldsendactionsblah");
-                    shouldSendActions = true;  // unpause ourselves for next time
+                    ShouldSendActions = true;  // unpause ourselves for next time
                     return;
                 }
 
@@ -1302,7 +1291,7 @@ namespace OpenAI
                     if (trackingchoice >= 1) trackingchoice = OpenAI.Instance.choiceCardsEntitys[trackingchoice - 1];
                     //there is a tracking/discover effect ongoing! (not druid choice)
                     BotAction trackingaction = new HSRangerLib.BotAction();
-                    trackingaction.Actor = this.getEntityWithNumber(trackingchoice);
+                    trackingaction.Actor = this.GetEntityWithNumber(trackingchoice);
 
 
                     foreach (var item in OpenAI.Instance.choiceCards)
@@ -1419,7 +1408,7 @@ namespace OpenAI
                             this.queuedMoveGuesses.Add(new Playfield(Ai.Instance.nextMoveGuess));
                             if (nextMove.Type == BotActionType.CAST_ABILITY || nextMove.Type == BotActionType.CAST_MINION || nextMove.Type == BotActionType.CAST_SPELL || nextMove.Type == BotActionType.CAST_WEAPON) System.Threading.Thread.Sleep(45); // to avoid misplay
                             else System.Threading.Thread.Sleep(5);
-                            hasMoreActions = canQueueNextActions();
+                            hasMoreActions = CanQueueNextActions();
                             if (hasMoreActions) Ai.Instance.doNextCalcedMove();
 
                             if (Settings.Instance.enemyConcede) HelpFunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
@@ -1496,7 +1485,7 @@ namespace OpenAI
         }
 
 
-        private bool canQueueNextActions()
+        private bool CanQueueNextActions()
         {
             if (!Ai.Instance.canQueueNextMoves()) return false;
 
@@ -1551,7 +1540,7 @@ namespace OpenAI
         int lossedtodo = 0;
         int KeepConcede = 0;
         int oldwin = 0;
-        private bool autoconcede()
+        private bool AutoConcede()
         {
             if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena) return false;
             if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.Play_Ranked) return false;
@@ -1586,7 +1575,7 @@ namespace OpenAI
             return false;
         }
 
-        private bool concedeVSenemy(string ownh, string enemyh)
+        private bool ConcedeVSenemy(string ownh, string enemyh)
         {
             if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena) return false;
             if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.Play_Ranked) return false;
@@ -1643,7 +1632,7 @@ namespace OpenAI
 
         }
 
-        private Entity getEntityWithNumber(int number)
+        private Entity GetEntityWithNumber(int number)
         {
             foreach (Entity e in gameState.GameEntityList)
             {
@@ -1652,7 +1641,7 @@ namespace OpenAI
             return null;
         }
 
-        private Entity getCardWithNumber(int number)
+        private Entity GetCardWithNumber(int number)
         {
             foreach (Entity e in base.FriendHand)
             {

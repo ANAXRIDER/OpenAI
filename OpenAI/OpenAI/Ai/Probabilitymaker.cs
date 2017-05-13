@@ -1318,18 +1318,18 @@
                 if (hcard != null && hcard.card.type == CardDB.cardtype.SPELL)
                 {
                     if (hcard.card.type == CardDB.cardtype.SPELL) usedspell = true;
-                    int entityOfLastAffected = OpenAI.getCardTarget(hcard.entity);
+                    int entityOfLastAffected = OpenAI.GetCardTarget(hcard.entity);
                     if (entityOfLastAffected >= 1) lastEffectedIsMinion = 2;
                     if (entityOfLastAffected == p.enemyHero.entityID) lastEffectedIsMinion = 1;
                 }
 
                 if (hcard != null && hcard.card.type == CardDB.cardtype.MOB)
                 {
-                    int entityOfLastAffected = OpenAI.getLastAffected(hcard.entity);
+                    int entityOfLastAffected = OpenAI.GetLastAffected(hcard.entity);
                     if (entityOfLastAffected >= 1) lastEffectedIsMinion = 2;
                     if (entityOfLastAffected == p.enemyHero.entityID && (p.enemyHero.Hp < old.enemyHero.Hp || p.enemyHero.immune)) lastEffectedIsMinion = 1;
 
-                    entityOfLastAffected = OpenAI.getCardTarget(hcard.entity);
+                    entityOfLastAffected = OpenAI.GetCardTarget(hcard.entity);
                     if (entityOfLastAffected >= 1)
                     {
                         lastEffectedIsMinion = 2;

@@ -143,7 +143,7 @@ namespace OpenAI
             HelpFunctions.Instance.startFlushingLogBuffers();
         }
 
-        public void setnewLoggFile()
+        public void SetnewLogFile()
         {
             Questmanager.Instance.Reset();
             OwnCrystalCore = 0;
@@ -165,12 +165,12 @@ namespace OpenAI
             }
         }
 
-        public void setNewGame()
+        public void SetNewGame()
         {
             //todo sepefeets - move stuff here to make things more consistant between HR/HB versions
         }
 
-        public bool updateEverything(HSRangerLib.BotBase rangerbot, Behavior botbase, bool queueActions, bool runExtern = false, bool passiveWait = false)
+        public bool UpdateEverything(HSRangerLib.BotBase rangerbot, Behavior botbase, bool queueActions, bool runExtern = false, bool passiveWait = false)
         {
             // data sync workaround for temp buffs - something is wrong
             /*if (lastpf != null && lastpf.playactions[0].actionType == actionEnum.playcard && (lastpf.playactions[0].card.card.name == CardDB.cardName.savageroar ||
@@ -803,7 +803,7 @@ namespace OpenAI
             HelpFunctions.Instance.ErrorLog("updateEverything");
             latestGameState = rangerbot.gameState;
 
-            this.updateBehaveString(botbase);
+            this.UpdateBehaveString(botbase);
 
             Entity ownPlayer = rangerbot.FriendPlayer;
             Entity enemyPlayer = rangerbot.EnemyPlayer;
@@ -813,11 +813,11 @@ namespace OpenAI
             Handmanager.Instance.clearAll();
 
             // create hero + minion data
-            getHerostuff(rangerbot);
-            getMinions(rangerbot);
-            getHandcards(rangerbot);
-            getDecks(rangerbot);
-            correctSpellpower(rangerbot);
+            GetHerostuff(rangerbot);
+            GetMinions(rangerbot);
+            GetHandcards(rangerbot);
+            GetDecks(rangerbot);
+            CorrectSpellpower(rangerbot);
 
             Hrtprozis.Instance.setOwnPlayer(ownPlayerController);
             Handmanager.Instance.setOwnPlayer(ownPlayerController);
@@ -876,7 +876,7 @@ namespace OpenAI
                 {
                     if (lastpf.isEqualf(p))
                     {
-                        ((Bot)rangerbot).shouldSendActions = false;  // let the bot know we haven't updated any actions
+                        ((Bot)rangerbot).ShouldSendActions = false;  // let the bot know we haven't updated any actions
                         return false;
                     }
 
@@ -932,7 +932,7 @@ namespace OpenAI
                 //Ai.Instance.nextMoveGuess.printBoard();
                 if (p.isEqual(Ai.Instance.nextMoveGuess, true))
                 {
-                    printstuff(p, false);
+                    PrintStuff(p, false);
                     Ai.Instance.doNextCalcedMove();
                 }
                 else
@@ -940,16 +940,16 @@ namespace OpenAI
                     List<Handmanager.Handcard> newcards = p.getNewHandCards(Ai.Instance.nextMoveGuess);
                     foreach (var card in newcards)
                     {
-                        if (!isCardCreated(card)) Hrtprozis.Instance.removeCardFromTurnDeck(card.card.cardIDenum);
+                        if (!IsCardCreated(card)) Hrtprozis.Instance.removeCardFromTurnDeck(card.card.cardIDenum);
                     }
 
-                    printstuff(p, true);
-                    readActionFile(passiveWait);
+                    PrintStuff(p, true);
+                    ReadActionFile(passiveWait);
                 }
             }
             else
             {
-                printstuff(p, false);
+                PrintStuff(p, false);
                 Ai.Instance.dosomethingclever(botbase);
             }
 
@@ -958,7 +958,7 @@ namespace OpenAI
             return true;
         }
 
-        public bool isCardCreated(Handmanager.Handcard handcard)
+        public bool IsCardCreated(Handmanager.Handcard handcard)
         {
             foreach (var card in latestGameState.GameEntityList)
             {
@@ -972,7 +972,7 @@ namespace OpenAI
         }
 
 
-        private void getHerostuff(HSRangerLib.BotBase rangerbot)
+        private void GetHerostuff(HSRangerLib.BotBase rangerbot)
         {
 
             //TODO GET HERO POWER USES!!!!!!
@@ -1255,7 +1255,7 @@ namespace OpenAI
 
         }
 
-        private void getMinions(HSRangerLib.BotBase rangerbot)
+        private void GetMinions(HSRangerLib.BotBase rangerbot)
         {
             Dictionary<int, Entity> allEntitys = new Dictionary<int, Entity>();
 
@@ -1445,7 +1445,7 @@ namespace OpenAI
             setEnchantments(enchantments);*/
         }
 
-        private void correctSpellpower(HSRangerLib.BotBase rangerbot)
+        private void CorrectSpellpower(HSRangerLib.BotBase rangerbot)
         {
             int ownspellpower = rangerbot.gameState.LocalPlayerSpellPower;
             int spellpowerfield = 0;
@@ -1485,7 +1485,7 @@ namespace OpenAI
             }
         }
 
-        private void setEnchantments(List<Entity> enchantments)
+        private void SetEnchantments(List<Entity> enchantments)
         {
             /*
             foreach (HREntity bhu in enchantments)
@@ -1520,7 +1520,7 @@ namespace OpenAI
             */
         }
 
-        private void getHandcards(HSRangerLib.BotBase rangerbot)
+        private void GetHandcards(HSRangerLib.BotBase rangerbot)
         {
             handCards.Clear();
             this.anzcards = 0;
@@ -1603,7 +1603,7 @@ namespace OpenAI
 
 
 
-        private void getDecks(HSRangerLib.BotBase rangerbot)
+        private void GetDecks(HSRangerLib.BotBase rangerbot)
         {
             Dictionary<int, Entity> allEntitys = new Dictionary<int, Entity>();
 
@@ -1705,7 +1705,7 @@ namespace OpenAI
 
         }
 
-        private void updateBehaveString(Behavior botbase)
+        private void UpdateBehaveString(Behavior botbase)
         {
             this.BotBehave = "rush";
             if (botbase is BehaviorFace) this.BotBehave = "face";
@@ -1756,7 +1756,7 @@ namespace OpenAI
 
         }
 
-        public static int getLastAffected(int entityid)
+        public static int GetLastAffected(int entityid)
         {
 
             if (latestGameState != null)
@@ -1773,7 +1773,7 @@ namespace OpenAI
             return 0;
         }
 
-        public static int getCardTarget(int entityid)
+        public static int GetCardTarget(int entityid)
         {
 
             if (latestGameState != null)
@@ -1801,7 +1801,7 @@ namespace OpenAI
         //    readActionFile();
         //}
 
-        private void printstuff(Playfield p, bool runEx)
+        private void PrintStuff(Playfield p, bool runEx)
         {
             string dtimes = DateTime.Now.ToString("HH:mm:ss:ffff");
             String completeBoardString = p.getCompleteBoardForSimulating(this.BotBehave, this.VersionNumber, dtimes);
@@ -1824,7 +1824,7 @@ namespace OpenAI
 
         }
 
-        public bool readActionFile(bool passiveWaiting = false)
+        public bool ReadActionFile(bool passiveWaiting = false)
         {
             bool readed = true;
             List<string> alist = new List<string>();
