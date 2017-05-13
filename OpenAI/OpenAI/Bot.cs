@@ -177,13 +177,9 @@ namespace OpenAI
         }
 
         /// <summary>
-        /// HRanger Code
-        /// invoke when game enter mulligan
+        /// 
         /// </summary>
-        /// <param name="e">
-        ///     e.card_list -- mulligan card list
-        ///     e.replace_list -- toggle card list (output)
-        /// </param>
+        /// <param name="e"></param>
         public override void OnGameMulligan(GameMulliganEventArgs e)
         {
             if (e.handled || e.card_list.Count == 0) // if count==0 then HR is conceding
@@ -326,7 +322,7 @@ namespace OpenAI
         }
 
         /// <summary>
-        /// invoke when drafting arena cards (including hero draft)
+        /// 
         /// </summary>
         /// <param name="e"></param>
         public override void OnGameArenaDraft(GameArenaDraftEventArgs e)
@@ -448,15 +444,10 @@ namespace OpenAI
         //}
     
 
-
-
-
-
-
         /// <summary>
-        /// invoke when game starts.
+        /// 
         /// </summary>
-        /// <param name="e">e.deck_list -- all cards id in the deck.</param>
+        /// <param name="e"></param>
         public override void OnGameStart(GameStartEventArgs e)
         {
             // reset instance vars
@@ -483,7 +474,7 @@ namespace OpenAI
         }
 
         /// <summary>
-        /// invoke when game ends.
+        /// 
         /// </summary>
         /// <param name="e"></param>
         public override void OnGameOver(GameOverEventArgs e)
