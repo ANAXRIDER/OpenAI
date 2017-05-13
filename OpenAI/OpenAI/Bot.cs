@@ -56,7 +56,6 @@ namespace OpenAI
     public class Bot : BotBase
     {
         private static Bot instance;
-
         public static Bot Instance
         {
             get
@@ -64,33 +63,36 @@ namespace OpenAI
                 return instance ?? (instance = new Bot());
             }
         }
-        public override string Description
-        {
-            get
-            {
-                return "OpenAI Version V" + OpenAI.Instance.VersionNumber + " )" + Environment.NewLine;
-            }
-        }
 
-        public bool doMultipleThingsAtATime = true;
+        public bool DoMultipleThingsAtATime { get; set; } = true;
+        public bool IsGoingToConcede { get; set; } = false;
+        public DateTime StartTime { get; set; }
+        public int NumConcedes { get; set; } = 0;
+        public int NumLoses { get; set; } = 0;
+        public int NumWins { get; set; } = 0;
+        public int NumActionsSent { get; set; } = 0;
+        public int NumExecsReceived { get; set; } = 0;
+
+        private bool DeckChanged { get; set; } = false;
+        private bool ShouldSendFakeAction { get; set; } = false;
+        
+        /*** Cleaned ***/
+
         public int dontmultiactioncount = 0;
         public int POWERFULSINGLEACTION = 0;
 
         //private int stopAfterWins = 30;
         private int concedeLvl = 5; // the rank, till you want to concede
-        DateTime starttime = DateTime.Now;
         OpenAI sf;
 
         public Behavior behave = new BehaviorControl();
 
         //stuff for attack queueing :D
-        public int numExecsReceived = 0;
-        public int numActionsSent = 0;
+
         public bool shouldSendActions = true;
         public List<Playfield> queuedMoveGuesses = new List<Playfield>();
         
-        private bool deckChanged = false;
-        private bool shouldSendFakeAction = false;
+
 
         int discovercounter = 0;
 
@@ -98,17 +100,16 @@ namespace OpenAI
         int targetentity = 0;
 
         //
-        bool isgoingtoconcede = false;
+        
 
   
-        int wins = 0;
-        int loses = 0;
+
 
         public Bot()
         {
             base.HasBestMoveAI = true;
 
-            starttime = DateTime.Now;
+            StartTime = DateTime.Now;
 
             Settings set = Settings.Instance;
             this.sf = OpenAI.Instance;
@@ -134,7 +135,7 @@ namespace OpenAI
             if (!sf.StartedExe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
             {
                 sf.StartedExe = true;
-                Task.Run(() => startExeAsync());
+                Task.Run(() => StartExeAsync());
             }
 
 
@@ -143,16 +144,16 @@ namespace OpenAI
                 Ai.Instance.autoTester(printstuff);
             }
 
-            this.doMultipleThingsAtATime = Settings.Instance.speedy;
+            this.DoMultipleThingsAtATime = Settings.Instance.speedy;
 
-            this.doMultipleThingsAtATime = true; // for easier debugging+bug fixing in the first weeks after update
+            this.DoMultipleThingsAtATime = true; // for easier debugging+bug fixing in the first weeks after update
             //will be false until xytrix fixes it (@xytrix end the action list, after playing a tracking/discover card)
         }
 
-        private void startExeAsync()
+        private void StartExeAsync()
         {
-            System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("Redfish");
-            string directory = Settings.Instance.path + "Redfish.exe";
+            System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("OpenAIConsole");
+            string directory = Settings.Instance.path + "OpenAIConsole.exe";
             bool hasToOpen = true;
 
             if (pname.Length >= 1)
@@ -174,6 +175,17 @@ namespace OpenAI
             }
 
             sf.StartedExe = false; //reset it in case user closes exe
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override string Description
+        {
+            get
+            {
+                return "OpenAI Version V" + OpenAI.Instance.VersionNumber + " )" + Environment.NewLine;
+            }
         }
 
         /// <summary>
@@ -208,7 +220,7 @@ namespace OpenAI
             // reload settings
             HeroEnum heroname = Hrtprozis.Instance.heroNametoEnum(ownName);
             HeroEnum enemyHeroname = Hrtprozis.Instance.heroNametoEnum(enemName);
-            if (deckChanged || heroname != Hrtprozis.Instance.heroname)
+            if (DeckChanged || heroname != Hrtprozis.Instance.heroname)
             {
                 if (heroname != Hrtprozis.Instance.heroname)
                 {
@@ -218,9 +230,9 @@ namespace OpenAI
                 ComboBreaker.Instance.updateInstance();
                 Discovery.Instance.updateInstance();
                 Mulligan.Instance.updateInstance();
-                deckChanged = false;
+                DeckChanged = false;
             }
-            if (deckChanged || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
+            if (DeckChanged || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
             {
                 Hrtprozis.Instance.setEnemyHeroName(enemName);
                 if (enemyHeroname != Hrtprozis.Instance.enemyHeroname)
@@ -317,7 +329,7 @@ namespace OpenAI
                 }
 
                 //set concede flag
-                e.concede = this.isgoingtoconcede;
+                e.concede = this.IsGoingToConcede;
             }
         }
 
@@ -451,18 +463,18 @@ namespace OpenAI
         public override void OnGameStart(GameStartEventArgs e)
         {
             // reset instance vars
-            numExecsReceived = 0;
-            numActionsSent = 0;
+            NumExecsReceived = 0;
+            NumActionsSent = 0;
 
             if (Hrtprozis.Instance.deckName != e.deck_name)
             {
                 HelpFunctions.Instance.ErrorLog("New Deck: \"" + e.deck_name + "\", Old Deck: \"" + Hrtprozis.Instance.deckName + "\"");
-                deckChanged = true;
+                DeckChanged = true;
                 Hrtprozis.Instance.setDeckName(e.deck_name);
             }
             else
             {
-                deckChanged = false;
+                DeckChanged = false;
             }
 
             Hrtprozis.Instance.clearDecks();
@@ -592,12 +604,12 @@ namespace OpenAI
                     {
                         if (daum.IsPlayRandomEffect(daum.bestmove.card.card, daum.oldMoveGuess, daum.nextMoveGuess))
                         {
-                            this.doMultipleThingsAtATime = false;
+                            this.DoMultipleThingsAtATime = false;
                             this.dontmultiactioncount++;
                             //Helpfunctions.Instance.ErrorLog("doMultipleThingsAtATime " + doMultipleThingsAtATime + " because IsPlayRandomEffect 찾는거");
 
                         }
-                        else this.doMultipleThingsAtATime = true;
+                        else this.DoMultipleThingsAtATime = true;
 
 
                         //if (daum.bestmove.card.card.name == CardDB.cardName.barnes) POWERFULSINGLEACTION++;
@@ -616,7 +628,7 @@ namespace OpenAI
                                 //Helpfunctions.Instance.logg("찾는거 " + daum.bestmove.card.card.name + " 드로우카드 찾는거");
                                 //Helpfunctions.Instance.ErrorLog("찾는거 " + daum.bestmove.card.card.name + " 드로우카드 찾는거");
                                 //case CardDB.cardName.defenderofargus:
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 this.dontmultiactioncount++; break;
                             default: break;
                         }
@@ -625,7 +637,7 @@ namespace OpenAI
                             || PenalityManager.Instance.AdaptDatabase.ContainsKey(daum.bestmove.card.card.name)
                             || PenalityManager.Instance.discoverCards.ContainsKey(daum.bestmove.card.card.name))
                         {
-                            this.doMultipleThingsAtATime = false;
+                            this.DoMultipleThingsAtATime = false;
                             this.dontmultiactioncount++; break;                            
                         }
                         if (PenalityManager.Instance.AdaptDatabase.ContainsKey(daum.bestmove.card.card.name)
@@ -636,7 +648,7 @@ namespace OpenAI
                         //charge
                         if (daum.bestmove.card.card.Charge)
                         {
-                            this.doMultipleThingsAtATime = false;
+                            this.DoMultipleThingsAtATime = false;
                             this.dontmultiactioncount++; break;
 
                         }
@@ -648,7 +660,7 @@ namespace OpenAI
                                 case CardDB.cardName.leathercladhogleader:
                                     if (Playfield.Instance.EnemyCards.Count >= 6)
                                     {
-                                        this.doMultipleThingsAtATime = false;
+                                        this.DoMultipleThingsAtATime = false;
                                         this.dontmultiactioncount++; break;
                                     }
                                     else break;
@@ -657,26 +669,26 @@ namespace OpenAI
                                 case CardDB.cardName.spikedhogrider:
                                     if (Playfield.Instance.enemyMinions.Find(a => a.taunt) != null)
                                     {
-                                        this.doMultipleThingsAtATime = false;
+                                        this.DoMultipleThingsAtATime = false;
                                         this.dontmultiactioncount++; break;
                                     }
                                     else break;
                                 case CardDB.cardName.alexstraszaschampion:
                                     if (Playfield.Instance.owncards.Find(a => a.card.race == TAG_RACE.DRAGON) != null)
                                     {
-                                        this.doMultipleThingsAtATime = false;
+                                        this.DoMultipleThingsAtATime = false;
                                         this.dontmultiactioncount++; break;
                                     }
                                     else break;
                                 case CardDB.cardName.tanarishogchopper:
                                     if (Playfield.Instance.EnemyCards.Count == 6)
                                     {
-                                        this.doMultipleThingsAtATime = false;
+                                        this.DoMultipleThingsAtATime = false;
                                         this.dontmultiactioncount++; break;
                                     }
                                     else break;
                                 case CardDB.cardName.armoredwarhorse:
-                                    this.doMultipleThingsAtATime = false;
+                                    this.DoMultipleThingsAtATime = false;
                                     this.dontmultiactioncount++; break;
                                 default: break;
                             }
@@ -792,7 +804,7 @@ namespace OpenAI
                         {
                             if (m.name == CardDB.cardName.fandralstaghelm && !m.silenced)
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 this.dontmultiactioncount++;
                             }
                         }
@@ -950,28 +962,28 @@ namespace OpenAI
 
                 if (hashyena && daum.bestmove.own.Hp <= daum.bestmove.target.Angr && !daum.bestmove.target.isHero && (TAG_RACE)daum.bestmove.own.handcard.card.race == TAG_RACE.BEAST)
                 {
-                    this.doMultipleThingsAtATime = false;
+                    this.DoMultipleThingsAtATime = false;
                     this.dontmultiactioncount++;
                     POWERFULSINGLEACTION++;
                 }
 
                 else if (cultmaster && daum.bestmove.own.Hp <= daum.bestmove.target.Angr && !daum.bestmove.target.isHero)
                 {
-                    this.doMultipleThingsAtATime = false;
+                    this.DoMultipleThingsAtATime = false;
                     this.dontmultiactioncount++;
                     POWERFULSINGLEACTION++;
                 }
 
                 else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp && !daum.bestmove.target.divineshild && daum.bestmove.own.name == CardDB.cardName.finjatheflyingstar)
                 {
-                    this.doMultipleThingsAtATime = false;
+                    this.DoMultipleThingsAtATime = false;
                     this.dontmultiactioncount++;
                     POWERFULSINGLEACTION++;
                 }
 
                 else if ((daum.bestmove.own.Angr >= daum.bestmove.target.Hp || daum.bestmove.own.poisonous ) && !daum.bestmove.target.divineshild && (daum.bestmove.target.name == CardDB.cardName.murlocwarleader || daum.bestmove.target.name == CardDB.cardName.southseacaptain))
                 {
-                    this.doMultipleThingsAtATime = false;
+                    this.DoMultipleThingsAtATime = false;
                     this.dontmultiactioncount++;
                     POWERFULSINGLEACTION++;
                 }
@@ -984,7 +996,7 @@ namespace OpenAI
                         if ((ranger_action.Target.Health - ranger_action.Target.Damage) <= ranger_action.Actor.ATK || 
                             ranger_action.Target.IsPoisonous || ranger_action.Actor.IsPoisonous)
                         {
-                            this.doMultipleThingsAtATime = false;
+                            this.DoMultipleThingsAtATime = false;
                             this.dontmultiactioncount++;
                         }
                     }
@@ -993,19 +1005,19 @@ namespace OpenAI
                         if ((ranger_action.Actor.Health - ranger_action.Actor.Damage) <= ranger_action.Target.ATK ||
                             ranger_action.Target.IsPoisonous || ranger_action.Actor.IsPoisonous)
                         {
-                            this.doMultipleThingsAtATime = false;
+                            this.DoMultipleThingsAtATime = false;
                             this.dontmultiactioncount++;
                         }
                     }
                 }
                 else if (POWERFULSINGLEACTION >= 1)
                 {
-                    this.doMultipleThingsAtATime = false;
+                    this.DoMultipleThingsAtATime = false;
                 }
                 else 
                 {
                     dontmultiactioncount = 0;
-                    this.doMultipleThingsAtATime = true;
+                    this.DoMultipleThingsAtATime = true;
                 }
             }
 
@@ -1018,7 +1030,7 @@ namespace OpenAI
                     {
                         if (si.canBe_noblesacrifice)
                         {
-                            this.doMultipleThingsAtATime = false;
+                            this.DoMultipleThingsAtATime = false;
                             POWERFULSINGLEACTION++;
                         }
                         else if (daum.bestmove.target.isHero)
@@ -1027,7 +1039,7 @@ namespace OpenAI
                                 //|| si.canBe_icebarrier
                                 || si.canBe_beartrap)
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 POWERFULSINGLEACTION++;
                             }
                         }
@@ -1035,14 +1047,14 @@ namespace OpenAI
                         {
                             if (si.canBe_snaketrap)
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 POWERFULSINGLEACTION++;
                             }
                             else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp)
                             {
                                 if (si.canBe_iceblock)
                                 {
-                                    this.doMultipleThingsAtATime = false;
+                                    this.DoMultipleThingsAtATime = false;
                                     POWERFULSINGLEACTION++;
                                 }
                             }
@@ -1055,7 +1067,7 @@ namespace OpenAI
                                 || si.canBe_avenge
                                 || si.canBe_duplicate)
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 POWERFULSINGLEACTION++;
                             }
                         }
@@ -1069,7 +1081,7 @@ namespace OpenAI
                         if (si.canBe_noblesacrifice
                        || si.canBe_freezing)
                         {
-                            this.doMultipleThingsAtATime = false;
+                            this.DoMultipleThingsAtATime = false;
                             POWERFULSINGLEACTION++;
                         }
 
@@ -1080,7 +1092,7 @@ namespace OpenAI
                                 //|| si.canBe_icebarrier
                                 || si.canBe_vaporize)
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 POWERFULSINGLEACTION++;
                             }
                         }
@@ -1088,14 +1100,14 @@ namespace OpenAI
                         {
                             if (si.canBe_snaketrap)
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 POWERFULSINGLEACTION++;
                             }
                             else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp)
                             {
                                 if (si.canBe_iceblock)
                                 {
-                                    this.doMultipleThingsAtATime = false;
+                                    this.DoMultipleThingsAtATime = false;
                                     POWERFULSINGLEACTION++;
                                 }
                             }
@@ -1107,7 +1119,7 @@ namespace OpenAI
                                 || si.canBe_avenge
                                 || si.canBe_duplicate)
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 POWERFULSINGLEACTION++;
                             }
                         }
@@ -1124,13 +1136,13 @@ namespace OpenAI
                         {
                             if (si.canBe_mirrorentity)
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 POWERFULSINGLEACTION++;
                             }
                             else if ((si.canBe_snipe)
                                     || (si.canBe_Trial && Playfield.Instance.ownMinions.Count >= 3))
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 POWERFULSINGLEACTION++;
                             }
                         }
@@ -1140,7 +1152,7 @@ namespace OpenAI
                                     || (si.canBe_spellbender && daum.bestmove.target != null && !daum.bestmove.target.isHero)
                                     || si.canBe_cattrick)
                             {
-                                this.doMultipleThingsAtATime = false;
+                                this.DoMultipleThingsAtATime = false;
                                 POWERFULSINGLEACTION++;
                             }
                             else if (Playfield.Instance.enemyMinions.Count >= 1 &&
@@ -1156,7 +1168,7 @@ namespace OpenAI
                                     || si.canBe_avenge
                                     || si.canBe_duplicate)
                                 {
-                                    this.doMultipleThingsAtATime = false;
+                                    this.DoMultipleThingsAtATime = false;
                                     POWERFULSINGLEACTION++;
                                 }
                             }
@@ -1169,12 +1181,12 @@ namespace OpenAI
 
             if (moveTodo.actionType == ActionType.ATTACK_WITH_MINION && ranger_action.Target.IsHero && this.EnemyMinion.Count == 0)
             {
-                this.doMultipleThingsAtATime = true;
+                this.DoMultipleThingsAtATime = true;
                 this.dontmultiactioncount = 0;
             }
             if (POWERFULSINGLEACTION >= 1) 
             {
-                this.doMultipleThingsAtATime = false;
+                this.DoMultipleThingsAtATime = false;
                 dontmultiactioncount++;
             }
 
@@ -1219,11 +1231,11 @@ namespace OpenAI
 
 
                 //we are conceding
-                if (this.isgoingtoconcede)
+                if (this.IsGoingToConcede)
                 {
                     if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena)
                     {
-                        this.isgoingtoconcede = false;
+                        this.IsGoingToConcede = false;
                     }
                     else
                     {
@@ -1239,7 +1251,7 @@ namespace OpenAI
                 }
 
                 HelpFunctions.Instance.ErrorLog("update everything...");
-                bool templearn = sf.updateEverything(this, behave, doMultipleThingsAtATime, Settings.Instance.useExternalProcess, false); // cant use passive waiting (in this mode i return nothing)
+                bool templearn = sf.updateEverything(this, behave, DoMultipleThingsAtATime, Settings.Instance.useExternalProcess, false); // cant use passive waiting (in this mode i return nothing)
                 if (templearn == true) Settings.Instance.printlearnmode = true;
 
                 // actions-queue-stuff
@@ -1276,7 +1288,7 @@ namespace OpenAI
                 //if (Silverfish.Instance.choiceCards.Count >= 1 && e.action_list.Count == 0 && discovercounter == 0)
                 {
                     //detect which choice
-                    doMultipleThingsAtATime = false;
+                    DoMultipleThingsAtATime = false;
                     this.dontmultiactioncount++;
 
                     //Hrtprozis.Instance.updateLastPlayedCard(lastplayedcard, targetentity);
@@ -1320,7 +1332,7 @@ namespace OpenAI
                 }
 
 
-                else if (!doMultipleThingsAtATime || this.dontmultiactioncount >= 1)
+                else if (!DoMultipleThingsAtATime || this.dontmultiactioncount >= 1)
                 {
                     discovercounter = 0;
                     //this is used if you cant queue actions (so ai is just sending one action at a time)
@@ -1353,14 +1365,14 @@ namespace OpenAI
                             //Helpfunctions.Instance.logg("찾는거종료1 doMultipleThingsAtATime " + doMultipleThingsAtATime);
                             POWERFULSINGLEACTION = 0;
                             dontmultiactioncount = 0;
-                            doMultipleThingsAtATime = true;
+                            DoMultipleThingsAtATime = true;
                         }
-                        doMultipleThingsAtATime = true;
+                        DoMultipleThingsAtATime = true;
                         return;
                     }
                     else
                     {
-                        shouldSendFakeAction = true;
+                        ShouldSendFakeAction = true;
                     }
 
 
@@ -1424,9 +1436,9 @@ namespace OpenAI
                     }
                     while (hasMoreActions);
 
-                    numActionsSent = e.action_list.Count();
-                    HelpFunctions.Instance.ErrorLog("sending HR " + numActionsSent + " queued actions");
-                    numExecsReceived = 0;
+                    NumActionsSent = e.action_list.Count();
+                    HelpFunctions.Instance.ErrorLog("sending HR " + NumActionsSent + " queued actions");
+                    NumExecsReceived = 0;
                     if (Settings.Instance.enemyConcede) HelpFunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
 
                     if (Ai.Instance.bestmoveValue <= Settings.Instance.enemyConcedeValue && Settings.Instance.enemyConcede)
@@ -1469,18 +1481,18 @@ namespace OpenAI
             //do nothing here
 
             //queue stuff
-            numExecsReceived++;
+            NumExecsReceived++;
 
             switch (e.done_result)
             {
                 case ActionDoneEventArgs.ActionResult.Executed:
-                    HelpFunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <executed>: " + e.action_id); break;
+                    HelpFunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <executed>: " + e.action_id); break;
                 case ActionDoneEventArgs.ActionResult.SourceInvalid:
-                    HelpFunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <invalid_source>: " + e.action_id); break;
+                    HelpFunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <invalid_source>: " + e.action_id); break;
                 case ActionDoneEventArgs.ActionResult.TargetInvalid:
-                    HelpFunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <invalid_target>: " + e.action_id); break;
+                    HelpFunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <invalid_target>: " + e.action_id); break;
                 default:
-                    HelpFunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <default>: " + e.action_id + " " + e.ToString()); break;
+                    HelpFunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <default>: " + e.action_id + " " + e.ToString()); break;
             }
 
         }
@@ -1545,8 +1557,8 @@ namespace OpenAI
         {
             if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena) return false;
             if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.Play_Ranked) return false;
-            int totalwin = this.wins;
-            int totallose = this.loses;
+            int totalwin = this.NumWins;
+            int totallose = this.NumLoses;
             /*if ((totalwin + totallose - KeepConcede) != 0)
             {
                 Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
@@ -1570,7 +1582,7 @@ namespace OpenAI
                     this.lossedtodo--;
                 }
                 HelpFunctions.Instance.ErrorLog("not today!! (you won a game)");
-                this.isgoingtoconcede = true;
+                this.IsGoingToConcede = true;
                 return true;
             }
 
@@ -1578,7 +1590,7 @@ namespace OpenAI
             {
                 this.lossedtodo--;
                 HelpFunctions.Instance.ErrorLog("not today!");
-                this.isgoingtoconcede = true;
+                this.IsGoingToConcede = true;
                 return true;
             }
 
@@ -1587,7 +1599,7 @@ namespace OpenAI
                 this.lossedtodo = 3;
                 HelpFunctions.Instance.ErrorLog("your rank is " + curlvl + " targeted rank is " + this.concedeLvl + " -> concede!");
                 HelpFunctions.Instance.ErrorLog("not today!!!");
-                this.isgoingtoconcede = true;
+                this.IsGoingToConcede = true;
                 return true;
             }
             return false;
@@ -1601,7 +1613,7 @@ namespace OpenAI
             if (Mulligan.Instance.shouldConcede(Hrtprozis.Instance.heroNametoEnum(ownh), Hrtprozis.Instance.heroNametoEnum(enemyh)))
             {
                 HelpFunctions.Instance.ErrorLog("not today!!!!");
-                this.isgoingtoconcede = true;
+                this.IsGoingToConcede = true;
                 return true;
             }
             return false;
@@ -1609,13 +1621,13 @@ namespace OpenAI
 
         private void HandleWining()
         {
-            this.wins++;
-            if (this.isgoingtoconcede)
+            this.NumWins++;
+            if (this.IsGoingToConcede)
             {
-                this.isgoingtoconcede = false;
+                this.IsGoingToConcede = false;
             }
-            int totalwin = this.wins;
-            int totallose = this.loses;
+            int totalwin = this.NumWins;
+            int totallose = this.NumLoses;
             if ((totalwin + totallose - KeepConcede) != 0)
             {
                 HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
@@ -1629,15 +1641,15 @@ namespace OpenAI
 
         private void HandleLosing(bool is_concede)
         {
-            this.loses++;
+            this.NumLoses++;
             if (is_concede)
             {
-                this.isgoingtoconcede = false;
+                this.IsGoingToConcede = false;
                 this.KeepConcede++;
             }
-            this.isgoingtoconcede = false;
-            int totalwin = this.wins;
-            int totallose = this.loses;
+            this.IsGoingToConcede = false;
+            int totalwin = this.NumWins;
+            int totallose = this.NumLoses;
             if ((totalwin + totallose - KeepConcede) != 0)
             {
                 HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));

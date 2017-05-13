@@ -866,7 +866,7 @@ namespace OpenAI
                     Probabilitymaker.Instance.updateSecretList(p, lastpf);
                     Bot.Instance.dontmultiactioncount = 0;
                     Bot.Instance.POWERFULSINGLEACTION = 0;
-                    Bot.Instance.doMultipleThingsAtATime = true;
+                    Bot.Instance.DoMultipleThingsAtATime = true;
                 }
             }
             else
@@ -885,7 +885,7 @@ namespace OpenAI
                     Probabilitymaker.Instance.updateSecretList(p, lastpf);
                     Bot.Instance.dontmultiactioncount = 1;
                     Bot.Instance.POWERFULSINGLEACTION = 0;
-                    Bot.Instance.doMultipleThingsAtATime = false;
+                    Bot.Instance.DoMultipleThingsAtATime = false;
                 }
 
             }
@@ -904,7 +904,7 @@ namespace OpenAI
                 // Detect errors in HearthRanger execution of our last set of actions and try to fix it so we don't
                 // have to re-calculate the entire turn.
                 Bot currentBot = (Bot)rangerbot;
-                if (currentBot.numActionsSent > currentBot.numExecsReceived && !p.isEqualf(Ai.Instance.nextMoveGuess))
+                if (currentBot.NumActionsSent > currentBot.NumExecsReceived && !p.isEqualf(Ai.Instance.nextMoveGuess))
                 {
                     HelpFunctions.Instance.ErrorLog("HR action queue did not complete!");
                     HelpFunctions.Instance.logg("board state out-of-sync due to action queue!");
