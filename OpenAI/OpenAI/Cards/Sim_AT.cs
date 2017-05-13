@@ -3,7 +3,7 @@
  * - Sim_AT_002
  */
 
-namespace OpenAI.Cards
+namespace OpenAI
 {
     /// <summary>
     /// Flame Lance
