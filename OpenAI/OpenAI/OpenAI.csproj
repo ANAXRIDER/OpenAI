@@ -78,9 +78,6 @@
     <Compile Include="Ai\sleep.cs" />
     <Compile Include="Ai\TAGGS.cs" />
     <Compile Include="Cards\Sim_AT.cs" />
-    <Compile Include="Cards\Sim_AT_005.cs" />
-    <Compile Include="Cards\Sim_AT_005t.cs" />
-    <Compile Include="Cards\Sim_AT_006.cs" />
     <Compile Include="Cards\Sim_AT_007.cs" />
     <Compile Include="Cards\Sim_AT_008.cs" />
     <Compile Include="Cards\Sim_AT_009.cs" />

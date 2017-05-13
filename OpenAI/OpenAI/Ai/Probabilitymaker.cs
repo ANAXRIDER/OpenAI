@@ -528,7 +528,7 @@
             if (!dontwrite)
             {
                 HelpFunctions.Instance.logg(s);
-                if (writetobuffer) HelpFunctions.Instance.writeToBuffer(s);
+                if (writetobuffer) HelpFunctions.Instance.WriteToBuffer(s);
             }
 
             data += s + "\r\n";
@@ -542,7 +542,7 @@
             if (!dontwrite)
             {
                 HelpFunctions.Instance.logg(s);
-                if (writetobuffer) HelpFunctions.Instance.writeToBuffer(s);
+                if (writetobuffer) HelpFunctions.Instance.WriteToBuffer(s);
             }
 
             data += s + "\r\n";
@@ -671,8 +671,8 @@
                 HelpFunctions.Instance.logg(eg);
                 if (writetobuffer)
                 {
-                    HelpFunctions.Instance.writeToBuffer(og);
-                    HelpFunctions.Instance.writeToBuffer(eg);
+                    HelpFunctions.Instance.WriteToBuffer(og);
+                    HelpFunctions.Instance.WriteToBuffer(eg);
                 }
             }
             return og + "\r\n" + eg + "\r\n";

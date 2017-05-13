@@ -223,12 +223,12 @@
 
             if (writeTobuffer)
             {
-                help.writeToBuffer("Own Handcards: ");
+                help.WriteToBuffer("Own Handcards: ");
                 foreach (Handmanager.Handcard c in this.handCards)
                 {
-                    help.writeToBuffer("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack);
+                    help.WriteToBuffer("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack);
                 }
-                help.writeToBuffer("Enemy cards: " + this.enemyAnzCards);
+                help.WriteToBuffer("Enemy cards: " + this.enemyAnzCards);
 
                 //todo print died minions this turn!
 

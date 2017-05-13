@@ -22,7 +22,7 @@ namespace OpenAI
         private HelpFunctions() { }
 
         private bool writelogg = true;
-        public void loggonoff(bool onoff)
+        public void Loggonoff(bool onoff)
         {
             //writelogg = onoff;
         }
@@ -103,17 +103,17 @@ namespace OpenAI
 
 
         string sendbuffer = "";
-        public void resetBuffer()
+        public void ResetBuffer()
         {
             this.sendbuffer = "";
         }
 
-        public void writeToBuffer(string data)
+        public void WriteToBuffer(string data)
         {
             this.sendbuffer += data + "\r\n";
         }
 
-        public void writeBufferToNetwork(string msgtype)
+        public void WriteBufferToNetwork(string msgtype)
         {
             FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
         }
@@ -127,7 +127,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
+                    if (Settings.Instance.useNetwork) WriteBufferToNetwork("crrntbrd.txt");
                     else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
                     writed = false;
                 }
@@ -139,7 +139,7 @@ namespace OpenAI
             this.sendbuffer = "";
         }
 
-        public void writeBufferToDeckFile()
+        public void WriteBufferToDeckFile()
         {
             bool writed = true;
             this.sendbuffer += "<EoF>";
@@ -147,7 +147,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
+                    if (Settings.Instance.useNetwork) WriteBufferToNetwork("curdeck.txt");
                     else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
                     writed = false;
                 }
@@ -159,7 +159,7 @@ namespace OpenAI
             this.sendbuffer = "";
         }
 
-        public void writeBufferToActionFile()
+        public void WriteBufferToActionFile()
         {
             bool writed = true;
             this.sendbuffer += "<EoF>";
@@ -168,7 +168,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
+                    if (Settings.Instance.useNetwork) WriteBufferToNetwork("actionstodo.txt");
                     else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
                     writed = false;
                 }
@@ -180,7 +180,7 @@ namespace OpenAI
             this.sendbuffer = "";
         }
 
-        public void writeBufferToCardDB()
+        public void WriteBufferToCardDB()
         {
             bool writed = true;
             while (writed)

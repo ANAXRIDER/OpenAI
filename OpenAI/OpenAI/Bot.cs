@@ -99,6 +99,8 @@ namespace OpenAI
 
         //
         bool isgoingtoconcede = false;
+
+  
         int wins = 0;
         int loses = 0;
 
@@ -129,9 +131,9 @@ namespace OpenAI
             if (set.useExternalProcess) HelpFunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
             if (set.useExternalProcess) HelpFunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
             
-            if (!sf.startedexe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
+            if (!sf.StartedExe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
             {
-                sf.startedexe = true;
+                sf.StartedExe = true;
                 Task.Run(() => startExeAsync());
             }
 
@@ -171,7 +173,7 @@ namespace OpenAI
                 System.Diagnostics.Process.Start(startInfo);
             }
 
-            sf.startedexe = false; //reset it in case user closes exe
+            sf.StartedExe = false; //reset it in case user closes exe
         }
 
         /// <summary>
@@ -254,9 +256,9 @@ namespace OpenAI
             }
 
             //reload external process settings too
-            HelpFunctions.Instance.resetBuffer();
-            HelpFunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + ownName + ";" + enemName + ";");
-            HelpFunctions.Instance.writeBufferToDeckFile();
+            HelpFunctions.Instance.ResetBuffer();
+            HelpFunctions.Instance.WriteToBuffer(Hrtprozis.Instance.deckName + ";" + ownName + ";" + enemName + ";");
+            HelpFunctions.Instance.WriteBufferToDeckFile();
 
             if (Mulligan.Instance.hasmulliganrules(ownName, enemName))
             {

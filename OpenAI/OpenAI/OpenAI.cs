@@ -11,12 +11,12 @@ namespace OpenAI
     public sealed class OpenAI
     {
         public string VersionNumber { get; } = "0.0.1";
-        private bool singleLog = false;
-        private string botbehave = "rush";
-        public bool waitingForSilver = false;
+        public bool WaitingForOpenAI { get; set; } = false;
+        public bool StartedExe { get; set; } = false;
 
-        public bool startedexe = false;
-
+        private string BotBehave { get; set; } = "rush";
+        private bool SingleLog { get; set; } = false;
+        //
         Playfield lastpf;
         Settings sttngs = Settings.Instance;
 
@@ -116,12 +116,12 @@ namespace OpenAI
 
         private OpenAI()
         {
-            this.singleLog = Settings.Instance.writeToSingleFile;
+            this.SingleLog = Settings.Instance.writeToSingleFile;
             string path = OpenAIPath.AssemblyDirectory + "SilverLogs" + System.IO.Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             sttngs.setFilePath(OpenAIPath.AssemblyDirectory);
 
-            if (singleLog)
+            if (SingleLog)
             {
                 sttngs.setLoggPath(OpenAIPath.LogPath + System.IO.Path.DirectorySeparatorChar);
                 sttngs.setLoggFile("SilverLog.txt");
@@ -151,7 +151,7 @@ namespace OpenAI
             ownMinionsCost0 = false;
 
             HelpFunctions.Instance.flushLogg(); // flush the buffer before creating a new log
-            if (!singleLog)
+            if (!SingleLog)
             {
                 sttngs.setLoggFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
                 HelpFunctions.Instance.createNewLoggfile();
@@ -1707,50 +1707,50 @@ namespace OpenAI
 
         private void updateBehaveString(Behavior botbase)
         {
-            this.botbehave = "rush";
-            if (botbase is BehaviorFace) this.botbehave = "face";
-            if (botbase is BehaviorControl) this.botbehave = "control";
-            if (botbase is BehaviorMana) this.botbehave = "mana";
-            if (botbase is BehaviorAggroWarlock) this.botbehave = "aggrowarlock";
-            if (botbase is BehaviorAggroshaman) this.botbehave = "aggroshaman";
-            this.botbehave += " " + Ai.Instance.maxwide;
-            this.botbehave += " face " + ComboBreaker.Instance.attackFaceHP;
+            this.BotBehave = "rush";
+            if (botbase is BehaviorFace) this.BotBehave = "face";
+            if (botbase is BehaviorControl) this.BotBehave = "control";
+            if (botbase is BehaviorMana) this.BotBehave = "mana";
+            if (botbase is BehaviorAggroWarlock) this.BotBehave = "aggrowarlock";
+            if (botbase is BehaviorAggroshaman) this.BotBehave = "aggroshaman";
+            this.BotBehave += " " + Ai.Instance.maxwide;
+            this.BotBehave += " face " + ComboBreaker.Instance.attackFaceHP;
             if (Settings.Instance.secondTurnAmount > 0)
             {
                 if (Ai.Instance.nextMoveGuess.mana == -100)
                 {
                     Ai.Instance.updateTwoTurnSim();
                 }
-                this.botbehave += " twoturnsim " + Settings.Instance.secondTurnAmount + " ntss " + Settings.Instance.nextTurnDeep + " " + Settings.Instance.nextTurnMaxWide + " " + Settings.Instance.nextTurnTotalBoards;
+                this.BotBehave += " twoturnsim " + Settings.Instance.secondTurnAmount + " ntss " + Settings.Instance.nextTurnDeep + " " + Settings.Instance.nextTurnMaxWide + " " + Settings.Instance.nextTurnTotalBoards;
             }
 
             if (Settings.Instance.playarround)
             {
-                this.botbehave += " playaround";
-                this.botbehave += " " + Settings.Instance.playaroundprob + " " + Settings.Instance.playaroundprob2;
+                this.BotBehave += " playaround";
+                this.BotBehave += " " + Settings.Instance.playaroundprob + " " + Settings.Instance.playaroundprob2;
             }
 
-            this.botbehave += " ets " + Settings.Instance.enemyTurnMaxWide;
+            this.BotBehave += " ets " + Settings.Instance.enemyTurnMaxWide;
 
             if (Settings.Instance.simEnemySecondTurn)
             {
-                this.botbehave += " ets2 " + Settings.Instance.enemyTurnMaxWideSecondTime;
-                this.botbehave += " ents " + Settings.Instance.enemySecondTurnMaxWide;
+                this.BotBehave += " ets2 " + Settings.Instance.enemyTurnMaxWideSecondTime;
+                this.BotBehave += " ents " + Settings.Instance.enemySecondTurnMaxWide;
             }
 
             if (Settings.Instance.useSecretsPlayArround)
             {
-                this.botbehave += " secret";
+                this.BotBehave += " secret";
             }
 
             if (Settings.Instance.secondweight != 0.5f)
             {
-                this.botbehave += " weight " + (int)(Settings.Instance.secondweight * 100f);
+                this.BotBehave += " weight " + (int)(Settings.Instance.secondweight * 100f);
             }
 
             if (Settings.Instance.simulatePlacement)
             {
-                this.botbehave += " plcmnt";
+                this.BotBehave += " plcmnt";
             }
 
 
@@ -1804,21 +1804,21 @@ namespace OpenAI
         private void printstuff(Playfield p, bool runEx)
         {
             string dtimes = DateTime.Now.ToString("HH:mm:ss:ffff");
-            String completeBoardString = p.getCompleteBoardForSimulating(this.botbehave, this.VersionNumber, dtimes);
+            String completeBoardString = p.getCompleteBoardForSimulating(this.BotBehave, this.VersionNumber, dtimes);
 
             HelpFunctions.Instance.logg(completeBoardString);
 
             if (runEx)
             {
                 Ai.Instance.currentCalculatedBoard = dtimes;
-                HelpFunctions.Instance.resetBuffer();
+                HelpFunctions.Instance.ResetBuffer();
                 if (!Settings.Instance.useNetwork)
                 {
-                    HelpFunctions.Instance.writeBufferToActionFile();
-                    HelpFunctions.Instance.resetBuffer();
+                    HelpFunctions.Instance.WriteBufferToActionFile();
+                    HelpFunctions.Instance.ResetBuffer();
                 }
 
-                HelpFunctions.Instance.writeToBuffer(completeBoardString);
+                HelpFunctions.Instance.WriteToBuffer(completeBoardString);
                 HelpFunctions.Instance.writeBufferToFile();
             }
 
@@ -1830,7 +1830,7 @@ namespace OpenAI
             List<string> alist = new List<string>();
             float value = 0f;
             string boardnumm = "-1";
-            this.waitingForSilver = true;
+            this.WaitingForOpenAI = true;
             int trackingchoice = 0;
             int trackingstate = 0;
             bool network = Settings.Instance.useNetwork;
@@ -1867,8 +1867,8 @@ namespace OpenAI
                         //Helpfunctions.Instance.ErrorLog(data);
                         if (!network)
                         {
-                            HelpFunctions.Instance.resetBuffer();
-                            HelpFunctions.Instance.writeBufferToActionFile();
+                            HelpFunctions.Instance.ResetBuffer();
+                            HelpFunctions.Instance.WriteBufferToActionFile();
                         }
                         alist.AddRange(data.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
                         string board = alist[0];
@@ -1918,7 +1918,7 @@ namespace OpenAI
                     System.Threading.Thread.Sleep(10);
                 }
             }
-            this.waitingForSilver = false;
+            this.WaitingForOpenAI = false;
             HelpFunctions.Instance.logg("received " + boardnumm + " actions to do: (currtime = " + DateTime.Now.ToString("HH:mm:ss.ffff") + ")");
             Ai.Instance.currentCalculatedBoard = "0";
             Playfield p = new Playfield();

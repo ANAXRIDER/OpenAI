@@ -80,4 +80,47 @@ namespace OpenAI
             p.minionGetDamageOrHeal(target, dmg);
         }
     }
+
+    /// <summary>
+    /// Polymorph: Boar
+    ///     Transform a minion into a 4/2 Boar with Charge.
+    /// </summary>
+    class Sim_AT_005 : SimTemplate//
+    {
+        private CardDB.Card boar = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_005t);
+
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        {
+            p.minionTransform(target, boar);
+        }
+
+    }
+
+    /// <summary>
+    /// Boar
+    ///     Charge
+    /// </summary>
+    class Sim_AT_005t : SimTemplate
+    {
+    }
+
+    /// <summary>
+    /// Dalaran Aspirant
+    ///     Inspire: Gain Spell Damage +1.
+    /// </summary>
+    class Sim_AT_006 : SimTemplate
+    {
+        public override void onInspire(Playfield p, Minion m)
+        {
+            m.spellpower++;
+            if (m.own)
+            {
+                p.spellpower++;
+            }
+            else
+            {
+                p.enemyspellpower++;
+            }
+        }
+    }
 }

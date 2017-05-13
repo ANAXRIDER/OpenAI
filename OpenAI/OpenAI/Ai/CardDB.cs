@@ -10569,14 +10569,14 @@ namespace OpenAI
         private void enumCreator()
         {
             // cardIDEnum creator:
-            HelpFunctions.Instance.writeToBuffer("public enum cardIDEnum");
-            HelpFunctions.Instance.writeToBuffer("{");
-            HelpFunctions.Instance.writeToBuffer("None,");
+            HelpFunctions.Instance.WriteToBuffer("public enum cardIDEnum");
+            HelpFunctions.Instance.WriteToBuffer("{");
+            HelpFunctions.Instance.WriteToBuffer("None,");
             foreach (string cardid in this.allCardIDS)
             {
-                HelpFunctions.Instance.writeToBuffer(cardid + ",");
+                HelpFunctions.Instance.WriteToBuffer(cardid + ",");
             }
-            HelpFunctions.Instance.writeToBuffer("}");
+            HelpFunctions.Instance.WriteToBuffer("}");
 
             
             // cardName creator:
@@ -10587,30 +10587,30 @@ namespace OpenAI
                 namelist.Add(cardid);
             }
             
-            HelpFunctions.Instance.writeToBuffer("public enum cardName");
-            HelpFunctions.Instance.writeToBuffer("{");
+            HelpFunctions.Instance.WriteToBuffer("public enum cardName");
+            HelpFunctions.Instance.WriteToBuffer("{");
             foreach (string cardid in namelist)
             {
-                HelpFunctions.Instance.writeToBuffer(cardid + ",");
+                HelpFunctions.Instance.WriteToBuffer(cardid + ",");
             }
-            HelpFunctions.Instance.writeToBuffer("}");
+            HelpFunctions.Instance.WriteToBuffer("}");
 
             
             // getSimCard creator:
-            HelpFunctions.Instance.writeToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
-            HelpFunctions.Instance.writeToBuffer("{");
-            HelpFunctions.Instance.writeToBuffer("switch (id)");
-            HelpFunctions.Instance.writeToBuffer("{");
+            HelpFunctions.Instance.WriteToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
+            HelpFunctions.Instance.WriteToBuffer("{");
+            HelpFunctions.Instance.WriteToBuffer("switch (id)");
+            HelpFunctions.Instance.WriteToBuffer("{");
             foreach (string cardid in this.allCardIDS)
             {
-                HelpFunctions.Instance.writeToBuffer("case cardIDEnum." + cardid + ": return new Sim_" + cardid + "();");
+                HelpFunctions.Instance.WriteToBuffer("case cardIDEnum." + cardid + ": return new Sim_" + cardid + "();");
             }
-            HelpFunctions.Instance.writeToBuffer("return new SimTemplate();");
-            HelpFunctions.Instance.writeToBuffer("}");
-            HelpFunctions.Instance.writeToBuffer("}");
+            HelpFunctions.Instance.WriteToBuffer("return new SimTemplate();");
+            HelpFunctions.Instance.WriteToBuffer("}");
+            HelpFunctions.Instance.WriteToBuffer("}");
 
 
-            HelpFunctions.Instance.writeBufferToCardDB();
+            HelpFunctions.Instance.WriteBufferToCardDB();
         }
 
         private static string removeSpecialChars(string s)

@@ -192,26 +192,26 @@ namespace OpenAI
 
                     if (this.druidchoice >= 1) playaction += " choice " + this.druidchoice;
 
-                    help.writeToBuffer(playaction + discover);
+                    help.WriteToBuffer(playaction + discover);
                 }
                 if (this.actionType == ActionType.ATTACK_WITH_MINION && this.target != null)
                 {
-                    help.writeToBuffer("attack " + this.own.entityID + " enemy " + this.target.entityID + discover);
+                    help.WriteToBuffer("attack " + this.own.entityID + " enemy " + this.target.entityID + discover);
                 }
                 if (this.actionType == ActionType.ATTACK_WITH_HERO && this.target != null)
                 {
-                    help.writeToBuffer("heroattack " + this.target.entityID + discover);
+                    help.WriteToBuffer("heroattack " + this.target.entityID + discover);
                 }
                 if (this.actionType == ActionType.USE_HERO_POWER)
                 {
 
                     if (this.target != null)
                     {
-                        help.writeToBuffer("useability on target " + this.target.entityID + discover);
+                        help.WriteToBuffer("useability on target " + this.target.entityID + discover);
                     }
                     else
                     {
-                        help.writeToBuffer("useability" + discover);
+                        help.WriteToBuffer("useability" + discover);
                     }
                 }
                 return;
