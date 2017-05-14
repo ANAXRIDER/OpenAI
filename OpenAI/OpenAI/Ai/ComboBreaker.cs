@@ -400,7 +400,7 @@
 
         public void loggCleanPath()
         {
-            HelpFunctions.Instance.logg(cleanPath);
+            Helpfunctions.Instance.logg(cleanPath);
         }
 
         private void readCombos()
@@ -440,10 +440,10 @@
             }
             else
             {
-                HelpFunctions.Instance.ErrorLog("[Combo] cant find base _combo.txt, consider creating one");
+                Helpfunctions.Instance.ErrorLog("[Combo] cant find base _combo.txt, consider creating one");
                 return;
             }
-            HelpFunctions.Instance.ErrorLog("[Combo] read " + cleanPath);
+            Helpfunctions.Instance.ErrorLog("[Combo] read " + cleanPath);
 
 
             try
@@ -452,7 +452,7 @@
             }
             catch
             {
-                HelpFunctions.Instance.ErrorLog("_combo.txt read error. Continuing without user-defined rules.");
+                Helpfunctions.Instance.ErrorLog("_combo.txt read error. Continuing without user-defined rules.");
                 return;
             }
 
@@ -470,7 +470,7 @@
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog("combomaker cant read: " + line);
+                        Helpfunctions.Instance.ErrorLog("combomaker cant read: " + line);
                     }
                 }
                 else
@@ -488,7 +488,7 @@
                         }
                         catch
                         {
-                            HelpFunctions.Instance.ErrorLog("combomaker cant read: " + line);
+                            Helpfunctions.Instance.ErrorLog("combomaker cant read: " + line);
                         }
                     }
                     else
@@ -500,13 +500,13 @@
                         }
                         catch
                         {
-                            HelpFunctions.Instance.ErrorLog("combomaker cant read: " + line);
+                            Helpfunctions.Instance.ErrorLog("combomaker cant read: " + line);
                         }
                     }
                 }
             }
-            if (combos.Count > 0) HelpFunctions.Instance.ErrorLog("[Combo] " + combos.Count + " combo rules found");
-            if (playByValue.Count > 0) HelpFunctions.Instance.ErrorLog("[Combo] " + playByValue.Count + " card value rules found");
+            if (combos.Count > 0) Helpfunctions.Instance.ErrorLog("[Combo] " + combos.Count + " combo rules found");
+            if (playByValue.Count > 0) Helpfunctions.Instance.ErrorLog("[Combo] " + playByValue.Count + " card value rules found");
         }
 
         public int getPenalityForDestroyingCombo(CardDB.Card crd, Playfield p)

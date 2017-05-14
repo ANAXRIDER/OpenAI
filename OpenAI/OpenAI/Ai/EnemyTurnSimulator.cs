@@ -39,7 +39,7 @@
             posmoves.Clear();
             if (print)
             {
-                HelpFunctions.Instance.ErrorLog("board at enemyturn start-----------------------------");
+                Helpfunctions.Instance.ErrorLog("board at enemyturn start-----------------------------");
                 rootfield.value = botBase.getPlayfieldValue(rootfield);
                 rootfield.printBoard();
             }
@@ -235,7 +235,7 @@
             }
             if (print)
             {
-                HelpFunctions.Instance.ErrorLog("best enemy board----------------------------------");
+                Helpfunctions.Instance.ErrorLog("best enemy board----------------------------------");
                 bestplay.printBoard();
             }
             rootfield.value = bestplay.value;
