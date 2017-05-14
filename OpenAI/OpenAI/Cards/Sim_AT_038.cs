@@ -9,7 +9,7 @@ namespace OpenAI
     {
         //Battlecry: Gain an empty Mana Crystal. Deathrattle: Lose a Mana Crystal.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {
@@ -29,7 +29,7 @@ namespace OpenAI
         }
 
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

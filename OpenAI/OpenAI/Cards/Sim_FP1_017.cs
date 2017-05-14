@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 
 //    diener mit kampfschrei/ kosten (2) mehr.
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
 		{
             p.anzNerubarWeblord++;
 		}
 
-        public override void onAuraEnds(Playfield p, Minion m)
+        public override void OnAuraEnds(Playfield p, Minion m)
         {
             p.anzNerubarWeblord--;
         }

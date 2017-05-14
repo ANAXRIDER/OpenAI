@@ -34,27 +34,27 @@ namespace OpenAI
             HERO,
         }
 
-        public enum cardtrigers
+        public enum CardTriggers
         {
-            newtriger,
-            getBattlecryEffect,
-            onAHeroGotHealedTrigger,
-            onAMinionGotHealedTrigger,
-            onAuraEnds,
-            onAuraStarts,
-            onCardIsGoingToBePlayed,
-            onCardPlay,
-            onCardWasPlayed,
-            onDeathrattle,
-            onEnrageStart,
-            onEnrageStop,
-            onMinionDiedTrigger,
-            onMinionGotDmgTrigger,
-            onMinionIsSummoned,
-            onMinionWasSummoned,
-            onSecretPlay,
-            onTurnEndsTrigger,
-            onTurnStartTrigger,
+            newtriger, // BB - Should this be removed??
+            GetBattlecryEffect,
+            OnAHeroGotHealedTrigger,
+            OnAMinionGotHealedTrigger,
+            OnAuraEnds,
+            OnAuraStarts,
+            OnCardIsGoingToBePlayed,
+            OnCardPlay,
+            OnCardWasPlayed,
+            OnDeathrattle,
+            OnEnrageStart,
+            OnEnrageStop,
+            OnMinionDiedTrigger,
+            OnMinionGotDmgTrigger,
+            OnMinionIsSummoned,
+            OnMinionWasSummoned,
+            OnSecretPlay,
+            OnTurnEndsTrigger,
+            OnTurnStartTrigger,
             triggerInspire
         }
 
@@ -5703,7 +5703,7 @@ namespace OpenAI
             public int spellpowervalue;
             public cardIDEnum cardIDenum = cardIDEnum.None;
             public List<ErrorType2> playrequires;
-            public List<cardtrigers> trigers;
+            public List<CardTriggers> triggers;
 
             public SimTemplate sim_card;
             public PenTemplate pen_card;
@@ -10664,23 +10664,23 @@ namespace OpenAI
                     c.lethalhelper = true;
                 }
 
-                c.trigers = new List<cardtrigers>();
+                c.triggers = new List<CardTriggers>();
                 Type trigerType = c.sim_card.GetType();
-                foreach (string trigerName in Enum.GetNames(typeof(cardtrigers)))
+                foreach (string trigerName in Enum.GetNames(typeof(CardTriggers)))
                 {
                     try
                     {
                         foreach (var m in trigerType.GetMethods().Where(e => e.Name.Equals(trigerName, StringComparison.Ordinal)))
                         {
                             if (m.DeclaringType == trigerType)
-                                c.trigers.Add((cardtrigers)Enum.Parse(typeof(cardtrigers), trigerName));
+                                c.triggers.Add((CardTriggers)Enum.Parse(typeof(CardTriggers), trigerName));
                         }
                     }
                     catch
                     {
                     }
                 }
-                if (c.trigers.Count > 10) c.trigers.Clear();
+                if (c.triggers.Count > 10) c.triggers.Clear();
             }
         }
     }

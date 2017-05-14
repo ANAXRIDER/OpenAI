@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Battlecry: Deal 2 damage. Give your C'Thun +2/+2 (wherever it is)
 		
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.minionGetDamageOrHeal(target, 2);
             if (own.own)

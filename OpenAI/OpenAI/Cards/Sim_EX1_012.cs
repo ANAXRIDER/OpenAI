@@ -6,7 +6,7 @@ namespace OpenAI
 {
     class Sim_EX1_012 : SimTemplate//bloodmage thalnos
     {
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
         {
 
             own.spellpower = 1;
@@ -22,7 +22,7 @@ namespace OpenAI
 
        
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.None, m.own);
         }

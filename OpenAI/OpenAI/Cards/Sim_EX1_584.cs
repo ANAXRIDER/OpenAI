@@ -7,7 +7,7 @@ namespace OpenAI
 	class Sim_EX1_584 : SimTemplate //ancientmage
 	{
 //    kampfschrei:/ verleiht benachbarten dienern zauberschaden +1/.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             List<Minion> temp = (own.own) ? p.ownMinions : p.enemyMinions;
             foreach (Minion m in temp)

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Each time you play a Beast this turn, add_a_random Beast to_your hand.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
 
             p.Stampede++;

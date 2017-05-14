@@ -10,7 +10,7 @@ namespace OpenAI
 //    benachbarte diener haben +1 angriff.
         // note buff and debuff is handled by playfield (faster)
         /*
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
         {
             if (own.own)
             {
@@ -36,7 +36,7 @@ namespace OpenAI
 		}
 
 
-        public override void onAuraEnds(Playfield p, Minion own)
+        public override void OnAuraEnds(Playfield p, Minion own)
         {
             if (own.own)
             {

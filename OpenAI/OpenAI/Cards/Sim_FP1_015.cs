@@ -11,7 +11,7 @@ namespace OpenAI
         CardDB.Card thaddius = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.FP1_014t);
         //    todesröcheln:/ ruft thaddius herbei, wenn feugen in diesem duell bereits gestorben ist.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             if (p.stalaggDead)
             {

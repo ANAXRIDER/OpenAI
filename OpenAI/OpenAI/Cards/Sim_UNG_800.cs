@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Trigger a friendly minion's Deathrattle.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (target != null) p.doDeathrattles(new List<Minion>() { target });
         }

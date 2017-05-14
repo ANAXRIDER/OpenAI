@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    hat ansturm/, während ihr eine waffe angelegt habt.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (own.own)
             {

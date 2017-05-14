@@ -7,7 +7,7 @@ namespace OpenAI
     class Sim_CS2_009 : SimTemplate//Mark of the Wild
     {
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             target.taunt = true;
             p.minionGetBuffed(target, 2, 2);

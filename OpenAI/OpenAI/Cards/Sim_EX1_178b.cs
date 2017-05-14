@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    +5 angriff.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.minionGetBuffed(own, 5, 0);
 		}

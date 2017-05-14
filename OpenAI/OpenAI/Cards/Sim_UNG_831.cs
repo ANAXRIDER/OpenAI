@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Corrupt every minion. Destroy them at the start of your next turn.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
 
             foreach (Minion mnn in p.ownMinions)

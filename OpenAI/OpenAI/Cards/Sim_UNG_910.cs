@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Deal $2 damage to a minion and $1 damage to adjacent ones.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int dmg1 = (ownplay) ? p.getSpellDamageDamage(2) : p.getEnemySpellDamageDamage(2);
             int dmg2 = (ownplay) ? p.getSpellDamageDamage(1) : p.getEnemySpellDamageDamage(1);

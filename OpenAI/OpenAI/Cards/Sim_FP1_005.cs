@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    verstohlenheit/. erhält zu beginn eures zuges +1/+1.
 
-        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if (triggerEffectMinion.own == turnStartOfOwner)
             {

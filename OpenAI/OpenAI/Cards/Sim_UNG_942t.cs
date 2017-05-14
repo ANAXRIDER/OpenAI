@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Fill your hand with random Murlocs.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int original = p.owncards.Count;
             if (own.own)

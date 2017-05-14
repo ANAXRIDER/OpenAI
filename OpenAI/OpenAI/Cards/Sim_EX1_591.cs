@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    eure karten und fähigkeiten, die leben wiederherstellen, verursachen stattdessen nun schaden.
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
         {
             if (own.own)
             {
@@ -21,7 +21,7 @@ namespace OpenAI
 
         }
 
-        public override void onAuraEnds(Playfield p, Minion own)
+        public override void OnAuraEnds(Playfield p, Minion own)
         {
             if (own.own)
             {

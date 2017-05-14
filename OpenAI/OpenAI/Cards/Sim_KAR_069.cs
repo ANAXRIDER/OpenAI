@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Battlecry: Add a random class card to your hand (from your opponent's class).
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.drawACard(CardDB.cardName.unknown, own.own, true);
         }

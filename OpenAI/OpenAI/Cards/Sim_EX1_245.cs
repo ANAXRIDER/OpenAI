@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    bringt einen diener zum schweigen/ und fügt ihm dann $1 schaden zu.
 
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.minionGetSilenced(target);
             int dmg = (ownplay) ? p.getSpellDamageDamage(1) : p.getEnemySpellDamageDamage(1);

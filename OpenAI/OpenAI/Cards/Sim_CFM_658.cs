@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Whenever a friendly minion dies, gain +1 Attack.
 
-        public override void onMinionDiedTrigger(Playfield p, Minion m, Minion diedMinion)
+        public override void OnMinionDiedTrigger(Playfield p, Minion m, Minion diedMinion)
         {
             if (m.own == diedMinion.own)
             {

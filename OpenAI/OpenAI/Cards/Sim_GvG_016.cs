@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Whenever your opponent plays a card, discard the top 3 cards of your deck.
 
-        public override void onCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
+        public override void OnCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
         {
             if (wasOwnCard == triggerEffectMinion.own) return; //owner of card = owner of minion -> no effect
 

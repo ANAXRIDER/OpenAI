@@ -10,7 +10,7 @@ namespace OpenAI
         //   Inspire: Summon a 3/5 War Kodo.
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_099t);//War Kodo
 
-        public override void onInspire(Playfield p, Minion m)
+        public override void OnInspire(Playfield p, Minion m)
         {
             int pos = (m.own) ? p.ownMinions.Count : p.enemyMinions.Count;
             p.callKid(kid, pos, m.own);

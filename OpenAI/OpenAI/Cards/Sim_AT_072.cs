@@ -10,7 +10,7 @@ namespace OpenAI
         //Battlecry: Draw 3 cards. Put any minions you drew directly into the battlefield.
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_099t);
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.drawACard(CardDB.cardIDEnum.None, own.own);
             p.drawACard(CardDB.cardIDEnum.None, own.own);

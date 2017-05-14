@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    At the end of your turn, deal 2 damage to a non-Mech minion.
 
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             //count non-mechs
             int ownNonMechs = 0;

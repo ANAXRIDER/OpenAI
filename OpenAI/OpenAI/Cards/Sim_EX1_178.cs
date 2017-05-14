@@ -7,7 +7,7 @@ namespace OpenAI
     class Sim_EX1_178 : SimTemplate //ancientofwar
     {
         //Choose One - +5 Attack; or +5 Health and Taunt.
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             bool hasfandral = false;
             if (p.ownMinions.Find(a => a.name == CardDB.cardName.fandralstaghelm && !a.silenced) != null) hasfandral = true;

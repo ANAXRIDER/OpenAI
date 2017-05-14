@@ -10,7 +10,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.OG_318t);
 		
-        public override void onMinionGotDmgTrigger(Playfield p, Minion m, bool ownDmgdmin)
+        public override void OnMinionGotDmgTrigger(Playfield p, Minion m, bool ownDmgdmin)
         {
             if (m.anzGotDmg>=1)
             {

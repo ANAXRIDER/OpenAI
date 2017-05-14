@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Choose a friendly minion. Summon a 1/1 copy of it.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             List<Minion> temp = (own.own) ? p.ownMinions : p.enemyMinions;
             if (target != null)

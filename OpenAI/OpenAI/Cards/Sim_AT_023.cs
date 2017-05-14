@@ -9,7 +9,7 @@ namespace OpenAI
 
         //insprire: Destroy a random minion for each player.
 
-        public override void onInspire(Playfield p, Minion m)
+        public override void OnInspire(Playfield p, Minion m)
         {
             Minion choosen2 = p.searchRandomMinion(p.enemyMinions, Playfield.searchmode.searchLowestAttack);
             if (choosen2 != null) p.minionGetDestroyed(choosen2);

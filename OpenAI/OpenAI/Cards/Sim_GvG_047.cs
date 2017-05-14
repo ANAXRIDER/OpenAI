@@ -10,7 +10,7 @@ namespace OpenAI
         //   Destroy a random enemy minion. Combo: And your opponent's weapon.
 
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp = (ownplay)? p.enemyMinions : p.ownMinions;
             if (temp.Count >= 1)

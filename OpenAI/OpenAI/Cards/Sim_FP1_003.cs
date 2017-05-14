@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ beschwört am ende des zuges eine exakte kopie dieses dieners.
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.playedThisTurn && triggerEffectMinion.own == turnEndOfOwner)
             {

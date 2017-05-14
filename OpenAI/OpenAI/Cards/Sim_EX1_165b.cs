@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    +2 leben und spott/.
         CardDB.Card bear = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_165t2);
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
                 p.minionTransform(own, bear);
         }

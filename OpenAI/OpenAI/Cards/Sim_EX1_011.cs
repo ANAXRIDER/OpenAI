@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ stellt 2 leben wieder her.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             int heal = (own.own) ? p.getMinionHeal(2) : p.getEnemyMinionHeal(2);
             p.minionGetDamageOrHeal(target, -heal);

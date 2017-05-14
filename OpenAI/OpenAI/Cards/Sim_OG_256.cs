@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Deathive your minions +1/+1.
 		
-		public override void onDeathrattle(Playfield p, Minion m)
+		public override void OnDeathrattle(Playfield p, Minion m)
         {
             List<Minion> temp = (m.own) ? p.ownMinions : p.enemyMinions;
             foreach (Minion mn in temp)

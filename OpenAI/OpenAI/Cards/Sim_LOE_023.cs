@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //Battlecry: Discover a 3-Cost card.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.drawACard(CardDB.cardIDEnum.None, own.own, true);
         }

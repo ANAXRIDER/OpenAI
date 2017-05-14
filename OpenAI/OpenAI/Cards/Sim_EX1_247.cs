@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         CardDB.Card card = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_247);
         //
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.equipWeapon(card,ownplay);
             p.changeRecall(ownplay, 1);

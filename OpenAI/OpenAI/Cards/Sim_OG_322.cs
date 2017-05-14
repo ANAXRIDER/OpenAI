@@ -8,12 +8,12 @@ namespace OpenAI
     {
         //Your weapons cost (2) less.
         
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
         {
             if (own.own) p.anzBlackwaterPirate++;
         }
 
-        public override void onAuraEnds(Playfield p, Minion m)
+        public override void OnAuraEnds(Playfield p, Minion m)
         {
             if (m.own) p.anzBlackwaterPirate--;
         }

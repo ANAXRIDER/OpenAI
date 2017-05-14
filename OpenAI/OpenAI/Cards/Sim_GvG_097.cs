@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Taunt Battlecry: Gain +1/+1 for each enemy Deathrattle minion.
         //todo does silenced count?
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             List<Minion> temp = (own.own) ? p.enemyMinions : p.ownMinions;
 

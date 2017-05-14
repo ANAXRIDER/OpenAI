@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: Summon a Jade Golem. Give it Taunt.
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             p.callKid(p.getNextJadeGolem(m.own), m.zonepos, m.own, true);
             List<Minion> tmp = m.own ? p.ownMinions : p.enemyMinions;

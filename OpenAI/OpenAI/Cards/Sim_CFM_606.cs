@@ -10,7 +10,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CFM_606t); //2/2 Crystal
 
-        public override void onAMinionGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
+        public override void OnAMinionGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
         {
             if (triggerEffectMinion.anzGotHealed > 0)
             {

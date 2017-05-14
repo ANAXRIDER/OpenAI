@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    fügt allen charakteren mit ausnahme von ysera $5 schaden zu.
 
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int dmg = (ownplay) ? p.getSpellDamageDamage(5) : p.getEnemySpellDamageDamage(5);
             foreach (Minion m in p.ownMinions)

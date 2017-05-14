@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    verursacht 2 schaden.
 
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if(target!=null) p.minionGetDamageOrHeal(target, 2);
 		}

@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //<deDE>TodesrÃ¶cheln: Legt ein Geheimnis aus Eurem Deck auf das Schlachtfeld.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             //if(p.isServer)
 

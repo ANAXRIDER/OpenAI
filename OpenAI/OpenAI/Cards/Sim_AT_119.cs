@@ -9,7 +9,7 @@ namespace OpenAI
 
         //insprire: Gain +2/+2.
 
-        public override void onInspire(Playfield p, Minion m)
+        public override void OnInspire(Playfield p, Minion m)
         {
             p.minionGetBuffed(m, 2, 2);
         }

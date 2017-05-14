@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         // Battlecry:do some crazy stuff
         // =Replace your hand and deck with Legendary minions.
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             // TODO: to random... just give him a high value :D
             Probabilitymaker.Instance.hasDeck = false;

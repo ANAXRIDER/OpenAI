@@ -6,7 +6,7 @@ namespace OpenAI
 {
 	class Sim_EX1_617 : SimTemplate //deadlyshot
 	{
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             
             List<Minion> temp1 = (ownplay) ? new List<Minion>(p.ownMinions) : new List<Minion>(p.enemyMinions);

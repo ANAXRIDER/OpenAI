@@ -10,7 +10,7 @@ namespace OpenAI
 //    erhält jedes mal +1/+1, wenn ein geheimnis/ ausgespielt wird.
 
         //we do them manually in playfield
-        /*public override void onCardWasPlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion)
+        /*public override void OnCardWasPlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion)
         {
             if (wasOwnCard && c.Secret)
             {

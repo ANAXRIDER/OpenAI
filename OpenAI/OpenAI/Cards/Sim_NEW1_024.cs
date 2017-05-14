@@ -7,7 +7,7 @@ namespace OpenAI
 	class Sim_NEW1_024 : SimTemplate //captaingreenskin
 	{
 //    kampfschrei:/ verleiht eurer waffe +1/+1.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (own.own)
             {

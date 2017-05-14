@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Taunt , Battlecry:Give a minion Taunt
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (target != null) target.taunt = true;
         }

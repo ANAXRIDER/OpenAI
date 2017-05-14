@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Deal $3 damage. Gain 3 Armor.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (target != null)
             {

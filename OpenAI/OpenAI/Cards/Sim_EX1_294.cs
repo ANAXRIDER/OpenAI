@@ -9,7 +9,7 @@ namespace OpenAI
         //todo secret
         //    geheimnis:/ wenn euer gegner einen diener ausspielt, beschwört ihr eine kopie desselben herbei.
 
-        public override void onSecretPlay(Playfield p, bool ownplay, Minion target, int number)
+        public override void OnSecretPlay(Playfield p, bool ownplay, Minion target, int number)
         {
 
             int posi = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;

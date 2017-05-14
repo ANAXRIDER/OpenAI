@@ -10,7 +10,7 @@ namespace OpenAI
         //    Has +2 Attack while you have a Mech.
 
         CardDB.Card w = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_024);
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.equipWeapon(w, ownplay);
 
@@ -38,7 +38,7 @@ namespace OpenAI
 
         }
 
-        public override void onMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        public override void OnMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if ((TAG_RACE)summonedMinion.handcard.card.race == TAG_RACE.MECHANICAL)
             {

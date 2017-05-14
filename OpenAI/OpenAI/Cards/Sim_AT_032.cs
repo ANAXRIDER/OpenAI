@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Battlecry: If you have a Pirate, gain +1/+1.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             bool hasPirate = false;
             foreach (Minion m in (own.own) ? p.ownMinions : p.enemyMinions)

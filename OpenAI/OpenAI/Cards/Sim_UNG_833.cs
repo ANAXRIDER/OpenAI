@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Taunt  Battlecry: Discard two random cards.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.discardACard(own.own);
             p.discardACard(own.own);

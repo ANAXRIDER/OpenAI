@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_017);//nerubian
 //    spott. todesröcheln:/ euer gegner legt einen diener aus seinem deck auf das schlachtfeld.
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             int place = (m.own) ? p.enemyMinions.Count : p.ownMinions.Count;
             p.callKid(c, place, !m.own);

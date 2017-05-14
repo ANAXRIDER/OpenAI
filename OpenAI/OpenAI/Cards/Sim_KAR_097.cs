@@ -10,7 +10,7 @@ namespace OpenAI
 
         CardDB.Card w = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_097t);
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.equipWeapon(w, true);
         }

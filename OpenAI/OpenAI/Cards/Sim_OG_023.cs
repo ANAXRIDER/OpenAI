@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Give a minion +1/+1 for each of your Totems.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int gain = 0;
             List<Minion> temp = (ownplay) ? p.ownMinions : p.enemyMinions;

@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // If you're holding a Dragon, deal 3 damage.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             bool hasdragon = false;
             if (own.own)

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Taunt. Deathrattle: Shuffle 'The Storm Guardian' into your deck.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             if (m.own) p.ownDeckSize++;
             else p.enemyDeckSize++;

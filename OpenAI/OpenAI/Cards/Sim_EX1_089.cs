@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    ansturm/. kampfschrei:/ gebt eurem gegner 1 manakristall.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (own.own)
             {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Divine Shield. Battlecry: Give your C'Thun +2/+2 (wherever it is).
 		
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

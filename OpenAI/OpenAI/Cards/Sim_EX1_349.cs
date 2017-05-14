@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    zieht so viele karten, bis ihr genauso viele karten auf eurer hand habt wie euer gegner.
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int diff = (ownplay) ? p.enemyAnzCards - p.owncards.Count :  p.owncards.Count - p.enemyAnzCards;
             if (diff >= 1)

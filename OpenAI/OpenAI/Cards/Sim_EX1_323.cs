@@ -10,7 +10,7 @@ namespace OpenAI
         CardDB.Card weapon = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_323w);
         
 //    kampfschrei:/ vernichtet euren helden und ersetzt ihn durch lord jaraxxus.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (own.own)
             {

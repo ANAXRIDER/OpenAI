@@ -14,7 +14,7 @@ namespace OpenAI
         // 3: deal enemy hero hp 6
         // 4: deal 3 dmg to all enemy minion  
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (p.anzOwnElementalsLastTurn > 0 && own.own)
             { }

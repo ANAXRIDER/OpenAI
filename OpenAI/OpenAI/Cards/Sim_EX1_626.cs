@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    bringt alle feindlichen diener zum schweigen/. zieht eine karte.
 
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.allMinionsGetSilenced(!ownplay);
             p.drawACard(CardDB.cardIDEnum.None, ownplay);

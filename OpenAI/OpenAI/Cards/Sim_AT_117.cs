@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: If you have a minion with Spell Damage, gain +2/+2.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 
             bool hasdragon = false;
