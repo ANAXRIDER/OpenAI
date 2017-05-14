@@ -36,7 +36,7 @@ namespace OpenAI
                 }
                 try
                 {
-                    string data = File.ReadAllText("curdeck.txt");
+                    string data = File.ReadAllText(FilePath.CurrentDeck);
                     //Helpfunctions.Instance.ErrorLog(data);
                     if (data != "" && data != "<EoF>")
                     {
@@ -56,7 +56,7 @@ namespace OpenAI
 
         static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
-            using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
+            using (StreamWriter sw = File.AppendText(FolderPath.Logs + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
             {
                 sw.WriteLine(e.ExceptionObject.ToString());
             }
@@ -68,7 +68,6 @@ namespace OpenAI
             Console.WriteLine("Press Enter to exit");
             Console.ReadLine();
             throw (Exception)e.ExceptionObject;
-            Environment.Exit(1);
         }
     }
 
@@ -520,12 +519,13 @@ namespace OpenAI
         public void writeBufferToDeckFile()
         {
             bool writed = true;
-            this.sendbuffer += "<EoF>";
+            sendbuffer += "<EoF>";
+
             while (writed)
             {
                 try
                 {
-                    File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
+                    File.WriteAllText(FilePath.CurrentDeck, sendbuffer);
                     writed = false;
                 }
                 catch
@@ -533,7 +533,7 @@ namespace OpenAI
                     writed = true;
                 }
             }
-            this.sendbuffer = "";
+            sendbuffer = "";
         }
 
         public void writeBufferToActionFile()

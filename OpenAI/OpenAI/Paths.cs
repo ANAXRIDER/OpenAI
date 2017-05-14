@@ -30,6 +30,14 @@ namespace OpenAI
                 return Path.Combine(FolderPath.Common + "crrntbrd.txt");
             }
         }
+
+        public static string CurrentDeck
+        {
+            get
+            {
+                return Path.Combine(FolderPath.Common + "curdeck.txt");
+            }
+        }
     }
 
     public static class FolderPath
