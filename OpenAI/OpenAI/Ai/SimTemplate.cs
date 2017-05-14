@@ -97,33 +97,33 @@
             return;
         }
 
-        public virtual void onCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
+        public virtual void OnCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
         {
             return;
         }
 
-        public virtual void onCardWasPlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion)
+        public virtual void OnCardWasPlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion)
         {
             return;
         }
 
 
-        public virtual void onCardWasDiscarded(Playfield p, bool wasOwnCard, Minion triggerEffectMinion)
+        public virtual void OnCardWasDiscarded(Playfield p, bool wasOwnCard, Minion triggerEffectMinion)
         {
             return;
         }
 
-        public virtual void onCardIsDiscarded(Playfield p, CardDB.Card card, bool own)
+        public virtual void OnCardIsDiscarded(Playfield p, CardDB.Card card, bool own)
         {
             return;
         }
 
-        public virtual void onCardToDecks(Playfield p, bool ownplay, Minion target, int choice)
+        public virtual void OnCardToDecks(Playfield p, bool ownplay, Minion target, int choice)
         {
             return;
         }
 
-        public virtual void onAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
+        public virtual void OnAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
         {
             return;
         }

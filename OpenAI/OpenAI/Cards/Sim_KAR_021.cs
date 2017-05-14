@@ -13,7 +13,7 @@ namespace OpenAI
         CardDB.Card kid3 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_009);//healing
         //CardDB.Card kid4 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_051);//taunt
 
-        public override void onCardWasPlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion)
+        public override void OnCardWasPlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion)
         {
             int pos = (wasOwnCard) ? p.ownMinions.Count : p.enemyMinions.Count;
             if (triggerEffectMinion.own == wasOwnCard && c.type == CardDB.cardtype.SPELL)

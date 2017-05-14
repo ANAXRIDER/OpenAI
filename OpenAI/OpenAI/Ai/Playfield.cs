@@ -5329,12 +5329,12 @@ namespace OpenAI
                         continue;
                     }
 
-                    m.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
+                    m.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
                 }
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    if (summoningStone != null) summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    if (summoningStone != null) summoningStone.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.enemyMinions)
@@ -5345,7 +5345,7 @@ namespace OpenAI
                     }
                     if (m.name == CardDB.cardName.felreaver)
                     {
-                        m.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
+                        m.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
                     }
                 }
 
@@ -5452,12 +5452,12 @@ namespace OpenAI
                     }
 
 
-                    m.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
+                    m.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
                 }
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    if (summoningStone.handcard != null) summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    if (summoningStone.handcard != null) summoningStone.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.ownMinions)
@@ -5468,7 +5468,7 @@ namespace OpenAI
                     }
                     if (m.name == CardDB.cardName.felreaver)
                     {
-                        m.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
+                        m.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
                     }
                 }
 
@@ -5511,7 +5511,7 @@ namespace OpenAI
 
                 if (own && m.name == CardDB.cardName.flamewaker && c.type == CardDB.cardtype.SPELL && !this.isadapt(c))
                 {
-                    m.handcard.card.sim_card.onCardWasPlayed(this, c, own, m);
+                    m.handcard.card.sim_card.OnCardWasPlayed(this, c, own, m);
                 }
 
                 if (m.name == CardDB.cardName.secretkeeper && c.Secret)
@@ -5534,7 +5534,7 @@ namespace OpenAI
 
                 if (!own && m.name == CardDB.cardName.flamewaker && c.type == CardDB.cardtype.SPELL && !this.isadapt(c))
                 {
-                    m.handcard.card.sim_card.onCardWasPlayed(this, c, own, m);
+                    m.handcard.card.sim_card.OnCardWasPlayed(this, c, own, m);
                 }
 
                 if (m.name == CardDB.cardName.secretkeeper && c.Secret)
@@ -5942,7 +5942,7 @@ namespace OpenAI
                 {
                     if (m.name == CardDB.cardName.tinyknightofevil && !m.silenced)
                     {
-                        m.handcard.card.sim_card.onCardWasDiscarded(this, own, m);
+                        m.handcard.card.sim_card.OnCardWasDiscarded(this, own, m);
                     }
                 }
             }
@@ -5952,7 +5952,7 @@ namespace OpenAI
                 {
                     if (m.name == CardDB.cardName.tinyknightofevil && !m.silenced)
                     {
-                        m.handcard.card.sim_card.onCardWasDiscarded(this, own, m);
+                        m.handcard.card.sim_card.OnCardWasDiscarded(this, own, m);
                     }
                 }
             }
@@ -9066,7 +9066,7 @@ namespace OpenAI
                             removedCard.card.cardIDenum == CardDB.cardIDEnum.KAR_205 ||
                             removedCard.card.cardIDenum == CardDB.cardIDEnum.UNG_836)
                         {
-                            removedCard.card.sim_card.onCardIsDiscarded(this, removedCard.card, true);
+                            removedCard.card.sim_card.OnCardIsDiscarded(this, removedCard.card, true);
                         }
                         this.owncards.RemoveAt(0);
                         this.triggerACardWasDiscarded(true);

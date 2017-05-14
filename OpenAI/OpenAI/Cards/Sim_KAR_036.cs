@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //   Whenever you cast a spell, give this minion +1 Health.
 
-        public override void onCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
+        public override void OnCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
         {
             if (wasOwnCard == triggerEffectMinion.own && c.type == CardDB.cardtype.SPELL)
             {

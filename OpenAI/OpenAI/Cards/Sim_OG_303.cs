@@ -7,7 +7,7 @@ namespace OpenAI
 	class Sim_OG_303 : SimTemplate //* Cult Sorcerer
 	{
         //Spell Damage +1. After you cast a spell, give your C'Thun +1/+1 (wherever it is).
-        public override void onCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
+        public override void OnCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
         {
             if (triggerEffectMinion.own == wasOwnCard && c.type == CardDB.cardtype.SPELL)
             {

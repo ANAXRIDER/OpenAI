@@ -15,7 +15,7 @@ namespace OpenAI
 
 
 
-        public override void onAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
+        public override void OnAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
         {
             List<Minion> temp = p.ownMinions;
             switch (choice)

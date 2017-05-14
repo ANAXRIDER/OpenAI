@@ -10,7 +10,7 @@ namespace OpenAI
 
         //    After you cast a spell, deal 2 damage randomly split among all enemies.
 
-        public override void onCardWasPlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion)
+        public override void OnCardWasPlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion)
         {
             if (triggerEffectMinion.own == wasOwnCard)
             {
