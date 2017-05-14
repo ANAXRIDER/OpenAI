@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.IO;
 
 namespace OpenAI
 {
@@ -198,57 +198,57 @@ namespace OpenAI
             string[] lines = new string[] { };
 
             string path = this.path;
-            string cleanpath = "Silverfish" + System.IO.Path.DirectorySeparatorChar;
-            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
-            string cleandatapath = cleanpath + "Data" + System.IO.Path.DirectorySeparatorChar;
-            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
-            string cleanclasspath = cleandatapath + ownClass + System.IO.Path.DirectorySeparatorChar;
-            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
-            string cleandeckpath = cleanclasspath + deckName + System.IO.Path.DirectorySeparatorChar;
+            string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
+            string datapath = path + "Data" + Path.DirectorySeparatorChar;
+            string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + Path.DirectorySeparatorChar;
+            string cleanclasspath = cleandatapath + ownClass + Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + Path.DirectorySeparatorChar;
+            string cleandeckpath = cleanclasspath + deckName + Path.DirectorySeparatorChar;
             string enemyfilestring = "settings-" + enemyClass + ".txt";
             const string filestring = "settings.txt";
             bool enemysettings = false;
 
             // if we have a deckName then we have a real ownClass too, not the default "druid"
-            if (deckName != "" && System.IO.File.Exists(deckpath + enemyfilestring))
+            if (deckName != "" && File.Exists(deckpath + enemyfilestring))
             {
                 enemysettings = true;
                 path = deckpath;
                 cleanPath = cleandeckpath + enemyfilestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(deckpath + filestring))
+            else if (deckName != "" && File.Exists(deckpath + filestring))
             {
                 path = deckpath;
                 cleanPath = cleandeckpath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(classpath + enemyfilestring))
+            else if (deckName != "" && File.Exists(classpath + enemyfilestring))
             {
                 enemysettings = true;
                 path = classpath;
                 cleanPath = cleanclasspath + enemyfilestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(classpath + filestring))
+            else if (deckName != "" && File.Exists(classpath + filestring))
             {
                 path = classpath;
                 cleanPath = cleanclasspath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(datapath + enemyfilestring))
+            else if (deckName != "" && File.Exists(datapath + enemyfilestring))
             {
                 enemysettings = true;
                 path = datapath;
                 cleanPath = cleandatapath + enemyfilestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(datapath + filestring))
+            else if (deckName != "" && File.Exists(datapath + filestring))
             {
                 path = datapath;
                 cleanPath = cleandatapath + filestring;
             }
-            else if (System.IO.File.Exists(path + enemyfilestring))
+            else if (File.Exists(path + enemyfilestring))
             {
                 enemysettings = true;
                 cleanPath = cleanpath + enemyfilestring;
             }
-            else if (System.IO.File.Exists(path + filestring))
+            else if (File.Exists(path + filestring))
             {
                 cleanPath = cleanpath + filestring;
             }
@@ -265,7 +265,7 @@ namespace OpenAI
             {
                 try
                 {
-                    lines = System.IO.File.ReadAllLines(path + enemyfilestring);
+                    lines = File.ReadAllLines(path + enemyfilestring);
                 }
                 catch
                 {
@@ -277,7 +277,7 @@ namespace OpenAI
             {
                 try
                 {
-                    lines = System.IO.File.ReadAllLines(path + filestring);
+                    lines = File.ReadAllLines(path + filestring);
                 }
                 catch
                 {
