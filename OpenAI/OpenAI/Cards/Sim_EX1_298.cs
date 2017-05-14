@@ -72,7 +72,7 @@ namespace OpenAI
                         if (p.ownWeaponAttack >= mnn.Hp && p.ownHero.Hp > mnn.Angr && !p.ownHero.frozen)
                         {
                             //if () cankillbyherocount++;
-                            if (p.playactions.Find(a => a.actionType == actionEnum.attackWithHero && a.target.entityID == mnn.entityID) != null)
+                            if (p.playactions.Find(a => a.actionType == ActionType.ATTACK_WITH_HERO && a.target.entityID == mnn.entityID) != null)
                             {
                                 cankillandkilled = true;
                                 //Helpfunctions.Instance.logg("cankillbyherocount= " + cankillandkilled);

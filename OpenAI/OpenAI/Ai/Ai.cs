@@ -171,7 +171,7 @@
             }
             this.bestmoveValue = bestval;
 
-            if (bestmove != null && bestmove.actionType != actionEnum.endturn) // save the guessed move, so we doesnt need to recalc!
+            if (bestmove != null && bestmove.actionType != ActionType.END_TURN) // save the guessed move, so we doesnt need to recalc!
             {
                 this.nextMoveGuess = new Playfield();
 
@@ -203,8 +203,8 @@
                 int useability = 0;
                 foreach (Action a in bestplay.playactions)
                 {
-                    if (a.actionType == actionEnum.useHeroPower) useability = 1;
-                    if (a.actionType == actionEnum.attackWithHero) useability++;
+                    if (a.actionType == ActionType.USE_HERO_POWER) useability = 1;
+                    if (a.actionType == ActionType.ATTACK_WITH_HERO) useability++;
                     int actDmd = tmpPf.enemyHero.Hp + tmpPf.enemyHero.armor;
                     tmpPf.doAction(a);
                     actDmd -= (tmpPf.enemyHero.Hp + tmpPf.enemyHero.armor);
@@ -226,7 +226,7 @@
 
                 switch (a.actionType)
                 {
-                    case actionEnum.playcard:
+                    case ActionType.PLAY_CARD:
                         foreach (Handmanager.Handcard hc in tmpPf.owncards)
                         {
                             if (hc.entity == a.card.entity)
@@ -236,7 +236,7 @@
                             }
                         }
                         break;
-                    case actionEnum.attackWithMinion:
+                    case ActionType.ATTACK_WITH_MINION:
                         foreach (Minion m in tmpPf.ownMinions)
                         {
                             if (m.entityID == a.own.entityID)
@@ -247,10 +247,10 @@
                             }
                         }
                         break;
-                    case actionEnum.attackWithHero:
+                    case ActionType.ATTACK_WITH_HERO:
                         if (tmpPf.ownHero.Ready) found = true;
                         break;
-                    case actionEnum.useHeroPower:
+                    case ActionType.USE_HERO_POWER:
                         if (tmpPf.ownAbilityReady && tmpPf.mana >= tmpPf.ownHeroAblility.card.getManaCost(tmpPf, tmpPf.ownHeroAblility.manacost)) found = true;
                         break;
                 }
@@ -367,7 +367,7 @@
             //only debug:
             //this.nextMoveGuess.printBoardDebug();
 
-            if (bestmove != null && bestmove.actionType != actionEnum.endturn) // save the guessed move, so we doesnt need to recalc!
+            if (bestmove != null && bestmove.actionType != ActionType.END_TURN) // save the guessed move, so we doesnt need to recalc!
             {
                 //Helpfunctions.Instance.logg("nmgsim-");
                 try
@@ -406,7 +406,7 @@
             this.oldMoveGuess = new Playfield(this.nextMoveGuess);
             //this.nextMoveGuess.printBoardDebug();
 
-            if (bestmove != null && bestmove.actionType != actionEnum.endturn)  // save the guessed move, so we doesnt need to recalc!
+            if (bestmove != null && bestmove.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
             {
                 //this.nextMoveGuess = new Playfield();
                 //Helpfunctions.Instance.logg("nmgsim-");
@@ -617,7 +617,7 @@
                 help.logg("stepp");
 
 
-                if (bestmovee != null && bestmovee.actionType != actionEnum.endturn)  // save the guessed move, so we doesnt need to recalc!
+                if (bestmovee != null && bestmovee.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
                 {
                     bestmovee.print();
 
@@ -653,7 +653,7 @@
             tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
             tempbestboard.printBoard();
 
-            if (bestmove != null && bestmove.actionType != actionEnum.endturn)  // save the guessed move, so we doesnt need to recalc!
+            if (bestmove != null && bestmove.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
             {
                 bestmove.print();
 
@@ -674,7 +674,7 @@
                 help.logg("stepp");
 
 
-                if (bestmovee != null && bestmovee.actionType != actionEnum.endturn)  // save the guessed move, so we doesnt need to recalc!
+                if (bestmovee != null && bestmovee.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
                 {
                     bestmovee.print();
 
@@ -709,7 +709,7 @@
 
             Playfield tempbestboard = new Playfield();
 
-            if (bestmove != null && bestmove.actionType != actionEnum.endturn)  // save the guessed move, so we doesnt need to recalc!
+            if (bestmove != null && bestmove.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
             {
 
                 tempbestboard.doAction(bestmove);
@@ -730,7 +730,7 @@
             foreach (Action bestmovee in this.bestActions)
             {
 
-                if (bestmovee != null && bestmovee.actionType != actionEnum.endturn)  // save the guessed move, so we doesnt need to recalc!
+                if (bestmovee != null && bestmovee.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
                 {
                     //bestmovee.print();
                     tempbestboard.doAction(bestmovee);
@@ -805,7 +805,7 @@
             // but 90% of the time we cannot take an action involving them, so easier to just not queue.
             if (boardContainsGeneratedEntities(this.nextMoveGuess) || nextMoveContainsGeneratedEntities()) return false;
 
-            if (this.bestmove.actionType == actionEnum.attackWithHero)
+            if (this.bestmove.actionType == ActionType.ATTACK_WITH_HERO)
             {
                 // check if using a random effect weapon
                 if (this.oldMoveGuess.ownWeaponName == CardDB.cardName.ogrewarmaul) return false;
@@ -819,7 +819,7 @@
                     }
                 }
             }
-            else if (this.bestmove.actionType == actionEnum.attackWithMinion)
+            else if (this.bestmove.actionType == ActionType.ATTACK_WITH_MINION)
             {
                 // check for the ogres
                 foreach (Minion m in this.oldMoveGuess.ownMinions)
@@ -844,7 +844,7 @@
 
 
 
-                if (Ai.Instance.bestmove.actionType == actionEnum.attackWithMinion || Ai.Instance.bestmove.actionType == actionEnum.attackWithHero)
+                if (Ai.Instance.bestmove.actionType == ActionType.ATTACK_WITH_MINION || Ai.Instance.bestmove.actionType == ActionType.ATTACK_WITH_HERO)
                 {
                     Ai daum = Ai.Instance;
                     if (daum.bestmove.target.isHero) return true;
@@ -880,12 +880,12 @@
                 //        break;
                 //}
             }
-            else if (this.bestmove.actionType == actionEnum.useHeroPower)
+            else if (this.bestmove.actionType == ActionType.USE_HERO_POWER)
             {
                 // Shaman/Paladin -- covered by boardContainsGeneratedEntities
                 // Warlock -- covered by owncarddraw != 0
             }
-            else if (this.bestmove.actionType == actionEnum.playcard)
+            else if (this.bestmove.actionType == ActionType.PLAY_CARD)
             {
 
                 if (this.bestmove.card.card.type == CardDB.cardtype.SPELL)
@@ -980,7 +980,7 @@
             if (this.bestActions.Count == 0) return false;
 
             Action potentialMove = this.bestActions[0];
-            if (potentialMove.actionType == actionEnum.endturn) return false;
+            if (potentialMove.actionType == ActionType.END_TURN) return false;
 
             if (potentialMove.card != null && potentialMove.card.entity >= 1000) return true;
             if (potentialMove.own != null && potentialMove.own.handcard.entity >= 1000) return true;

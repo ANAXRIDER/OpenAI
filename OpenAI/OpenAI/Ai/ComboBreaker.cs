@@ -548,7 +548,7 @@
             int mana = Math.Max(hp.ownMaxMana, hp.currentMana);
             foreach (Action a in alist)
             {
-                if (a.actionType != actionEnum.playcard && a.actionType != actionEnum.useHeroPower) continue;
+                if (a.actionType != ActionType.PLAY_CARD && a.actionType != ActionType.USE_HERO_POWER) continue;
                 CardDB.Card crd = a.card.card;
                 //playedcards.Add(a.handcard);
                 foreach (combo c in this.combos)

@@ -6824,7 +6824,7 @@ namespace OpenAI
                         {
                             foreach (Action a in p.playactions)
                             {
-                                if (a.actionType == actionEnum.playcard)
+                                if (a.actionType == ActionType.PLAY_CARD)
                                 {
                                     switch (a.card.card.name)
                                     {
@@ -6841,7 +6841,7 @@ namespace OpenAI
                                         }
                                     }
                                 }
-                                else if (a.actionType == actionEnum.useHeroPower)
+                                else if (a.actionType == ActionType.USE_HERO_POWER)
                                 {
                                     //Helpfunctions.Instance.ErrorLog("찾았다");
                                     switch (p.ownHeroAblility.card.name)
@@ -7057,7 +7057,7 @@ namespace OpenAI
                         {
                             foreach (Action a in p.playactions)
                             {
-                                if (a.actionType == actionEnum.playcard)
+                                if (a.actionType == ActionType.PLAY_CARD)
                                 {
                                     switch (a.card.card.name)
                                     {
@@ -7074,7 +7074,7 @@ namespace OpenAI
                                         }
                                     }
                                 }
-                                else if (a.actionType == actionEnum.useHeroPower)
+                                else if (a.actionType == ActionType.USE_HERO_POWER)
                                 {
                                     //Helpfunctions.Instance.ErrorLog("찾았다");
                                     switch (p.ownHeroAblility.card.name)
