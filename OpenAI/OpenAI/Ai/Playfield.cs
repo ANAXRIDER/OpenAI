@@ -3155,7 +3155,7 @@ namespace OpenAI
             //penalty for destroying combo
 
 
-                this.evaluatePenality += ComboBreaker.Instance.checkIfComboWasPlayed(this.playactions, this.ownWeaponName, this.ownHeroName);
+                this.evaluatePenality += ComboBreaker.Instance.CheckIfComboWasPlayed(this.playactions, this.ownWeaponName, this.ownHeroName);
                 if (this.complete) return;
 
 

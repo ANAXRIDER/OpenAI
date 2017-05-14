@@ -163,7 +163,7 @@ namespace OpenAI
                 try
                 {
                     string path = Settings.Instance.path;
-                    lines = System.IO.File.ReadAllLines(path + "test.txt");
+                    lines = File.ReadAllLines(path + "test.txt");
                     this.datareaded = true;
                 }
                 catch

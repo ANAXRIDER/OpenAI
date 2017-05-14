@@ -128,7 +128,7 @@ namespace OpenAI
 
             if (SingleLog)
             {
-                sttngs.setLoggPath(OpenAIPath.LogPath + System.IO.Path.DirectorySeparatorChar);
+                sttngs.setLoggPath(OpenAIPath.LogPath + Path.DirectorySeparatorChar);
                 sttngs.setLoggFile("SilverLog.txt");
                 HelpFunctions.Instance.CreateNewLogfile();
             }
@@ -1613,10 +1613,10 @@ namespace OpenAI
             Dictionary<int, Entity> allEntitys = new Dictionary<int, Entity>();
 
             // add json.net nuget package to use this debug code
-            //string path = SilverFishBotPath.AssemblyDirectory + System.IO.Path.DirectorySeparatorChar + "HRERRORLogs" + System.IO.Path.DirectorySeparatorChar;
-            //System.IO.Directory.CreateDirectory(path);
+            //string path = SilverFishBotPath.AssemblyDirectory + Path.DirectorySeparatorChar + "HRERRORLogs" + Path.DirectorySeparatorChar;
+            //Directory.CreateDirectory(path);
             //string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(rangerbot.gameState.GameEntityList, Newtonsoft.Json.Formatting.Indented);
-            //System.IO.File.WriteAllText(path + "HRErrorLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt", jsonData);
+            //File.WriteAllText(path + "HRErrorLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt", jsonData);
 
             foreach (Entity item in rangerbot.gameState.GameEntityList)
             {
@@ -1865,7 +1865,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                        data = File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
                     }
                     //if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
                     //if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");

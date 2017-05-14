@@ -698,7 +698,7 @@ namespace OpenAI
 
             if (!lethal)
             {
-                retval += cb.getPenalityForDestroyingCombo(card, p);
+                retval += cb.GetPenalityForDestroyingCombo(card, p);
                 retval += cb.getPlayValue(card.cardIDenum);
                 retval += getPlayInspirePenalty(hcard, p);
                 retval += getPlayMobPenalty(hcard, target, p, lethal);

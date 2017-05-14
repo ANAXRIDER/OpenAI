@@ -7446,7 +7446,7 @@ namespace OpenAI
             try
             {
                 string path = Settings.Instance.path;
-                lines = System.IO.File.ReadAllLines(path + "_carddb.txt");
+                lines = File.ReadAllLines(path + "_carddb.txt");
                 HelpFunctions.Instance.ErrorLog("read carddb.txt " + lines.Length + " lines");
             }
             catch
