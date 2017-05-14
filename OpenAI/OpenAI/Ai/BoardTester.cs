@@ -191,7 +191,7 @@ namespace OpenAI
             foreach (string sss in lines)
             {
                 string s = sss + " ";
-                Helpfunctions.Instance.Log(s);
+                Helpfunctions.Instance.logg(s);
 
                 if (s.StartsWith("ailoop"))
                 {
@@ -1072,7 +1072,7 @@ namespace OpenAI
                 counter++;
                 j++;
             }
-            Helpfunctions.Instance.Log("rdy");
+            Helpfunctions.Instance.logg("rdy");
 
 
             Hrtprozis.Instance.setOwnPlayer(ownPlayer);

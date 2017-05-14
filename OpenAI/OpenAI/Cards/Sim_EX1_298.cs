@@ -14,7 +14,7 @@ namespace OpenAI
                 int fatiguedamage = (p.enemyDeckSize == 0) ? p.enemyHeroFatigue + 1 : 0;
 
                 bool loggtarget = false;
-                if (loggtarget) Helpfunctions.Instance.Log("@@@@@T A R G E T@@@@@");
+                if (loggtarget) Helpfunctions.Instance.logg("@@@@@T A R G E T@@@@@");
                 //Helpfunctions.Instance.logg("fatiguedamage= " + fatiguedamage); 
                 if (count >= 1 && p.enemyHero.Hp + p.enemyHero.armor - fatiguedamage >= 9)
                 {
@@ -32,7 +32,7 @@ namespace OpenAI
                         {
                             if (mins.Hp >= 9 || mins.divineshild) continue;
                             p.minionGetDamageOrHeal(mins, 8);
-                            if (loggtarget) Helpfunctions.Instance.Log("/// T A R G E T ///" + mins.name);
+                            if (loggtarget) Helpfunctions.Instance.logg("/// T A R G E T ///" + mins.name);
                             break;
                         }
                     }
@@ -51,7 +51,7 @@ namespace OpenAI
                 else if (count == 0)
                 {
                     p.minionGetDamageOrHeal(turnEndOfOwner ? p.enemyHero : p.ownHero, 8);
-                    if (loggtarget) Helpfunctions.Instance.Log("/// T A R G E T /// IS HERO" );
+                    if (loggtarget) Helpfunctions.Instance.logg("/// T A R G E T /// IS HERO" );
                 }
                 else //chance to lethal
                 {
@@ -94,7 +94,7 @@ namespace OpenAI
                                 foreach (Minion mins in temp2)
                                 {
                                     p.minionGetDamageOrHeal(mins, 8);
-                                        if (loggtarget) Helpfunctions.Instance.Log("/// T A R G E T ///" + mins.name);
+                                        if (loggtarget) Helpfunctions.Instance.logg("/// T A R G E T ///" + mins.name);
                                         break;
                                 }
                             }
@@ -106,7 +106,7 @@ namespace OpenAI
                             foreach (Minion mins in temp2)
                             {
                                 p.minionGetDamageOrHeal(mins, 8);
-                                    if (loggtarget) Helpfunctions.Instance.Log("/// T A R G E T ///" + mins.name);
+                                    if (loggtarget) Helpfunctions.Instance.logg("/// T A R G E T ///" + mins.name);
                                     break;
                             }
                         }
@@ -123,7 +123,7 @@ namespace OpenAI
                         foreach (Minion mins in temp2)
                         {
                             p.minionGetDamageOrHeal(mins, 8);
-                                if (loggtarget) Helpfunctions.Instance.Log("/// T A R G E T ///" + mins.name);
+                                if (loggtarget) Helpfunctions.Instance.logg("/// T A R G E T ///" + mins.name);
                                 break;
                         }
                     }

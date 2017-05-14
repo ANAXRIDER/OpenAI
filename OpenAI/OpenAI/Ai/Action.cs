@@ -183,26 +183,26 @@ namespace OpenAI
 
                     if (this.druidchoice >= 1) playaction += " choice " + this.druidchoice;
 
-                    help.WriteToBuffer(playaction + discover);
+                    help.writeToBuffer(playaction + discover);
                 }
                 if (this.actionType == ActionType.ATTACK_WITH_MINION && this.target != null)
                 {
-                    help.WriteToBuffer("attack " + this.own.entityID + " enemy " + this.target.entityID + discover);
+                    help.writeToBuffer("attack " + this.own.entityID + " enemy " + this.target.entityID + discover);
                 }
                 if (this.actionType == ActionType.ATTACK_WITH_HERO && this.target != null)
                 {
-                    help.WriteToBuffer("heroattack " + this.target.entityID + discover);
+                    help.writeToBuffer("heroattack " + this.target.entityID + discover);
                 }
                 if (this.actionType == ActionType.USE_HERO_POWER)
                 {
 
                     if (this.target != null)
                     {
-                        help.WriteToBuffer("useability on target " + this.target.entityID + discover);
+                        help.writeToBuffer("useability on target " + this.target.entityID + discover);
                     }
                     else
                     {
-                        help.WriteToBuffer("useability" + discover);
+                        help.writeToBuffer("useability" + discover);
                     }
                 }
                 return;
@@ -246,22 +246,22 @@ namespace OpenAI
 
                 if (this.druidchoice >= 1) playaction += ", choice " + this.druidchoice;
 
-                help.Log(playaction + discover);
+                help.logg(playaction + discover);
             }
             if (this.actionType == ActionType.ATTACK_WITH_MINION && this.target != null && this.own != null)
             {
-                help.Log("attacker: " + cardname + " id " + this.own.entityID + ", enemy: " + targetname + " id " + this.target.entityID + discover);
+                help.logg("attacker: " + cardname + " id " + this.own.entityID + ", enemy: " + targetname + " id " + this.target.entityID + discover);
             }
             if (this.actionType == ActionType.ATTACK_WITH_HERO && this.target != null)
             {
-                help.Log("attack with hero, enemy: " + targetname + " id " + this.target.entityID + discover);
+                help.logg("attack with hero, enemy: " + targetname + " id " + this.target.entityID + discover);
             }
             if (this.actionType == ActionType.USE_HERO_POWER)
             {
-                help.Log("useability " + discover);
+                help.logg("useability " + discover);
                 if (this.target != null)
                 {
-                    help.Log("on " + (target.own ? "own " : "enemy ") + targetname + " id " + this.target.entityID + discover);
+                    help.logg("on " + (target.own ? "own " : "enemy ") + targetname + " id " + this.target.entityID + discover);
                 }
             }
         }
