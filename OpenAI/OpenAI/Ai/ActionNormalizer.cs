@@ -6,7 +6,7 @@ namespace OpenAI
     public class ActionNormalizer
     {
         PenalityManager penman = PenalityManager.Instance;
-        Helpfunctions help = Helpfunctions.Instance;
+        HelpFunctions help = HelpFunctions.Instance;
         Settings settings = Settings.Instance;
 
         public struct targetNdamage

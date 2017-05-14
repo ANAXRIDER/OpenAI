@@ -24,8 +24,8 @@ namespace OpenAI
                 }
                 foreach (Handmanager.Handcard hccc in p.owncards)
                 {
-                    Helpfunctions.Instance.ErrorLog("" + hccc.card.name);
-                    Helpfunctions.Instance.ErrorLog("addattack : " + hccc.addattack + "addhp : " + hccc.addHp);
+                    HelpFunctions.Instance.ErrorLog("" + hccc.card.name);
+                    HelpFunctions.Instance.ErrorLog("addattack : " + hccc.addattack + "addhp : " + hccc.addHp);
                 }
                 
             }
