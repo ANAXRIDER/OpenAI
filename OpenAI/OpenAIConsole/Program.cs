@@ -10,7 +10,7 @@ namespace OpenAI
     {
         static void Main(string[] args)
         {
-            System.AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
             Bot b = new Bot();
             bool network = Settings.Instance.useNetwork;
 
@@ -35,7 +35,7 @@ namespace OpenAI
                 }
                 try
                 {
-                    string data = System.IO.File.ReadAllText("crrntbrd.txt");
+                    string data = File.ReadAllText(FilePath.CurrentBoard);
                     //Helpfunctions.Instance.ErrorLog(data);
                     if (data != "" && data != "<EoF>")
                     {
@@ -52,7 +52,7 @@ namespace OpenAI
                 }
                 try
                 {
-                    string data = System.IO.File.ReadAllText("curdeck.txt");
+                    string data = File.ReadAllText("curdeck.txt");
                     //Helpfunctions.Instance.ErrorLog(data);
                     if (data != "" && data != "<EoF>")
                     {
@@ -370,7 +370,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                        data = System.IO.File.ReadAllText(FilePath.ActionsToDo);
                     }
                     if (data != "" && data != "<EoF>" && data.EndsWith("<EoF>"))
                     {
@@ -537,7 +537,7 @@ namespace OpenAI
                 try
                 {
                     if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
+                    else System.IO.File.WriteAllText(FilePath.CurrentBoard, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -578,7 +578,7 @@ namespace OpenAI
                 try
                 {
                     if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
+                    else System.IO.File.WriteAllText(FilePath.ActionsToDo, this.sendbuffer);
                     writed = false;
                 }
                 catch

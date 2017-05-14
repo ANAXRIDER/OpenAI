@@ -15,6 +15,21 @@ namespace OpenAI
             }
         }
 
+        public static string ActionsToDo
+        {
+            get
+            {
+                return Path.Combine(FolderPath.Common + "actionstodo.txt");
+            }
+        }
+
+        public static string CurrentBoard
+        {
+            get
+            {
+                return Path.Combine(FolderPath.Common + "crrntbrd.txt.txt");
+            }
+        }
     }
 
     public static class FolderPath

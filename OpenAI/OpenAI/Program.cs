@@ -3456,7 +3456,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                        data = System.IO.File.ReadAllText(FilePath.ActionsToDo);
                     }
                     //if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
                     //if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");
@@ -3664,7 +3664,7 @@ namespace OpenAI
                 try
                 {
                     if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
+                    else System.IO.File.WriteAllText(FilePath.CurrentBoard, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -3705,7 +3705,7 @@ namespace OpenAI
                 try
                 {
                     if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
+                    else System.IO.File.WriteAllText(FilePath.ActionsToDo, this.sendbuffer);
                     writed = false;
                 }
                 catch
