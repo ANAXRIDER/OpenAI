@@ -38,7 +38,7 @@ namespace OpenAI
                         {
                             if (mins.Hp >= 9 || mins.divineshild) continue;
                             p.minionGetDamageOrHeal(mins, 8);
-                            if (loggtarget) HelpFunctions.Instance.logg("/// T A R G E T ///" + mins.name);
+                            if (loggtarget) HelpFunctions.Instance.Log("/// T A R G E T ///" + mins.name);
                             break;
                         }
                     }
@@ -54,7 +54,7 @@ namespace OpenAI
                                 i++;
                                 if (i <= temp2.Count / 2 + 1) continue; //damage to middle-high
                                 p.minionGetDamageOrHeal(mins, 8);
-                                if (loggtarget) HelpFunctions.Instance.logg("/// T A R G E T ///" + mins.name);
+                                if (loggtarget) HelpFunctions.Instance.Log("/// T A R G E T ///" + mins.name);
                                 break;
                             }
                         }
@@ -75,7 +75,7 @@ namespace OpenAI
                 else if (count == 0)
                 {
                     p.minionGetDamageOrHeal(ownplay ? p.enemyHero : p.ownHero, 8);
-                    if (loggtarget) HelpFunctions.Instance.logg("/// T A R G E T /// IS HERO");
+                    if (loggtarget) HelpFunctions.Instance.Log("/// T A R G E T /// IS HERO");
                 }
                 else //chance to lethal
                 {
@@ -93,7 +93,7 @@ namespace OpenAI
                             i++;
                             if (i <= temp2.Count / 2 + 1) continue; //damage to middle-high
                             p.minionGetDamageOrHeal(mins, 8);
-                            if (loggtarget) HelpFunctions.Instance.logg("/// T A R G E T ///" + mins.name);
+                            if (loggtarget) HelpFunctions.Instance.Log("/// T A R G E T ///" + mins.name);
                             break;
                         }
                     }

@@ -34,14 +34,14 @@ namespace OpenAI
         }
 
         private List<string> loggBuffer = new List<string>(Settings.Instance.logBuffer + 1);
-        public void logg(string s)
+        public void Log(string s)
         {
             loggBuffer.Add(s);
 
-            if (loggBuffer.Count > Settings.Instance.logBuffer) flushLogg();
+            if (loggBuffer.Count > Settings.Instance.logBuffer) FlushLog();
         }
 
-        public void flushLogg()
+        public void FlushLog()
         {
             if (loggBuffer.Count == 0) return;
             try
@@ -69,10 +69,10 @@ namespace OpenAI
             if (!writelogg) return;
             errorLogBuffer.Add(DateTime.Now.ToString("HH:mm:ss: ") + s);
 
-            if (errorLogBuffer.Count > Settings.Instance.logBuffer) flushErrorLog();
+            if (errorLogBuffer.Count > Settings.Instance.logBuffer) FlushErrorLog();
         }
 
-        public void flushErrorLog()
+        public void FlushErrorLog()
         {
             if (errorLogBuffer.Count == 0) return;
             try
@@ -86,21 +86,30 @@ namespace OpenAI
             }
         }
 
-        public Task startFlushingLogBuffers(CancellationToken cancellationToken = default(CancellationToken))
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task StartFlushingLogBuffers(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return Task.Run(() => Instance.flushLogBuffersAsync(cancellationToken), cancellationToken);
+            return Task.Run(() => Instance.FlushLogBuffersAsync(cancellationToken), cancellationToken);
         }
 
-        public async Task flushLogBuffersAsync(CancellationToken cancellationToken)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task FlushLogBuffersAsync(CancellationToken cancellationToken)
         {
             while (true)
             {
-                Instance.flushLogg();
-                Instance.flushErrorLog();
+                Instance.FlushLog();
+                Instance.FlushErrorLog();
                 await Task.Delay(50, cancellationToken);
             }
         }
-
 
         string sendbuffer = "";
         public void ResetBuffer()
@@ -118,7 +127,7 @@ namespace OpenAI
             FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
         }
 
-        public void writeBufferToFile()
+        public void WriteBufferToFile()
         {
             bool writed = true;
             this.sendbuffer += "<EoF>";

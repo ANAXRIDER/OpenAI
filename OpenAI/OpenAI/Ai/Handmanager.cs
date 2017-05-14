@@ -174,12 +174,12 @@
         //not updated anymore!
         public void printcards(bool writeTobuffer = false)
         {
-            help.logg("Own Handcards: ");
+            help.Log("Own Handcards: ");
             foreach (Handmanager.Handcard c in this.handCards)
             {
-                help.logg("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack +" " + c.elemPoweredUp);
+                help.Log("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack +" " + c.elemPoweredUp);
             }
-            help.logg("Enemy cards: " + this.enemyAnzCards);
+            help.Log("Enemy cards: " + this.enemyAnzCards);
 
             //todo print died minions this turn!
 

@@ -196,7 +196,7 @@ namespace OpenAI
 
         public void loggCleanPath()
         {
-            HelpFunctions.Instance.logg(cleanPath);
+            HelpFunctions.Instance.Log(cleanPath);
         }
 
         private void readMulligan()
@@ -421,7 +421,7 @@ namespace OpenAI
             {
                 if ((mi.enemyclass == "all" || mi.enemyclass == enemclass) && (mi.ownclass == "all" || mi.ownclass == ownclass)) hasARule = true;
             }
-            if (!hasARule) HelpFunctions.Instance.logg("[Mulligan] using default rules for " + ownclass + " vs " + enemclass);
+            if (!hasARule) HelpFunctions.Instance.Log("[Mulligan] using default rules for " + ownclass + " vs " + enemclass);
             return hasARule;
         }
 
@@ -470,7 +470,7 @@ namespace OpenAI
             mullstring += ";" + ownclass + ";" + enemclass + ";";
             mullstring += (hascoin) ? "coin" : "nocoin";
 
-            HelpFunctions.Instance.logg("[Mulligan] mulltest string: " + mullstring);
+            HelpFunctions.Instance.Log("[Mulligan] mulltest string: " + mullstring);
             
 
             foreach (CardIDEntity c in cards)
@@ -614,7 +614,7 @@ namespace OpenAI
                         break;
                 }
             }
-            HelpFunctions.Instance.logg("[Mulligan] final discards:" + discards);
+            HelpFunctions.Instance.Log("[Mulligan] final discards:" + discards);
 
             return discarditems;
 

@@ -7451,7 +7451,7 @@ namespace OpenAI
             }
             catch
             {
-                HelpFunctions.Instance.logg("cant find _carddb.txt");
+                HelpFunctions.Instance.Log("cant find _carddb.txt");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");

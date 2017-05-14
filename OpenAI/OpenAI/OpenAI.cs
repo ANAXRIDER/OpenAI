@@ -16,7 +16,9 @@ namespace OpenAI
 
         private string BotBehave { get; set; } = "rush";
         private bool SingleLog { get; set; } = false;
-        //
+
+        /*** Cleaned ***/
+
         Playfield lastpf;
         Settings sttngs = Settings.Instance;
 
@@ -105,7 +107,6 @@ namespace OpenAI
         private static HSRangerLib.GameState latestGameState;
 
         private static OpenAI instance;
-
         public static OpenAI Instance
         {
             get
@@ -114,11 +115,15 @@ namespace OpenAI
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private OpenAI()
         {
-            this.SingleLog = Settings.Instance.writeToSingleFile;
-            string path = OpenAIPath.AssemblyDirectory + "SilverLogs" + System.IO.Path.DirectorySeparatorChar;
-            Directory.CreateDirectory(path);
+            SingleLog = Settings.Instance.writeToSingleFile;
+
+            /*** Cleaned ***/
+
             sttngs.setFilePath(OpenAIPath.AssemblyDirectory);
 
             if (SingleLog)
@@ -129,18 +134,18 @@ namespace OpenAI
             }
             else
             {
-                sttngs.setLoggPath(path);
+                sttngs.setLoggPath(OpenAIPath.LogPath);
             }
 
-            HelpFunctions.Instance.ErrorLog("init Silverfish");
-            HelpFunctions.Instance.ErrorLog("setlogpath to:" + path);
+            HelpFunctions.Instance.ErrorLog("Started OpenAI");
+            HelpFunctions.Instance.ErrorLog("setlogpath to:" + OpenAIPath.LogPath);
 
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
             Discovery d = Discovery.Instance; // read the discover list
             Settings.Instance.setSettings();
             if (Settings.Instance.useNetwork) FishNet.Instance.startClient();
-            HelpFunctions.Instance.startFlushingLogBuffers();
+            HelpFunctions.Instance.StartFlushingLogBuffers();
         }
 
         public void SetnewLogFile()
@@ -150,7 +155,7 @@ namespace OpenAI
             EnemyCrystalCore = 0;
             ownMinionsCost0 = false;
 
-            HelpFunctions.Instance.flushLogg(); // flush the buffer before creating a new log
+            HelpFunctions.Instance.FlushLog(); // flush the buffer before creating a new log
             if (!SingleLog)
             {
                 sttngs.setLoggFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
@@ -237,7 +242,7 @@ namespace OpenAI
                                         if (si.canBe_noblesacrifice)
                                         {
                                             System.Threading.Thread.Sleep(time);
-                                            HelpFunctions.Instance.logg("찾는거 덫발견 덫8 time: " + time);
+                                            HelpFunctions.Instance.Log("찾는거 덫발견 덫8 time: " + time);
                                             HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫8 time: " + time);
                                         }
                                         else if (daum.bestmove.target.isHero)
@@ -247,7 +252,7 @@ namespace OpenAI
                                                 || si.canBe_beartrap)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                HelpFunctions.Instance.logg("찾는거 덫발견 덫9 time: " + time);
+                                                HelpFunctions.Instance.Log("찾는거 덫발견 덫9 time: " + time);
                                                 HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫9 time: " + time);
                                             }
                                         }
@@ -256,7 +261,7 @@ namespace OpenAI
                                             if (si.canBe_snaketrap)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                HelpFunctions.Instance.logg("찾는거 덫발견 덫10 time: " + time);
+                                                HelpFunctions.Instance.Log("찾는거 덫발견 덫10 time: " + time);
                                                 HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫10 time: " + time);
                                             }
                                             else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp)
@@ -264,7 +269,7 @@ namespace OpenAI
                                                 if (si.canBe_iceblock)
                                                 {
                                                     System.Threading.Thread.Sleep(time);
-                                                    HelpFunctions.Instance.logg("찾는거 덫발견 덫13 time: " + time);
+                                                    HelpFunctions.Instance.Log("찾는거 덫발견 덫13 time: " + time);
                                                     HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫13 time: " + time);
                                                 }
                                             }
@@ -278,7 +283,7 @@ namespace OpenAI
                                                 || si.canBe_duplicate)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                HelpFunctions.Instance.logg("찾는거 덫발견 덫11 time: " + time);
+                                                HelpFunctions.Instance.Log("찾는거 덫발견 덫11 time: " + time);
                                                 HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫11 time: " + time);
                                             }
                                         }
@@ -458,7 +463,7 @@ namespace OpenAI
                                        || si.canBe_freezing)
                                         {
                                             System.Threading.Thread.Sleep(time * 4 / 3);
-                                            HelpFunctions.Instance.logg("찾는거 덫발견 덫1 슬립 time: " + time * 4 / 3);
+                                            HelpFunctions.Instance.Log("찾는거 덫발견 덫1 슬립 time: " + time * 4 / 3);
                                             HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫1 time: " + time * 4 / 3);
                                         }
 
@@ -470,7 +475,7 @@ namespace OpenAI
                                                 || si.canBe_vaporize)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                HelpFunctions.Instance.logg("찾는거 덫발견 덫2 time: " + time);
+                                                HelpFunctions.Instance.Log("찾는거 덫발견 덫2 time: " + time);
                                                 HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫2 time: " + time);
                                             }
                                         }
@@ -479,7 +484,7 @@ namespace OpenAI
                                             if (si.canBe_snaketrap)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                HelpFunctions.Instance.logg("찾는거 덫발견 덫3 time: " + time);
+                                                HelpFunctions.Instance.Log("찾는거 덫발견 덫3 time: " + time);
                                                 HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫3 time: " + time);
                                             }
                                             else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp)
@@ -487,7 +492,7 @@ namespace OpenAI
                                                 if (si.canBe_iceblock)
                                                 {
                                                     System.Threading.Thread.Sleep(time);
-                                                    HelpFunctions.Instance.logg("찾는거 덫발견 덫13 time: " + time);
+                                                    HelpFunctions.Instance.Log("찾는거 덫발견 덫13 time: " + time);
                                                     HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫13 time: " + time);
                                                 }
                                             }
@@ -500,7 +505,7 @@ namespace OpenAI
                                                 || si.canBe_duplicate)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                HelpFunctions.Instance.logg("찾는거 덫발견 덫7 time: " + time);
+                                                HelpFunctions.Instance.Log("찾는거 덫발견 덫7 time: " + time);
                                                 HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫7 time: " + time);
                                             }
                                         }
@@ -527,14 +532,14 @@ namespace OpenAI
                                         if (si.canBe_mirrorentity)
                                         {
                                             System.Threading.Thread.Sleep(time);
-                                            HelpFunctions.Instance.logg("찾는거 덫발견 덫4 time: " + time);
+                                            HelpFunctions.Instance.Log("찾는거 덫발견 덫4 time: " + time);
                                             HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫4 time: " + time);
                                         }
                                         else if ((si.canBe_snipe)
                                                 || (si.canBe_Trial && this.ownMinions.Count >= 3))
                                         {
                                             System.Threading.Thread.Sleep(time);
-                                            HelpFunctions.Instance.logg("찾는거 덫발견 덫5 time: " + time);
+                                            HelpFunctions.Instance.Log("찾는거 덫발견 덫5 time: " + time);
                                             HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫5 time: " + time);
                                         }
                                         //else if (daum.bestmove.card.card.Charge)
@@ -555,7 +560,7 @@ namespace OpenAI
                                                 || si.canBe_cattrick)
                                         {
                                             System.Threading.Thread.Sleep(time);
-                                            HelpFunctions.Instance.logg("찾는거 덫발견 덫6 time: " + time);
+                                            HelpFunctions.Instance.Log("찾는거 덫발견 덫6 time: " + time);
                                             HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫6 time: " + time);
                                         }
                                         else if (this.enemyMinions.Count >= 1 &&
@@ -572,7 +577,7 @@ namespace OpenAI
                                                 || si.canBe_duplicate)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                HelpFunctions.Instance.logg("찾는거 덫발견 덫7 time: " + time);
+                                                HelpFunctions.Instance.Log("찾는거 덫발견 덫7 time: " + time);
                                                 HelpFunctions.Instance.ErrorLog("찾는거 덫발견 덫7 time: " + time);
                                             }
                                         }
@@ -654,8 +659,8 @@ namespace OpenAI
                                     {
                                         time = time * daum.bestmove.card.card.Summon_Spell_Minion_Count;
                                         System.Threading.Thread.Sleep(time);
-                                        HelpFunctions.Instance.logg("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
-                                        HelpFunctions.Instance.logg("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
+                                        HelpFunctions.Instance.Log("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
+                                        HelpFunctions.Instance.Log("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
                                         HelpFunctions.Instance.ErrorLog("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
                                         HelpFunctions.Instance.ErrorLog("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
                                     }
@@ -907,7 +912,7 @@ namespace OpenAI
                 if (currentBot.NumActionsSent > currentBot.NumExecsReceived && !p.isEqualf(Ai.Instance.nextMoveGuess))
                 {
                     HelpFunctions.Instance.ErrorLog("HR action queue did not complete!");
-                    HelpFunctions.Instance.logg("board state out-of-sync due to action queue!");
+                    HelpFunctions.Instance.Log("board state out-of-sync due to action queue!");
 
                     //if (Ai.Instance.restoreBestMoves(p, currentBot.queuedMoveGuesses))
                     //{
@@ -918,7 +923,7 @@ namespace OpenAI
             }
             if (p.mana > Ai.Instance.nextMoveGuess.mana && p.ownMaxMana > Ai.Instance.nextMoveGuess.ownMaxMana && Ai.Instance.bestActions.Count > 0)
             {
-                HelpFunctions.Instance.logg("You may have roped last turn!");
+                HelpFunctions.Instance.Log("You may have roped last turn!");
                 //Helpfunctions.Instance.logg("Mana: " + p.mana + ">" + Ai.Instance.nextMoveGuess.mana);
                 //Helpfunctions.Instance.logg("Max Mana: " + p.ownMaxMana + ">" + Ai.Instance.nextMoveGuess.ownMaxMana);
                 //Helpfunctions.Instance.logg("Actions left: " + Ai.Instance.bestActions.Count);
@@ -927,7 +932,7 @@ namespace OpenAI
             HelpFunctions.Instance.ErrorLog("calculating stuff... " + DateTime.Now.ToString("HH:mm:ss.ffff"));
             if (runExtern)
             {
-                HelpFunctions.Instance.logg("recalc-check###########");
+                HelpFunctions.Instance.Log("recalc-check###########");
                 //p.printBoard();
                 //Ai.Instance.nextMoveGuess.printBoard();
                 if (p.isEqual(Ai.Instance.nextMoveGuess, true))
@@ -1599,10 +1604,10 @@ namespace OpenAI
 
         }
 
-
-
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rangerbot"></param>
         private void GetDecks(HSRangerLib.BotBase rangerbot)
         {
             Dictionary<int, Entity> allEntitys = new Dictionary<int, Entity>();
@@ -1622,7 +1627,7 @@ namespace OpenAI
 
             foreach (var any in rangerbot.gameState.MyDeckCards)
             {
-                HelpFunctions.Instance.logg("Value " + any.Value + "Key " + any.Key);
+                HelpFunctions.Instance.Log("Value " + any.Value + "Key " + any.Key);
             }
 
             int owncontroler = rangerbot.gameState.LocalControllerId;
@@ -1684,7 +1689,7 @@ namespace OpenAI
                             if (cardid == CardDB.cardIDEnum.UNG_067t1)
                             {
                                 EnemyCrystalCore = 5;
-                                HelpFunctions.Instance.logg("ENEMYCRYSTALCOREFOUND");
+                                HelpFunctions.Instance.Log("ENEMYCRYSTALCOREFOUND");
                                 HelpFunctions.Instance.ErrorLog("ENEMYCRYSTALCOREFOUND");
                             }
                         }
@@ -1702,9 +1707,12 @@ namespace OpenAI
                 Ai.Instance.updateTwoTurnSim();
             }
             Probabilitymaker.Instance.setGraveYard(graveYard, isTurnStart);
-
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="botbase"></param>
         private void UpdateBehaveString(Behavior botbase)
         {
             this.BotBehave = "rush";
@@ -1752,13 +1760,15 @@ namespace OpenAI
             {
                 this.BotBehave += " plcmnt";
             }
-
-
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entityid"></param>
+        /// <returns></returns>
         public static int GetLastAffected(int entityid)
         {
-
             if (latestGameState != null)
             {
                 foreach (var item in latestGameState.GameEntityList)
@@ -1769,13 +1779,16 @@ namespace OpenAI
                     }
                 }
             }
-
             return 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entityid"></param>
+        /// <returns></returns>
         public static int GetCardTarget(int entityid)
         {
-
             if (latestGameState != null)
             {
                 foreach (var item in latestGameState.GameEntityList)
@@ -1786,8 +1799,6 @@ namespace OpenAI
                     }
                 }
             }
-
-
             return 0;
         }
 
@@ -1806,7 +1817,7 @@ namespace OpenAI
             string dtimes = DateTime.Now.ToString("HH:mm:ss:ffff");
             String completeBoardString = p.getCompleteBoardForSimulating(this.BotBehave, this.VersionNumber, dtimes);
 
-            HelpFunctions.Instance.logg(completeBoardString);
+            HelpFunctions.Instance.Log(completeBoardString);
 
             if (runEx)
             {
@@ -1819,7 +1830,7 @@ namespace OpenAI
                 }
 
                 HelpFunctions.Instance.WriteToBuffer(completeBoardString);
-                HelpFunctions.Instance.writeBufferToFile();
+                HelpFunctions.Instance.WriteBufferToFile();
             }
 
         }
@@ -1919,7 +1930,7 @@ namespace OpenAI
                 }
             }
             this.WaitingForOpenAI = false;
-            HelpFunctions.Instance.logg("received " + boardnumm + " actions to do: (currtime = " + DateTime.Now.ToString("HH:mm:ss.ffff") + ")");
+            HelpFunctions.Instance.Log("received " + boardnumm + " actions to do: (currtime = " + DateTime.Now.ToString("HH:mm:ss.ffff") + ")");
             Ai.Instance.currentCalculatedBoard = "0";
             Playfield p = new Playfield();
             List<Action> aclist = new List<Action>();
@@ -1927,14 +1938,12 @@ namespace OpenAI
             foreach (string a in alist)
             {
                 aclist.Add(new Action(a, p));
-                HelpFunctions.Instance.logg(a);
+                HelpFunctions.Instance.Log(a);
             }
 
             Ai.Instance.setBestMoves(aclist, value, trackingchoice, trackingstate);
 
             return true;
         }
-
-
     }
 }

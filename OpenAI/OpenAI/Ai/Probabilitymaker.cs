@@ -527,7 +527,7 @@
 
             if (!dontwrite)
             {
-                HelpFunctions.Instance.logg(s);
+                HelpFunctions.Instance.Log(s);
                 if (writetobuffer) HelpFunctions.Instance.WriteToBuffer(s);
             }
 
@@ -541,7 +541,7 @@
 
             if (!dontwrite)
             {
-                HelpFunctions.Instance.logg(s);
+                HelpFunctions.Instance.Log(s);
                 if (writetobuffer) HelpFunctions.Instance.WriteToBuffer(s);
             }
 
@@ -667,8 +667,8 @@
             }
             if (!dontwrite)
             {
-                HelpFunctions.Instance.logg(og);
-                HelpFunctions.Instance.logg(eg);
+                HelpFunctions.Instance.Log(og);
+                HelpFunctions.Instance.Log(eg);
                 if (writetobuffer)
                 {
                     HelpFunctions.Instance.WriteToBuffer(og);
@@ -840,7 +840,7 @@
             foreach (int i in enemySecretIds)
             {
                 if (i >= 1000) continue;
-                HelpFunctions.Instance.logg("detect secret with id" + i);
+                HelpFunctions.Instance.Log("detect secret with id" + i);
                 SecretItem sec = getNewSecretGuessedItem(i, enemyHeroName);
 
                 newlist.Add(new SecretItem(sec));
