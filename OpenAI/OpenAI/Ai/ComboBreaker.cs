@@ -400,7 +400,7 @@
 
         public void loggCleanPath()
         {
-            Helpfunctions.Instance.logg(cleanPath);
+            Helpfunctions.Instance.Log(cleanPath);
         }
 
         private void readCombos()

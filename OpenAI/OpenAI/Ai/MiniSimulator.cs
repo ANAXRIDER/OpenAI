@@ -138,7 +138,7 @@
             int deep = 0;
             //Helpfunctions.Instance.logg("NXTTRN" + playf.mana + " " + posmoves.Count);
             this.calculated = 0;
-            Helpfunctions.Instance.logg("Calculating... ");//
+            Helpfunctions.Instance.Log("Calculating... ");//
             while (havedonesomething)
             {
                 //if (this.printNormalstuff)Helpfunctions.Instance.logg("ailoop");
@@ -214,7 +214,7 @@
                     {
                         if (p.complete) donec++;
                     }
-                    Helpfunctions.Instance.logg("deep " + deep + " len " + this.posmoves.Count + " dones " + donec);
+                    Helpfunctions.Instance.Log("deep " + deep + " len " + this.posmoves.Count + " dones " + donec);
                 }
 
                 if (!test)
@@ -224,7 +224,7 @@
 
                 if (this.printNormalstuff)
                 {
-                    Helpfunctions.Instance.logg("cut to len " + this.posmoves.Count);
+                    Helpfunctions.Instance.Log("cut to len " + this.posmoves.Count);
                 }
                 //Helpfunctions.Instance.loggonoff(false);
                 deep++;

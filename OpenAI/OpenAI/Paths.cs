@@ -5,11 +5,35 @@ namespace OpenAI
 {
     public static class FilePath
     {
+        public static string Exe
+        {
+            get
+            {
+                return Path.Combine(FolderPath.OpenAI + "OpenAIConsole.exe");
+            }
+        }
+
         public static string CardDB
         {
             get
             {
                 return Path.Combine(FolderPath.OpenAI + "_carddb.txt");
+            }
+        }
+
+        public static string ErrorLog
+        {
+            get
+            {
+                return Path.Combine(FolderPath.Logs + "ErrorLog.txt");
+            }
+        }
+
+        public static string Log
+        {
+            get
+            {
+                return Path.Combine(FolderPath.Logs + "Log.txt");
             }
         }
 

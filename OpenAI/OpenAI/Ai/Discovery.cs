@@ -53,7 +53,7 @@ namespace OpenAI
 
         public void LogCleanPath()
         {
-            Helpfunctions.Instance.logg(cleanPath);
+            Helpfunctions.Instance.Log(cleanPath);
         }
 
         private void ReadCombos()
@@ -302,7 +302,7 @@ namespace OpenAI
 
 
                 Helpfunctions.Instance.ErrorLog("card : " + i + " name : " + hc.card.name);
-                Helpfunctions.Instance.logg("card : " + i + " name : " + hc.card.name);
+                Helpfunctions.Instance.Log("card : " + i + " name : " + hc.card.name);
             }
 
             this.choicebonus = prevbonus;
@@ -317,7 +317,7 @@ namespace OpenAI
             }
 
             Helpfunctions.Instance.ErrorLog("Choice : " + choice + " bonus : " + choicebonus);
-            Helpfunctions.Instance.logg("Choice : " + choice + " bonus : " + choicebonus);
+            Helpfunctions.Instance.Log("Choice : " + choice + " bonus : " + choicebonus);
             return choice;
         }
     }
