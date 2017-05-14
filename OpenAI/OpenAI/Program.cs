@@ -20,41 +20,32 @@ namespace OpenAI
             }
         }
 
-        public override string Description
-        {
-            get
-            {
-                return "Silverfish A.I. version V" + Silverfish.Instance.versionnumber +" )\r\n" +
-                       "\r\n\r\n\r\n\r\n\r\ni hope you dont see the following version number :P"
-                       ;
-            }
-        }
+        public CardDB.cardIDEnum LastPlayedCard = CardDB.cardIDEnum.None;
+
+        public DateTime StartTime { get; set; } = DateTime.Now;
+
+        public int NumActionsSent { get; set; } = 0;
+        public int NumExecsReceived { get; set; } = 0;
+        public int NumLoses { get; set; } = 0;
+        public int NumWins { get; set; } = 0;
+        public int TargetEntity { get; set; } = 0;
+
+        public bool ShouldSendActions { get; set; } = true;
+        private bool DeckChanged { get; set; } = false;
+        private bool ShouldSendFakeAction = false;
+
+        /*** ClEANED ***/
 
         public bool doMultipleThingsAtATime = true;
         public int dontmultiactioncount = 0;
         public int POWERFULSINGLEACTION = 0;
 
-        DateTime starttime = DateTime.Now;
+        
         Silverfish sf;
-
         public Behavior behave = new BehaviorControl();
-
-        //stuff for attack queueing :D
-        public int numExecsReceived = 0;
-        public int numActionsSent = 0;
-        public bool shouldSendActions = true;
         public List<Playfield> queuedMoveGuesses = new List<Playfield>();
         
-        private bool deckChanged = false;
-        private bool shouldSendFakeAction = false;
-
         int discovercounter = 0;
-
-        CardDB.cardIDEnum lastplayedcard = CardDB.cardIDEnum.None;
-        int targetentity = 0;
-
-        public int NumWins { get; set; } = 0;
-        public int NumLoses { get; set; } = 0;
 
         public Bot()
         {
@@ -63,7 +54,7 @@ namespace OpenAI
             //or Hearthranger will never call OnQueryBestMove !
             base.HasBestMoveAI = true;
 
-            starttime = DateTime.Now;
+            StartTime = DateTime.Now;
 
             Settings set = Settings.Instance;
             this.sf = Silverfish.Instance;
@@ -131,6 +122,17 @@ namespace OpenAI
             sf.startedexe = false; 
         }
 
+
+        public override string Description
+        {
+            get
+            {
+                return "Silverfish A.I. version V" + Silverfish.Instance.versionnumber + " )\r\n" +
+                       "\r\n\r\n\r\n\r\n\r\ni hope you dont see the following version number :P"
+                       ;
+            }
+        }
+
         public override void OnGameMulligan(GameMulliganEventArgs e)
         {
             if (e.handled || e.card_list.Count == 0)
@@ -155,7 +157,7 @@ namespace OpenAI
             // reload settings
             HeroEnum heroname = Hrtprozis.Instance.heroNametoEnum(ownName);
             HeroEnum enemyHeroname = Hrtprozis.Instance.heroNametoEnum(enemName);
-            if (deckChanged || heroname != Hrtprozis.Instance.heroname)
+            if (DeckChanged || heroname != Hrtprozis.Instance.heroname)
             {
                 if (heroname != Hrtprozis.Instance.heroname)
                 {
@@ -165,9 +167,9 @@ namespace OpenAI
                 ComboBreaker.Instance.updateInstance();
                 Discovery.Instance.UpdateInstance();
                 Mulligan.Instance.updateInstance();
-                deckChanged = false;
+                DeckChanged = false;
             }
-            if (deckChanged || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
+            if (DeckChanged || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
             {
                 Hrtprozis.Instance.setEnemyHeroName(enemName);
                 if (enemyHeroname != Hrtprozis.Instance.enemyHeroname)
@@ -262,18 +264,18 @@ namespace OpenAI
 
         public override void OnGameStart(GameStartEventArgs e)
         {
-            numExecsReceived = 0;
-            numActionsSent = 0;
+            NumExecsReceived = 0;
+            NumActionsSent = 0;
 
             if (Hrtprozis.Instance.deckName != e.deck_name)
             {
                 Helpfunctions.Instance.ErrorLog("New Deck: \"" + e.deck_name + "\", Old Deck: \"" + Hrtprozis.Instance.deckName + "\"");
-                deckChanged = true;
+                DeckChanged = true;
                 Hrtprozis.Instance.setDeckName(e.deck_name);
             }
             else
             {
-                deckChanged = false;
+                DeckChanged = false;
             }
 
             Hrtprozis.Instance.clearDecks();
@@ -384,12 +386,12 @@ namespace OpenAI
                 case ActionType.PLAY_CARD:
                     ranger_action.Actor = getCardWithNumber(moveTodo.card.entity);
 
-                    lastplayedcard = CardDB.Instance.cardIdstringToEnum(ranger_action.Actor.CardId);
-                    if (daum.bestmove.target != null) targetentity = daum.bestmove.target.entityID;
-                    Helpfunctions.Instance.ErrorLog("lastplayedcard " + lastplayedcard.ToString());
-                    if (targetentity >= 1) Helpfunctions.Instance.ErrorLog("lastplayedcardtarget " + targetentity);
-                    Hrtprozis.Instance.updateLastPlayedCard(lastplayedcard, targetentity);
-                    Ai.Instance.playedlastcard = lastplayedcard;
+                    LastPlayedCard = CardDB.Instance.cardIdstringToEnum(ranger_action.Actor.CardId);
+                    if (daum.bestmove.target != null) TargetEntity = daum.bestmove.target.entityID;
+                    Helpfunctions.Instance.ErrorLog("lastplayedcard " + LastPlayedCard.ToString());
+                    if (TargetEntity >= 1) Helpfunctions.Instance.ErrorLog("lastplayedcardtarget " + TargetEntity);
+                    Hrtprozis.Instance.updateLastPlayedCard(LastPlayedCard, TargetEntity);
+                    Ai.Instance.playedlastcard = LastPlayedCard;
 
                     if (daum.bestmove.actionType == ActionType.PLAY_CARD && daum.bestmove != null)
                     {
@@ -668,12 +670,12 @@ namespace OpenAI
 
                     if (daum.bestmove.own.name == CardDB.cardName.viciousfledgling && daum.bestmove.target.isHero && !daum.bestmove.target.own)
                     {
-                        lastplayedcard = CardDB.Instance.cardIdstringToEnum(ranger_action.Actor.CardId);
-                        if (daum.bestmove.target != null) targetentity = daum.bestmove.own.entityID;
-                        Helpfunctions.Instance.ErrorLog("lastplayedcard " + lastplayedcard.ToString());
-                        if (targetentity >= 1) Helpfunctions.Instance.ErrorLog("lastplayedcardtarget " + targetentity);
-                        Hrtprozis.Instance.updateLastPlayedCard(lastplayedcard, targetentity);
-                        Ai.Instance.playedlastcard = lastplayedcard;
+                        LastPlayedCard = CardDB.Instance.cardIdstringToEnum(ranger_action.Actor.CardId);
+                        if (daum.bestmove.target != null) TargetEntity = daum.bestmove.own.entityID;
+                        Helpfunctions.Instance.ErrorLog("lastplayedcard " + LastPlayedCard.ToString());
+                        if (TargetEntity >= 1) Helpfunctions.Instance.ErrorLog("lastplayedcardtarget " + TargetEntity);
+                        Hrtprozis.Instance.updateLastPlayedCard(LastPlayedCard, TargetEntity);
+                        Ai.Instance.playedlastcard = LastPlayedCard;
                     }
 
                     //foreach (Minion m in Playfield.Instance.ownMinions)
@@ -1027,10 +1029,10 @@ namespace OpenAI
 
                 // actions-queue-stuff
                 //  AI has requested to ignore this update, so return without setting any actions.
-                if (!shouldSendActions)
+                if (!ShouldSendActions)
                 {
                     //Helpfunctions.Instance.ErrorLog("shouldsendactionsblah");
-                    shouldSendActions = true;  // unpause ourselves for next time
+                    ShouldSendActions = true;  // unpause ourselves for next time
                     return;
                 }
 
@@ -1129,7 +1131,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        shouldSendFakeAction = true;
+                        ShouldSendFakeAction = true;
                     }
 
 
@@ -1179,9 +1181,9 @@ namespace OpenAI
                     }
                     while (hasMoreActions);
 
-                    numActionsSent = e.action_list.Count();
-                    Helpfunctions.Instance.ErrorLog("sending HR " + numActionsSent + " queued actions");
-                    numExecsReceived = 0;
+                    NumActionsSent = e.action_list.Count();
+                    Helpfunctions.Instance.ErrorLog("sending HR " + NumActionsSent + " queued actions");
+                    NumExecsReceived = 0;
                 }//##########################################################################
             }
             catch (Exception Exception)
@@ -1207,18 +1209,18 @@ namespace OpenAI
 
         public override void OnActionDone(ActionDoneEventArgs e)
         {
-            numExecsReceived++;
+            NumExecsReceived++;
 
             switch (e.done_result)
             {
                 case ActionDoneEventArgs.ActionResult.Executed:
-                    Helpfunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <executed>: " + e.action_id); break;
+                    Helpfunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <executed>: " + e.action_id); break;
                 case ActionDoneEventArgs.ActionResult.SourceInvalid:
-                    Helpfunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <invalid_source>: " + e.action_id); break;
+                    Helpfunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <invalid_source>: " + e.action_id); break;
                 case ActionDoneEventArgs.ActionResult.TargetInvalid:
-                    Helpfunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <invalid_target>: " + e.action_id); break;
+                    Helpfunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <invalid_target>: " + e.action_id); break;
                 default:
-                    Helpfunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <default>: " + e.action_id + " " + e.ToString()); break;
+                    Helpfunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <default>: " + e.action_id + " " + e.ToString()); break;
             }
 
         }
@@ -2165,7 +2167,7 @@ namespace OpenAI
                 {
                     if (lastpf.isEqualf(p))
                     {
-                        ((Bot)rangerbot).shouldSendActions = false;  // let the bot know we haven't updated any actions
+                        ((Bot)rangerbot).ShouldSendActions = false;  // let the bot know we haven't updated any actions
                         return false;
                     }
 
@@ -2193,7 +2195,7 @@ namespace OpenAI
                 // Detect errors in HearthRanger execution of our last set of actions and try to fix it so we don't
                 // have to re-calculate the entire turn.
                 Bot currentBot = (Bot)rangerbot;
-                if (currentBot.numActionsSent > currentBot.numExecsReceived && !p.isEqualf(Ai.Instance.nextMoveGuess))
+                if (currentBot.NumActionsSent > currentBot.NumExecsReceived && !p.isEqualf(Ai.Instance.nextMoveGuess))
                 {
                     Helpfunctions.Instance.ErrorLog("HR action queue did not complete!");
                     Helpfunctions.Instance.logg("board state out-of-sync due to action queue!");

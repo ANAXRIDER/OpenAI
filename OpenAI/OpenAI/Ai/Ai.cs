@@ -1,12 +1,11 @@
-﻿namespace OpenAI
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace OpenAI
+{
     public sealed class Ai
     {
-
         private int maxdeep = 12;
         public int maxwide = 3000;
         //public int playaroundprob = 40;
