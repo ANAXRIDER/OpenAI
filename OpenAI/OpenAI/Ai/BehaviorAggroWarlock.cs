@@ -310,9 +310,12 @@
             enemyherohpvalue = enemyherohpvalue * Settings.Instance.enemyherovaluemultiply / 100;
             retval += enemyherohpvalue;
 
-            if (p.turnCounter == 0)
+            if (p.turnCounter == 0 || p.turnCounter == 2)
             {
                 retval += p.ownMaxMana * 10;
+            }
+            if (p.turnCounter == 1 || p.turnCounter == 3)
+            {
                 retval -= p.enemyMaxMana * 10;
             }
             foreach (Minion m in p.ownMinions)
