@@ -58,8 +58,7 @@ namespace OpenAI
         public void applySettings()
         {
             this.setWeights(alpha);
-
-            Mulligan.Instance.setAutoConcede(Settings.Instance.concede);
+            
             Helpfunctions.Instance.ErrorLog("[Settings] set enemy-face-hp to: " + this.enfacehp);
             ComboBreaker.Instance.attackFaceHP = this.enfacehp;
             Ai.Instance.setMaxWide(this.maxwide);

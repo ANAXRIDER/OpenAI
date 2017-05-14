@@ -34,8 +34,6 @@ namespace OpenAI
         public int dontmultiactioncount = 0;
         public int POWERFULSINGLEACTION = 0;
 
-        //private int stopAfterWins = 30;
-        private int concedeLvl = 5; // the rank, till you want to concede
         DateTime starttime = DateTime.Now;
         Silverfish sf;
 
@@ -55,10 +53,8 @@ namespace OpenAI
         CardDB.cardIDEnum lastplayedcard = CardDB.cardIDEnum.None;
         int targetentity = 0;
 
-        //
-        bool isgoingtoconcede = false;
-        int wins = 0;
-        int loses = 0;
+        public int NumWins { get; set; } = 0;
+        public int NumLoses { get; set; } = 0;
 
         public Bot()
         {
@@ -269,17 +265,6 @@ namespace OpenAI
 
             Ai.Instance.bestmoveValue = 0; // not concede
             //Helpfunctions.Instance.logg("Ai.Instance.bestmoveValue " + Ai.Instance.bestmoveValue);
-
-            if (Mulligan.Instance.loserLoserLoser)
-            {
-                if (!autoconcede())
-                {
-                    concedeVSenemy(ownName, enemName);
-                }
-
-                //set concede flag
-                e.concede = this.isgoingtoconcede;
-            }
         }
 
         public override void OnGameArenaDraft(GameArenaDraftEventArgs e)
@@ -318,21 +303,12 @@ namespace OpenAI
         public override void OnGameOver(GameOverEventArgs e)
         {
             if (e.win)
-            {
-                HandleWining();
-            }else if (e.loss || e.concede)
-            {
-                HandleLosing(e.concede);
-            }
-        }
+                NumWins++;
 
-        private HSRangerLib.BotAction CreateRangerConcedeAction()
-        {
-            HSRangerLib.BotAction ranger_action = new HSRangerLib.BotAction();
-            ranger_action.Actor = base.FriendHero;
-            ranger_action.Type = BotActionType.CONCEDE;
-
-            return ranger_action;
+            if (e.loss || e.concede)
+                NumLoses++;
+            
+            Helpfunctions.Instance.ErrorLog("#info: win:" + NumWins + " lose:" + NumLoses + " real winrate:" + (NumWins * 100 / (NumWins + NumLoses)));
         }
 
         private HSRangerLib.BotActionType GetRangerActionType(Entity actor, Entity target, actionEnum sf_action_type)
@@ -1060,21 +1036,6 @@ namespace OpenAI
 
                 Helpfunctions.Instance.ErrorLog("proc check done...");
 
-
-                //we are conceding
-                if (this.isgoingtoconcede)
-                {
-                    if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena)
-                    {
-                        this.isgoingtoconcede = false;
-                    }
-                    else
-                    {
-                        ranger_action = CreateRangerConcedeAction();
-                        e.action_list.Add(ranger_action);
-                        return;
-                    }
-                }
                 if (Settings.Instance.learnmode)
                 {
                     e.handled = false;
@@ -1108,14 +1069,6 @@ namespace OpenAI
                 }
 
                 if (Settings.Instance.enemyConcede) Helpfunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
-
-                if (Ai.Instance.bestmoveValue <= Settings.Instance.enemyConcedeValue && Settings.Instance.enemyConcede)
-                {
-                    Helpfunctions.Instance.ErrorLog("concede! because value: " + Ai.Instance.bestmoveValue);
-                    Helpfunctions.Instance.logg("concede! because value: " + Ai.Instance.bestmoveValue);
-                    e.action_list.Add(CreateRangerConcedeAction());
-                    return;
-                }
 
                 if (Handmanager.Instance.getNumberChoices() >= 1)
                 //if (Silverfish.Instance.choiceCards.Count >= 1 && e.action_list.Count == 0 && discovercounter == 0)
@@ -1348,119 +1301,6 @@ namespace OpenAI
             }
 
             return true;
-        }
-
-
-        int lossedtodo = 0;
-        int KeepConcede = 0;
-        int oldwin = 0;
-        private bool autoconcede()
-        {
-            if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena) return false;
-            if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.Play_Ranked) return false;
-            int totalwin = this.wins;
-            int totallose = this.loses;
-            /*if ((totalwin + totallose - KeepConcede) != 0)
-            {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
-            }*/
-
-
-
-            int curlvl = gameState.CurrentRank;
-
-            if (curlvl > this.concedeLvl)
-            {
-                this.lossedtodo = 0;
-                return false;
-            }
-
-            if (this.oldwin != totalwin)
-            {
-                this.oldwin = totalwin;
-                if (this.lossedtodo > 0)
-                {
-                    this.lossedtodo--;
-                }
-                Helpfunctions.Instance.ErrorLog("not today!! (you won a game)");
-                this.isgoingtoconcede = true;
-                return true;
-            }
-
-            if (this.lossedtodo > 0)
-            {
-                this.lossedtodo--;
-                Helpfunctions.Instance.ErrorLog("not today!");
-                this.isgoingtoconcede = true;
-                return true;
-            }
-
-            if (curlvl < this.concedeLvl)
-            {
-                this.lossedtodo = 3;
-                Helpfunctions.Instance.ErrorLog("your rank is " + curlvl + " targeted rank is " + this.concedeLvl + " -> concede!");
-                Helpfunctions.Instance.ErrorLog("not today!!!");
-                this.isgoingtoconcede = true;
-                return true;
-            }
-            return false;
-        }
-
-        private bool concedeVSenemy(string ownh, string enemyh)
-        {
-            if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena) return false;
-            if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.Play_Ranked) return false;
-
-            if (Mulligan.Instance.shouldConcede(Hrtprozis.Instance.heroNametoEnum(ownh), Hrtprozis.Instance.heroNametoEnum(enemyh)))
-            {
-                Helpfunctions.Instance.ErrorLog("not today!!!!");
-                this.isgoingtoconcede = true;
-                return true;
-            }
-            return false;
-        }
-
-        private void HandleWining()
-        {
-            this.wins++;
-            if (this.isgoingtoconcede)
-            {
-                this.isgoingtoconcede = false;
-            }
-            int totalwin = this.wins;
-            int totallose = this.loses;
-            if ((totalwin + totallose - KeepConcede) != 0)
-            {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
-            }
-            else
-            {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
-            }
-            Helpfunctions.Instance.logg("Match Won!");
-        }
-
-        private void HandleLosing(bool is_concede)
-        {
-            this.loses++;
-            if (is_concede)
-            {
-                this.isgoingtoconcede = false;
-                this.KeepConcede++;
-            }
-            this.isgoingtoconcede = false;
-            int totalwin = this.wins;
-            int totallose = this.loses;
-            if ((totalwin + totallose - KeepConcede) != 0)
-            {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
-            }
-            else
-            {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
-            }
-            Helpfunctions.Instance.logg("Match Lost :(");
-
         }
 
         private Entity getEntityWithNumber(int number)

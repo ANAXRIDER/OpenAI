@@ -647,11 +647,6 @@ namespace OpenAI
             }
         }
 
-        public void setAutoConcede(bool mode)
-        {
-            loserLoserLoser = mode;
-        }
-
         public bool shouldConcede(HeroEnum ownhero, HeroEnum enemHero)
         {
 
