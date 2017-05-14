@@ -19,7 +19,7 @@ namespace OpenAI
         CardDB.Card warli = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_WARLOCK);
         CardDB.Card warri = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_WARRIOR);
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.heroPowerActivationsThisTurn = 0;
             if (own.own)

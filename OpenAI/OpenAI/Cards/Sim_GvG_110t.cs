@@ -11,7 +11,7 @@ namespace OpenAI
 
         
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             int dmg = (m.own ? 2 : 3);
             p.doDmgToRandomEnemyCLIENT2(dmg, true, m.own);

@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Deathrattle: Draw a card.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardName.unknown, m.own);
         }

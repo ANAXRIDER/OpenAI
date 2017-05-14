@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Gain 4 Armor. Summon a random 4-Cost minion.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay)
             {

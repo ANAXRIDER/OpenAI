@@ -7,7 +7,7 @@ namespace OpenAI
     class Sim_AT_025 : SimTemplate //Dark Bargain
     {
         //Destroy 2 random enemy minions. Discard 2 random cards.
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay)
             {

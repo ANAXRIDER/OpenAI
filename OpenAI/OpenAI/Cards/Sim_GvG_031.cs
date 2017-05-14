@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Shuffle an enemy minion into your opponent's deck.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp = (ownplay) ? p.ownMinions : p.enemyMinions;
             target.endAura(p);

@@ -10,7 +10,7 @@ namespace OpenAI
 //    heldenfähigkeit/\nbeschwört eine höllenbestie (6/6).
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_tk34);//infernal
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int posi = (ownplay)? p.ownMinions.Count : p.enemyMinions.Count;
             p.callKid(kid, posi, ownplay);

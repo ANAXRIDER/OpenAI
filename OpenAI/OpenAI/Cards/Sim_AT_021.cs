@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Whenever you discard a card, gain +1/+1.
 
-        public override void OnCardWasDiscarded(Playfield p, bool wasOwnCard, Minion triggerEffectMinion)
+        public override void onCardWasDiscarded(Playfield p, bool wasOwnCard, Minion triggerEffectMinion)
         {
             if (triggerEffectMinion.own == wasOwnCard)
             {

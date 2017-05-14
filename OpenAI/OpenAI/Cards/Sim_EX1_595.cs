@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    zieht jedes mal eine karte, wenn einer eurer anderen diener stirbt.
 
-        public override void OnMinionDiedTrigger(Playfield p, Minion triggerEffectMinion, Minion diedMinion)
+        public override void onMinionDiedTrigger(Playfield p, Minion triggerEffectMinion, Minion diedMinion)
         {
             if (triggerEffectMinion.own == diedMinion.own)
             {

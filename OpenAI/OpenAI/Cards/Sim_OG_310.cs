@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Whenever you summon a 1-Health minion, give it Divine Shield.
 
-        public override void OnMinionWasSummoned(Playfield p, Minion m, Minion summonedMinion)
+        public override void onMinionWasSummoned(Playfield p, Minion m, Minion summonedMinion)
         {
             if (summonedMinion.Hp == 1 && m.own == summonedMinion.own && m.entityID != summonedMinion.entityID)
             {

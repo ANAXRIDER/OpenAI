@@ -9,7 +9,7 @@ namespace OpenAI
 
         //  Deathrattle: Deal 2 damage to all minions. 
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.allMinionsGetDamage(2);
         }

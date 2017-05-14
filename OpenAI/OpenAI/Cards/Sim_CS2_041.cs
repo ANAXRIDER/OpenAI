@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    stellt das volle leben eines dieners wieder her und verleiht ihm spott/.
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             target.taunt = true;
             int heal = (ownplay)? p.getSpellHeal(target.maxHp) : p.getEnemySpellHeal(target.maxHp);

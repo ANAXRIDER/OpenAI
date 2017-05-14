@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: If your deck has no duplicates, your Hero Power costs (0) this game.
 				
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own && Hrtprozis.Instance.noDuplicates) p.ownHeroAblility.manacost = 0;
         }

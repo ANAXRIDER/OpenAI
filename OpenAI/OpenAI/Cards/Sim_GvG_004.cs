@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Battlecry: If you have a Mech, deal 4 damage randomly split among all enemies.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 
             // conservative/realistic

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: Remove 1 Durability from your opponent's weapon.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             p.lowerWeaponDurability(1, !m.own);
         }

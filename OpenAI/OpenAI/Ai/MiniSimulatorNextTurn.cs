@@ -77,13 +77,13 @@
         {
 
             //todo only one time!
-            this.doEnemySecondTurn = Settings.Instance.SimEnemySecondTurn;
-            int totalboards = Settings.Instance.NextTurnTotalBoards;
-            int maxwide = Settings.Instance.NextTurnMaxWide;
-            int maxdeep = Settings.Instance.NextTurnDeep;
-            bool playaround = Settings.Instance.PlayAround;
-            int playaroundprob = Settings.Instance.PlayAroundProb;
-            int playaroundprob2 = Settings.Instance.PlayAroundProb2;
+            this.doEnemySecondTurn = Settings.Instance.simEnemySecondTurn;
+            int totalboards = Settings.Instance.nextTurnTotalBoards;
+            int maxwide = Settings.Instance.nextTurnMaxWide;
+            int maxdeep = Settings.Instance.nextTurnDeep;
+            bool playaround = Settings.Instance.playarround;
+            int playaroundprob = Settings.Instance.playaroundprob;
+            int playaroundprob2 = Settings.Instance.playaroundprob2;
 
 
             //Helpfunctions.Instance.logg("NXTTRN" + playf.mana);
@@ -216,7 +216,7 @@
 
                 if (print)
                 {
-                    HelpFunctions.Instance.ErrorLog("best board after your second turn (value included enemy second turn)----------");
+                    Helpfunctions.Instance.ErrorLog("best board after your second turn (value included enemy second turn)----------");
                     bestplay.printBoard();
                     bestplay.value = int.MinValue;
                     //bestplay.sEnemTurn = this.doEnemySecondTurn;

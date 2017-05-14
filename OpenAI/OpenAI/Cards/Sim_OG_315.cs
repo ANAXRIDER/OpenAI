@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Battlecry: If you control a Pirate, give your weapon +1/+1.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             List<Minion> temp = (own.own) ? p.ownMinions : p.enemyMinions;
             foreach (Minion m in temp)

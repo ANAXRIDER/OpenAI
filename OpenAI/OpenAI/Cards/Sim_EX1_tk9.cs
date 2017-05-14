@@ -10,7 +10,7 @@ namespace OpenAI
 //    ansturm/. vernichtet diesen diener am ende des zuges.
 
 
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (turnEndOfOwner == triggerEffectMinion.own)
             {

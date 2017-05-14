@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    verdoppelt den schaden und die heilung eurer zauber und heldenfähigkeiten.
-		public override void OnAuraStarts(Playfield p, Minion own)
+		public override void onAuraStarts(Playfield p, Minion own)
 		{
             if (own.own)
             {
@@ -16,7 +16,7 @@ namespace OpenAI
             }
 		}
 
-        public override void OnAuraEnds(Playfield p, Minion m)
+        public override void onAuraEnds(Playfield p, Minion m)
         {
             if (m.own)
             {

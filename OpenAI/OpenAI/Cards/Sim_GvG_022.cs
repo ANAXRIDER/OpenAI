@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Give your weapon +3 Attack. Combo: Give a random friendly minion +3 Attack.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay)
             {

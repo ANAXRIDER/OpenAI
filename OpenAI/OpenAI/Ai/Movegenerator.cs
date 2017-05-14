@@ -266,7 +266,7 @@
 
                                 for (int placer = 1; placer <= p.ownMinions.Count + 1; placer++)
                                 {
-                                    Action a = new Action(ActionType.PLAY_CARD, hc, null, placer, null, cardplayPenality, i, tracking);
+                                    Action a = new Action(actionEnum.playcard, hc, null, placer, null, cardplayPenality, i, tracking);
                                     returnlist.Add(a);
                                 }
 
@@ -276,7 +276,7 @@
                         {
                             //pf.playCard(hc, hc.position - 1, hc.entity, -1, -1, i, bestplace, cardplayPenality);
 
-                            Action a = new Action(ActionType.PLAY_CARD, hc, null, bestplace, null, cardplayPenality, i , tracking);
+                            Action a = new Action(actionEnum.playcard, hc, null, bestplace, null, cardplayPenality, i , tracking);
                             returnlist.Add(a);
                         }
 
@@ -295,7 +295,7 @@
                                     //help.logg(hc.card.name + " is played");
                                     //pf.playCard(hc, hc.position - 1, hc.entity, trgt.target, trgt.targetEntity, i, bestplace, cardplayPenality);
 
-                                    Action a = new Action(ActionType.PLAY_CARD, hc, null, bestplace, trgt, cardplayPenality, i , tracking); //i is the choice
+                                    Action a = new Action(actionEnum.playcard, hc, null, bestplace, trgt, cardplayPenality, i , tracking); //i is the choice
                                     returnlist.Add(a);
                                 }
                             }
@@ -303,7 +303,7 @@
                             {
                                 //pf.playCard(hc, hc.position - 1, hc.entity, trgt.target, trgt.targetEntity, i, bestplace, cardplayPenality);
 
-                                Action a = new Action(ActionType.PLAY_CARD, hc, null, bestplace, trgt, cardplayPenality, i , tracking); //i is the choice
+                                Action a = new Action(actionEnum.playcard, hc, null, bestplace, trgt, cardplayPenality, i , tracking); //i is the choice
                                 returnlist.Add(a);
                             }
 
@@ -387,7 +387,7 @@
                             cardplayPenality = pen.getPlayCardPenality(hc, null, p, 0, isLethalCheck);
                             for (int placer = 1; placer <= p.ownMinions.Count + 1; placer++)
                             {
-                                Action a = new Action(ActionType.PLAY_CARD, hc, null, placer, null, cardplayPenality, 0);
+                                Action a = new Action(actionEnum.playcard, hc, null, placer, null, cardplayPenality, 0);
                                 ret.Add(a);
                             }
                         }
@@ -409,7 +409,7 @@
                                     if ((hc.card.name == CardDB.cardName.tuskarrtotemic  || hc.card.name == CardDB.cardName.barnes) && !superplacement)
                                     {
                                         bestplace = (p.ownMinions.Count / 2) + 1; //just put it center left
-                                        Action a = new Action(ActionType.PLAY_CARD, hc, null, bestplace, null, cardplayPenality, 0);
+                                        Action a = new Action(actionEnum.playcard, hc, null, bestplace, null, cardplayPenality, 0);
                                         ret.Add(a);
                                     }
 
@@ -437,13 +437,13 @@
                                             {
                                                 for (int placer = 1; placer <= p.ownMinions.Count + 1; placer++)
                                                 {
-                                                    Action a = new Action(ActionType.PLAY_CARD, hc, null, placer, null, cardplayPenality, 0);
+                                                    Action a = new Action(actionEnum.playcard, hc, null, placer, null, cardplayPenality, 0);
                                                     ret.Add(a);
                                                 }
                                             }
                                             else
                                             {
-                                                Action a = new Action(ActionType.PLAY_CARD, hc, null, 2, null, cardplayPenality, 0);
+                                                Action a = new Action(actionEnum.playcard, hc, null, 2, null, cardplayPenality, 0);
 
                                                 ret.Add(a);
                                             }
@@ -460,7 +460,7 @@
                                                     if (p.ownMinions.Find(ab => ab.zonepos == placer - 1 && ab.Ready) != null) cardplayPenality+=2;
                                                     if (p.ownMinions.Find(ab => ab.zonepos == placer + 1 && ab.Ready) != null) cardplayPenality+=2;
                                                 }
-                                                Action a = new Action(ActionType.PLAY_CARD, hc, null, placer, null, cardplayPenality, 0);
+                                                Action a = new Action(actionEnum.playcard, hc, null, placer, null, cardplayPenality, 0);
                                                 //Helpfunctions.Instance.ErrorLog("place " +hc.card.name + " on pos " + (placer+adding) + " mincount " + p.ownMinions.Count);
                                                 //pf.playCard(hc, hc.position - 1, hc.entity, -1, -1, 0, bestplace, cardplayPenality);
                                                 ret.Add(a);
@@ -471,14 +471,14 @@
                                         {
                                             for (int placer = 1; placer <= p.ownMinions.Count + 1; placer++)
                                             {
-                                                Action a = new Action(ActionType.PLAY_CARD, hc, null, placer, null, cardplayPenality, 0);
+                                                Action a = new Action(actionEnum.playcard, hc, null, placer, null, cardplayPenality, 0);
                                                 ret.Add(a);
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        Action a = new Action(ActionType.PLAY_CARD, hc, null, bestplace, null, cardplayPenality, 0);
+                                        Action a = new Action(actionEnum.playcard, hc, null, bestplace, null, cardplayPenality, 0);
                                         //pf.playCard(hc, hc.position - 1, hc.entity, -1, -1, 0, bestplace, cardplayPenality);
                                         ret.Add(a);
                                     }
@@ -486,7 +486,7 @@
                             }
                             else
                             {
-                                Action a = new Action(ActionType.PLAY_CARD, hc, null, bestplace, null, cardplayPenality, 0);
+                                Action a = new Action(actionEnum.playcard, hc, null, bestplace, null, cardplayPenality, 0);
                                 //pf.playCard(hc, hc.position - 1, hc.entity, -1, -1, 0, bestplace, cardplayPenality);
                                 ret.Add(a);
                             }
@@ -506,7 +506,7 @@
                                     if (cardplayPenality < 500)
                                     {
                                         //pf.playCard(hc, hc.position - 1, hc.entity, trgt.target, trgt.targetEntity, 0, bestplace, cardplayPenality);
-                                        Action a = new Action(ActionType.PLAY_CARD, hc, null, bestplace, trgt, cardplayPenality, 0);
+                                        Action a = new Action(actionEnum.playcard, hc, null, bestplace, trgt, cardplayPenality, 0);
                                         ret.Add(a);
 
                                     }
@@ -515,7 +515,7 @@
                                 {
 
                                     //pf.playCard(hc, hc.position - 1, hc.entity, trgt.target, trgt.targetEntity, 0, bestplace, cardplayPenality);
-                                    Action a = new Action(ActionType.PLAY_CARD, hc, null, bestplace, trgt, cardplayPenality, 0);
+                                    Action a = new Action(actionEnum.playcard, hc, null, bestplace, trgt, cardplayPenality, 0);
                                     ret.Add(a);
                                 }
 
@@ -633,14 +633,14 @@
                             {
                                 //pf.attackWithMinion(m, trgt.target, trgt.targetEntity, attackPenality);
 
-                                Action a = new Action(ActionType.ATTACK_WITH_MINION, null, m, 0, trgt, attackPenality, 0);
+                                Action a = new Action(actionEnum.attackWithMinion, null, m, 0, trgt, attackPenality, 0);
                                 ret.Add(a);
                             }
                         }
                         else
                         {
                             //pf.attackWithMinion(m, trgt.target, trgt.targetEntity, attackPenality);
-                            Action a = new Action(ActionType.ATTACK_WITH_MINION, null, m, 0, trgt, attackPenality, 0);
+                            Action a = new Action(actionEnum.attackWithMinion, null, m, 0, trgt, attackPenality, 0);
                             ret.Add(a);
 
                         }
@@ -695,7 +695,7 @@
                         heroAttackPen = pen.getAttackWithHeroPenality(trgt, p, isLethalCheck);
                     }
                     //pf.attackWithWeapon(trgt.target, trgt.targetEntity, heroAttackPen);
-                    Action a = new Action(ActionType.ATTACK_WITH_HERO, null, p.ownHero, 0, trgt, heroAttackPen, 0);
+                    Action a = new Action(actionEnum.attackWithHero, null, p.ownHero, 0, trgt, heroAttackPen, 0);
                     ret.Add(a);
 
                 }
@@ -741,14 +741,14 @@
                             if (abilityPenality < 500)
                             {
                                 //pf.activateAbility(p.ownHeroAblility, trgt.target, trgt.targetEntity, abilityPenality);
-                                Action a = new Action(ActionType.USE_HERO_POWER, p.ownHeroAblility, null, 0, trgt, abilityPenality, 0);
+                                Action a = new Action(actionEnum.useHeroPower, p.ownHeroAblility, null, 0, trgt, abilityPenality, 0);
                                 ret.Add(a);
                             }
                         }
                         else
                         {
                             //pf.activateAbility(p.ownHeroAblility, trgt.target, trgt.targetEntity, abilityPenality);
-                            Action a = new Action(ActionType.USE_HERO_POWER, p.ownHeroAblility, null, 0, trgt, abilityPenality, 0);
+                            Action a = new Action(actionEnum.useHeroPower, p.ownHeroAblility, null, 0, trgt, abilityPenality, 0);
                             ret.Add(a);
                         }
 
@@ -766,7 +766,7 @@
                         {
                             //havedonesomething = true;
                             //pf.activateAbility(p.ownHeroAblility, -1, -1, abilityPenality);
-                            Action a = new Action(ActionType.USE_HERO_POWER, p.ownHeroAblility, null, 0, null, abilityPenality, 0);
+                            Action a = new Action(actionEnum.useHeroPower, p.ownHeroAblility, null, 0, null, abilityPenality, 0);
                             ret.Add(a);
                         }
                     }
@@ -774,7 +774,7 @@
                     {
                         //havedonesomething = true;
                         //pf.activateAbility(p.ownHeroAblility, -1, -1, abilityPenality);
-                        Action a = new Action(ActionType.USE_HERO_POWER, p.ownHeroAblility, null, 0, null, abilityPenality, 0);
+                        Action a = new Action(actionEnum.useHeroPower, p.ownHeroAblility, null, 0, null, abilityPenality, 0);
                         ret.Add(a);
                     }
 
@@ -813,14 +813,14 @@
                     foreach (Minion trgt in trgts)
                     {
                         if (trgt.isHero) continue;//dont target hero
-                        Action a = new Action(ActionType.USE_HERO_POWER, null, null, 0, trgt, abilityPenality, 0);
+                        Action a = new Action(actionEnum.useHeroPower, null, null, 0, trgt, abilityPenality, 0);
                         ret.Add(a);
                     }
                 }
                 else
                 {
                     // the other classes dont have to target####################################################
-                    Action a = new Action(ActionType.USE_HERO_POWER, null, null, 0, null, abilityPenality, 0);
+                    Action a = new Action(actionEnum.useHeroPower, null, null, 0, null, abilityPenality, 0);
                     ret.Add(a);
                 }
                 return ret;
@@ -894,7 +894,7 @@
                             continue; //this minion cant attack heros!
                         }
 
-                        Action a = new Action(ActionType.ATTACK_WITH_MINION, null, m, 0, trgt, this.pen.getAttackWithMininonPenality(m, p, trgt, false), 0);
+                        Action a = new Action(actionEnum.attackWithMinion, null, m, 0, trgt, this.pen.getAttackWithMininonPenality(m, p, trgt, false), 0);
                         ret.Add(a);
                     }
 
@@ -921,7 +921,7 @@
                 {
                     if (p.enemyWeaponName == CardDB.cardName.foolsbane && trgt.isHero) continue; //this weapon cant attack heros!
                     //pf.attackWithWeapon(trgt.target, trgt.targetEntity, heroAttackPen);
-                    Action a = new Action(ActionType.ATTACK_WITH_HERO, null, p.enemyHero, 0, trgt, 0, 0);
+                    Action a = new Action(actionEnum.attackWithHero, null, p.enemyHero, 0, trgt, 0, 0);
                     ret.Add(a);
                 }
             }

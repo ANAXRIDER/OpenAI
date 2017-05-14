@@ -10,7 +10,7 @@ namespace OpenAI
         
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_205);//Silverware Golem
 
-        public override void OnCardIsDiscarded(Playfield p, CardDB.Card card, bool own)
+        public override void onCardIsDiscarded(Playfield p, CardDB.Card card, bool own)
         {
             int pos = p.ownMinions.Count;
             p.callKid(kid, pos, own);

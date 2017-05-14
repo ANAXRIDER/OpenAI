@@ -11,7 +11,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.tt_010a);
 
-        public override void OnSecretPlay(Playfield p, bool ownplay, Minion attacker, Minion target, out int number)
+        public override void onSecretPlay(Playfield p, bool ownplay, Minion attacker, Minion target, out int number)
         {
             number = 0;
             if (ownplay)

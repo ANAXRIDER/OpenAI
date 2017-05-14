@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    der angriff dieses dieners entspricht immer seinem leben.
         //todo dont buff this!
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             own.Angr = own.Hp;
 		}

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: If you're holding a Dragon, Discover a card in your opponent's deck.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (m.own)
             {

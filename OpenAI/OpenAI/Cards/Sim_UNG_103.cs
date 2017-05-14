@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Adapt your minions.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp = (ownplay) ? p.ownMinions : p.enemyMinions;
             bool hasreadyminion = false;
@@ -42,7 +42,7 @@ namespace OpenAI
         }
 
 
-        public override void OnAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
+        public override void onAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
         {
             List<Minion> temp = p.ownMinions;
             switch (choice)

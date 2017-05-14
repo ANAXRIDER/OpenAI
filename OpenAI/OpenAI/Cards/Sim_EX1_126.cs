@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    zwingt einen feindlichen diener, seinen schaden benachbarten dienern zuzufügen.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             //attack right neightbor
             if (target.Angr>0)

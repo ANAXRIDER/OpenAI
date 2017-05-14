@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Whenever you draw a card, reduce its Cost by (1).
 
-        public override void OnAuraStarts(Playfield p, Minion m)
+        public override void onAuraStarts(Playfield p, Minion m)
         {
             if (m.own)
             {
@@ -21,7 +21,7 @@ namespace OpenAI
             }
         }
 
-        public override void OnAuraEnds(Playfield p, Minion m)
+        public override void onAuraEnds(Playfield p, Minion m)
         {
             if (m.own)
             {

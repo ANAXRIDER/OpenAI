@@ -10,7 +10,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_004a); // 4/2 Panther
 
-        public override void OnSecretPlay(Playfield p, bool ownplay, int number)
+        public override void onSecretPlay(Playfield p, bool ownplay, int number)
         {
             number = 0;
             if (ownplay)

@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Choose One - Deal $3 damage to a minion; or $1 damage and draw a card.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int damage = 0;
 

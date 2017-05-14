@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Hero Power: Deal 8 damage to a random enemy.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp2 = (ownplay) ? new List<Minion>(p.enemyMinions) : new List<Minion>(p.ownMinions);
             int count = (ownplay) ? p.enemyMinions.Count : p.ownMinions.Count;

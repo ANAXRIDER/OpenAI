@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //Return a friendly minion to your hand. It costs (2) less.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.minionReturnToHand(target, ownplay, -2);
 		}

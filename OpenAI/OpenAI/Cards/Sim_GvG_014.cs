@@ -9,7 +9,7 @@ namespace OpenAI
         //todo: what happens if the target is damaged?
        //Battlecry: Swap Health with another minion.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (target == null) return;
 
@@ -21,7 +21,7 @@ namespace OpenAI
             if (target.wounded)
             {
                 target.wounded = false;
-                target.handcard.card.sim_card.OnEnrageStop(p, target);
+                target.handcard.card.sim_card.onEnrageStop(p, target);
             }
         }
     }

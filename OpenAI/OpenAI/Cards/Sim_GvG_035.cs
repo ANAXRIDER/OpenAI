@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Deathrattle:&lt;/b&gt; Shuffle this minion into your deck.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

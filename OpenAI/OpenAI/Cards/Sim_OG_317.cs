@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Deathrattle: Put all Dragons from your hand into the battlefield.
 		
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

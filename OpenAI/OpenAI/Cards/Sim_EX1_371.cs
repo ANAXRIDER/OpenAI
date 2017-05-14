@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    verleiht einem diener gottesschild/.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             target.divineshild = true;
 		}

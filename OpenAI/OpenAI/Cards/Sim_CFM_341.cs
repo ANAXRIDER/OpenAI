@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Deathrattle: Deal damage equal to the minion's Attack to all enemy minions.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.allMinionOfASideGetDamage(!m.own, m.Angr);
         }

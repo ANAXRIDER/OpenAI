@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Battlecry: Cast a random spell for each spell you've cast this game (targets chosen randomly).
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

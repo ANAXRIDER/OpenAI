@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Vernichtet einen Diener. Stellt bei Eurem Helden #3 Leben wieder her.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.minionGetDestroyed(target);
             int heal = (ownplay) ? p.getSpellHeal(3) : p.getEnemySpellHeal(3);

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ verleiht beiden spielern die macht des rock! (durch eine powerakkordkarte)
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.drawACard(CardDB.cardIDEnum.PRO_001b, true, true);
             p.drawACard(CardDB.cardIDEnum.PRO_001b, false, true);

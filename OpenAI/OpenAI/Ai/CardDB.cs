@@ -6824,7 +6824,7 @@ namespace OpenAI
                         {
                             foreach (Action a in p.playactions)
                             {
-                                if (a.actionType == ActionType.PLAY_CARD)
+                                if (a.actionType == actionEnum.playcard)
                                 {
                                     switch (a.card.card.name)
                                     {
@@ -6841,7 +6841,7 @@ namespace OpenAI
                                         }
                                     }
                                 }
-                                else if (a.actionType == ActionType.USE_HERO_POWER)
+                                else if (a.actionType == actionEnum.useHeroPower)
                                 {
                                     //Helpfunctions.Instance.ErrorLog("찾았다");
                                     switch (p.ownHeroAblility.card.name)
@@ -7057,7 +7057,7 @@ namespace OpenAI
                         {
                             foreach (Action a in p.playactions)
                             {
-                                if (a.actionType == ActionType.PLAY_CARD)
+                                if (a.actionType == actionEnum.playcard)
                                 {
                                     switch (a.card.card.name)
                                     {
@@ -7074,7 +7074,7 @@ namespace OpenAI
                                         }
                                     }
                                 }
-                                else if (a.actionType == ActionType.USE_HERO_POWER)
+                                else if (a.actionType == actionEnum.useHeroPower)
                                 {
                                     //Helpfunctions.Instance.ErrorLog("찾았다");
                                     switch (p.ownHeroAblility.card.name)
@@ -7445,27 +7445,27 @@ namespace OpenAI
             string[] lines = new string[] { };
             try
             {
-                string path = OpenAIPath.SettingsPath;
-                lines = File.ReadAllLines(path + "_carddb.txt");
-                HelpFunctions.Instance.ErrorLog("read carddb.txt " + lines.Length + " lines");
+                string path = Settings.Instance.path;
+                lines = System.IO.File.ReadAllLines(path + "_carddb.txt");
+                Helpfunctions.Instance.ErrorLog("read carddb.txt " + lines.Length + " lines");
             }
             catch
             {
-                HelpFunctions.Instance.Log("cant find _carddb.txt");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("cant find _carddb.txt in " + OpenAIPath.SettingsPath);
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("you installed it wrong");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.logg("cant find _carddb.txt");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("cant find _carddb.txt in " + Settings.Instance.path);
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("you installed it wrong");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
                 this.installedWrong = true;
             }
             cardlist.Clear();
@@ -8064,7 +8064,7 @@ namespace OpenAI
             this.imp = this.getCardDataFromID(CardDB.cardIDEnum.BRM_006t);//imp from blackrock
             this.ligthningJolt = this.getCardDataFromID(CardDB.cardIDEnum.AT_050t);//deal 2 dmg hero power
 
-            HelpFunctions.Instance.ErrorLog("CardList:" + cardidToCardList.Count);
+            Helpfunctions.Instance.ErrorLog("CardList:" + cardidToCardList.Count);
 
         }
 
@@ -10569,14 +10569,14 @@ namespace OpenAI
         private void enumCreator()
         {
             // cardIDEnum creator:
-            HelpFunctions.Instance.WriteToBuffer("public enum cardIDEnum");
-            HelpFunctions.Instance.WriteToBuffer("{");
-            HelpFunctions.Instance.WriteToBuffer("None,");
+            Helpfunctions.Instance.writeToBuffer("public enum cardIDEnum");
+            Helpfunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("None,");
             foreach (string cardid in this.allCardIDS)
             {
-                HelpFunctions.Instance.WriteToBuffer(cardid + ",");
+                Helpfunctions.Instance.writeToBuffer(cardid + ",");
             }
-            HelpFunctions.Instance.WriteToBuffer("}");
+            Helpfunctions.Instance.writeToBuffer("}");
 
             
             // cardName creator:
@@ -10587,30 +10587,30 @@ namespace OpenAI
                 namelist.Add(cardid);
             }
             
-            HelpFunctions.Instance.WriteToBuffer("public enum cardName");
-            HelpFunctions.Instance.WriteToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("public enum cardName");
+            Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in namelist)
             {
-                HelpFunctions.Instance.WriteToBuffer(cardid + ",");
+                Helpfunctions.Instance.writeToBuffer(cardid + ",");
             }
-            HelpFunctions.Instance.WriteToBuffer("}");
+            Helpfunctions.Instance.writeToBuffer("}");
 
             
             // getSimCard creator:
-            HelpFunctions.Instance.WriteToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
-            HelpFunctions.Instance.WriteToBuffer("{");
-            HelpFunctions.Instance.WriteToBuffer("switch (id)");
-            HelpFunctions.Instance.WriteToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
+            Helpfunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("switch (id)");
+            Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in this.allCardIDS)
             {
-                HelpFunctions.Instance.WriteToBuffer("case cardIDEnum." + cardid + ": return new Sim_" + cardid + "();");
+                Helpfunctions.Instance.writeToBuffer("case cardIDEnum." + cardid + ": return new Sim_" + cardid + "();");
             }
-            HelpFunctions.Instance.WriteToBuffer("return new SimTemplate();");
-            HelpFunctions.Instance.WriteToBuffer("}");
-            HelpFunctions.Instance.WriteToBuffer("}");
+            Helpfunctions.Instance.writeToBuffer("return new SimTemplate();");
+            Helpfunctions.Instance.writeToBuffer("}");
+            Helpfunctions.Instance.writeToBuffer("}");
 
 
-            HelpFunctions.Instance.WriteBufferToCardDB();
+            Helpfunctions.Instance.writeBufferToCardDB();
         }
 
         private static string removeSpecialChars(string s)

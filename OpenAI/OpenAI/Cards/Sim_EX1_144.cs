@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    lasst einen befreundeten diener auf eure hand zurückkehren. der diener kostet (2) weniger.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.minionReturnToHand(target, ownplay, target.handcard.card.cost - 2);
 		}

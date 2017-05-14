@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Has +2 Attack while you have a Mech.
 
-        public override void OnMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        public override void onMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if ((TAG_RACE)summonedMinion.handcard.card.race == TAG_RACE.MECHANICAL)
             {

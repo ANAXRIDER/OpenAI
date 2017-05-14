@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Add aRazorpetal to your handthat deals 1 damage.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.CardToHand(CardDB.cardName.razorpetal, own.own);
         }

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    vernichtet einen diener. euer gegner zieht 2 karten.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.minionGetDestroyed(target);
             p.drawACard(CardDB.cardIDEnum.None, !ownplay);

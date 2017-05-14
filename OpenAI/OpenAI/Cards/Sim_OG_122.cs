@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Battlecry: Add 2 Bananas to your hand.
 		
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.drawACard(CardDB.cardName.bananas, own.own, true);
             p.drawACard(CardDB.cardName.bananas, own.own, true);

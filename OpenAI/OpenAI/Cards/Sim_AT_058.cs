@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Reveal a minion in each deck. If yours costs more, draw it.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             //p.drawACard(CardDB.cardIDEnum.None, own.own, true);
             if (p.ownMaxMana >= 6)

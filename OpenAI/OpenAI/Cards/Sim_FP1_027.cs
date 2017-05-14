@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    stellt zu beginn eures zuges das volle leben dieses dieners wieder her.
 
-        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if (triggerEffectMinion.own == turnStartOfOwner)
             {

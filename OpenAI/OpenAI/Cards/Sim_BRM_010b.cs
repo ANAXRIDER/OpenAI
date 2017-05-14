@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   choose 2/5 minion
         CardDB.Card bear = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRM_010t2);
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
                 p.minionTransform(own, bear);
         }

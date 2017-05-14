@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Shuffle a sealed_Un'Goro pack into_your deck.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own) p.ownDeckSize++;
             else p.enemyDeckSize++;

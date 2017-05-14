@@ -176,7 +176,7 @@
             string canbe = secdata.Split('.')[1];
             if (canbe.Length < 17)
             {
-                HelpFunctions.Instance.ErrorLog("cant read secret " + secdata + " " + canbe.Length);
+                Helpfunctions.Instance.ErrorLog("cant read secret " + secdata + " " + canbe.Length);
             }
 
             this.canBe_snaketrap = (canbe[0] == '1');
@@ -527,8 +527,8 @@
 
             if (!dontwrite)
             {
-                HelpFunctions.Instance.Log(s);
-                if (writetobuffer) HelpFunctions.Instance.WriteToBuffer(s);
+                Helpfunctions.Instance.logg(s);
+                if (writetobuffer) Helpfunctions.Instance.writeToBuffer(s);
             }
 
             data += s + "\r\n";
@@ -541,8 +541,8 @@
 
             if (!dontwrite)
             {
-                HelpFunctions.Instance.Log(s);
-                if (writetobuffer) HelpFunctions.Instance.WriteToBuffer(s);
+                Helpfunctions.Instance.logg(s);
+                if (writetobuffer) Helpfunctions.Instance.writeToBuffer(s);
             }
 
             data += s + "\r\n";
@@ -667,12 +667,12 @@
             }
             if (!dontwrite)
             {
-                HelpFunctions.Instance.Log(og);
-                HelpFunctions.Instance.Log(eg);
+                Helpfunctions.Instance.logg(og);
+                Helpfunctions.Instance.logg(eg);
                 if (writetobuffer)
                 {
-                    HelpFunctions.Instance.WriteToBuffer(og);
-                    HelpFunctions.Instance.WriteToBuffer(eg);
+                    Helpfunctions.Instance.writeToBuffer(og);
+                    Helpfunctions.Instance.writeToBuffer(eg);
                 }
             }
             return og + "\r\n" + eg + "\r\n";
@@ -840,7 +840,7 @@
             foreach (int i in enemySecretIds)
             {
                 if (i >= 1000) continue;
-                HelpFunctions.Instance.Log("detect secret with id" + i);
+                Helpfunctions.Instance.logg("detect secret with id" + i);
                 SecretItem sec = getNewSecretGuessedItem(i, enemyHeroName);
 
                 newlist.Add(new SecretItem(sec));
@@ -1318,18 +1318,18 @@
                 if (hcard != null && hcard.card.type == CardDB.cardtype.SPELL)
                 {
                     if (hcard.card.type == CardDB.cardtype.SPELL) usedspell = true;
-                    int entityOfLastAffected = OpenAI.GetCardTarget(hcard.entity);
+                    int entityOfLastAffected = Silverfish.getCardTarget(hcard.entity);
                     if (entityOfLastAffected >= 1) lastEffectedIsMinion = 2;
                     if (entityOfLastAffected == p.enemyHero.entityID) lastEffectedIsMinion = 1;
                 }
 
                 if (hcard != null && hcard.card.type == CardDB.cardtype.MOB)
                 {
-                    int entityOfLastAffected = OpenAI.GetLastAffected(hcard.entity);
+                    int entityOfLastAffected = Silverfish.getLastAffected(hcard.entity);
                     if (entityOfLastAffected >= 1) lastEffectedIsMinion = 2;
                     if (entityOfLastAffected == p.enemyHero.entityID && (p.enemyHero.Hp < old.enemyHero.Hp || p.enemyHero.immune)) lastEffectedIsMinion = 1;
 
-                    entityOfLastAffected = OpenAI.GetCardTarget(hcard.entity);
+                    entityOfLastAffected = Silverfish.getCardTarget(hcard.entity);
                     if (entityOfLastAffected >= 1)
                     {
                         lastEffectedIsMinion = 2;

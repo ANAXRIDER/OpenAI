@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //bc: discover a powerful artifact.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             //TODO add a choice card with all 3 artifacts?
             p.drawACard(CardDB.cardIDEnum.LOEA16_4, own.own, true);

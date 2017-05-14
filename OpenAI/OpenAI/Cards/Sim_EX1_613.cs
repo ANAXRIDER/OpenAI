@@ -6,7 +6,7 @@ namespace OpenAI
 {
     class Sim_EX1_613 : SimTemplate//edwin van cleefe
     {
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 
             if(own.own) p.minionGetBuffed(own, p.cardsPlayedThisTurn * 2, p.cardsPlayedThisTurn * 2);

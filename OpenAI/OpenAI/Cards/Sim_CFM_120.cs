@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Deathrattle: Restore 4 Health to both players.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             int heal = (m.own) ? p.getMinionHeal(4) : p.getEnemyMinionHeal(4);
             p.minionGetDamageOrHeal(p.ownHero, -heal);

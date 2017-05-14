@@ -8,12 +8,12 @@ namespace OpenAI
     {
         // Your Secrets cost (0).
         
-        public override void OnAuraStarts(Playfield p, Minion m)
+        public override void onAuraStarts(Playfield p, Minion m)
         {
             if (m.own) p.anzOwnCloakedHuntress++;
         }
 
-        public override void OnAuraEnds(Playfield p, Minion m)
+        public override void onAuraEnds(Playfield p, Minion m)
         {
             if (m.own) p.anzOwnCloakedHuntress--;
         }

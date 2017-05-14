@@ -8,12 +8,12 @@ namespace OpenAI
     {
         //Battlecry: Discard a random card. Deathrattle: Draw a card.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardName.unknown, m.own);
         }
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.discardACard(own.own);
         }

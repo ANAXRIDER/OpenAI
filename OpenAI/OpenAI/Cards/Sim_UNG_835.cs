@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Discover a spell. Deal damage to your hero equal to its Cost.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.CardToHand(CardDB.cardName.unknown, ownplay);
 

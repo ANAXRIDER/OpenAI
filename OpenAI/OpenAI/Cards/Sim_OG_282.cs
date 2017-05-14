@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Battlecry: Destroy a minion. Add its Attack and Health to C'Thun's (wherever it is).
 		
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if(target != null)
 			{

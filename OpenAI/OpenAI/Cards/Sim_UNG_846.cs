@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Deathrattle: Add a random Mage spell to your hand.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.CardToHand(CardDB.cardName.unknown, m.own);
         }

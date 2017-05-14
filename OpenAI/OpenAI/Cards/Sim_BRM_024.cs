@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Battlecry: If your opponent has 15 or less Health, gain +3/+3.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             List<Handmanager.Handcard> temp =  p.owncards;
 

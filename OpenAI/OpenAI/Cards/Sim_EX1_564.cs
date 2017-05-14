@@ -8,7 +8,7 @@ namespace OpenAI
     {
 
         //    kampfschrei:/ wählt einen diener aus, um gesichtsloser manipulator in eine kopie desselben zu verwandeln.
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (target != null)
             {
@@ -16,7 +16,7 @@ namespace OpenAI
                 bool source = own.own;
                 own.setMinionTominion(target);
                 own.own = source;
-                own.handcard.card.sim_card.OnAuraStarts(p, own);
+                own.handcard.card.sim_card.onAuraStarts(p, own);
             }
         }
 

@@ -8,13 +8,13 @@ namespace OpenAI
 	{
 
 //    die todesröcheln/-effekte eurer diener werden 2-mal ausgelöst.
-        public override void OnAuraStarts(Playfield p, Minion own)
+        public override void onAuraStarts(Playfield p, Minion own)
 		{
             if (own.own) p.ownBaronRivendare++;
             else p.enemyBaronRivendare++;
 		}
 
-        public override void OnAuraEnds(Playfield p, Minion m)
+        public override void onAuraEnds(Playfield p, Minion m)
         {
             if (m.own)
             {

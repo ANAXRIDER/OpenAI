@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Taunt Battlecry: Set all other minions' Attack and Health to 3.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             foreach (Minion minion in p.ownMinions)
             {

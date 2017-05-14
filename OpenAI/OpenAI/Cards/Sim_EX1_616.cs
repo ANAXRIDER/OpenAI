@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 
 //    alle diener kosten (1) mehr.
-        public override void OnAuraStarts(Playfield p, Minion own)
+        public override void onAuraStarts(Playfield p, Minion own)
 		{
             p.anzManaWraith ++;
 		}
 
-        public override void OnAuraEnds(Playfield p, Minion m)
+        public override void onAuraEnds(Playfield p, Minion m)
         {
             p.anzManaWraith--;
         }

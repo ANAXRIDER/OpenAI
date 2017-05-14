@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 		//Your Choose One cards have both effects combine.
 
-        public override void OnAuraStarts(Playfield p, Minion own)
+        public override void onAuraStarts(Playfield p, Minion own)
         {
             if (own.own) p.anzOwnFandralStaghelm++;
         }
 
-        public override void OnAuraEnds(Playfield p, Minion m)
+        public override void onAuraEnds(Playfield p, Minion m)
         {
             if (m.own) p.anzOwnFandralStaghelm--;
         }

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    verdoppelt den angriff eines dieners.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.minionGetBuffed(target, target.Angr, 0);
 		}

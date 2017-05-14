@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Inspire: Deal 4 damage to each hero.
 
-        public override void OnInspire(Playfield p, Minion m)
+        public override void onInspire(Playfield p, Minion m)
         {
             p.minionGetDamageOrHeal(p.ownHero, 4);
             p.minionGetDamageOrHeal(p.enemyHero, 4);

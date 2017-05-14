@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Inspire: Gain +1 Health.
 
-        public override void OnInspire(Playfield p, Minion m)
+        public override void onInspire(Playfield p, Minion m)
         {
             int heal = (m.own) ? p.getMinionHeal(2) : p.getEnemyMinionHeal(2);
             p.minionGetDamageOrHeal(m.own ? p.ownHero : p.enemyHero, -heal);

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //todo make it better
 //    todesröcheln:/ übernehmt die kontrolle über einen zufälligen feindlichen diener.
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             List<Minion> tmp = (m.own) ? p.enemyMinions : p.ownMinions;
             if (tmp.Count >= 1)

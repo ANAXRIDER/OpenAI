@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    verleiht euren dienern „todesröcheln:/ ruft einen treant (2/2) herbei.“
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             List<Minion> temp = (ownplay) ? p.ownMinions : p.enemyMinions;
 

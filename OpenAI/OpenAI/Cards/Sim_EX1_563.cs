@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    zauberschaden +5/
-        public override void OnAuraStarts(Playfield p, Minion own)
+        public override void onAuraStarts(Playfield p, Minion own)
 		{
             p.spellpower = 5;
             if (own.own)

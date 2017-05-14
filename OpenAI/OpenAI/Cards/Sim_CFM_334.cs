@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Give a random Beast in your hand +2/+2.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay)
             {

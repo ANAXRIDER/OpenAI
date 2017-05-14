@@ -20,7 +20,7 @@ namespace OpenAI
 
                 if (target.own && target.Angr <= 4) ret += 8 - 2 * target.Angr;
 
-                if (p.playactions.Find(a => a.actionType == ActionType.ATTACK_WITH_MINION && a.own.entityID == target.entityID && a.target.entityID == tmpPf.enemyHero.entityID) != null)
+                if (p.playactions.Find(a => a.actionType == actionEnum.attackWithMinion && a.own.entityID == target.entityID && a.target.entityID == tmpPf.enemyHero.entityID) != null)
                 {
                     ret += 10;
                 }

@@ -65,7 +65,7 @@
 
         private int ownPlayerController;
 
-        HelpFunctions help;
+        Helpfunctions help;
         CardDB cdb = CardDB.Instance;
 
         private static Handmanager instance;
@@ -80,7 +80,7 @@
 
         private Handmanager()
         {
-            this.help = HelpFunctions.Instance;
+            this.help = Helpfunctions.Instance;
         }
 
 
@@ -127,7 +127,7 @@
                     manacost = cardc.cost
                 };
                 this.handcardchoices.Add(nehc);
-                HelpFunctions.Instance.ErrorLog("choices " + cardc.name);
+                Helpfunctions.Instance.ErrorLog("choices " + cardc.name);
             }
             CardDB.Card tempcard = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_029);//=fireball, just to make sure its not a mob (movegen will ignore mobs if own minions >= 7)
             tempcard.name = CardDB.cardName.placeholdercard;
@@ -174,12 +174,12 @@
         //not updated anymore!
         public void printcards(bool writeTobuffer = false)
         {
-            help.Log("Own Handcards: ");
+            help.logg("Own Handcards: ");
             foreach (Handmanager.Handcard c in this.handCards)
             {
-                help.Log("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack +" " + c.elemPoweredUp);
+                help.logg("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack +" " + c.elemPoweredUp);
             }
-            help.Log("Enemy cards: " + this.enemyAnzCards);
+            help.logg("Enemy cards: " + this.enemyAnzCards);
 
             //todo print died minions this turn!
 
@@ -223,12 +223,12 @@
 
             if (writeTobuffer)
             {
-                help.WriteToBuffer("Own Handcards: ");
+                help.writeToBuffer("Own Handcards: ");
                 foreach (Handmanager.Handcard c in this.handCards)
                 {
-                    help.WriteToBuffer("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack);
+                    help.writeToBuffer("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack);
                 }
-                help.WriteToBuffer("Enemy cards: " + this.enemyAnzCards);
+                help.writeToBuffer("Enemy cards: " + this.enemyAnzCards);
 
                 //todo print died minions this turn!
 

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //Choose a minion. Whenever it attacks, restore 4 Health to your hero.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             if (ownplay)
             {

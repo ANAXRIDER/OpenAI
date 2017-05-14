@@ -113,7 +113,7 @@
         private CardDB.cardName nextMobName = CardDB.cardName.unknown;
         private int nextMobId = 0;
         private int prevMobId = 0;
-        HelpFunctions help;
+        Helpfunctions help;
 
         private static Questmanager instance;
 
@@ -127,7 +127,7 @@
         
         private Questmanager()
         {
-            this.help = HelpFunctions.Instance;
+            this.help = Helpfunctions.Instance;
         }
 
         public void updateQuestStuff(string questID, int curProgr, int maxProgr, bool ownplay)

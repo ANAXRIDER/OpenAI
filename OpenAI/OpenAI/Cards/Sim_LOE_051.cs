@@ -7,7 +7,7 @@ namespace OpenAI
 	class Sim_LOE_051 : SimTemplate //Both players have Spell Damage +2 .
 	{
 
-		public override void  OnAuraStarts(Playfield p, Minion m)
+		public override void  onAuraStarts(Playfield p, Minion m)
         {
             m.spellpower = 2;
             p.enemyspellpower += 2;
@@ -15,7 +15,7 @@ namespace OpenAI
 
         }
 
-        public override void OnAuraEnds(Playfield p, Minion m)
+        public override void onAuraEnds(Playfield p, Minion m)
         {
             //end spellpower of enemy
             if (m.own)

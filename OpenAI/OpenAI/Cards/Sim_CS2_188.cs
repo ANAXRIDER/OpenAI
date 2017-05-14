@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ verleiht einem diener +2 angriff in diesem zug.
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (target != null) p.minionGetTempBuff(target, 2, 0);
 		}

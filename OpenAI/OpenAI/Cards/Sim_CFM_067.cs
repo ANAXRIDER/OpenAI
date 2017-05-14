@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: Restore a minion to full Health.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (target != null)
             {

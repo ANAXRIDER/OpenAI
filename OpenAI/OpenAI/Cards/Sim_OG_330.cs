@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Deathrattle: Add a random class card to your hand (from your opponent's class).
 
-		public override void OnDeathrattle(Playfield p, Minion m)
+		public override void onDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardName.unknown, m.own, true);
         }

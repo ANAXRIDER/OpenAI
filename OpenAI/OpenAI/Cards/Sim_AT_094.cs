@@ -10,7 +10,7 @@ namespace OpenAI
         //Battlecry: Deal 1 damage to a random enemy.
 
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.doDmgToRandomEnemyCLIENT2(1, true, own.own);
         }

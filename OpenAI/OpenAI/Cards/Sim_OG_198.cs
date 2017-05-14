@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Spend all your Mana. Heal for double the mana you spent.
 		
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
 			if (ownplay)
 			{

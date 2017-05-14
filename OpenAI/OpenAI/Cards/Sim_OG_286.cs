@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//At the end of your turn, give your C'Thun +1/+1 (wherever it is).
 		
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own == turnEndOfOwner)
             {

@@ -437,12 +437,12 @@
             int usecoin = 0;
             foreach (Action a in p.playactions)
             {
-                if (a.actionType == ActionType.PLAY_CARD && a.card.card.Secret && hassecretkeeper) retval += 4;
+                if (a.actionType == actionEnum.playcard && a.card.card.Secret && hassecretkeeper) retval += 4;
                 //if (a.actionType == actionEnum.attackWithHero && p.enemyHero.Hp <= p.attackFaceHP) retval++;
-                if (a.actionType == ActionType.USE_HERO_POWER) useAbili = true;
-                if (p.ownHeroName == HeroEnum.warrior && a.actionType == ActionType.ATTACK_WITH_HERO && useAbili) retval -= 1;
+                if (a.actionType == actionEnum.useHeroPower) useAbili = true;
+                if (p.ownHeroName == HeroEnum.warrior && a.actionType == actionEnum.attackWithHero && useAbili) retval -= 1;
                 //if (a.actionType == actionEnum.useHeroPower && a.card.card.name == CardDB.cardName.lesserheal && (!a.target.own)) retval -= 5;
-                if (a.actionType != ActionType.PLAY_CARD) continue;
+                if (a.actionType != actionEnum.playcard) continue;
                 if (a.card.card.name == CardDB.cardName.thecoin)
                 {
                     usecoin = 1;
@@ -473,14 +473,16 @@
             {
                 
                 if ((p.ownHeroAblility.card.name == CardDB.cardName.thesilverhand ||
-                   p.ownHeroAblility.card.name == CardDB.cardName.reinforce) && p.ownMinions.Count <= 6) hppen -= 10; //didn't use pala heropower
+                   p.ownHeroAblility.card.name == CardDB.cardName.reinforce ||
+                   p.ownHeroAblility.card.name == CardDB.cardName.thetidalhand) && p.ownMinions.Count <= 6) hppen -= 10; //didn't use pala heropower
                 else if (p.ownHeroAblility.card.name == CardDB.cardName.lifetap && p.ownHero.Hp >= 12) hppen -= 30;
                 else if (!(p.ownHeroAblility.card.name == CardDB.cardName.daggermastery && (p.ownWeaponDurability >= 2 || p.ownWeaponAttack >= 2))
                     && !(p.ownHeroAblility.card.name == CardDB.cardName.thesilverhand ||
                    p.ownHeroAblility.card.name == CardDB.cardName.reinforce ||
                    p.ownHeroAblility.card.name == CardDB.cardName.totemiccall ||
                    p.ownHeroAblility.card.name == CardDB.cardName.totemicslam ||
-                   p.ownHeroAblility.card.name == CardDB.cardName.inferno) && p.ownMinions.Count == 7
+                   p.ownHeroAblility.card.name == CardDB.cardName.inferno ||
+                   p.ownHeroAblility.card.name == CardDB.cardName.thetidalhand) && p.ownMinions.Count == 7
                     ) hppen -= 20;
                 else hppen -= 12;
 
@@ -507,13 +509,13 @@
 
 
             //rockbiter
-            bool rockbiterHero = p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null;
+            bool rockbiterHero = p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null;
             if (rockbiterHero && p.ownHero.Ready) retval -= 30;
             //if (rockbiterHero) Helpfunctions.Instance.ErrorLog("rockbiterHero " + rockbiterHero + " ");
             bool rockbiterMinion = false;
             foreach (Minion m in p.ownMinions)
             {
-                if (p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == m.entityID) != null) rockbiterMinion = true;
+                if (p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == m.entityID) != null) rockbiterMinion = true;
                 if (rockbiterMinion && m.Ready) { retval -= 30; break; }
             }
             //if (rockbiterMinion) Helpfunctions.Instance.ErrorLog("rockbiterMinion " + rockbiterMinion + " ");
@@ -1435,11 +1437,11 @@
                     retval -= 8;
                 }
 
-                if (m.name == CardDB.cardName.murlocwarleader && (m.Hp <= enemypotentialattacktotal) && !m.silenced) //special value for murloc warleader 
+                if (m.name == CardDB.cardName.murlocwarleader && (m.Hp <= enemypotentialattacktotal) && !m.silenced && p.turnCounter == 0) //special value for murloc warleader 
                 {
                     foreach (Minion mnn in p.ownMinions)
                     {
-                        if (m.entityID != mnn.entityID && mnn.handcard.card.race == TAG_RACE.MURLOC) retval -= 4; //angr 2 *2 + hp = 5;
+                        if (m.entityID != mnn.entityID && mnn.handcard.card.race == TAG_RACE.MURLOC) retval -= 3; //angr 2 *2 + hp = 3;
                     }
                 }
 

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    verleiht am ende eures zuges einem anderen zufälligen befreundeten diener +1 leben.
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             List<Minion> temp2 = new List<Minion>((turnEndOfOwner) ? p.ownMinions : p.enemyMinions);
             temp2.Sort((a, b) => a.Hp.CompareTo(b.Hp));//buff the weakest

@@ -12,7 +12,7 @@ namespace OpenAI
         CardDB.Card kid2 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_025b); //Broom
         CardDB.Card kid3 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_025c); //Teapot
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int pos = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
 

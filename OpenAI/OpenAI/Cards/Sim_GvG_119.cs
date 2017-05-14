@@ -10,7 +10,7 @@ namespace OpenAI
         //   Battlecry: Equip a random weapon for each player.
         CardDB.Card w = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_080);
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.equipWeapon(w, true);
             p.equipWeapon(w, false);

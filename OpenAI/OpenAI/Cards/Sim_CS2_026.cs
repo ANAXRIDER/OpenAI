@@ -8,7 +8,7 @@ namespace OpenAI
     {
 
         //    friert/ alle feindlichen diener ein.
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp = (ownplay) ? p.enemyMinions : p.ownMinions;
             foreach (Minion t in temp)

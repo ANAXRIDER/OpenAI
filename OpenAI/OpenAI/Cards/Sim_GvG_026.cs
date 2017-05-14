@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Trigger all Deathrattles on your minions.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.doDeathrattles(ownplay ? new List<Minion>(p.ownMinions) : new List<Minion>(p.enemyMinions));
         }

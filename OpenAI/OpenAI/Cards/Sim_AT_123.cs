@@ -10,7 +10,7 @@ namespace OpenAI
         //Taunt , Deathrattle: If you're holding a Dragon, deal 3 damage to all minions.
 
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             bool hasdragon = false;
             if (m.own)

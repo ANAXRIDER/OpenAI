@@ -11,7 +11,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_125);
 
-        public override void OnSecretPlay(Playfield p, bool ownplay, int number)
+        public override void onSecretPlay(Playfield p, bool ownplay, int number)
         {
             int pos = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
             p.callKid(kid, pos, ownplay);

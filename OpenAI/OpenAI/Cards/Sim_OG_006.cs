@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Battlecry: Your Hero Power becomes 'Summon a 1/1 Murloc.'
 		
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
 			CardDB.Card hewHeroPower = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.OG_006b); //The Tidal Hand
             if (own.own)

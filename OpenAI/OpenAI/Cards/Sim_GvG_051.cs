@@ -9,12 +9,12 @@ namespace OpenAI
 
         //   Enrage:&lt;/b&gt; +1 Attack.
 
-        public override void OnEnrageStart(Playfield p, Minion m)
+        public override void onEnrageStart(Playfield p, Minion m)
         {
             p.minionGetBuffed(m, 1, 0);
         }
 
-        public override void OnEnrageStop(Playfield p, Minion m)
+        public override void onEnrageStop(Playfield p, Minion m)
         {
             p.minionGetBuffed(m, -1, 0);
         }

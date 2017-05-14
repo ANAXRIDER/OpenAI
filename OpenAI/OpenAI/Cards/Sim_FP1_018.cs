@@ -9,7 +9,7 @@ namespace OpenAI
         //todo secret
 //    geheimnis:/ wenn ein befreundeter diener stirbt, erhaltet ihr 2 kopien dieses dieners auf eure hand.
 
-        public override void OnSecretPlay(Playfield p, bool ownplay, int number)
+        public override void onSecretPlay(Playfield p, bool ownplay, int number)
         {
             if (ownplay)
             {

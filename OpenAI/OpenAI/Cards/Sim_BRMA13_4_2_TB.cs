@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Hero Power: Put a random spell from your opponent's class into your hand.
 		
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             TAG_CLASS opponentHeroClass = ownplay ? p.enemyHeroStartClass : p.ownHeroStartClass;
 

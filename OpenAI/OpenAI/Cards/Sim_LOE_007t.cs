@@ -9,7 +9,7 @@ namespace OpenAI
 
         //While this is in your hand, take 2 damage at the start of your turn.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (!ownplay)
             {

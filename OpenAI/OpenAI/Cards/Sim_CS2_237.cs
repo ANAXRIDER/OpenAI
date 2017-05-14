@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    zieht jedes mal eine karte, wenn ihr ein wildtier herbeiruft.
-        public override void OnMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        public override void onMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if (triggerEffectMinion.own == summonedMinion.own && (TAG_RACE)summonedMinion.handcard.card.race == TAG_RACE.BEAST)
             {

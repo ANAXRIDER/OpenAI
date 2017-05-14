@@ -9,7 +9,7 @@ namespace OpenAI
         //    If you're holding a Dragon, destroy a Legendary minion.
 
         //todo sepefeets - move dragon check to shared function in carddb!
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             bool hasdragon = false;
             if (own.own)

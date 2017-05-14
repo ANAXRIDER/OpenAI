@@ -11,13 +11,13 @@ namespace OpenAI
         CardDB.Card w = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_050);
         CardDB.Card hp = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_050t);
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.equipWeapon(w, ownplay);
         }
 
         //deathrattle is done in lowerWeaponDurability (not here)
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

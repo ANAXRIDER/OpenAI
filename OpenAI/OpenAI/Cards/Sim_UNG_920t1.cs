@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Shuffle 15 Raptors into your deck.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own) p.ownDeckSize += 15;
         }

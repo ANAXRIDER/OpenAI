@@ -10,7 +10,7 @@ namespace OpenAI
 
         CardDB.Card card = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_028);
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.equipWeapon(card, ownplay);
         }

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    stellt bei allen dienern #4 leben wieder her.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int heal = (ownplay) ? p.getSpellHeal(4) : p.getEnemySpellHeal(4);
             p.allMinionsGetDamage(-heal);

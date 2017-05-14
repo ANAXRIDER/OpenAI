@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Deal $1 damage to a random minion. Repeat until a minion dies.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int dmg = (ownplay) ? p.getSpellDamageDamage(1) : p.getEnemySpellDamageDamage(1);
             

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry:Copy your opponent's Hero Power.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 
             if (own.own)

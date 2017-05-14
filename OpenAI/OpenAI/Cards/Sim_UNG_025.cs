@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Deal $15 damage randomly split among all_minions.Overload: (2)
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> targets = new List<Minion>(p.enemyMinions);
             targets.AddRange(p.ownMinions);

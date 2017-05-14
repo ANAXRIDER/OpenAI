@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Taunt Battlecry: Gain +1 Attack for each other Beast you have.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 
             int bonusattack = 0;

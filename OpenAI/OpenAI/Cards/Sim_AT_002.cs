@@ -10,7 +10,7 @@ namespace OpenAI
         //    if minion dies, summon another one with same manacost
 
 
-        public override void OnSecretPlay(Playfield p, bool ownplay, int number)
+        public override void onSecretPlay(Playfield p, bool ownplay, int number)
         {
 
             //TODO SERVER

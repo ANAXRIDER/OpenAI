@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    heldenfähigkeit/ Equip a 2/2 Weapon.
         CardDB.Card weapon = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_ROGUEt);
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay && p.ownWeaponDurability >= 1 && p.ownWeaponName == CardDB.cardName.poisonedblade)
             {

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    erhält jedes mal +1 attack, wenn ihr einen diener mit todesröcheln/ herbeiruft.
 
-        public override void OnMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        public override void onMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if (triggerEffectMinion.own == summonedMinion.own)
             {

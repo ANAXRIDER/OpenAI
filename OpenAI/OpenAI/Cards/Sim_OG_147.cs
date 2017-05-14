@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Deathrattle: Restore 8 Health to the enemy hero.
 		
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             int heal = (m.own) ? p.getMinionHeal(8) : p.getEnemyMinionHeal(8);
 

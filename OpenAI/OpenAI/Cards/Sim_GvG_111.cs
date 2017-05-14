@@ -10,7 +10,7 @@ namespace OpenAI
         //   At the start of your turn, if you have at least 3 Mechs, destroy them all and form V-07-TR-0N.
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_111t);
 
-        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if(turnStartOfOwner != triggerEffectMinion.own) return;
             List<Minion> temp = (turnStartOfOwner) ? p.ownMinions : p.enemyMinions;
