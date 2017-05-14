@@ -54,7 +54,7 @@ namespace OpenAI
             OnSecretPlay,
             OnTurnEndsTrigger,
             OnTurnStartTrigger,
-            triggerInspire
+            OnInspire
         }
 
         public enum cardrace
@@ -10664,14 +10664,14 @@ namespace OpenAI
                 }
 
                 c.triggers = new List<CardTriggers>();
-                Type trigerType = c.sim_card.GetType();
+                Type triggerType = c.sim_card.GetType();
                 foreach (string triggerName in Enum.GetNames(typeof(CardTriggers)))
                 {
                     try
                     {
-                        foreach (var m in trigerType.GetMethods().Where(e => e.Name.Equals(triggerName, StringComparison.Ordinal)))
+                        foreach (var m in triggerType.GetMethods().Where(e => e.Name.Equals(triggerName, StringComparison.Ordinal)))
                         {
-                            if (m.DeclaringType == trigerType)
+                            if (m.DeclaringType == triggerType)
                                 c.triggers.Add((CardTriggers)Enum.Parse(typeof(CardTriggers), triggerName));
                         }
                     }
