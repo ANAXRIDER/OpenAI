@@ -1134,7 +1134,7 @@ namespace OpenAI
 
 
                     Helpfunctions.Instance.ErrorLog("play action");
-                    moveTodo.print();
+                    moveTodo.Print();
                     e.action_list.Add(ConvertToRangerAction(moveTodo));
                 }
                 else
@@ -1162,7 +1162,7 @@ namespace OpenAI
                         else
                         {
                             Helpfunctions.Instance.ErrorLog("play action");
-                            moveTodo.print();
+                            moveTodo.Print();
 
                             BotAction nextMove = ConvertToRangerAction(moveTodo);
                             if (nextMove == null) return;  // Prevent exceptions for expected errors like missing entityID for new spawned minions

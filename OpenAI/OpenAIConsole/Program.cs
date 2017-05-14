@@ -113,10 +113,10 @@ namespace OpenAI
 
             if (Ai.Instance.bestmove != null)
             {
-                Ai.Instance.bestmove.print(true);
+                Ai.Instance.bestmove.Print(true);
                 foreach (Action a in Ai.Instance.bestActions)
                 {
-                    a.print(true);
+                    a.Print(true);
                 }
             }
             Helpfunctions.Instance.writeBufferToActionFile();

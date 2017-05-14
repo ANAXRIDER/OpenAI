@@ -160,7 +160,7 @@
             foreach (Action a in bestplay.playactions)
             {
                 this.bestActions.Add(new Action(a));
-                a.print();
+                a.Print();
             }
             //todo sepefeets - enable after implementing anzEnemyTaunt or finding alternative            //if (isLethalCheck) reorderingActions();
 
@@ -268,7 +268,7 @@
                 foreach (Action a in bestplay.playactions)
                 {
                     this.bestActions.Add(new Action(a));
-                    a.print();
+                    a.Print();
                 }
             }
         }
@@ -352,7 +352,7 @@
             {
                 help.logg("-a-");
                 this.bestActions.Add(new Action(a));
-                this.bestActions[this.bestActions.Count - 1].print();
+                this.bestActions[this.bestActions.Count - 1].Print();
             }
             //this.bestActions.Add(new Action(actionEnum.endturn, null, null, 0, null, 0, 0));
 
@@ -619,7 +619,7 @@
 
                 if (bestmovee != null && bestmovee.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
                 {
-                    bestmovee.print();
+                    bestmovee.Print();
 
                     tempbestboard.doAction(bestmovee);
 
@@ -655,7 +655,7 @@
 
             if (bestmove != null && bestmove.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
             {
-                bestmove.print();
+                bestmove.Print();
 
                 tempbestboard.doAction(bestmove);
 
@@ -676,7 +676,7 @@
 
                 if (bestmovee != null && bestmovee.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
                 {
-                    bestmovee.print();
+                    bestmovee.Print();
 
                     tempbestboard.doAction(bestmovee);
 

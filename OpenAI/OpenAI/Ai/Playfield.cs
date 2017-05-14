@@ -8658,7 +8658,7 @@ namespace OpenAI
                 Helpfunctions.Instance.logg("HP + Armor: " + this.ownHero.Hp + (this.ownHero.armor > 0  ? "+" + this.ownHero.armor : "") + " VS " + this.enemyHero.Hp + (this.enemyHero.armor > 0 ? "+" + this.enemyHero.armor : "") + "  Minion Count: " + this.ownMinions.Count + " VS " + this.enemyMinions.Count);
                 foreach (Action a in this.playactions)
                 {
-                    a.print();
+                    a.Print();
                 }
                 //string data = "";
                 //int tdc = 0;
@@ -8734,7 +8734,7 @@ namespace OpenAI
 
                     foreach (Action a in this.playactions)
                     {
-                        a.print();
+                        a.Print();
                     }
                     Helpfunctions.Instance.logg("----------------------------------------");
 
@@ -8775,7 +8775,7 @@ namespace OpenAI
         {
             foreach (Action a in this.playactions)
             {
-                a.print(toBuffer);
+                a.Print(toBuffer);
                 Helpfunctions.Instance.logg("");
             }
         }

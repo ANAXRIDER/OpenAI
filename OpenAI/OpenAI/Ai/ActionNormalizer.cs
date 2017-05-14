@@ -207,7 +207,7 @@ namespace OpenAI
                 if (oldval > newval) return;
             }
             help.logg("Old order of actions:");
-            foreach (Action a in p.playactions) a.print();
+            foreach (Action a in p.playactions) a.Print();
 
             p.playactions.Clear();
             p.playactions.AddRange(reorderedActions);
@@ -293,11 +293,11 @@ namespace OpenAI
         {
             help.ErrorLog("Reordering actions error!");
             help.logg("Reordering actions error!\r\nError in action:");
-            aError.print();
+            aError.Print();
             help.logg("Main order of actions:");
-            foreach (Action a in mainActList) a.print();
+            foreach (Action a in mainActList) a.Print();
             help.logg("New order of actions:");
-            foreach (Action a in newActList) a.print();
+            foreach (Action a in newActList) a.Print();
             return;
         }
 

@@ -168,7 +168,7 @@ namespace OpenAI
             this.tracking = a.tracking;
         }
 
-        public void print(bool tobuffer = false)
+        public void Print(bool tobuffer = false)
         {
             Helpfunctions help = Helpfunctions.Instance;
             string discover = "";
