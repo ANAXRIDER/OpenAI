@@ -12,27 +12,11 @@ namespace OpenAI
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
             Bot b = new Bot();
-            bool network = Settings.Instance.useNetwork;
 
             while (true)
             {
                 System.Threading.Thread.Sleep(10);
-                if (network)
-                {
-                    FishNet.Instance.checkConnection();
-                    KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
-                    if (msg.Value == "") continue;
-                    switch (msg.Key)
-                    {
-                        case "crrntbrd.txt":
-                            b.doData(msg.Value);
-                            break;
-                        case "curdeck.txt":
-                            b.doDeckData(msg.Value);
-                            break;
-                    }
-                    continue;
-                }
+
                 try
                 {
                     string data = File.ReadAllText(FilePath.CurrentBoard);
@@ -320,7 +304,6 @@ namespace OpenAI
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
             Settings.Instance.setSettings();
-            if (Settings.Instance.useNetwork) FishNet.Instance.startServer();
         }
 
         public void setnewLoggFile()
@@ -354,7 +337,6 @@ namespace OpenAI
             string boardnumm = "-1";
             int trackingchoice = 0;
             int trackingstate = 0;
-            bool network = Settings.Instance.useNetwork;
 
             while (readed)
             {
@@ -362,16 +344,9 @@ namespace OpenAI
                 {
                     string data = "";
                     System.Threading.Thread.Sleep(10);
-                    if (network)
-                    {
-                        KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
-                        if (msg.Key != "actionstodo.txt") continue;
-                        data = msg.Value;
-                    }
-                    else
-                    {
-                        data = System.IO.File.ReadAllText(FilePath.ActionsToDo);
-                    }
+
+                    data = File.ReadAllText(FilePath.ActionsToDo);
+                    
                     if (data != "" && data != "<EoF>" && data.EndsWith("<EoF>"))
                     {
                         data = data.Replace("<EoF>", "");
@@ -523,11 +498,6 @@ namespace OpenAI
             this.sendbuffer += data + "\r\n";
         }
 
-        public void writeBufferToNetwork(string msgtype)
-        {
-            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
-        }
-
         public void writeBufferToFile()
         {
             bool writed = true;
@@ -536,8 +506,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
-                    else System.IO.File.WriteAllText(FilePath.CurrentBoard, this.sendbuffer);
+                    File.WriteAllText(FilePath.CurrentBoard, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -556,8 +525,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
+                    File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -571,14 +539,14 @@ namespace OpenAI
         public void writeBufferToActionFile()
         {
             bool writed = true;
-            this.sendbuffer += "<EoF>";
-            this.ErrorLog("write to action file: "+ sendbuffer);
+            sendbuffer += "<EoF>";
+            ErrorLog("write to action file: "+ sendbuffer);
+
             while (writed)
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
-                    else System.IO.File.WriteAllText(FilePath.ActionsToDo, this.sendbuffer);
+                    File.WriteAllText(FilePath.ActionsToDo, sendbuffer);
                     writed = false;
                 }
                 catch

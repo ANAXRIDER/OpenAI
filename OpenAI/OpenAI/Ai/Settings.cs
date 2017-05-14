@@ -43,10 +43,6 @@ namespace OpenAI
             this.passiveWaiting = false; // process will wait passive for silver.exe to finish
 
             this.speedy = false; // send multiple actions together to HR
-            
-            this.useNetwork = false; // use networking to communicate with silver.exe instead of a file
-            this.netAddress = "127.0.0.1"; // address where the bot is running
-            this.tcpPort = 14804; // TCP port to connect on
 
             this.logBuffer = 100; // max log messages to buffer before writing to disk
 
@@ -122,10 +118,6 @@ namespace OpenAI
         public bool concede = false;
         public bool enemyConcede;
         public int enemyConcedeValue = -1200;
-
-        public bool useNetwork = false;
-        public string netAddress = "127.0.0.1";
-        public int tcpPort = 14804;
 
         public int logBuffer = 100;
 
@@ -611,48 +603,7 @@ namespace OpenAI
                         Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
-
-                searchword = "usenetwork=";
-                if (s.StartsWith(searchword))
-                {
-                    string a = s.Replace(searchword, "");
-                    try
-                    {
-                        this.useNetwork = Convert.ToBoolean(a);
-                    }
-                    catch
-                    {
-                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
-                    }
-                }
-
-                searchword = "netaddress=";
-                if (s.StartsWith(searchword))
-                {
-                    string a = s.Replace(searchword, "");
-                    try
-                    {
-                        this.netAddress = a;
-                    }
-                    catch
-                    {
-                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
-                    }
-                }
-
-                searchword = "tcpport=";
-                if (s.StartsWith(searchword))
-                {
-                    string a = s.Replace(searchword, "");
-                    try
-                    {
-                        this.tcpPort = Convert.ToInt32(a);
-                    }
-                    catch
-                    {
-                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
-                    }
-                }
+               
 
                 //always enabled now so ignore user setting
                 /*

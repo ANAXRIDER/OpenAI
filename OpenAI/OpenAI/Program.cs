@@ -90,7 +90,7 @@ namespace OpenAI
             if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
             if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
             
-            if (!sf.startedexe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
+            if (!sf.startedexe && set.useExternalProcess)
             {
                 sf.startedexe = true;
                 Task.Run(() => StartExeAsync());
@@ -1741,7 +1741,6 @@ namespace OpenAI
             Mulligan m = Mulligan.Instance; // read the mulligan list
             Discovery d = Discovery.Instance; // read the discover list
             Settings.Instance.setSettings();
-            if (Settings.Instance.useNetwork) FishNet.Instance.startClient();
             Helpfunctions.Instance.startFlushingLogBuffers();
         }
 
@@ -3414,12 +3413,8 @@ namespace OpenAI
             {
                 Ai.Instance.currentCalculatedBoard = dtimes;
                 Helpfunctions.Instance.resetBuffer();
-                if (!Settings.Instance.useNetwork)
-                {
-                    Helpfunctions.Instance.writeBufferToActionFile();
-                    Helpfunctions.Instance.resetBuffer();
-                }
-
+                Helpfunctions.Instance.writeBufferToActionFile();
+                Helpfunctions.Instance.resetBuffer();
                 Helpfunctions.Instance.writeToBuffer(completeBoardString);
                 Helpfunctions.Instance.writeBufferToFile();
             }
@@ -3435,7 +3430,6 @@ namespace OpenAI
             this.waitingForSilver = true;
             int trackingchoice = 0;
             int trackingstate = 0;
-            bool network = Settings.Instance.useNetwork;
 
             while (readed)
             {
@@ -3443,21 +3437,8 @@ namespace OpenAI
                 {
                     string data = "";
                     System.Threading.Thread.Sleep(5);
-                    if (network)
-                    {
-                        KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
-                        if (msg.Key != "actionstodo.txt")
-                        {
-                            Helpfunctions.Instance.ErrorLog("[Program] Ignoring Message: " + msg.Key);
-                            continue;
-                        }
-                        Helpfunctions.Instance.ErrorLog("[Program] Message Type: " + msg.Key);
-                        data = msg.Value;
-                    }
-                    else
-                    {
-                        data = System.IO.File.ReadAllText(FilePath.ActionsToDo);
-                    }
+                    data = System.IO.File.ReadAllText(FilePath.ActionsToDo);
+                    
                     //if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
                     //if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");
                     //if (!data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: missing <EoF>");
@@ -3467,11 +3448,10 @@ namespace OpenAI
                         //Helpfunctions.Instance.ErrorLog($"[Program] Message Data:\r\n{data}");
                         data = data.Replace("<EoF>", "");
                         //Helpfunctions.Instance.ErrorLog(data);
-                        if (!network)
-                        {
-                            Helpfunctions.Instance.resetBuffer();
-                            Helpfunctions.Instance.writeBufferToActionFile();
-                        }
+      
+                        Helpfunctions.Instance.resetBuffer();
+                        Helpfunctions.Instance.writeBufferToActionFile();
+                        
                         alist.AddRange(data.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
                         string board = alist[0];
                         if (board.StartsWith("board "))
@@ -3649,11 +3629,6 @@ namespace OpenAI
             this.sendbuffer += data + "\r\n";
         }
 
-        public void writeBufferToNetwork(string msgtype)
-        {
-            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
-        }
-
         public void writeBufferToFile()
         {
             bool writed = true;
@@ -3663,8 +3638,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
-                    else System.IO.File.WriteAllText(FilePath.CurrentBoard, this.sendbuffer);
+                    File.WriteAllText(FilePath.CurrentBoard, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -3683,8 +3657,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
+                    File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -3704,8 +3677,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
-                    else System.IO.File.WriteAllText(FilePath.ActionsToDo, this.sendbuffer);
+                    File.WriteAllText(FilePath.ActionsToDo, this.sendbuffer);
                     writed = false;
                 }
                 catch

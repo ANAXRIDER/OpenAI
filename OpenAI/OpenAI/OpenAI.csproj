@@ -60,7 +60,6 @@
     <Compile Include="Ai\ComboBreaker.cs" />
     <Compile Include="Ai\Discovery.cs" />
     <Compile Include="Ai\EnemyTurnSimulator.cs" />
-    <Compile Include="Ai\FishNet.cs" />
     <Compile Include="Ai\Handmanager.cs" />
     <Compile Include="Ai\Hrtprozis.cs" />
     <Compile Include="Ai\Minion.cs" />
