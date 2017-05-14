@@ -279,7 +279,7 @@
             int trackingstatus = 0;
 
             //which choice-card to draw?
-            int choice = Discovery.Instance.getChoice(mainTurnSimulator.bestboard);
+            int choice = Discovery.Instance.GetChoice(mainTurnSimulator.bestboard);
             if (choice >= 1)
             {
                 trackingchoice = choice;

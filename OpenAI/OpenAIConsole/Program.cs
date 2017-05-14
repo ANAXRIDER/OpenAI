@@ -141,7 +141,7 @@ namespace OpenAI
                 Hrtprozis.Instance.setDeckName(deckname);
                 Hrtprozis.Instance.setHeroName(ownname);
                 ComboBreaker.Instance.updateInstance();
-                Discovery.Instance.updateInstance();
+                Discovery.Instance.UpdateInstance();
                 Mulligan.Instance.updateInstance();
             }
             if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)

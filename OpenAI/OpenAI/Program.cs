@@ -163,7 +163,7 @@ namespace OpenAI
                 }
                 Hrtprozis.Instance.setHeroName(ownName);
                 ComboBreaker.Instance.updateInstance();
-                Discovery.Instance.updateInstance();
+                Discovery.Instance.UpdateInstance();
                 Mulligan.Instance.updateInstance();
                 deckChanged = false;
             }
@@ -181,7 +181,7 @@ namespace OpenAI
             sf.setnewLoggFile();
             Settings.Instance.loggCleanPath();
             Mulligan.Instance.loggCleanPath();
-            Discovery.Instance.loggCleanPath();
+            Discovery.Instance.LogCleanPath();
             ComboBreaker.Instance.loggCleanPath();
 
             if (Hrtprozis.Instance.startDeck.Count > 0)
