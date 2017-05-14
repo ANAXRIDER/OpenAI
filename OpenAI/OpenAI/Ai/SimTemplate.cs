@@ -1,6 +1,6 @@
 ﻿namespace OpenAI
 {
-    public class SimTemplate
+    public abstract class SimTemplate
     {
         public virtual void OnSecretPlay(Playfield p, bool ownplay, Minion attacker, Minion target, out int number)
         {

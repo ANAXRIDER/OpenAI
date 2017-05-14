@@ -7482,7 +7482,7 @@ namespace OpenAI
             {
                 name = cardName.unknown,
                 cost = 1000,
-                sim_card = new SimTemplate(),
+                sim_card = new UnknownCard(),
                 pen_card = new PenTemplate()
             };
             this.namelist.Add("unknown");
@@ -9627,7 +9627,7 @@ namespace OpenAI
                 case cardIDEnum.PlaceholderCard: return new Sim_PlaceholderCard();
             }
 
-            return new SimTemplate();
+            return new UnknownCard();
         }
 
         public PenTemplate getPenCard(cardIDEnum id)
