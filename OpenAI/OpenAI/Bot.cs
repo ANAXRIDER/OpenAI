@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using HSRangerLib;
 
@@ -94,8 +93,8 @@ namespace OpenAI
         {
             base.HasBestMoveAI = true;
             StartTime = DateTime.Now;
-
             Settings set = Settings.Instance;
+
             this.sf = OpenAI.Instance;
             behave = set.behave;
             sf.SetnewLogFile();
@@ -133,18 +132,19 @@ namespace OpenAI
             //will be false until xytrix fixes it (@xytrix end the action list, after playing a tracking/discover card)
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void StartExeAsync()
         {
-            System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("OpenAIConsole");
-            string directory = Settings.Instance.path + "OpenAIConsole.exe";
+            Process[] pname = Process.GetProcessesByName("OpenAIConsole");
+            string directory = OpenAIPath.SettingsPath + "OpenAIConsole.exe";
             bool hasToOpen = true;
 
             if (pname.Length >= 1)
             {
-
                 for (int i = 0; i < pname.Length; i++)
                 {
-
                     string fullPath = pname[i].Modules[0].FileName;
                     if (fullPath == directory) hasToOpen = false;
                 }
@@ -152,9 +152,11 @@ namespace OpenAI
 
             if (hasToOpen)
             {
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(directory);
-                startInfo.WorkingDirectory = Settings.Instance.path;
-                System.Diagnostics.Process.Start(startInfo);
+                ProcessStartInfo startInfo = new ProcessStartInfo(directory)
+                {
+                    WorkingDirectory = OpenAIPath.SettingsPath
+                };
+                Process.Start(startInfo);
             }
             sf.StartedExe = false; //reset it in case user closes exe
         }
