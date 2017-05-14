@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace OpenAI
 {
-    public class Questmanager
+    public class QuestManager
     {
         public class QuestItem
         {
@@ -12,10 +11,6 @@ namespace OpenAI
             public CardDB.cardIDEnum Id = CardDB.cardIDEnum.None;
             public int questProgress = 0;
             public int maxProgress = 1000;
-
-            public QuestItem()
-            {
-            }
 
             public void Copy(QuestItem q)
             {
@@ -37,16 +32,8 @@ namespace OpenAI
                 this.mobsTurn.Clear();
             }
 
-            public QuestItem(string s)
-            {
-                String[] q = s.Split(' ');
-                this.Id = CardDB.Instance.cardIdstringToEnum(q[0]);
-                this.questProgress = Convert.ToInt32(q[1]);
-                this.maxProgress = Convert.ToInt32(q[2]);
-            }
 
-            //-!!!!set in code check if (this.enemyQuest.Id != CardDB.cardIDEnum.None)
-            public void trigger_MinionWasPlayed(Minion m)
+            public void MinionWasPlayed(Minion m)
             {
                 switch (Id)
                 {
@@ -55,13 +42,13 @@ namespace OpenAI
                     case CardDB.cardIDEnum.UNG_067:
                         if (mobsTurn.ContainsKey(m.name)) mobsTurn[m.name]++;
                         else mobsTurn.Add(m.name, 1);
-                        int total = mobsTurn[m.name] + Questmanager.Instance.getPlayedCardFromHand(m.name);
+                        int total = mobsTurn[m.name] + QuestManager.Instance.GetPlayedCardFromHand(m.name);
                         if (total > questProgress) questProgress++;
                         break;
                 }
             }
 
-            public void trigger_MinionWasSummoned(Minion m)
+            public void MinionWasSummoned(Minion m)
             {
                 switch (Id)
                 {
@@ -71,7 +58,7 @@ namespace OpenAI
                 }
             }
 
-            public void trigger_SpellWasPlayed(Minion target, int qId)
+            public void SpellWasPlayed(Minion target, int qId)
             {
                 switch (Id)
                 {
@@ -80,7 +67,7 @@ namespace OpenAI
                 }
             }
 
-            public void trigger_WasDiscard(int num)
+            public void WasDiscarded(int num)
             {
                 switch (Id)
                 {
@@ -113,63 +100,36 @@ namespace OpenAI
         private CardDB.cardName nextMobName = CardDB.cardName.unknown;
         private int nextMobId = 0;
         private int prevMobId = 0;
-        private Helpfunctions help;
+        Helpfunctions help;
 
-        private static Questmanager instance;
-
-        public static Questmanager Instance
+        private static QuestManager _instance;
+        public static QuestManager Instance
         {
             get
             {
-                return instance ?? (instance = new Questmanager());
+                return _instance ?? (_instance = new QuestManager());
             }
         }
 
-        private Questmanager()
+        private QuestManager()
         {
             this.help = Helpfunctions.Instance;
         }
 
-        public void updateQuestStuff(string questID, int curProgr, int maxProgr, bool ownplay)
+
+        public void UpdateQuestProgress(string questID, int curProgr, int maxProgr, bool ownplay)
         {
             QuestItem tmp = new QuestItem() { Id = CardDB.Instance.cardIdstringToEnum(questID), questProgress = curProgr, maxProgress = maxProgr };
             if (ownplay) this.ownQuest = tmp;
             else this.enemyQuest = tmp;
         }
 
-        public void updatePlayedMobs(int step)
+        public int GetPlayedCardFromHand(CardDB.cardName name)
         {
-            if (step != 0)
-            {
-                if (nextMobName != CardDB.cardName.unknown && nextMobId != prevMobId)
-                {
-                    prevMobId = nextMobId;
-                    nextMobId = 0;
-                    if (mobsGame.ContainsKey(nextMobName))
-                    {
-                        if (ownQuest.questProgress > mobsGame[nextMobName]) mobsGame[nextMobName]++;
-                        else mobsGame[nextMobName] = ownQuest.questProgress;
-                    }
-                    else mobsGame.Add(nextMobName, 1);
-                }
-            }
-        }
+            if (mobsGame.ContainsKey(name))
+                return mobsGame[name];
 
-        public void updatePlayedCardFromHand(Handmanager.Handcard hc)
-        {
-            nextMobName = CardDB.cardName.unknown;
-            nextMobId = 0;
-            if (hc != null && hc.card.type == CardDB.cardtype.MOB)
-            {
-                nextMobName = hc.card.name;
-                nextMobId = hc.entity;
-            }
-        }
-
-        public int getPlayedCardFromHand(CardDB.cardName name)
-        {
-            if (mobsGame.ContainsKey(name)) return mobsGame[name];
-            else return 0;
+            return 0;
         }
 
         public void Reset()
@@ -183,7 +143,7 @@ namespace OpenAI
             prevMobId = 0;
         }
 
-        public string getQuestsString()
+        public string GetQuestsString()
         {
             sb.Clear();
             sb.Append("quests: ");
@@ -191,5 +151,6 @@ namespace OpenAI
             sb.Append(enemyQuest.Id).Append(" ").Append(enemyQuest.questProgress).Append(" ").Append(enemyQuest.maxProgress);
             return sb.ToString();
         }
+
     }
 }

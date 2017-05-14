@@ -1433,7 +1433,7 @@ namespace OpenAI
 
         public void SetNewLogFile()
         {
-            Questmanager.Instance.Reset();
+            QuestManager.Instance.Reset();
             OwnCrystalCore = 0;
             EnemyCrystalCore = 0;
             ownMinionsCost0 = false;
@@ -2292,7 +2292,7 @@ namespace OpenAI
             {
                 if (item.GetTagValue((int)GAME_TAG.QUEST) >= 1)
                 {
-                    Questmanager.Instance.updateQuestStuff(item.CardId, item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS), item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS_TOTAL), false);
+                    QuestManager.Instance.UpdateQuestProgress(item.CardId, item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS), item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS_TOTAL), false);
                     continue;
                 }
                 enemySecretList.Add(item.EntityId);
@@ -2304,7 +2304,7 @@ namespace OpenAI
             {
                 if (item.GetTagValue((int)GAME_TAG.QUEST) >= 1)
                 {
-                    Questmanager.Instance.updateQuestStuff(item.CardId, item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS), item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS_TOTAL), true);
+                    QuestManager.Instance.UpdateQuestProgress(item.CardId, item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS), item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS_TOTAL), true);
                     continue;
                 }
                 this.ownSecretList.Add(item.CardId);
