@@ -90,14 +90,14 @@ namespace OpenAI
             //    {
             //        if (p.GetHashCode() == pf.GetHashCode())
             //        {
-            //            if (botBase.getPlayfieldValue(p) >= botBase.getPlayfieldValue(pf)) return;
+            //            if (botBase.GetPlayfieldValue(p) >= botBase.GetPlayfieldValue(pf)) return;
             //        }
             //    }
             //}
 
             this.posmoves.Add(pf);
 
-            //posmoves.Sort((a, b) => -(botBase.getPlayfieldValue(a)).CompareTo(botBase.getPlayfieldValue(b)));//want to keep the best
+            //posmoves.Sort((a, b) => -(botBase.GetPlayfieldValue(a)).CompareTo(botBase.GetPlayfieldValue(b)));//want to keep the best
             //if (posmoves.Count > this.maxwide) posmoves.RemoveAt(this.maxwide);
             if (this.totalboards >= 1)
             {
@@ -178,7 +178,7 @@ namespace OpenAI
                     }
 
                     //sort stupid stuff ouf
-                    float newPlayfieldValue = botBase.getPlayfieldValue(p);
+                    float newPlayfieldValue = botBase.GetPlayfieldValue(p);
                     if (newPlayfieldValue > bestoldval)
                     {
                         bestoldval = newPlayfieldValue;
@@ -255,7 +255,7 @@ namespace OpenAI
                 Playfield bestplay = posmoves[0];//temp[0]
                 foreach (Playfield p in posmoves)//temp
                 {
-                    float val = botBase.getPlayfieldValue(p);
+                    float val = botBase.GetPlayfieldValue(p);
                     if (bestval <= val)
                     {
                         if (bestval == val && bestanzactions <= p.playactions.Count) continue;
@@ -348,7 +348,7 @@ namespace OpenAI
             }
 
             //just for debugging
-            posmoves.Sort((a, b) => -(botBase.getPlayfieldValue(a)).CompareTo(botBase.getPlayfieldValue(b)));//want to keep the best
+            posmoves.Sort((a, b) => -(botBase.GetPlayfieldValue(a)).CompareTo(botBase.GetPlayfieldValue(b)));//want to keep the best
 
             //Helpfunctions.Instance.ErrorLog("time needed for parallel: " + (DateTime.Now - started).TotalSeconds);
         }
@@ -388,7 +388,7 @@ namespace OpenAI
             // take the x best values
             int takenumber = this.maxwide;
             List<Playfield> temp = new List<Playfield>();
-            posmoves.Sort((a, b) => -(botBase.getPlayfieldValue(a)).CompareTo(botBase.getPlayfieldValue(b)));//want to keep the best
+            posmoves.Sort((a, b) => -(botBase.GetPlayfieldValue(a)).CompareTo(botBase.GetPlayfieldValue(b)));//want to keep the best
 
             if (this.useComparison)
             {
@@ -434,7 +434,7 @@ namespace OpenAI
             temp.Clear();
             temp.AddRange(this.twoturnfields);
             temp.AddRange(posmoves.GetRange(0, Math.Min(this.dirtyTwoTurnSim, posmoves.Count)));
-            temp.Sort((a, b) => -(botBase.getPlayfieldValue(a)).CompareTo(botBase.getPlayfieldValue(b)));
+            temp.Sort((a, b) => -(botBase.GetPlayfieldValue(a)).CompareTo(botBase.GetPlayfieldValue(b)));
             this.twoturnfields.Clear();
 
             if (this.useComparison)

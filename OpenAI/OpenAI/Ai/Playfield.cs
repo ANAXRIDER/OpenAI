@@ -1821,10 +1821,10 @@ namespace OpenAI
             if (this.anzEnemyLoatheb == 0)
             {
                 Playfield p = new Playfield(this);
-                float oldval = Ai.Instance.botBase.getPlayfieldValue(p);
+                float oldval = Ai.Instance.botBase.GetPlayfieldValue(p);
                 p.value = int.MinValue;
                 p.EnemyCardPlaying(p.enemyHeroName, p.mana, p.enemyAnzCards, pprob, pprob2);
-                float newval = Ai.Instance.botBase.getPlayfieldValue(p);
+                float newval = Ai.Instance.botBase.GetPlayfieldValue(p);
                 p.value = int.MinValue;
                 if (oldval > newval) // new board is better for enemy (value is smaller)
                 {
@@ -3384,7 +3384,7 @@ namespace OpenAI
             this.isOwnTurn = true;
             this.triggerStartTurn(true);
             this.complete = true;
-            //Ai.Instance.botBase.getPlayfieldValue(this);
+            //Ai.Instance.botBase.GetPlayfieldValue(this);
 
         }
 
@@ -6630,7 +6630,7 @@ namespace OpenAI
 
                         /*if (m.handcard.card.name == CardDB.cardName.cairnebloodhoof || m.handcard.card.name == CardDB.cardName.harvestgolem || m.ancestralspirit>=1)
                         {
-                            this.evaluatePenality -= Ai.Instance.botBase.getEnemyMinionValue(m, this) - 1;
+                            this.evaluatePenality -= Ai.Instance.botBase.GetEnemyMinionValue(m, this) - 1;
                         }*/
 
                     }
@@ -6684,7 +6684,7 @@ namespace OpenAI
 
                         //if ((!m.silenced && (m.handcard.card.name == CardDB.cardName.cairnebloodhoof || m.handcard.card.name == CardDB.cardName.harvestgolem)) || m.ancestralspirit >= 1)
                         //{
-                        //    if (Ai.Instance.botBase != null) this.evaluatePenality -= Ai.Instance.botBase.getEnemyMinionValue(m, this) - 1;
+                        //    if (Ai.Instance.botBase != null) this.evaluatePenality -= Ai.Instance.botBase.GetEnemyMinionValue(m, this) - 1;
                         //}
                     }
                     else
@@ -8640,7 +8640,7 @@ namespace OpenAI
 
         public void printBoard(bool justactions = false, int boardnumber = -1)
         {
-            //float copy = Ai.Instance.botBase.getPlayfieldValue(this);
+            //float copy = Ai.Instance.botBase.GetPlayfieldValue(this);
             if (boardnumber >= 0)
             {
                 Helpfunctions.Instance.logg(" ");

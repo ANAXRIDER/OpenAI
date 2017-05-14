@@ -25,7 +25,7 @@ namespace OpenAI
 
         public int lethalMissed;
 
-        public override float getPlayfieldValue(Playfield p)
+        public override float GetPlayfieldValue(Playfield p)
         {
             if (p.value >= -2000000) return p.value;
             float retval = 0;
@@ -471,12 +471,12 @@ namespace OpenAI
 
             foreach (Minion m in p.ownMinions)
             {
-                retval += this.getOwnMinionValue(m, p);
+                retval += this.GetOwnMinionValue(m, p);
             }
 
             foreach (Minion m in p.enemyMinions)
             {
-                retval -= this.getEnemyMinionValue(m, p);
+                retval -= this.GetEnemyMinionValue(m, p);
             }
 
             int Houndmaster = 0; //Unleash the Hounds EX1_538
@@ -1024,7 +1024,7 @@ namespace OpenAI
             return retval;
         }
 
-        public override float getOwnMinionValue(Minion m, Playfield p)
+        public override float GetOwnMinionValue(Minion m, Playfield p)
         {
             float retval = 0;
 
@@ -1422,12 +1422,12 @@ namespace OpenAI
         }
 
         //other value of the board for enemys turn? (currently the same as getplayfield value)
-        public override float getPlayfieldValueEnemy(Playfield p)
+        public override float GetPlayfieldValueEnemy(Playfield p)
         {
-            return getPlayfieldValue(p);
+            return GetPlayfieldValue(p);
         }
 
-        public override float getEnemyMinionValue(Minion m, Playfield p)
+        public override float GetEnemyMinionValue(Minion m, Playfield p)
         {
             float retval = 1.5f;
 

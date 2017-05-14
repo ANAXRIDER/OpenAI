@@ -2,22 +2,22 @@
 {
     public abstract class Behavior
     {
-        public virtual float getPlayfieldValue(Playfield p)
+        public virtual float GetPlayfieldValue(Playfield p)
         {
             return 0;
         }
 
-        public virtual float getPlayfieldValueEnemy(Playfield p)
+        public virtual float GetPlayfieldValueEnemy(Playfield p)
         {
-            return getPlayfieldValue(p);
+            return GetPlayfieldValue(p);
         }
 
-        public virtual float getOwnMinionValue(Minion m, Playfield p)
+        public virtual float GetOwnMinionValue(Minion m, Playfield p)
         {
             return 0;
         }
 
-        public virtual float getEnemyMinionValue(Minion m, Playfield p)
+        public virtual float GetEnemyMinionValue(Minion m, Playfield p)
         {
             return 0;
         }
