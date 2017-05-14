@@ -5,7 +5,13 @@ namespace OpenAI
 {
     public static class FilePath
     {
-        private static string Root = FolderPath.OpenAI;
+        public static string CardDB
+        {
+            get
+            {
+                return Path.Combine(FolderPath.OpenAI + "_carddb.txt");
+            }
+        }
 
         public static string CrashTest
         {
