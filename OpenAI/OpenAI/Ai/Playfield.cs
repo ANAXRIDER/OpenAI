@@ -7881,7 +7881,7 @@ namespace OpenAI
             Handmanager.Handcard hc = new Handmanager.Handcard(c){ entity = this.getNextEntity() }; // m.entityID;
 
             //necessary???
-            /*Minion tranform = createNewMinion(hc, m.zonepos, m.own);
+            /*Minion tranform = CreateNewMinion(hc, m.zonepos, m.own);
             Minion temp = new Minion();
             temp.setMinionTominion(m);
             m.setMinionTominion(tranform);*/

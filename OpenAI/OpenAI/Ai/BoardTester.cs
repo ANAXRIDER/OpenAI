@@ -786,7 +786,7 @@
                         int crystalcored = 0;
                         if (s.Contains(" crystalcored(")) crystalcored = Convert.ToInt32(s.Split(new string[] { " crystalcored(" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(')')[0]);
 
-                        tempminion = createNewMinion(new Handmanager.Handcard(CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(minionid))), zp, true);
+                        tempminion = CreateNewMinion(new Handmanager.Handcard(CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(minionid))), zp, true);
                         tempminion.own = true;
                         tempminion.entityID = ent;
                         tempminion.handcard.entity = ent;
@@ -937,7 +937,7 @@
                         int crystalcored = 0;
                         if (s.Contains(" crystalcored(")) crystalcored = Convert.ToInt32(s.Split(new string[] { " crystalcored(" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(')')[0]);
 
-                        tempminion = createNewMinion(new Handmanager.Handcard(CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(minionid))), zp, false);
+                        tempminion = CreateNewMinion(new Handmanager.Handcard(CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(minionid))), zp, false);
                         tempminion.own = false;
                         tempminion.entityID = ent;
                         tempminion.handcard.entity = ent;
@@ -1137,7 +1137,7 @@
             Settings.Instance.SetWeights(alpha);
         }
 
-        public Minion createNewMinion(Handmanager.Handcard hc, int zonepos, bool own)
+        public Minion CreateNewMinion(Handmanager.Handcard hc, int zonepos, bool own)
         {
             Minion m = new Minion
             {
