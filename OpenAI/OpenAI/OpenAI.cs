@@ -122,21 +122,17 @@ namespace OpenAI
         {
             SingleLog = Settings.Instance.writeToSingleFile;
 
-            /*** Cleaned ***/
-
-            if (SingleLog)
-            {
-                sttngs.SetLogPath(OpenAIPath.LogPath + Path.DirectorySeparatorChar);
-                sttngs.SetLogFile("SilverLog.txt");
-                HelpFunctions.Instance.CreateNewLogfile();
-            }
-            else
-            {
-                sttngs.SetLogPath(OpenAIPath.LogPath);
-            }
-
+            HelpFunctions.Instance.ErrorLog(string.Empty);
             HelpFunctions.Instance.ErrorLog("Started OpenAI");
-            HelpFunctions.Instance.ErrorLog("setlogpath to:" + OpenAIPath.LogPath);
+            HelpFunctions.Instance.ErrorLog("Paths");
+            HelpFunctions.Instance.ErrorLog("   Assembly:");
+            HelpFunctions.Instance.ErrorLog("       " + PathFolder.OpenAI);
+            HelpFunctions.Instance.ErrorLog("   Logs");
+            HelpFunctions.Instance.ErrorLog("       " + PathFolder.Logs);
+            HelpFunctions.Instance.ErrorLog("   Common");
+            HelpFunctions.Instance.ErrorLog("       " + PathFolder.Common);
+
+            /*** Cleaned ***/
 
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
@@ -154,18 +150,6 @@ namespace OpenAI
             ownMinionsCost0 = false;
 
             HelpFunctions.Instance.FlushLog(); // flush the buffer before creating a new log
-            if (!SingleLog)
-            {
-                sttngs.SetLogFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
-                HelpFunctions.Instance.CreateNewLogfile();
-                HelpFunctions.Instance.ErrorLog("#######################################################");
-                HelpFunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
-                HelpFunctions.Instance.ErrorLog("#######################################################");
-            }
-            else
-            {
-                sttngs.SetLogFile("UILogg.txt");
-            }
         }
 
         public void SetNewGame()
@@ -1863,7 +1847,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        data = File.ReadAllText(OpenAIPath.SettingsPath + "actionstodo.txt");
+                        data = File.ReadAllText(PathFile.ActionsToDo);
                     }
                     //if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
                     //if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");

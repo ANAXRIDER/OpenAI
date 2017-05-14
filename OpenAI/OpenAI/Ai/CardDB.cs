@@ -7445,8 +7445,7 @@ namespace OpenAI
             string[] lines = new string[] { };
             try
             {
-                string path = OpenAIPath.SettingsPath;
-                lines = File.ReadAllLines(path + "_carddb.txt");
+                lines = File.ReadAllLines(PathFile.CardDB);
                 HelpFunctions.Instance.ErrorLog("read carddb.txt " + lines.Length + " lines");
             }
             catch
@@ -7456,7 +7455,7 @@ namespace OpenAI
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("cant find _carddb.txt in " + OpenAIPath.SettingsPath);
+                HelpFunctions.Instance.ErrorLog("cant find _carddb.txt in " + PathFolder.OpenAI);
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");

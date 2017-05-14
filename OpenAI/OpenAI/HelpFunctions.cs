@@ -66,7 +66,7 @@ namespace OpenAI
 
             try
             {
-                File.AppendAllLines(Settings.Instance.logpath + Settings.Instance.logfile, logBuffer);
+                File.AppendAllLines(PathFile.Log, logBuffer);
                 logBuffer.Clear();
             }
             catch
@@ -97,7 +97,14 @@ namespace OpenAI
             if (!WriteLog)
                 return;
 
-            errorLogBuffer.Add(DateTime.Now.ToString("HH:mm:ss: ") + s);
+            if(s != string.Empty)
+            {
+                errorLogBuffer.Add(DateTime.Now.ToString("HH:mm:ss: ") + s);
+            }
+            else
+            {
+                errorLogBuffer.Add(s);
+            }
 
             if (errorLogBuffer.Count > Settings.Instance.logBuffer)
                 FlushErrorLog();
@@ -113,7 +120,7 @@ namespace OpenAI
 
             try
             {
-                File.AppendAllLines(Settings.Instance.logpath + "Logging.txt", errorLogBuffer);
+                File.AppendAllLines(PathFile.ErrorLog, errorLogBuffer);
                 errorLogBuffer.Clear();
             }
             catch
@@ -187,7 +194,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        File.WriteAllText(OpenAIPath.SettingsPath + "crrntbrd.txt", SendBuffer);
+                        File.WriteAllText(PathFile.CurrentBoard, SendBuffer);
                     }
                     writed = false;
                 }
@@ -217,7 +224,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        File.WriteAllText(OpenAIPath.SettingsPath + "curdeck.txt", SendBuffer);
+                        File.WriteAllText(PathFile.CurrentDeck, SendBuffer);
                     }
                     writed = false;
                 }
@@ -247,7 +254,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        File.WriteAllText(OpenAIPath.SettingsPath + "actionstodo.txt", SendBuffer);
+                        File.WriteAllText(PathFile.ActionsToDo, SendBuffer);
                     }
                     writed = false;
                 }
@@ -270,7 +277,7 @@ namespace OpenAI
             {
                 try
                 {
-                    File.WriteAllText(OpenAIPath.SettingsPath + "newCardDB.cs", SendBuffer);
+                    File.WriteAllText(PathFile.NewCardDB, SendBuffer);
                     writed = false;
                 }
                 catch

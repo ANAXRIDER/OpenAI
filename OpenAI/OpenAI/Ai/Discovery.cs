@@ -63,6 +63,7 @@ namespace OpenAI
             string[] lines = new string[] { };
             this.discoverylist.Clear();
 
+            /*
             string path = OpenAIPath.SettingsPath;
             string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
             string datapath = path + "Data" + Path.DirectorySeparatorChar;
@@ -99,11 +100,21 @@ namespace OpenAI
                 return;
             }
             HelpFunctions.Instance.ErrorLog("[Discovery] read " + cleanPath);
-
+            */
+            if (File.Exists(PathFile.Discovery))
+            {
+                // Do something
+            }
+            else
+            {
+                HelpFunctions.Instance.ErrorLog("[Discovery] cant find base _discovery.txt, consider creating one");
+                return;
+            }
+            HelpFunctions.Instance.ErrorLog("[Discovery] read " + PathFile.Discovery);
 
             try
             {
-                lines = File.ReadAllLines(path + "_discovery.txt");
+                lines = File.ReadAllLines(PathFile.Discovery);
             }
             catch
             {

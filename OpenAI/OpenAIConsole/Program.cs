@@ -5,50 +5,6 @@ using System.IO;
 
 namespace OpenAIConsole
 {
-    public static class OpenAIPath
-    {
-        public static string AssemblyDirectory
-        {
-            get
-            {
-                string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-                UriBuilder uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
-                string temp = Path.GetDirectoryName(path) + Path.DirectorySeparatorChar;
-
-                return temp;
-            }
-        }
-
-        public static string SettingsPath
-        {
-            get
-            {
-                string temp = AssemblyDirectory + Path.DirectorySeparatorChar + "Common" + Path.DirectorySeparatorChar;
-                if (Directory.Exists(temp) == false)
-                {
-                    Directory.CreateDirectory(temp);
-                }
-
-                return temp;
-            }
-        }
-
-        public static string LogPath
-        {
-            get
-            {
-                string temp = AssemblyDirectory + Path.DirectorySeparatorChar + "Logs" + Path.DirectorySeparatorChar;
-                if (Directory.Exists(temp) == false)
-                {
-                    Directory.CreateDirectory(temp);
-                }
-
-                return temp;
-            }
-        }
-    }
-
     class Program
     {
         static void Main(string[] args)
@@ -115,7 +71,7 @@ namespace OpenAIConsole
 
         static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
-            using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
+            using (StreamWriter sw = File.AppendText(PathFolder.Logs + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
             {
                 sw.WriteLine(e.ExceptionObject.ToString());
             }
@@ -142,7 +98,6 @@ namespace OpenAIConsole
         {
             starttime = DateTime.Now;
             this.sf = Silverfish.Instance;
-            sf.setnewLoggFile();
 
             bool teststuff = true;
             bool printstuff = true;
@@ -154,7 +109,7 @@ namespace OpenAIConsole
                 Ai.Instance.autoTester(printstuff);
             }
 
-            if (System.IO.File.Exists(OpenAIPath.AssemblyDirectory + "crashtest.txt"))
+            if (File.Exists(PathFile.CrashTest))
             {
                 testing(1);
             }
@@ -338,47 +293,12 @@ namespace OpenAIConsole
         {
             this.singleLog = Settings.Instance.writeToSingleFile;
             Helpfunctions.Instance.ErrorLog("init Silverfish V" + versionnumber);
-            string path = "";
-            //System.IO.Directory.CreateDirectory(path);
 
-            if (!singleLog)
-            {
-                sttngs.SetLogPath(path);
-            }
-            else
-            {
-                sttngs.SetLogPath("");
-                sttngs.SetLogFile("UILogg.txt");
-                try
-                {
-                    Helpfunctions.Instance.createNewLoggfile();
-                }
-                catch
-                {
-
-                }
-            }
             PenalityManager.Instance.setCombos();
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
             Settings.Instance.SetSettings();
             if (Settings.Instance.useNetwork) FishNet.Instance.startServer();
-        }
-
-        public void setnewLoggFile()
-        {
-            if (!singleLog)
-            {
-                sttngs.SetLogFile("UILogg" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
-                Helpfunctions.Instance.createNewLoggfile();
-                Helpfunctions.Instance.ErrorLog("#######################################################");
-                Helpfunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
-                Helpfunctions.Instance.ErrorLog("#######################################################");
-            }
-            else
-            {
-                sttngs.SetLogFile("UILogg.txt");
-            }
         }
 
         public bool isCardCreated(Handmanager.Handcard handcard)
@@ -412,7 +332,7 @@ namespace OpenAIConsole
                     }
                     else
                     {
-                        data = System.IO.File.ReadAllText(OpenAIPath.SettingsPath + "actionstodo.txt");
+                        data = File.ReadAllText(PathFile.ActionsToDo);
                     }
                     if (data != "" && data != "<EoF>" && data.EndsWith("<EoF>"))
                     {
@@ -579,7 +499,7 @@ namespace OpenAIConsole
                 try
                 {
                     if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
-                    else System.IO.File.WriteAllText(OpenAIPath.SettingsPath + "crrntbrd.txt", this.sendbuffer);
+                    else File.WriteAllText(PathFile.CurrentBoard, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -599,7 +519,7 @@ namespace OpenAIConsole
                 try
                 {
                     if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
-                    else System.IO.File.WriteAllText(OpenAIPath.SettingsPath + "curdeck.txt", this.sendbuffer);
+                    else File.WriteAllText(PathFile.CurrentDeck, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -620,7 +540,7 @@ namespace OpenAIConsole
                 try
                 {
                     if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
-                    else System.IO.File.WriteAllText(OpenAIPath.SettingsPath + "actionstodo.txt", this.sendbuffer);
+                    else System.IO.File.WriteAllText(PathFile.ActionsToDo, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -638,7 +558,7 @@ namespace OpenAIConsole
             {
                 try
                 {
-                    System.IO.File.WriteAllText(OpenAIPath.SettingsPath + "newCardDB.cs", this.sendbuffer);
+                    File.WriteAllText(PathFile.NewCardDB, this.sendbuffer);
                     writed = false;
                 }
                 catch

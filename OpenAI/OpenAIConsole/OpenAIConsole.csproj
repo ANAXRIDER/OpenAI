@@ -4627,6 +4627,9 @@
     <Compile Include="..\OpenAI\OpenAI.cs">
       <Link>OpenAI.cs</Link>
     </Compile>
+    <Compile Include="..\OpenAI\Paths.cs">
+      <Link>Paths.cs</Link>
+    </Compile>
     <Compile Include="..\OpenAI\Penalties\Pen_AT_001.cs">
       <Link>Penalties\Pen_AT_001.cs</Link>
     </Compile>

@@ -133,9 +133,6 @@ namespace OpenAI
         public bool SecretStandard = true;
         public int enemyherovaluemultiply = 100;
 
-        public string logpath = "";
-        public string logfile = "Logg.txt";
-
         public bool writeToSingleFile = false;
 
         public bool learnmode = false;
@@ -186,20 +183,10 @@ namespace OpenAI
             HelpFunctions.Instance.ErrorLog("[Settings] current alpha is " + this.secondweight);
         }
 
-        public void SetLogPath(string path)
-        {
-            this.logpath = path;
-        }
-
-        public void SetLogFile(string path)
-        {
-            this.logfile = path;
-        }
-
         public Behavior ReadSettings() //takes same path as carddb
         {
+            /*
             string[] lines = new string[] { };
-
             string path = OpenAIPath.SettingsPath;
             string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
             string datapath = path + "Data" + Path.DirectorySeparatorChar;
@@ -261,11 +248,26 @@ namespace OpenAI
                 return SetDefaultSettings();
             }
             HelpFunctions.Instance.ErrorLog("[Settings] read " + cleanPath);
+            */
+
+            string[] lines = new string[] { };
+            bool enemysettings = false;
+
+            if(File.Exists(PathFile.Settings))
+            {
+                // Do something
+            }
+            else
+            {
+                HelpFunctions.Instance.Log("[Settings] cant find base settings.txt, using default settings");
+                return SetDefaultSettings();
+            }
 
 
             const string readerror = " read error. Continuing without user-defined rules.";
             if (enemysettings)
             {
+                /*
                 try
                 {
                     lines = File.ReadAllLines(path + enemyfilestring);
@@ -275,16 +277,17 @@ namespace OpenAI
                     HelpFunctions.Instance.ErrorLog(enemyfilestring + readerror);
                     return SetDefaultSettings();
                 }
+                */
             }
             else
             {
                 try
                 {
-                    lines = File.ReadAllLines(path + filestring);
+                    lines = File.ReadAllLines(PathFile.Settings);
                 }
                 catch
                 {
-                    HelpFunctions.Instance.Log(filestring + readerror);
+                    HelpFunctions.Instance.Log("[Settings] Can't read settings.txt, using default settings!");
                     return SetDefaultSettings();
                 }
             }

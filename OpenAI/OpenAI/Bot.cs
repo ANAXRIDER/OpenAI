@@ -8,50 +8,6 @@ using HSRangerLib;
 
 namespace OpenAI
 {
-    public static class OpenAIPath
-    {
-        public static string AssemblyDirectory
-        {
-            get
-            {
-                string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-                UriBuilder uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
-                string temp = Path.GetDirectoryName(path) + Path.DirectorySeparatorChar;
-
-                return temp;
-            }
-        }
-
-        public static string SettingsPath
-        {
-            get
-            {
-                string temp = AssemblyDirectory + Path.DirectorySeparatorChar + "Common" + Path.DirectorySeparatorChar;
-                if (Directory.Exists(temp) == false)
-                {
-                    Directory.CreateDirectory(temp);
-                }
-
-                return temp;
-            }
-        }
-
-        public static string LogPath
-        {
-            get
-            {
-                string temp = AssemblyDirectory + Path.DirectorySeparatorChar + "Logs" + Path.DirectorySeparatorChar;
-                if (Directory.Exists(temp) == false)
-                {
-                    Directory.CreateDirectory(temp);
-                }
-
-                return temp;
-            }
-        }
-    }
-
     public class Bot : BotBase
     {
         private static Bot instance;
@@ -112,8 +68,12 @@ namespace OpenAI
             HelpFunctions.Instance.ErrorLog("you are now running uai V" + sf.VersionNumber);
             HelpFunctions.Instance.ErrorLog("----------------------------");
             //Helpfunctions.Instance.ErrorLog("test... " + Settings.Instance.logpath + Settings.Instance.logfile);
-            if (set.useExternalProcess) HelpFunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
-            if (set.useExternalProcess) HelpFunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + OpenAIPath.SettingsPath);
+
+            if (set.useExternalProcess)
+            {
+                HelpFunctions.Instance.ErrorLog("Using External Process for calculations!");
+                HelpFunctions.Instance.ErrorLog("Executable is located in: " + PathFolder.OpenAI);
+            }
             
             if (!sf.StartedExe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
             {
@@ -138,7 +98,7 @@ namespace OpenAI
         private void StartExeAsync()
         {
             Process[] pname = Process.GetProcessesByName("OpenAIConsole");
-            string directory = OpenAIPath.SettingsPath + "OpenAIConsole.exe";
+            string directory = PathFile.Executable;
             bool hasToOpen = true;
 
             if (pname.Length >= 1)
@@ -154,7 +114,7 @@ namespace OpenAI
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo(directory)
                 {
-                    WorkingDirectory = OpenAIPath.SettingsPath
+                    WorkingDirectory = PathFolder.OpenAI
                 };
                 Process.Start(startInfo);
             }
@@ -1250,7 +1210,7 @@ namespace OpenAI
             }
             catch (Exception Exception)
             {
-                using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
+                using (StreamWriter sw = File.AppendText(PathFolder.Logs + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
                 {
                     sw.WriteLine(Exception.ToString());
                 }

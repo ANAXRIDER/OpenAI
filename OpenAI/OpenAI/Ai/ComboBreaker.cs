@@ -399,6 +399,7 @@ namespace OpenAI
             string[] lines = new string[0] { };
             combos.Clear();
 
+            /*
             string path = OpenAIPath.SettingsPath;
             string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
             string datapath = path + "Data" + Path.DirectorySeparatorChar;
@@ -435,11 +436,22 @@ namespace OpenAI
                 return;
             }
             HelpFunctions.Instance.ErrorLog("[Combo] read " + cleanPath);
+            */
 
+            if (File.Exists(PathFile.Combo))
+            {
+                // Do something
+            }
+            else
+            {
+                HelpFunctions.Instance.ErrorLog("[Combo] cant find base _combo.txt, consider creating one");
+                return;
+            }
+            HelpFunctions.Instance.ErrorLog("[Combo] read " + PathFile.Combo);
 
             try
             {
-                lines = File.ReadAllLines(path + filestring);
+                lines = File.ReadAllLines(PathFile.Combo);
             }
             catch
             {

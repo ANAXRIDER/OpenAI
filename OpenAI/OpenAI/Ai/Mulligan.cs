@@ -206,7 +206,8 @@ namespace OpenAI
             cardlist.Clear();
             holdDB.Clear();
             concedelist.Clear();
-            
+         
+            /*
             string path = OpenAIPath.SettingsPath;
             string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
             string datapath = path + "Data" + Path.DirectorySeparatorChar;
@@ -243,11 +244,21 @@ namespace OpenAI
                 return;
             }
             HelpFunctions.Instance.ErrorLog("[Mulligan] read " + cleanPath);
-            
+            */
+            if (File.Exists(PathFile.Mulligan))
+            {
+                // Do something
+            }
+            else
+            {
+                HelpFunctions.Instance.ErrorLog("[Mulligan] cant find base _mulligan.txt, consider creating one");
+                return;
+            }
+            HelpFunctions.Instance.ErrorLog("[Mulligan] read " + PathFile.Mulligan);
 
             try
             {
-                lines = File.ReadAllLines(path + "_mulligan.txt");
+                lines = File.ReadAllLines(PathFile.Mulligan);
             }
             catch
             {
@@ -669,8 +680,7 @@ namespace OpenAI
             string[] lines = new string[] { };
             try
             {
-                string path = OpenAIPath.SettingsPath;
-                lines = File.ReadAllLines(path + "mulltest.txt");
+                lines = File.ReadAllLines(PathFile.Mulligan);
             }
             catch
             {
