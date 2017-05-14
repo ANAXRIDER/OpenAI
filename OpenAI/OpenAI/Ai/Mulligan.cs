@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace OpenAI
 {
@@ -207,32 +208,32 @@ namespace OpenAI
             concedelist.Clear();
             
             string path = Settings.Instance.path;
-            string cleanpath = "Silverfish" + System.IO.Path.DirectorySeparatorChar;
-            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
-            string cleandatapath = cleanpath + "Data" + System.IO.Path.DirectorySeparatorChar;
-            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
-            string cleanclasspath = cleandatapath + ownClass + System.IO.Path.DirectorySeparatorChar;
-            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
-            string cleandeckpath = cleanclasspath + deckName + System.IO.Path.DirectorySeparatorChar;
+            string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
+            string datapath = path + "Data" + Path.DirectorySeparatorChar;
+            string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + Path.DirectorySeparatorChar;
+            string cleanclasspath = cleandatapath + ownClass + Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + Path.DirectorySeparatorChar;
+            string cleandeckpath = cleanclasspath + deckName + Path.DirectorySeparatorChar;
             const string filestring = "_mulligan.txt";
 
 
-            if (deckName != "" && System.IO.File.Exists(deckpath + filestring))
+            if (deckName != "" && File.Exists(deckpath + filestring))
             {
                 path = deckpath;
                 cleanPath = cleandeckpath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(classpath + filestring))
+            else if (deckName != "" && File.Exists(classpath + filestring))
             {
                 path = classpath;
                 cleanPath = cleanclasspath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(datapath + filestring))
+            else if (deckName != "" && File.Exists(datapath + filestring))
             {
                 path = datapath;
                 cleanPath = cleandatapath + filestring;
             }
-            else if (System.IO.File.Exists(path + filestring))
+            else if (File.Exists(path + filestring))
             {
                 cleanPath = cleanpath + filestring;
             }
@@ -246,7 +247,7 @@ namespace OpenAI
 
             try
             {
-                lines = System.IO.File.ReadAllLines(path + "_mulligan.txt");
+                lines = File.ReadAllLines(path + "_mulligan.txt");
             }
             catch
             {
@@ -664,7 +665,7 @@ namespace OpenAI
             try
             {
                 string path = Settings.Instance.path;
-                lines = System.IO.File.ReadAllLines(path + "mulltest.txt");
+                lines = File.ReadAllLines(path + "mulltest.txt");
             }
             catch
             {

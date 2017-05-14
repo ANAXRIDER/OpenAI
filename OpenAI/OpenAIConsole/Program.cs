@@ -442,7 +442,7 @@ namespace OpenAI
 
         private Helpfunctions()
         {
-            //System.IO.File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
+            //File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
         }
         
         public void loggonoff(bool onoff)
@@ -452,7 +452,7 @@ namespace OpenAI
 
         public void createNewLoggfile()
         {
-            //System.IO.File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
+            //File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
         }
 
         public void logg(string s)
@@ -564,7 +564,7 @@ namespace OpenAI
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
+                    File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
                     writed = false;
                 }
                 catch

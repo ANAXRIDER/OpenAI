@@ -1409,13 +1409,13 @@ namespace OpenAI
         private Silverfish()
         {
             this.singleLog = Settings.Instance.writeToSingleFile;
-            string path = FolderPath.OpenAI + "SilverLogs" + System.IO.Path.DirectorySeparatorChar;
+            string path = FolderPath.OpenAI + "SilverLogs" + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             sttngs.setFilePath(FolderPath.OpenAI);
 
             if (singleLog)
             {
-                sttngs.setLoggPath(FolderPath.Logs + System.IO.Path.DirectorySeparatorChar);
+                sttngs.setLoggPath(FolderPath.Logs + Path.DirectorySeparatorChar);
                 sttngs.setLoggFile("SilverLog.txt");
                 Helpfunctions.Instance.createNewLoggfile();
             }
@@ -2899,10 +2899,10 @@ namespace OpenAI
             Dictionary<int, Entity> allEntitys = new Dictionary<int, Entity>();
 
             // add json.net nuget package to use this debug code
-            //string path = SilverFishBotPath.AssemblyDirectory + System.IO.Path.DirectorySeparatorChar + "HRERRORLogs" + System.IO.Path.DirectorySeparatorChar;
+            //string path = SilverFishBotPath.AssemblyDirectory + Path.DirectorySeparatorChar + "HRERRORLogs" + Path.DirectorySeparatorChar;
             //System.IO.Directory.CreateDirectory(path);
             //string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(rangerbot.gameState.GameEntityList, Newtonsoft.Json.Formatting.Indented);
-            //System.IO.File.WriteAllText(path + "HRErrorLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt", jsonData);
+            //File.WriteAllText(path + "HRErrorLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt", jsonData);
 
             foreach (Entity item in rangerbot.gameState.GameEntityList)
             {
@@ -3127,7 +3127,7 @@ namespace OpenAI
                 {
                     string data = "";
                     System.Threading.Thread.Sleep(5);
-                    data = System.IO.File.ReadAllText(FilePath.ActionsToDo);
+                    data = File.ReadAllText(FilePath.ActionsToDo);
                     
                     //if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
                     //if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");
@@ -3224,7 +3224,7 @@ namespace OpenAI
 
         private Helpfunctions()
         {
-            //System.IO.File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
+            //File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
         }
 
         private bool writelogg = true;
@@ -3385,7 +3385,7 @@ namespace OpenAI
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
+                    File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
                     writed = false;
                 }
                 catch
