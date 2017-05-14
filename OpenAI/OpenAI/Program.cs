@@ -141,12 +141,6 @@ namespace OpenAI
             }
             e.handled = true;
 
-            if (Settings.Instance.learnmode)
-            {
-                e.handled = false;
-                return;
-            }
-
             var list = e.card_list;
 
             Entity enemyPlayer = base.EnemyHero;
@@ -1024,15 +1018,8 @@ namespace OpenAI
 
                 Helpfunctions.Instance.ErrorLog("proc check done...");
 
-                if (Settings.Instance.learnmode)
-                {
-                    e.handled = false;
-                    return;
-                }
-
                 Helpfunctions.Instance.ErrorLog("update everything...");
                 bool templearn = sf.updateEverything(this, behave, doMultipleThingsAtATime, Settings.Instance.useExternalProcess, false); // cant use passive waiting (in this mode i return nothing)
-                if (templearn == true) Settings.Instance.printlearnmode = true;
 
                 // actions-queue-stuff
                 //  AI has requested to ignore this update, so return without setting any actions.
@@ -1040,19 +1027,6 @@ namespace OpenAI
                 {
                     //Helpfunctions.Instance.ErrorLog("shouldsendactionsblah");
                     ShouldSendActions = true;  // unpause ourselves for next time
-                    return;
-                }
-
-
-                if (Settings.Instance.learnmode)
-                {
-                    if (Settings.Instance.printlearnmode)
-                    {
-                        Ai.Instance.simmulateWholeTurnandPrint();
-                    }
-                    Settings.Instance.printlearnmode = false;
-
-                    e.handled = false;
                     return;
                 }
 
@@ -1203,11 +1177,6 @@ namespace OpenAI
                 Helpfunctions.Instance.ErrorLog("\r\nDLL Crashed! " + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + "\r\nStackTrace ---" + Exception.ToString() + "\r\n\r\n");
                 Helpfunctions.Instance.flushLogg();
                 Helpfunctions.Instance.flushErrorLog();
-
-                if (Settings.Instance.learnmode)
-                {
-                    e.action_list.Clear();
-                }
                 throw;
             }
             return;

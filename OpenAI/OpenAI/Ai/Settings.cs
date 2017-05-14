@@ -127,9 +127,6 @@ namespace OpenAI
 
         public bool writeToSingleFile = false;
 
-        public bool learnmode = false;
-        public bool printlearnmode = true;
-
         public int numberOfThreads = Environment.ProcessorCount;//32;//
 
         private string ownClass = "";
