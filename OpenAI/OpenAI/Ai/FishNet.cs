@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenAI
 {
+    /*
     public sealed class FishNet
     {
         private static FishNet instance;
@@ -130,8 +131,11 @@ namespace OpenAI
             {
                 client.Blocking = blockState;
             }
-        }*/
-
+        }
+        
+        */
+        /*
+        
         private string getIp(Socket s)
         {
             IPEndPoint remoteIpEndPoint = s.RemoteEndPoint as IPEndPoint;
@@ -216,4 +220,5 @@ namespace OpenAI
             return output;
         }
     }
+    */
 }

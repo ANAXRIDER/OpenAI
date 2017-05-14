@@ -9,32 +9,15 @@ namespace OpenAIConsole
     {
         static void Main(string[] args)
         {
-            System.AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
             Bot b = new Bot();
-            bool network = Settings.Instance.useNetwork;
 
             while (true)
             {
                 System.Threading.Thread.Sleep(10);
-                if (network)
-                {
-                    FishNet.Instance.checkConnection();
-                    KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
-                    if (msg.Value == "") continue;
-                    switch (msg.Key)
-                    {
-                        case "crrntbrd.txt":
-                            b.doData(msg.Value);
-                            break;
-                        case "curdeck.txt":
-                            b.doDeckData(msg.Value);
-                            break;
-                    }
-                    continue;
-                }
                 try
                 {
-                    string data = System.IO.File.ReadAllText("crrntbrd.txt");
+                    string data = File.ReadAllText(PathFile.CurrentBoard);
                     //Helpfunctions.Instance.ErrorLog(data);
                     if (data != "" && data != "<EoF>")
                     {
@@ -298,7 +281,6 @@ namespace OpenAIConsole
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
             Settings.Instance.SetSettings();
-            if (Settings.Instance.useNetwork) FishNet.Instance.startServer();
         }
 
         public bool isCardCreated(Handmanager.Handcard handcard)
@@ -316,7 +298,6 @@ namespace OpenAIConsole
             string boardnumm = "-1";
             int trackingchoice = 0;
             int trackingstate = 0;
-            bool network = Settings.Instance.useNetwork;
 
             while (readed)
             {
@@ -324,16 +305,8 @@ namespace OpenAIConsole
                 {
                     string data = "";
                     System.Threading.Thread.Sleep(10);
-                    if (network)
-                    {
-                        KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
-                        if (msg.Key != "actionstodo.txt") continue;
-                        data = msg.Value;
-                    }
-                    else
-                    {
-                        data = File.ReadAllText(PathFile.ActionsToDo);
-                    }
+                    data = File.ReadAllText(PathFile.ActionsToDo);
+
                     if (data != "" && data != "<EoF>" && data.EndsWith("<EoF>"))
                     {
                         data = data.Replace("<EoF>", "");
@@ -485,11 +458,6 @@ namespace OpenAIConsole
             this.sendbuffer += data + "\r\n";
         }
 
-        public void writeBufferToNetwork(string msgtype)
-        {
-            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
-        }
-
         public void writeBufferToFile()
         {
             bool writed = true;
@@ -498,8 +466,7 @@ namespace OpenAIConsole
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
-                    else File.WriteAllText(PathFile.CurrentBoard, this.sendbuffer);
+                    File.WriteAllText(PathFile.CurrentBoard, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -518,8 +485,7 @@ namespace OpenAIConsole
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
-                    else File.WriteAllText(PathFile.CurrentDeck, this.sendbuffer);
+                    File.WriteAllText(PathFile.CurrentDeck, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -539,8 +505,7 @@ namespace OpenAIConsole
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
-                    else System.IO.File.WriteAllText(PathFile.ActionsToDo, this.sendbuffer);
+                    File.WriteAllText(PathFile.ActionsToDo, this.sendbuffer);
                     writed = false;
                 }
                 catch

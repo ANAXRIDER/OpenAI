@@ -171,11 +171,6 @@ namespace OpenAI
             SendBuffer += data + "\r\n";
         }
 
-        public void WriteBufferToNetwork(string msgtype)
-        {
-            FishNet.Instance.sendMessage(msgtype + "\r\n" + SendBuffer);
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -188,14 +183,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork)
-                    {
-                        WriteBufferToNetwork("crrntbrd.txt");
-                    }
-                    else
-                    {
-                        File.WriteAllText(PathFile.CurrentBoard, SendBuffer);
-                    }
+                    File.WriteAllText(PathFile.CurrentBoard, SendBuffer);
                     writed = false;
                 }
                 catch
@@ -218,14 +206,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork)
-                    {
-                        WriteBufferToNetwork("curdeck.txt");
-                    }
-                    else
-                    {
-                        File.WriteAllText(PathFile.CurrentDeck, SendBuffer);
-                    }
+                    File.WriteAllText(PathFile.CurrentDeck, SendBuffer);
                     writed = false;
                 }
                 catch
@@ -248,14 +229,7 @@ namespace OpenAI
             {
                 try
                 {
-                    if (Settings.Instance.useNetwork)
-                    {
-                            WriteBufferToNetwork("actionstodo.txt");
-                    }
-                    else
-                    {
-                        File.WriteAllText(PathFile.ActionsToDo, SendBuffer);
-                    }
+                    File.WriteAllText(PathFile.ActionsToDo, SendBuffer);
                     writed = false;
                 }
                 catch

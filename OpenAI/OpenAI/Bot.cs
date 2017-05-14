@@ -75,7 +75,7 @@ namespace OpenAI
                 HelpFunctions.Instance.ErrorLog("Executable is located in: " + PathFolder.OpenAI);
             }
             
-            if (!sf.StartedExe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
+            if (!sf.StartedExe && set.useExternalProcess)
             {
                 sf.StartedExe = true;
                 Task.Run(() => StartExeAsync());
