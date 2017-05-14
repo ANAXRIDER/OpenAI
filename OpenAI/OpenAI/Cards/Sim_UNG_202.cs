@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Reduce the Cost of Elementals in your hand_by (1).
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

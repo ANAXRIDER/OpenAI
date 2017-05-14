@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ jeder spieler zieht 2 karten.
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.drawACard(CardDB.cardIDEnum.None, true);
             p.drawACard(CardDB.cardIDEnum.None, true);

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Taunt. Choose One - +1 Attack; or +1 Health.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             bool hasfandral = false;
             if (p.ownMinions.Find(a => a.name == CardDB.cardName.fandralstaghelm && !a.silenced) != null) hasfandral = true;

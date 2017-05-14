@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_mirror);
 //    ruft zwei diener (0/2) mit spott/ herbei.
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int posi = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
             

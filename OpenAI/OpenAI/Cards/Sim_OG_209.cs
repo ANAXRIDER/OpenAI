@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //Whenever your spells deal damage, restore that much Health to your hero.
 
-        public override void OnCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
+        public override void onCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
         {
             if (triggerEffectMinion.own == wasOwnCard && c.type == CardDB.cardtype.SPELL)
             {

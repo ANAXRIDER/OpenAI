@@ -162,13 +162,14 @@ namespace OpenAI
                 this.datareaded = false;
                 try
                 {
-                    lines = File.ReadAllLines(PathFile.Test);
+                    string path = Settings.Instance.path;
+                    lines = System.IO.File.ReadAllLines(path + "test.txt");
                     this.datareaded = true;
                 }
                 catch
                 {
                     this.datareaded = false;
-                    HelpFunctions.Instance.ErrorLog("cant find test.txt");
+                    Helpfunctions.Instance.ErrorLog("cant find test.txt");
                     return;
                 }
             }
@@ -190,7 +191,7 @@ namespace OpenAI
             foreach (string sss in lines)
             {
                 string s = sss + " ";
-                HelpFunctions.Instance.Log(s);
+                Helpfunctions.Instance.logg(s);
 
                 if (s.StartsWith("ailoop"))
                 {
@@ -293,7 +294,7 @@ namespace OpenAI
                     {
                         string facehp = s.Split(new string[] { "face " }, StringSplitOptions.RemoveEmptyEntries)[1].Split(' ')[0];
                         ComboBreaker.Instance.attackFaceHP = Convert.ToInt32(facehp);
-                        Settings.Instance.EnfaceHp = ComboBreaker.Instance.attackFaceHP;
+                        Settings.Instance.enfacehp = ComboBreaker.Instance.attackFaceHP;
                     }
 
                     this.playarround = false;
@@ -315,7 +316,7 @@ namespace OpenAI
                     {
                         string eturnsim2 = s.Split(new string[] { " ets2 " }, StringSplitOptions.RemoveEmptyEntries)[1];
                         int ets2 = Convert.ToInt32(eturnsim2.Split(' ')[0]);
-                        Settings.Instance.EnemyTurnMaxWideSecondTime = ets2;
+                        Settings.Instance.enemyTurnMaxWideSecondTime = ets2;
                     }
 
 
@@ -1071,7 +1072,7 @@ namespace OpenAI
                 counter++;
                 j++;
             }
-            HelpFunctions.Instance.Log("rdy");
+            Helpfunctions.Instance.logg("rdy");
 
 
             Hrtprozis.Instance.setOwnPlayer(ownPlayer);
@@ -1144,11 +1145,11 @@ namespace OpenAI
 
             Ai.Instance.setMaxWide(this.maxwide);
             //Ai.Instance.setTwoTurnSimulation(false, this.twoturnsim);
-            Settings.Instance.SimEnemySecondTurn = this.simEnemy2Turn;
+            Settings.Instance.simEnemySecondTurn = this.simEnemy2Turn;
             //Ai.Instance.nextTurnSimulator.updateParams();
-            Settings.Instance.PlayAround = this.playarround;
-            Settings.Instance.PlayAroundProb = this.pprob1;
-            Settings.Instance.PlayAroundProb2 = this.pprob2;
+            Settings.Instance.playarround = this.playarround;
+            Settings.Instance.playaroundprob = this.pprob1;
+            Settings.Instance.playaroundprob2 = this.pprob2;
             Ai.Instance.setPlayAround();
 
             //save data
@@ -1174,17 +1175,17 @@ namespace OpenAI
             if (td != "") Hrtprozis.Instance.setTurnDeck(td);
             //Ai.Instance.enemyTurnSim.maxwide = ets;
             //Ai.Instance.enemySecondTurnSim.maxwide = ents;
-            Settings.Instance.EnemyTurnMaxWide = ets;
-            Settings.Instance.EnemySecondTurnMaxWide = ents;
+            Settings.Instance.enemyTurnMaxWide = ets;
+            Settings.Instance.enemySecondTurnMaxWide = ents;
 
-            Settings.Instance.NextTurnDeep = ntssd;
-            Settings.Instance.NextTurnMaxWide = ntssw;
-            Settings.Instance.NextTurnTotalBoards = ntssm;
+            Settings.Instance.nextTurnDeep = ntssd;
+            Settings.Instance.nextTurnMaxWide = ntssw;
+            Settings.Instance.nextTurnTotalBoards = ntssm;
             //Ai.Instance.nextTurnSimulator.updateParams(ntssd, ntssw, ntssm);
 
             Settings.Instance.useSecretsPlayArround = dosecrets;
 
-            Settings.Instance.SetWeights(alpha);
+            Settings.Instance.setWeights(alpha);
 
         }
 

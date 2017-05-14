@@ -9,7 +9,7 @@ namespace OpenAI
         //todo secret
         //    geheimnis:/ wenn einer eurer diener stirbt, erhält ein zufälliger befreundeter diener +3/+2.
 
-        public override void OnSecretPlay(Playfield p, bool ownplay, int number)
+        public override void onSecretPlay(Playfield p, bool ownplay, int number)
         {
             List<Minion> temp = new List<Minion>();
 

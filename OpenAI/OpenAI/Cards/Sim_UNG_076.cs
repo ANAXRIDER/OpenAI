@@ -11,7 +11,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.UNG_076t1); //Raptor
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.callKid(kid, m.zonepos - 1, m.own);
             p.callKid(kid, m.zonepos - 1, m.own);

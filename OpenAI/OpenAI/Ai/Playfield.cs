@@ -1468,7 +1468,7 @@ namespace OpenAI
             if (this.enemySecretCount != p.enemySecretCount)
             {
 
-                if (logg) HelpFunctions.Instance.Log("enemy secrets changed ");
+                if (logg) Helpfunctions.Instance.logg("enemy secrets changed ");
                 return false;
             }
 
@@ -1478,7 +1478,7 @@ namespace OpenAI
                 {
                     if (this.enemySecretList[i] != (p.enemySecretList[i]))
                     {
-                        if (logg) HelpFunctions.Instance.Log("enemy secrets value changed! ");
+                        if (logg) Helpfunctions.Instance.logg("enemy secrets value changed! ");
                         return false;
                     }
                 }
@@ -1486,40 +1486,40 @@ namespace OpenAI
 
             if (this.mana != p.mana || this.enemyMaxMana != p.enemyMaxMana || this.ownMaxMana != p.ownMaxMana)
             {
-                if (logg) HelpFunctions.Instance.Log("mana changed " + this.mana + " " + p.mana + " " + this.enemyMaxMana + " " + p.enemyMaxMana + " " + this.ownMaxMana + " " + p.ownMaxMana);
+                if (logg) Helpfunctions.Instance.logg("mana changed " + this.mana + " " + p.mana + " " + this.enemyMaxMana + " " + p.enemyMaxMana + " " + this.ownMaxMana + " " + p.ownMaxMana);
                 return false;
             }
 
             if (this.ownDeckSize != p.ownDeckSize || this.enemyDeckSize != p.enemyDeckSize || this.ownHeroFatigue != p.ownHeroFatigue || this.enemyHeroFatigue != p.enemyHeroFatigue)
             {
-                if (logg) HelpFunctions.Instance.Log("deck/fatigue changed " + this.ownDeckSize + " " + p.ownDeckSize + " " + this.enemyDeckSize + " " + p.enemyDeckSize + " " + this.ownHeroFatigue + " " + p.ownHeroFatigue + " " + this.enemyHeroFatigue + " " + p.enemyHeroFatigue);
+                if (logg) Helpfunctions.Instance.logg("deck/fatigue changed " + this.ownDeckSize + " " + p.ownDeckSize + " " + this.enemyDeckSize + " " + p.enemyDeckSize + " " + this.ownHeroFatigue + " " + p.ownHeroFatigue + " " + this.enemyHeroFatigue + " " + p.enemyHeroFatigue);
             }
 
             if (this.cardsPlayedThisTurn != p.cardsPlayedThisTurn || this.mobsPlayedThisTurn != p.mobsPlayedThisTurn || this.owedRecall != p.owedRecall || this.ownAbilityReady != p.ownAbilityReady || this.ownQuest.questProgress != p.ownQuest.questProgress)
             {
-                if (logg) HelpFunctions.Instance.Log("stuff changed " + this.cardsPlayedThisTurn + " " + p.cardsPlayedThisTurn + " " + this.mobsPlayedThisTurn + " " + p.mobsPlayedThisTurn + " " + this.owedRecall + " " + p.owedRecall + " " + this.ownAbilityReady + " " + p.ownAbilityReady + " " + this.ownQuest.questProgress + " " + p.ownQuest.questProgress);
+                if (logg) Helpfunctions.Instance.logg("stuff changed " + this.cardsPlayedThisTurn + " " + p.cardsPlayedThisTurn + " " + this.mobsPlayedThisTurn + " " + p.mobsPlayedThisTurn + " " + this.owedRecall + " " + p.owedRecall + " " + this.ownAbilityReady + " " + p.ownAbilityReady + " " + this.ownQuest.questProgress + " " + p.ownQuest.questProgress);
                 return false;
             }
 
             if (this.ownHeroName != p.ownHeroName || this.enemyHeroName != p.enemyHeroName)
             {
-                if (logg) HelpFunctions.Instance.Log("hero name changed ");
+                if (logg) Helpfunctions.Instance.logg("hero name changed ");
                 return false;
             }
 
             if (this.ownHero.Hp != p.ownHero.Hp || this.ownHero.Angr != p.ownHero.Angr || this.ownHero.armor != p.ownHero.armor || this.ownHero.frozen != p.ownHero.frozen || this.ownHero.immuneWhileAttacking != p.ownHero.immuneWhileAttacking || this.ownHero.immune != p.ownHero.immune)
             {
-                if (logg) HelpFunctions.Instance.Log("ownhero changed " + this.ownHero.Hp + " " + p.ownHero.Hp + " " + this.ownHero.Angr + " " + p.ownHero.Angr + " " + this.ownHero.armor + " " + p.ownHero.armor + " " + this.ownHero.frozen + " " + p.ownHero.frozen + " " + this.ownHero.immuneWhileAttacking + " " + p.ownHero.immuneWhileAttacking + " " + this.ownHero.immune + " " + p.ownHero.immune);
+                if (logg) Helpfunctions.Instance.logg("ownhero changed " + this.ownHero.Hp + " " + p.ownHero.Hp + " " + this.ownHero.Angr + " " + p.ownHero.Angr + " " + this.ownHero.armor + " " + p.ownHero.armor + " " + this.ownHero.frozen + " " + p.ownHero.frozen + " " + this.ownHero.immuneWhileAttacking + " " + p.ownHero.immuneWhileAttacking + " " + this.ownHero.immune + " " + p.ownHero.immune);
                 return false;
             }
             if (this.ownHero.Ready != p.ownHero.Ready || this.ownWeaponAttack != p.ownWeaponAttack || this.ownWeaponDurability != p.ownWeaponDurability || this.ownHero.numAttacksThisTurn != p.ownHero.numAttacksThisTurn || this.ownHero.windfury != p.ownHero.windfury)
             {
-                if (logg) HelpFunctions.Instance.Log("weapon changed " + this.ownHero.Ready + " " + p.ownHero.Ready + " " + this.ownWeaponAttack + " " + p.ownWeaponAttack + " " + this.ownWeaponDurability + " " + p.ownWeaponDurability + " " + this.ownHero.numAttacksThisTurn + " " + p.ownHero.numAttacksThisTurn + " " + this.ownHero.windfury + " " + p.ownHero.windfury);
+                if (logg) Helpfunctions.Instance.logg("weapon changed " + this.ownHero.Ready + " " + p.ownHero.Ready + " " + this.ownWeaponAttack + " " + p.ownWeaponAttack + " " + this.ownWeaponDurability + " " + p.ownWeaponDurability + " " + this.ownHero.numAttacksThisTurn + " " + p.ownHero.numAttacksThisTurn + " " + this.ownHero.windfury + " " + p.ownHero.windfury);
                 return false;
             }
             if (this.enemyHero.Hp != p.enemyHero.Hp || this.enemyWeaponAttack != p.enemyWeaponAttack || this.enemyHero.armor != p.enemyHero.armor || this.enemyWeaponDurability != p.enemyWeaponDurability || this.enemyHero.frozen != p.enemyHero.frozen || this.enemyHero.immune != p.enemyHero.immune)
             {
-                if (logg) HelpFunctions.Instance.Log("enemyhero changed " + this.enemyHero.Hp + " " + p.enemyHero.Hp + " " + this.enemyWeaponAttack + " " + p.enemyWeaponAttack + " " + this.enemyHero.armor + " " + p.enemyHero.armor + " " + this.enemyWeaponDurability + " " + p.enemyWeaponDurability + " " + this.enemyHero.frozen + " " + p.enemyHero.frozen + " " + this.enemyHero.immune + " " + p.enemyHero.immune);
+                if (logg) Helpfunctions.Instance.logg("enemyhero changed " + this.enemyHero.Hp + " " + p.enemyHero.Hp + " " + this.enemyWeaponAttack + " " + p.enemyWeaponAttack + " " + this.enemyHero.armor + " " + p.enemyHero.armor + " " + this.enemyWeaponDurability + " " + p.enemyWeaponDurability + " " + this.enemyHero.frozen + " " + p.enemyHero.frozen + " " + this.enemyHero.immune + " " + p.enemyHero.immune);
                 return false;
             }
 
@@ -1531,19 +1531,19 @@ namespace OpenAI
 
             if (this.ownHeroAblility.card.name != p.ownHeroAblility.card.name)
             {
-                if (logg) HelpFunctions.Instance.Log("hero ability changed ");
+                if (logg) Helpfunctions.Instance.logg("hero ability changed ");
                 return false;
             }
 
             if (this.spellpower != p.spellpower)
             {
-                if (logg) HelpFunctions.Instance.Log("spellpower changed");
+                if (logg) Helpfunctions.Instance.logg("spellpower changed");
                 return false;
             }
 
             if (this.ownMinions.Count != p.ownMinions.Count || this.enemyMinions.Count != p.enemyMinions.Count || this.owncards.Count != p.owncards.Count)
             {
-                if (logg) HelpFunctions.Instance.Log("minions count or hand changed");
+                if (logg) Helpfunctions.Instance.logg("minions count or hand changed");
                 return false;
             }
 
@@ -1568,7 +1568,7 @@ namespace OpenAI
             }
             if (minionbool == false)
             {
-                if (logg) HelpFunctions.Instance.Log("ownminions changed " + minion);
+                if (logg) Helpfunctions.Instance.logg("ownminions changed " + minion);
                 return false;
             }
 
@@ -1590,7 +1590,7 @@ namespace OpenAI
             }
             if (minionbool == false)
             {
-                if (logg) HelpFunctions.Instance.Log("enemyminions changed");
+                if (logg) Helpfunctions.Instance.logg("enemyminions changed");
                 return false;
             }
 
@@ -1599,7 +1599,7 @@ namespace OpenAI
                 Handmanager.Handcard dishc = this.owncards[i]; Handmanager.Handcard pishc = p.owncards[i];
                 if (dishc.position != pishc.position || dishc.entity != pishc.entity || dishc.getManaCost(this) != pishc.getManaCost(p))
                 {
-                    if (logg) HelpFunctions.Instance.Log("handcard changed: " + dishc.card.name);
+                    if (logg) Helpfunctions.Instance.logg("handcard changed: " + dishc.card.name);
                     return false;
                 }
             }
@@ -1621,14 +1621,14 @@ namespace OpenAI
             }
             if (this.ownSecretsIDList.Count != p.ownSecretsIDList.Count)
             {
-                if (logg) HelpFunctions.Instance.Log("secretsCount changed");
+                if (logg) Helpfunctions.Instance.logg("secretsCount changed");
                 return false;
             }
             for (int i = 0; i < this.ownSecretsIDList.Count; i++)
             {
                 if (this.ownSecretsIDList[i] != p.ownSecretsIDList[i])
                 {
-                    if (logg) HelpFunctions.Instance.Log("secrets changed");
+                    if (logg) Helpfunctions.Instance.logg("secrets changed");
                     return false;
                 }
             }
@@ -1778,20 +1778,20 @@ namespace OpenAI
                 {
                     switch (a.actionType)
                     {
-                        case ActionType.PLAY_CARD:
+                        case actionEnum.playcard:
                             retval += a.card.entity;
                             if (a.target != null)
                             {
                                 retval += a.target.entityID;
                             }
                             continue;
-                        case ActionType.ATTACK_WITH_MINION:
+                        case actionEnum.attackWithMinion:
                             retval += a.own.entityID + a.target.entityID;
                             continue;
-                        case ActionType.ATTACK_WITH_HERO:
+                        case actionEnum.attackWithHero:
                             retval += a.target.entityID;
                             continue;
-                        case ActionType.USE_HERO_POWER:
+                        case actionEnum.useHeroPower:
                             retval += 100;
                             if (a.target != null)
                             {
@@ -3155,7 +3155,7 @@ namespace OpenAI
             //penalty for destroying combo
 
 
-                this.evaluatePenality += ComboBreaker.Instance.CheckIfComboWasPlayed(this.playactions, this.ownWeaponName, this.ownHeroName);
+                this.evaluatePenality += ComboBreaker.Instance.checkIfComboWasPlayed(this.playactions, this.ownWeaponName, this.ownHeroName);
                 if (this.complete) return;
 
 
@@ -3523,7 +3523,7 @@ namespace OpenAI
                 {
                     ha = Handmanager.Instance.getCardChoice(aa.tracking - 1);
                 }
-                if (aa.actionType == ActionType.USE_HERO_POWER)
+                if (aa.actionType == actionEnum.useHeroPower)
                 {
                     ha = this.isOwnTurn ? this.ownHeroAblility : this.enemyHeroAblility;
                 }
@@ -3617,7 +3617,7 @@ namespace OpenAI
             //if (this.isOwnTurn) this.playactions.Add(a);
 
             // its a minion attack--------------------------------
-            if (a.actionType == ActionType.ATTACK_WITH_MINION)
+            if (a.actionType == actionEnum.attackWithMinion)
             {
                 this.evaluatePenality += a.penalty;
                 Minion target = a.target;
@@ -3652,7 +3652,7 @@ namespace OpenAI
             else
             {
                 // its an hero attack--------------------------------
-                if (a.actionType == ActionType.ATTACK_WITH_HERO)
+                if (a.actionType == actionEnum.attackWithHero)
                 {
                     //secret trigger is inside
                     //Console.WriteLine("HERO ATTACK:::::::::::::###################################");
@@ -3662,7 +3662,7 @@ namespace OpenAI
                 else
                 {
                     // its an playing-card--------------------------------
-                    if (a.actionType == ActionType.PLAY_CARD)
+                    if (a.actionType == actionEnum.playcard)
                     {
                         if (this.isOwnTurn)
                         {
@@ -3681,7 +3681,7 @@ namespace OpenAI
                     else
                     {
                         // its using the hero power--------------------------------
-                        if (a.actionType == ActionType.USE_HERO_POWER)
+                        if (a.actionType == actionEnum.useHeroPower)
                         {
                             playHeroPower(a.target, a.penalty, this.isOwnTurn);
                         }
@@ -3756,7 +3756,7 @@ namespace OpenAI
             }
             
 
-            if (logging) HelpFunctions.Instance.Log(".attck with" + attacker.name + " A " + attacker.Angr + " H " + attacker.Hp);
+            if (logging) Helpfunctions.Instance.logg(".attck with" + attacker.name + " A " + attacker.Angr + " H " + attacker.Hp);
 
             int attackerAngr = attacker.Angr;
             int defAngr = defender.Angr;
@@ -3954,7 +3954,7 @@ namespace OpenAI
                     break;
             }
 
-            if (logging) HelpFunctions.Instance.Log("attck with weapon trgt: " + target.entityID);
+            if (logging) Helpfunctions.Instance.logg("attck with weapon trgt: " + target.entityID);
 
             // hero attacks enemy----------------------------------------------------------------------------------
 
@@ -4068,7 +4068,7 @@ namespace OpenAI
 
 
             //Helpfunctions.Instance.logg("play crd " + c.name + " entitiy# " + cardEntity + " mana " + hc.getManaCost(this) + " trgt " + target);
-            if (logging) HelpFunctions.Instance.Log("play crd " + c.name + " entitiy# " + hc.entity + " mana " + hc.getManaCost(this) + " trgt " + target);
+            if (logging) Helpfunctions.Instance.logg("play crd " + c.name + " entitiy# " + hc.entity + " mana " + hc.getManaCost(this) + " trgt " + target);
 
 
             this.triggerACardWillBePlayed(hc, true, target, choice);
@@ -4104,7 +4104,7 @@ namespace OpenAI
                 }
                 else
                 {
-                    c.sim_card.OnCardPlay(this, true, target, choice);
+                    c.sim_card.onCardPlay(this, true, target, choice);
                     this.doDmgTriggers();
                     //secret trigger? do here
 
@@ -4113,7 +4113,7 @@ namespace OpenAI
                         if (PenalityManager.Instance.DamageAllDatabase.ContainsKey(c.name) && PenalityManager.Instance.DamageAllDatabase[c.name] + this.spellpower >= 2 ||
                      (PenalityManager.Instance.DamageAllEnemysDatabase.ContainsKey(c.name) && PenalityManager.Instance.DamageAllEnemysDatabase[c.name] + this.spellpower >= 2))
                         {
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_004).sim_card.OnSecretPlay(this, false, 0);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_004).sim_card.onSecretPlay(this, false, 0);
                         }
                     }
                         
@@ -4147,7 +4147,7 @@ namespace OpenAI
                             this.drawACard(CardDB.cardName.unknown, true, true);
                         }
                     }
-                    c.sim_card.OnCardPlay(this, true, target, choice);
+                    c.sim_card.onCardPlay(this, true, target, choice);
                     if (c.type == CardDB.cardtype.WEAPON)
                     {
                         this.ownWeaponAttack += hc.addattack;
@@ -4170,7 +4170,7 @@ namespace OpenAI
 
             Handmanager.Handcard hc = new Handmanager.Handcard(c) {entity = this.getNextEntity()};
             //Helpfunctions.Instance.logg("play crd " + c.name + " entitiy# " + cardEntity + " mana " + hc.getManaCost(this) + " trgt " + target);
-            if (logging) HelpFunctions.Instance.Log("enemy play crd " + c.name + " trgt " + target);
+            if (logging) Helpfunctions.Instance.logg("enemy play crd " + c.name + " trgt " + target);
 
             if (c.race == TAG_RACE.DRAGON) //dragon
             {
@@ -4216,7 +4216,7 @@ namespace OpenAI
                 }
                 else
                 {
-                    c.sim_card.OnCardPlay(this, false, target, choice);
+                    c.sim_card.onCardPlay(this, false, target, choice);
                     this.doDmgTriggers();
                     //secret trigger? do here
 
@@ -4279,14 +4279,14 @@ namespace OpenAI
             this.secretTrigger_HeroPowerUsed(ownturn);
 
             //Helpfunctions.Instance.logg("play crd " + c.name + " entitiy# " + cardEntity + " mana " + hc.getManaCost(this) + " trgt " + target);
-            if (logging) HelpFunctions.Instance.Log("play crd " + c.name + " trgt " + target);
+            if (logging) Helpfunctions.Instance.logg("play crd " + c.name + " trgt " + target);
 
-            c.sim_card.OnCardPlay(this, ownturn, target, 0);
+            c.sim_card.onCardPlay(this, ownturn, target, 0);
             this.doDmgTriggers();
 
             foreach (Minion m in (ownturn) ? this.ownMinions.ToArray() : this.enemyMinions.ToArray())
             {
-                if (!m.silenced) m.handcard.card.sim_card.OnInspire(this, m);
+                if (!m.silenced) m.handcard.card.sim_card.onInspire(this, m);
             }
             this.doDmgTriggers();
         }
@@ -4525,7 +4525,7 @@ namespace OpenAI
                     {
                         for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
                         {
-                            mnn.handcard.card.sim_card.OnAHeroGotHealedTrigger(this, mnn);
+                            mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn);
                         }
                     }
                     else
@@ -4533,7 +4533,7 @@ namespace OpenAI
                         //we are doing this, because we dont do a "real" search on enemys turn
                         for (int i = 0; i < this.tempTrigger.owncharsGotHealed; i++)
                         {
-                            mnn.handcard.card.sim_card.OnAHeroGotHealedTrigger(this, mnn);
+                            mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn);
                         }
                     }
 
@@ -4543,7 +4543,7 @@ namespace OpenAI
                 {
                     for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
                     {
-                        mnn.handcard.card.sim_card.OnAHeroGotHealedTrigger(this, mnn);
+                        mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn);
                     }
                 }
             }
@@ -4554,7 +4554,7 @@ namespace OpenAI
                 {
                     for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
                     {
-                        mnn.handcard.card.sim_card.OnAHeroGotHealedTrigger(this, mnn);
+                        mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn);
                     }
 
                 }
@@ -4725,7 +4725,7 @@ namespace OpenAI
 
                 if (m.name == CardDB.cardName.wrathguard && m.anzGotDmg >= 1)
                 {
-                    m.handcard.card.sim_card.OnMinionGotDmgTrigger(this, m, m.own);
+                    m.handcard.card.sim_card.onMinionGotDmgTrigger(this, m, m.own);
                 }
 
                 m.anzGotDmg = 0;
@@ -4838,7 +4838,7 @@ namespace OpenAI
 
                 if (m.name == CardDB.cardName.wrathguard && m.anzGotDmg >= 1)
                 {
-                    m.handcard.card.sim_card.OnMinionGotDmgTrigger(this, m, m.own);
+                    m.handcard.card.sim_card.onMinionGotDmgTrigger(this, m, m.own);
                 }
 
                 m.anzGotDmg = 0;
@@ -5329,12 +5329,12 @@ namespace OpenAI
                         continue;
                     }
 
-                    m.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
+                    m.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
                 }
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    if (summoningStone != null) summoningStone.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    if (summoningStone != null) summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.enemyMinions)
@@ -5345,7 +5345,7 @@ namespace OpenAI
                     }
                     if (m.name == CardDB.cardName.felreaver)
                     {
-                        m.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
+                        m.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
                     }
                 }
 
@@ -5452,12 +5452,12 @@ namespace OpenAI
                     }
 
 
-                    m.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
+                    m.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
                 }
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    if (summoningStone.handcard != null) summoningStone.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    if (summoningStone.handcard != null) summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.ownMinions)
@@ -5468,7 +5468,7 @@ namespace OpenAI
                     }
                     if (m.name == CardDB.cardName.felreaver)
                     {
-                        m.handcard.card.sim_card.OnCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
+                        m.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
                     }
                 }
 
@@ -5511,7 +5511,7 @@ namespace OpenAI
 
                 if (own && m.name == CardDB.cardName.flamewaker && c.type == CardDB.cardtype.SPELL && !this.isadapt(c))
                 {
-                    m.handcard.card.sim_card.OnCardWasPlayed(this, c, own, m);
+                    m.handcard.card.sim_card.onCardWasPlayed(this, c, own, m);
                 }
 
                 if (m.name == CardDB.cardName.secretkeeper && c.Secret)
@@ -5534,7 +5534,7 @@ namespace OpenAI
 
                 if (!own && m.name == CardDB.cardName.flamewaker && c.type == CardDB.cardtype.SPELL && !this.isadapt(c))
                 {
-                    m.handcard.card.sim_card.OnCardWasPlayed(this, c, own, m);
+                    m.handcard.card.sim_card.onCardWasPlayed(this, c, own, m);
                 }
 
                 if (m.name == CardDB.cardName.secretkeeper && c.Secret)
@@ -5561,7 +5561,7 @@ namespace OpenAI
                 foreach (Minion mnn in this.ownMinions)
                 {
                     if (mnn.silenced) continue;
-                    mnn.handcard.card.sim_card.OnMinionIsSummoned(this, mnn, m);
+                    mnn.handcard.card.sim_card.onMinionIsSummoned(this, mnn, m);
                 }
 
                 if (this.ownWeaponName == CardDB.cardName.swordofjustice)
@@ -5632,13 +5632,13 @@ namespace OpenAI
                 foreach (Minion mnn in this.enemyMinions)
                 {
                     if (mnn.silenced) continue;
-                    mnn.handcard.card.sim_card.OnMinionIsSummoned(this, mnn, m);
+                    mnn.handcard.card.sim_card.onMinionIsSummoned(this, mnn, m);
                 }
 
                 foreach (Minion mnn in this.ownMinions)
                 {
                     if (mnn.silenced) continue;
-                    if (mnn.name == CardDB.cardName.murloctidecaller) mnn.handcard.card.sim_card.OnMinionIsSummoned(this, mnn, m);
+                    if (mnn.name == CardDB.cardName.murloctidecaller) mnn.handcard.card.sim_card.onMinionIsSummoned(this, mnn, m);
                 }
                 if (this.enemyWeaponName == CardDB.cardName.swordofjustice && this.turnCounter != 0)
                 {
@@ -5679,7 +5679,7 @@ namespace OpenAI
                 foreach (Minion m in this.ownMinions)
                 {
                     if (m.silenced) continue;
-                    m.handcard.card.sim_card.OnMinionWasSummoned(this, m, mnn);
+                    m.handcard.card.sim_card.onMinionWasSummoned(this, m, mnn);
                     if (m.handcard.card.name == CardDB.cardName.eeriestatue)
                     {
                         m.updateReadyness(this);
@@ -5693,7 +5693,7 @@ namespace OpenAI
                 foreach (Minion m in this.enemyMinions)
                 {
                     if (m.silenced) continue;
-                    m.handcard.card.sim_card.OnMinionWasSummoned(this, m, mnn);
+                    m.handcard.card.sim_card.onMinionWasSummoned(this, m, mnn);
                     if (m.handcard.card.name == CardDB.cardName.eeriestatue)
                     {
                         m.updateReadyness(this);
@@ -5714,7 +5714,7 @@ namespace OpenAI
             {
                 if (!m.silenced)
                 {
-                    m.handcard.card.sim_card.OnTurnEndsTrigger(this, m, ownturn);
+                    m.handcard.card.sim_card.onTurnEndsTrigger(this, m, ownturn);
                 }
                 if (ownturn == m.own && m.destroyOnOwnTurnEnd) this.minionGetDestroyed(m);
                 if (ownturn != m.own && m.destroyOnEnemyTurnEnd) this.minionGetDestroyed(m);
@@ -5725,7 +5725,7 @@ namespace OpenAI
                 //only gruul + kelthuzad
                 if (!m.silenced && (m.name == CardDB.cardName.gruul || m.name == CardDB.cardName.kelthuzad || m.name == CardDB.cardName.animagolem || m.name == CardDB.cardName.jeeves))
                 {
-                    m.handcard.card.sim_card.OnTurnEndsTrigger(this, m, ownturn);
+                    m.handcard.card.sim_card.onTurnEndsTrigger(this, m, ownturn);
                 }
                 if (ownturn == m.own && m.destroyOnOwnTurnEnd) this.minionGetDestroyed(m);
                 if (ownturn != m.own && m.destroyOnEnemyTurnEnd) this.minionGetDestroyed(m);
@@ -5812,7 +5812,7 @@ namespace OpenAI
                         if (si.canBe_competivespirit)
                         {
                             triggered++;
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_132).sim_card.OnSecretPlay(this, false, 0);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_132).sim_card.onSecretPlay(this, false, 0);
                             si.usedTrigger_EndTurn();
                             secrettrigered = true;
                             foreach (SecretItem sii in this.enemySecretList)
@@ -5837,7 +5837,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        m.handcard.card.sim_card.OnTurnStartTrigger(this, m, ownturn);
+                        m.handcard.card.sim_card.onTurnStartTrigger(this, m, ownturn);
                     }
                 }
                 if (ownturn == m.own && m.destroyOnOwnTurnStart)
@@ -5852,7 +5852,7 @@ namespace OpenAI
             if (summonbigone >= 0)
             {
                 if (summonbigone >= ownm.Count) summonbigone = ownm.Count - 1; //todo - figure out how summonbigone is exceeding the minion count
-                ownm[summonbigone].handcard.card.sim_card.OnTurnStartTrigger(this, ownm[summonbigone], ownturn);
+                ownm[summonbigone].handcard.card.sim_card.onTurnStartTrigger(this, ownm[summonbigone], ownturn);
             }
 
             List<Minion> enemm = (ownturn) ? this.enemyMinions : this.ownMinions;
@@ -5860,7 +5860,7 @@ namespace OpenAI
             {
                 if (!m.silenced)
                 {
-                    if (m.name == CardDB.cardName.micromachine) m.handcard.card.sim_card.OnTurnStartTrigger(this, m, ownturn);
+                    if (m.name == CardDB.cardName.micromachine) m.handcard.card.sim_card.onTurnStartTrigger(this, m, ownturn);
                 }
                 if (ownturn == m.own && m.destroyOnOwnTurnStart) this.minionGetDestroyed(m);
                 if (ownturn != m.own && m.destroyOnEnemyTurnStart) this.minionGetDestroyed(m);
@@ -5942,7 +5942,7 @@ namespace OpenAI
                 {
                     if (m.name == CardDB.cardName.tinyknightofevil && !m.silenced)
                     {
-                        m.handcard.card.sim_card.OnCardWasDiscarded(this, own, m);
+                        m.handcard.card.sim_card.onCardWasDiscarded(this, own, m);
                     }
                 }
             }
@@ -5952,7 +5952,7 @@ namespace OpenAI
                 {
                     if (m.name == CardDB.cardName.tinyknightofevil && !m.silenced)
                     {
-                        m.handcard.card.sim_card.OnCardWasDiscarded(this, own, m);
+                        m.handcard.card.sim_card.onCardWasDiscarded(this, own, m);
                     }
                 }
             }
@@ -6031,7 +6031,7 @@ namespace OpenAI
                         if (si.canBe_Dart)
                         {
                             triggered++;
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.LOE_021).sim_card.OnSecretPlay(this, false, 0);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.LOE_021).sim_card.onSecretPlay(this, false, 0);
                             si.usedTrigger_HeroGotDmg();
                             secrettrigered = true;
                             foreach (SecretItem sii in this.enemySecretList)
@@ -6068,7 +6068,7 @@ namespace OpenAI
                         if (si.canBe_explosive)
                         {
                             triggered++;
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_610).sim_card.OnSecretPlay(this, false, 0);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_610).sim_card.onSecretPlay(this, false, 0);
                             doDmgTriggers();
                             secrettrigered = true;
                             //Helpfunctions.Instance.ErrorLog("trigger explosive" + attacker.Hp);
@@ -6089,7 +6089,7 @@ namespace OpenAI
                                 if (attacker.Angr * 2 + attacker.Hp > m.Angr * 2 + m.Hp) attackerislowestvalue = false;
                             }
 
-                            if (attackerislowestvalue) CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_594).sim_card.OnSecretPlay(this, false, attacker, 0); // to trigger with weak minion
+                            if (attackerislowestvalue) CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_594).sim_card.onSecretPlay(this, false, attacker, 0); // to trigger with weak minion
                             doDmgTriggers();
 
                             si.usedTrigger_CharIsAttacked(true, attacker.isHero);
@@ -6106,7 +6106,7 @@ namespace OpenAI
                             if (!(attacker.isHero && this.ownMinions.Count + this.enemyMinions.Count == 0))
                             {
                                 triggered++;
-                                CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_533).sim_card.OnSecretPlay(this, false, attacker, defender, out newTarget);
+                                CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_533).sim_card.onSecretPlay(this, false, attacker, defender, out newTarget);
                                 si.usedTrigger_CharIsAttacked(true, attacker.isHero);
                                 secrettrigered = true;
                                 //Helpfunctions.Instance.ErrorLog("trigger miss " + attacker.Hp);
@@ -6120,7 +6120,7 @@ namespace OpenAI
                         if (si.canBe_icebarrier)
                         {
                             triggered++;
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_289).sim_card.OnSecretPlay(this, false, defender, 0);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_289).sim_card.onSecretPlay(this, false, defender, 0);
                             si.usedTrigger_CharIsAttacked(true, attacker.isHero);
                             secrettrigered = true;
                             foreach (SecretItem sii in this.enemySecretList)
@@ -6133,7 +6133,7 @@ namespace OpenAI
                         if (si.canBe_beartrap)
                         {
                             triggered++;
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_060).sim_card.OnSecretPlay(this, false, 0);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_060).sim_card.onSecretPlay(this, false, 0);
                             si.usedTrigger_CharIsAttacked(true, attacker.isHero);
                             secrettrigered = true;
                             foreach (SecretItem sii in this.enemySecretList)
@@ -6155,7 +6155,7 @@ namespace OpenAI
                         if (si.canBe_freezing)
                         {
                             triggered++;
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_611).sim_card.OnSecretPlay(this, false, attacker, 0);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_611).sim_card.onSecretPlay(this, false, attacker, 0);
                             if (defender.isHero) si.usedTrigger_CharIsAttacked(true, false);
                             else if (!defender.isHero) si.usedTrigger_CharIsAttacked(false, false);
                             //Helpfunctions.Instance.ErrorLog("trigger freeze " + attacker.name);
@@ -6176,7 +6176,7 @@ namespace OpenAI
                         if (si.canBe_snaketrap)
                         {
                             triggered++;
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_554).sim_card.OnSecretPlay(this, false, 0);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_554).sim_card.onSecretPlay(this, false, 0);
                             if (attacker.isHero) si.usedTrigger_CharIsAttacked(false, true);
                             else if (!attacker.isHero) si.usedTrigger_CharIsAttacked(false, false);
                             secrettrigered = true;
@@ -6200,7 +6200,7 @@ namespace OpenAI
                         bool ishero = defender.isHero;
                         //CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_130).sim_card.onSecretPlay(this, false, attacker, defender, out newTarget);
                         si.usedTrigger_CharIsAttacked(false, false);
-                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_130).sim_card.OnSecretPlay(this, false, attacker, defender, out newTarget);
+                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_130).sim_card.onSecretPlay(this, false, attacker, defender, out newTarget);
                         secrettrigered = true;
                         foreach (SecretItem sii in this.enemySecretList)
                         {
@@ -6232,7 +6232,7 @@ namespace OpenAI
                         if (si.canBe_eyeforaneye)
                         {
                             triggered++;
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_132).sim_card.OnSecretPlay(this, false, dmg);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_132).sim_card.onSecretPlay(this, false, dmg);
                             si.usedTrigger_HeroGotDmg();
                             secrettrigered = true;
                             foreach (SecretItem sii in this.enemySecretList)
@@ -6244,7 +6244,7 @@ namespace OpenAI
                         if (si.canBe_iceblock && this.enemyHero.Hp <= 0)
                         {
                             triggered++;
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_295).sim_card.OnSecretPlay(this, false, this.enemyHero, dmg);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_295).sim_card.onSecretPlay(this, false, this.enemyHero, dmg);
                             si.usedTrigger_HeroGotDmg(true);
                             secrettrigered = true;
                             foreach (SecretItem sii in this.enemySecretList)
@@ -6276,7 +6276,7 @@ namespace OpenAI
                     if (si.canBe_snipe)
                     {
                         triggered++;
-                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_609).sim_card.OnSecretPlay(this, false, playedMinion, 0);
+                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_609).sim_card.onSecretPlay(this, false, playedMinion, 0);
                         doDmgTriggers();
                         si.usedTrigger_MinionIsPlayed(minionCount);
                         secrettrigered = true;
@@ -6290,7 +6290,7 @@ namespace OpenAI
                     if (si.canBe_Trial && minionCount >= 3)
                     {
                         triggered++;
-                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.LOE_027).sim_card.OnSecretPlay(this, false, playedMinion, 0);
+                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.LOE_027).sim_card.onSecretPlay(this, false, playedMinion, 0);
                         doDmgTriggers();
                         si.usedTrigger_MinionIsPlayed(minionCount);
                         secrettrigered = true;
@@ -6303,7 +6303,7 @@ namespace OpenAI
                     if (si.canBe_mirrorentity)
                     {
                         triggered++;
-                        if (this.ownHero.Hp + ownHero.armor >= 14 && this.ownHero.numAttacksThisTurn == 0) CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_294).sim_card.OnSecretPlay(this, false, playedMinion, 0);
+                        if (this.ownHero.Hp + ownHero.armor >= 14 && this.ownHero.numAttacksThisTurn == 0) CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_294).sim_card.onSecretPlay(this, false, playedMinion, 0);
                         si.usedTrigger_MinionIsPlayed(minionCount);
                         secrettrigered = true;
                         foreach (SecretItem sii in this.enemySecretList)
@@ -6364,7 +6364,7 @@ namespace OpenAI
                         triggered++;
                         if (this.isEnemyHasLethal() >= 6)
                         {
-                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_004).sim_card.OnSecretPlay(this, false, 0);
+                            CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_004).sim_card.onSecretPlay(this, false, 0);
                         } //assume trigger when enemy has lethal - to use spells.
                         
                         secrettrigered = true;
@@ -6381,7 +6381,7 @@ namespace OpenAI
                     if (si.canBe_spellbender && target != null && !target.isHero)
                     {
                         triggered++;
-                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.tt_010).sim_card.OnSecretPlay(this, false, null, target, out retval);
+                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.tt_010).sim_card.onSecretPlay(this, false, null, target, out retval);
                         si.usedTrigger_SpellIsPlayed(true);
                         secrettrigered = true;
                         foreach (SecretItem sii in this.enemySecretList)
@@ -6412,7 +6412,7 @@ namespace OpenAI
                     if (si.canBe_duplicate)
                     {
                         triggered++;
-                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.FP1_018).sim_card.OnSecretPlay(this, false, 0);
+                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.FP1_018).sim_card.onSecretPlay(this, false, 0);
                         si.usedTrigger_MinionDied();
                         secrettrigered = true;
                         foreach (SecretItem sii in this.enemySecretList)
@@ -6426,7 +6426,7 @@ namespace OpenAI
                     if (si.canBe_effigy)
                     {
                         //triggered++;
-                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_002).sim_card.OnSecretPlay(this, false, 0);
+                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_002).sim_card.onSecretPlay(this, false, 0);
                         si.usedTrigger_MinionDied();
                         secrettrigered = true;
                         foreach (SecretItem sii in this.enemySecretList)
@@ -6478,7 +6478,7 @@ namespace OpenAI
             //https://www.youtube.com/watch?v=2WrbqsOSbhc
             foreach (Minion m in deathrattles)
             {
-                if (!m.silenced && m.handcard.card.deathrattle) m.handcard.card.sim_card.OnDeathrattle(this, m);
+                if (!m.silenced && m.handcard.card.deathrattle) m.handcard.card.sim_card.onDeathrattle(this, m);
 
                 for (int i = 0; i < m.souloftheforest; i++)
                 {
@@ -6529,7 +6529,7 @@ namespace OpenAI
                 //baron rivendare ??
                 if ((m.own && this.ownBaronRivendare >= 1) || (!m.own && this.enemyBaronRivendare >= 1))
                 {
-                    if (!m.silenced && m.handcard.card.deathrattle) m.handcard.card.sim_card.OnDeathrattle(this, m);
+                    if (!m.silenced && m.handcard.card.deathrattle) m.handcard.card.sim_card.onDeathrattle(this, m);
 
                     for (int i = 0; i < m.souloftheforest; i++)
                     {
@@ -6985,7 +6985,7 @@ namespace OpenAI
             //trigger on summon effect!
             this.triggerAMinionIsSummoned(m, callkid);
             //activate onAura effect
-            m.handcard.card.sim_card.OnAuraStarts(this, m);
+            m.handcard.card.sim_card.onAuraStarts(this, m);
             //buffs minion
             this.minionGetOrEraseAllAreaBuffs(m, true);
             return m;
@@ -7000,23 +7000,23 @@ namespace OpenAI
 
             
             //trigger the battlecry!
-            m.handcard.card.sim_card.GetBattlecryEffect(this, m, target, choice);
+            m.handcard.card.sim_card.getBattlecryEffect(this, m, target, choice);
             if (m.own)
             {
                 if (this.anzOwnBranns >= 1)
                 {
-                    m.handcard.card.sim_card.GetBattlecryEffect(this, m, target, choice);
+                    m.handcard.card.sim_card.getBattlecryEffect(this, m, target, choice);
                 }
             }
             else
             {
                 if (this.anzEnemyBranns >= 1)
                 {
-                    m.handcard.card.sim_card.GetBattlecryEffect(this, m, target, choice);
+                    m.handcard.card.sim_card.getBattlecryEffect(this, m, target, choice);
                 }
             }
             //simcard - non - battlecry
-            m.handcard.card.sim_card.OnCardPlay(this, true, target, choice);
+            m.handcard.card.sim_card.onCardPlay(this, true, target, choice);
 
 
 
@@ -7026,7 +7026,7 @@ namespace OpenAI
             secretTrigger_MinionIsPlayed(m);
             if (this.ownQuest.Id != CardDB.cardIDEnum.None) ownQuest.trigger_MinionWasPlayed(m);
 
-            if (logging) HelpFunctions.Instance.Log("added " + m.handcard.card.name);
+            if (logging) Helpfunctions.Instance.logg("added " + m.handcard.card.name);
         }
 
         public void addMinionToBattlefield(Minion m, bool isSummon = true)
@@ -7890,7 +7890,7 @@ namespace OpenAI
 
             m.setMinionTominion(createNewMinion(hc, m.zonepos, m.own));
 
-            m.handcard.card.sim_card.OnAuraStarts(this, m);
+            m.handcard.card.sim_card.onAuraStarts(this, m);
             this.minionGetOrEraseAllAreaBuffs(m, true);
 
             if (m.own)
@@ -7902,7 +7902,7 @@ namespace OpenAI
                 this.tempTrigger.enemyMininsChanged = true;
             }
 
-            if (logging) HelpFunctions.Instance.Log("minion got sheep" + m.name + " " + m.Angr);
+            if (logging) Helpfunctions.Instance.logg("minion got sheep" + m.name + " " + m.Angr);
         }
 
         public CardDB.Card getRandomCardForManaMinion(int manaCost)
@@ -7969,7 +7969,7 @@ namespace OpenAI
 
             // add minion to new list + new buffs
             newOwnerList.Add(m);
-            m.handcard.card.sim_card.OnAuraStarts(this, m);
+            m.handcard.card.sim_card.onAuraStarts(this, m);
             this.minionGetOrEraseAllAreaBuffs(m, true);
 
             if (m.charge >= 1 || canAttack) // minion can attack if its shadowmadnessed (canAttack = true) or it has charge
@@ -8076,7 +8076,7 @@ namespace OpenAI
             minionGetOrEraseAllAreaBuffs(m, false);
             m.Hp = 1;
             m.maxHp = 1;
-            if (m.wounded && !m.silenced) m.handcard.card.sim_card.OnEnrageStop(this, m);
+            if (m.wounded && !m.silenced) m.handcard.card.sim_card.onEnrageStop(this, m);
             m.wounded = false;
             minionGetOrEraseAllAreaBuffs(m, true);
         }
@@ -8094,7 +8094,7 @@ namespace OpenAI
             minionGetOrEraseAllAreaBuffs(m, false);
             m.Hp = newHp;
             m.maxHp = newHp;
-            if (m.wounded && !m.silenced) m.handcard.card.sim_card.OnEnrageStop(this, m);
+            if (m.wounded && !m.silenced) m.handcard.card.sim_card.onEnrageStop(this, m);
             m.wounded = false;
             minionGetOrEraseAllAreaBuffs(m, true);
         }
@@ -8115,7 +8115,7 @@ namespace OpenAI
             m.Hp = temp;
             m.maxHp = temp;
             m.wounded = false;
-            if (woundedbef) m.handcard.card.sim_card.OnEnrageStop(this, m);
+            if (woundedbef) m.handcard.card.sim_card.onEnrageStop(this, m);
             if (m.Hp <= 0)
             {
                 if (m.own) this.tempTrigger.ownMinionsDied++;
@@ -8626,17 +8626,17 @@ namespace OpenAI
 
         public void debugMinions()
         {
-            HelpFunctions.Instance.Log("OWN MINIONS################");
+            Helpfunctions.Instance.logg("OWN MINIONS################");
 
             foreach (Minion m in this.ownMinions)
             {
-                HelpFunctions.Instance.Log("name,ang, hp, maxhp: " + m.name + ", " + m.Angr + ", " + m.Hp + ", " + m.maxHp);
+                Helpfunctions.Instance.logg("name,ang, hp, maxhp: " + m.name + ", " + m.Angr + ", " + m.Hp + ", " + m.maxHp);
             }
 
-            HelpFunctions.Instance.Log("ENEMY MINIONS############");
+            Helpfunctions.Instance.logg("ENEMY MINIONS############");
             foreach (Minion m in this.enemyMinions)
             {
-                HelpFunctions.Instance.Log("name,ang, hp: " + m.name + ", " + m.Angr + ", " + m.Hp);
+                Helpfunctions.Instance.logg("name,ang, hp: " + m.name + ", " + m.Angr + ", " + m.Hp);
             }
         }
 
@@ -8645,17 +8645,17 @@ namespace OpenAI
             //float copy = Ai.Instance.botBase.getPlayfieldValue(this);
             if (boardnumber >= 0)
             {
-                HelpFunctions.Instance.Log(" ");
-                HelpFunctions.Instance.Log("***index: "+boardnumber + " board: " + value + "  pen: " + this.evaluatePenality +" +++++");
+                Helpfunctions.Instance.logg(" ");
+                Helpfunctions.Instance.logg("***index: "+boardnumber + " board: " + value + "  pen: " + this.evaluatePenality +" +++++");
             }
             else
             {
-                HelpFunctions.Instance.Log("board: " + value + " ++++++++++++++++++++++");
+                Helpfunctions.Instance.logg("board: " + value + " ++++++++++++++++++++++");
             }
 
             if (justactions)
             {
-                HelpFunctions.Instance.Log("HP + Armor: " + this.ownHero.Hp + (this.ownHero.armor > 0  ? "+" + this.ownHero.armor : "") + " VS " + this.enemyHero.Hp + (this.enemyHero.armor > 0 ? "+" + this.enemyHero.armor : "") + "  Minion Count: " + this.ownMinions.Count + " VS " + this.enemyMinions.Count);
+                Helpfunctions.Instance.logg("HP + Armor: " + this.ownHero.Hp + (this.ownHero.armor > 0  ? "+" + this.ownHero.armor : "") + " VS " + this.enemyHero.Hp + (this.enemyHero.armor > 0 ? "+" + this.enemyHero.armor : "") + "  Minion Count: " + this.ownMinions.Count + " VS " + this.enemyMinions.Count);
                 foreach (Action a in this.playactions)
                 {
                     a.print();
@@ -8675,19 +8675,19 @@ namespace OpenAI
             }
             else
             {
-                if (this.evaluatePenality != 0) HelpFunctions.Instance.Log("pen " + this.evaluatePenality);
+                if (this.evaluatePenality != 0) Helpfunctions.Instance.logg("pen " + this.evaluatePenality);
                 //if (PenalityManager.Instance.penaltylmanager_penalty != 0) Helpfunctions.Instance.logg("penaltymanager _ penalty :   " + PenalityManager.Instance.penaltylmanager_penalty);
 
-                if (this.selectedChoice >= 1) HelpFunctions.Instance.Log("tracking " + this.selectedChoice);
-                if (this.selectedChoice >= 1) HelpFunctions.Instance.Log("lastplayedcard " + this.LastPlayedCard);
-                HelpFunctions.Instance.Log("mana " + this.mana + "/" + this.ownMaxMana + " turnEndMana " + this.manaTurnEnd);
-                HelpFunctions.Instance.Log("cardsplayed: " + this.cardsPlayedThisTurn + " handsize: " + this.owncards.Count + " vs " + this.enemyAnzCards);
+                if (this.selectedChoice >= 1) Helpfunctions.Instance.logg("tracking " + this.selectedChoice);
+                if (this.selectedChoice >= 1) Helpfunctions.Instance.logg("lastplayedcard " + this.LastPlayedCard);
+                Helpfunctions.Instance.logg("mana " + this.mana + "/" + this.ownMaxMana + " turnEndMana " + this.manaTurnEnd);
+                Helpfunctions.Instance.logg("cardsplayed: " + this.cardsPlayedThisTurn + " handsize: " + this.owncards.Count + " vs " + this.enemyAnzCards);
 
                 //Helpfunctions.Instance.logg("ownhero: ");
-                HelpFunctions.Instance.Log("ownherohp: " + this.ownHero.Hp + " + " + this.ownHero.armor);
-                if (this.ownHero.Angr >= 1) HelpFunctions.Instance.Log("ownheroattack: " + this.ownHero.Angr);
-                if (this.ownWeaponAttack >= 1) HelpFunctions.Instance.Log("ownheroweapon: " + this.ownWeaponAttack + " " + this.ownWeaponDurability + " " + this.ownWeaponName + (this.ownHero.poisonous ? " poisonous" : ""));
-                if (this.ownHero.frozen) HelpFunctions.Instance.Log("ownherostatus: frozen" + this.ownHero.frozen + " ");
+                Helpfunctions.Instance.logg("ownherohp: " + this.ownHero.Hp + " + " + this.ownHero.armor);
+                if (this.ownHero.Angr >= 1) Helpfunctions.Instance.logg("ownheroattack: " + this.ownHero.Angr);
+                if (this.ownWeaponAttack >= 1) Helpfunctions.Instance.logg("ownheroweapon: " + this.ownWeaponAttack + " " + this.ownWeaponDurability + " " + this.ownWeaponName + (this.ownHero.poisonous ? " poisonous" : ""));
+                if (this.ownHero.frozen) Helpfunctions.Instance.logg("ownherostatus: frozen" + this.ownHero.frozen + " ");
                 if (this.ownSecretsIDList.Count >= 1)
                 {
                     //string secs = "";
@@ -8701,67 +8701,67 @@ namespace OpenAI
                     {
                         secID += sec + " ";
                     }
-                    HelpFunctions.Instance.Log("own secrets ID: " + secID + "\r\n");
+                    Helpfunctions.Instance.logg("own secrets ID: " + secID + "\r\n");
                 }
 
-                HelpFunctions.Instance.Log("enemyherohp: " + this.enemyHero.Hp + " + " + this.enemyHero.armor + ((this.enemyHero.immune) ? " immune" : ""));
+                Helpfunctions.Instance.logg("enemyherohp: " + this.enemyHero.Hp + " + " + this.enemyHero.armor + ((this.enemyHero.immune) ? " immune" : ""));
 
-                if (this.enemyWeaponAttack >= 1) HelpFunctions.Instance.Log("enemyheroweapon: " + this.enemyWeaponAttack + " " + this.enemyWeaponDurability + " " + this.enemyWeaponName);
-                if (this.enemyHero.frozen) HelpFunctions.Instance.Log("enemyherostatus: frozen" + this.enemyHero.frozen + " ");
-                if (this.enemySecretCount >= 1) HelpFunctions.Instance.Log("enemySecrets: " + this.enemySecretCount + " " + Probabilitymaker.Instance.getEnemySecretData(this.enemySecretList));
+                if (this.enemyWeaponAttack >= 1) Helpfunctions.Instance.logg("enemyheroweapon: " + this.enemyWeaponAttack + " " + this.enemyWeaponDurability + " " + this.enemyWeaponName);
+                if (this.enemyHero.frozen) Helpfunctions.Instance.logg("enemyherostatus: frozen" + this.enemyHero.frozen + " ");
+                if (this.enemySecretCount >= 1) Helpfunctions.Instance.logg("enemySecrets: " + this.enemySecretCount + " " + Probabilitymaker.Instance.getEnemySecretData(this.enemySecretList));
                 /*foreach (Action a in this.playactions)
                 {
                     a.print();
                 }*/
-                if (ownMinions.Count != 0) HelpFunctions.Instance.Log("\r\n" + "OWN MINIONS################");
+                if (ownMinions.Count != 0) Helpfunctions.Instance.logg("\r\n" + "OWN MINIONS################");
 
                 foreach (Minion m in this.ownMinions)
                 {
                     String attrib = this.getMinionString(m);
-                    HelpFunctions.Instance.Log(attrib);
+                    Helpfunctions.Instance.logg(attrib);
                 }
 
-                if (enemyMinions.Count != 0) HelpFunctions.Instance.Log("\r\n" + "ENEMY MINIONS############");
+                if (enemyMinions.Count != 0) Helpfunctions.Instance.logg("\r\n" + "ENEMY MINIONS############");
                 foreach (Minion m in this.enemyMinions)
                 {
                     String attrib = this.getMinionString(m);
-                    HelpFunctions.Instance.Log(attrib);
+                    Helpfunctions.Instance.logg(attrib);
                 }
 
                 if (boardnumber <= 100)
                 {
-                    HelpFunctions.Instance.Log("");
+                    Helpfunctions.Instance.logg("");
 
                     foreach (Action a in this.playactions)
                     {
                         a.print();
                     }
-                    HelpFunctions.Instance.Log("----------------------------------------");
+                    Helpfunctions.Instance.logg("----------------------------------------");
 
                 }
             }
 
             
-            HelpFunctions.Instance.Log("");
+            Helpfunctions.Instance.logg("");
         }
 
         public void printBoardDebug()
         {
-            HelpFunctions.Instance.Log("hero " + this.ownHero.Hp + " " + this.ownHero.armor + " " + this.ownHero.entityID);
-            HelpFunctions.Instance.Log("ehero " + this.enemyHero.Hp + " " + this.enemyHero.armor + " " + this.enemyHero.entityID);
+            Helpfunctions.Instance.logg("hero " + this.ownHero.Hp + " " + this.ownHero.armor + " " + this.ownHero.entityID);
+            Helpfunctions.Instance.logg("ehero " + this.enemyHero.Hp + " " + this.enemyHero.armor + " " + this.enemyHero.entityID);
             foreach (Minion m in ownMinions)
             {
-                HelpFunctions.Instance.Log(m.name + " " + m.entityID);
+                Helpfunctions.Instance.logg(m.name + " " + m.entityID);
             }
-            HelpFunctions.Instance.Log("-");
+            Helpfunctions.Instance.logg("-");
             foreach (Minion m in enemyMinions)
             {
-                HelpFunctions.Instance.Log(m.name + " " + m.entityID);
+                Helpfunctions.Instance.logg(m.name + " " + m.entityID);
             }
-            HelpFunctions.Instance.Log("-");
+            Helpfunctions.Instance.logg("-");
             foreach (Handmanager.Handcard hc in this.owncards)
             {
-                HelpFunctions.Instance.Log(hc.position + " " + hc.card.name + " " + hc.entity);
+                Helpfunctions.Instance.logg(hc.position + " " + hc.card.name + " " + hc.entity);
             }
         }
 
@@ -8776,107 +8776,107 @@ namespace OpenAI
             foreach (Action a in this.playactions)
             {
                 a.print(toBuffer);
-                HelpFunctions.Instance.Log("");
+                Helpfunctions.Instance.logg("");
             }
         }
 
         public void printActionforDummies(Action a)
         {
-            if (a.actionType == ActionType.PLAY_CARD)
+            if (a.actionType == actionEnum.playcard)
             {
-                HelpFunctions.Instance.ErrorLog("play " + a.card.card.name);
+                Helpfunctions.Instance.ErrorLog("play " + a.card.card.name);
                 if (a.druidchoice >= 1)
                 {
                     string choose = (a.druidchoice == 1) ? "left card" : "right card";
-                    HelpFunctions.Instance.ErrorLog("choose the " + choose);
+                    Helpfunctions.Instance.ErrorLog("choose the " + choose);
                 }
                 if (a.place >= 1)
                 {
-                    HelpFunctions.Instance.ErrorLog("on position " + a.place);
+                    Helpfunctions.Instance.ErrorLog("on position " + a.place);
                 }
                 if (a.target != null)
                 {
                     if (!a.target.own && !a.target.isHero)
                     {
                         string ename = "" + a.target.name;
-                        HelpFunctions.Instance.ErrorLog("and target to the enemy " + ename);
+                        Helpfunctions.Instance.ErrorLog("and target to the enemy " + ename);
                     }
 
                     if (a.target.own && !a.target.isHero)
                     {
                         string ename = "" + a.target.name;
-                        HelpFunctions.Instance.ErrorLog("and target to your own" + ename);
+                        Helpfunctions.Instance.ErrorLog("and target to your own" + ename);
                     }
 
                     if (a.target.own && a.target.isHero)
                     {
-                        HelpFunctions.Instance.ErrorLog("and target your own hero");
+                        Helpfunctions.Instance.ErrorLog("and target your own hero");
                     }
 
                     if (!a.target.own && a.target.isHero)
                     {
-                        HelpFunctions.Instance.ErrorLog("and target to the enemy hero");
+                        Helpfunctions.Instance.ErrorLog("and target to the enemy hero");
                     }
                 }
 
             }
-            if (a.actionType == ActionType.ATTACK_WITH_MINION && a.target != null)
+            if (a.actionType == actionEnum.attackWithMinion && a.target != null)
             {
                 string name = "" + a.own.name;
                 if (a.target.isHero)
                 {
-                    HelpFunctions.Instance.ErrorLog("attack with: " + name + " the enemy hero");
+                    Helpfunctions.Instance.ErrorLog("attack with: " + name + " the enemy hero");
                 }
                 else
                 {
                     string ename = "" + a.target.name;
-                    HelpFunctions.Instance.ErrorLog("attack with: " + name + " the enemy: " + ename);
+                    Helpfunctions.Instance.ErrorLog("attack with: " + name + " the enemy: " + ename);
                 }
 
             }
 
-            if (a.actionType == ActionType.ATTACK_WITH_HERO && a.target != null)
+            if (a.actionType == actionEnum.attackWithHero && a.target != null)
             {
                 if (a.target.isHero)
                 {
-                    HelpFunctions.Instance.ErrorLog("attack with your hero the enemy hero!");
+                    Helpfunctions.Instance.ErrorLog("attack with your hero the enemy hero!");
                 }
                 else
                 {
                     string ename = "" + a.target.name;
-                    HelpFunctions.Instance.ErrorLog("attack with the hero, and choose the enemy: " + ename);
+                    Helpfunctions.Instance.ErrorLog("attack with the hero, and choose the enemy: " + ename);
                 }
             }
-            if (a.actionType == ActionType.USE_HERO_POWER)
+            if (a.actionType == actionEnum.useHeroPower)
             {
-                HelpFunctions.Instance.ErrorLog("use your Heropower ");
+                Helpfunctions.Instance.ErrorLog("use your Heropower ");
                 if (a.target != null)
                 {
                     if (!a.target.own && !a.target.isHero)
                     {
                         string ename = "" + a.target.name;
-                        HelpFunctions.Instance.ErrorLog("on enemy: " + ename);
+                        Helpfunctions.Instance.ErrorLog("on enemy: " + ename);
                     }
 
                     if (a.target.own && !a.target.isHero)
                     {
                         string ename = "" + a.target.name;
-                        HelpFunctions.Instance.ErrorLog("on your own: " + ename);
+                        Helpfunctions.Instance.ErrorLog("on your own: " + ename);
                     }
 
                     if (a.target.own && a.target.isHero)
                     {
-                        HelpFunctions.Instance.ErrorLog("on your own hero");
+                        Helpfunctions.Instance.ErrorLog("on your own hero");
                     }
 
                     if (!a.target.own && a.target.isHero)
                     {
-                        HelpFunctions.Instance.ErrorLog("on your the enemy hero");
+                        Helpfunctions.Instance.ErrorLog("on your the enemy hero");
                     }
 
                 }
             }
-            HelpFunctions.Instance.ErrorLog("");
+            Helpfunctions.Instance.ErrorLog("");
 
         }
 
@@ -9066,7 +9066,7 @@ namespace OpenAI
                             removedCard.card.cardIDenum == CardDB.cardIDEnum.KAR_205 ||
                             removedCard.card.cardIDenum == CardDB.cardIDEnum.UNG_836)
                         {
-                            removedCard.card.sim_card.OnCardIsDiscarded(this, removedCard.card, true);
+                            removedCard.card.sim_card.onCardIsDiscarded(this, removedCard.card, true);
                         }
                         this.owncards.RemoveAt(0);
                         this.triggerACardWasDiscarded(true);

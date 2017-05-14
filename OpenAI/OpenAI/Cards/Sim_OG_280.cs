@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Battlecry: Deal damage equal to this minion's Attack randomly split among all enemies.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int times = p.anzOgOwnCThunAngrBonus + 6 - own.Angr;
             if (times < 1) times = own.Angr;

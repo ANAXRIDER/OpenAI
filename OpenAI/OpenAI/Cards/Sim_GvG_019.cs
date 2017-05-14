@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Deal $5 damage to a minion.  If it's a friendly Demon, give it +5/+5 instead.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (target.own == ownplay && (TAG_RACE)target.handcard.card.race == TAG_RACE.DEMON)
             {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    verursacht $3 schaden. verursacht stattdessen $5 schaden, wenn ihr ein wildtier besitzt.
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             if (ownplay)
             {

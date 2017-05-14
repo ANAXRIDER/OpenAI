@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
         //Whenever you summon a Murloc, gain +1 Attack.
-        public override void OnMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        public override void onMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if (triggerEffectMinion.own == summonedMinion.own && summonedMinion.handcard.card.race == TAG_RACE.MURLOC)
             {

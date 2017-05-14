@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Deathrattle: Shuffle this minion into your opponent's deck.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             if (m.own) p.enemyDeckSize++;
             else p.ownDeckSize++;

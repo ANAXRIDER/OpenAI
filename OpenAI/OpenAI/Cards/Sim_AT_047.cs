@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   btlcry: Gain +1/+1 for each friendly Totem
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_050);//searing
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int totems = 0;
             foreach (Minion m in (own.own) ? p.ownMinions : p.enemyMinions)

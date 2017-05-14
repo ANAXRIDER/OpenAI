@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Restore 12 Health to your hero.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int heal = (ownplay) ? p.getSpellHeal(12) : p.getEnemySpellHeal(12);
 			p.minionGetDamageOrHeal(ownplay ? p.ownHero : p.enemyHero, -heal);

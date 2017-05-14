@@ -10,7 +10,7 @@ namespace OpenAI
 
         //updates his readyness if minion dies or is summoned
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
            
         }

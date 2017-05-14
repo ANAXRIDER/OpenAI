@@ -9,7 +9,7 @@ namespace OpenAI
 
         //For the rest of the game, your minions are 5/5.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay)
             {

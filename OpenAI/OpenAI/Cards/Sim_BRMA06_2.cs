@@ -10,7 +10,7 @@ namespace OpenAI
 		
 		CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRMA06_4);//1/3Flamewaker Acolyte
 		
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int place = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
             p.callKid(kid, place, ownplay, false);

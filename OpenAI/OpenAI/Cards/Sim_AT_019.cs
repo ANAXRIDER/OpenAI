@@ -11,7 +11,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_019); //captain greenskin
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             int pos = (m.own) ? p.ownMinions.Count : p.enemyMinions.Count;
 

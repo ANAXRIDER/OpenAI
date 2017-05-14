@@ -10,7 +10,7 @@ namespace OpenAI
         // Battlecry: Add 4 random Murlocs to your hand. Overload: (3)
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_168);
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 
             p.changeRecall(own.own, 3);

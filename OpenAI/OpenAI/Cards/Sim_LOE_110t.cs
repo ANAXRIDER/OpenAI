@@ -9,7 +9,7 @@ namespace OpenAI
 
         //shouldnt happen.. but if we have this on hand.. draw a card
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.drawACard(CardDB.cardIDEnum.None, ownplay);
         }

@@ -7,7 +7,7 @@ namespace OpenAI
     class Sim_EX1_007 : SimTemplate//Acolyte of Pain
     {
         //  <deDE>Zieht jedes Mal eine Karte, wenn dieser Diener Schaden erleidet.</deDE>
-        public override void OnMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdMinion)
+        public override void onMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdMinion)
         {
             if (triggerEffectMinion.anzGotDmg >= 1)
             {

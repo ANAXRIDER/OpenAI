@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace OpenAI
 {
@@ -123,15 +122,15 @@ namespace OpenAI
                 //warn about invalid data even though we accepted it (parts of reqs may be usable)
                 if (id != "#MANARULE" && CardDB.Instance.cardIdstringToEnum(id) == CardDB.cardIDEnum.None)
                 {
-                    HelpFunctions.Instance.ErrorLog("[Mulligan] CardID: \"" + id + "\" is not a valid card");
+                    Helpfunctions.Instance.ErrorLog("[Mulligan] CardID: \"" + id + "\" is not a valid card");
                 }
                 if (own != "all" && Hrtprozis.Instance.heroNametoEnum(own) == HeroEnum.None)
                 {
-                    HelpFunctions.Instance.ErrorLog("[Mulligan] Class: \"" + own + "\" is not a valid class");
+                    Helpfunctions.Instance.ErrorLog("[Mulligan] Class: \"" + own + "\" is not a valid class");
                 }
                 if (enemy != "all" && Hrtprozis.Instance.heroNametoEnum(enemy) == HeroEnum.None)
                 {
-                    HelpFunctions.Instance.ErrorLog("[Mulligan] Class: \"" + enemy + "\" is not a valid class");
+                    Helpfunctions.Instance.ErrorLog("[Mulligan] Class: \"" + enemy + "\" is not a valid class");
                 }
                 if (req != null)
                 {
@@ -142,7 +141,7 @@ namespace OpenAI
                         {
                             if (CardDB.Instance.cardIdstringToEnum(crd.Split(',')[0]) == CardDB.cardIDEnum.None)
                             {
-                                HelpFunctions.Instance.ErrorLog("[Mulligan] CardID: \"" + crd + "\" is not a valid card");
+                                Helpfunctions.Instance.ErrorLog("[Mulligan] CardID: \"" + crd + "\" is not a valid card");
                             }
                         }
                     }
@@ -197,7 +196,7 @@ namespace OpenAI
 
         public void loggCleanPath()
         {
-            HelpFunctions.Instance.Log(cleanPath);
+            Helpfunctions.Instance.logg(cleanPath);
         }
 
         private void readMulligan()
@@ -206,63 +205,52 @@ namespace OpenAI
             cardlist.Clear();
             holdDB.Clear();
             concedelist.Clear();
-         
-            /*
-            string path = OpenAIPath.SettingsPath;
-            string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
-            string datapath = path + "Data" + Path.DirectorySeparatorChar;
-            string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;
-            string classpath = datapath + ownClass + Path.DirectorySeparatorChar;
-            string cleanclasspath = cleandatapath + ownClass + Path.DirectorySeparatorChar;
-            string deckpath = classpath + deckName + Path.DirectorySeparatorChar;
-            string cleandeckpath = cleanclasspath + deckName + Path.DirectorySeparatorChar;
+            
+            string path = Settings.Instance.path;
+            string cleanpath = "Silverfish" + System.IO.Path.DirectorySeparatorChar;
+            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string cleandatapath = cleanpath + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string cleanclasspath = cleandatapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+            string cleandeckpath = cleanclasspath + deckName + System.IO.Path.DirectorySeparatorChar;
             const string filestring = "_mulligan.txt";
 
 
-            if (deckName != "" && File.Exists(deckpath + filestring))
+            if (deckName != "" && System.IO.File.Exists(deckpath + filestring))
             {
                 path = deckpath;
                 cleanPath = cleandeckpath + filestring;
             }
-            else if (deckName != "" && File.Exists(classpath + filestring))
+            else if (deckName != "" && System.IO.File.Exists(classpath + filestring))
             {
                 path = classpath;
                 cleanPath = cleanclasspath + filestring;
             }
-            else if (deckName != "" && File.Exists(datapath + filestring))
+            else if (deckName != "" && System.IO.File.Exists(datapath + filestring))
             {
                 path = datapath;
                 cleanPath = cleandatapath + filestring;
             }
-            else if (File.Exists(path + filestring))
+            else if (System.IO.File.Exists(path + filestring))
             {
                 cleanPath = cleanpath + filestring;
             }
             else
             {
-                HelpFunctions.Instance.ErrorLog("[Mulligan] cant find base _mulligan.txt, consider creating one");
+                Helpfunctions.Instance.ErrorLog("[Mulligan] cant find base _mulligan.txt, consider creating one");
                 return;
             }
-            HelpFunctions.Instance.ErrorLog("[Mulligan] read " + cleanPath);
-            */
-            if (File.Exists(PathFile.Mulligan))
-            {
-                // Do something
-            }
-            else
-            {
-                HelpFunctions.Instance.ErrorLog("[Mulligan] cant find base _mulligan.txt, consider creating one");
-                return;
-            }
-            HelpFunctions.Instance.ErrorLog("[Mulligan] read " + PathFile.Mulligan);
+            Helpfunctions.Instance.ErrorLog("[Mulligan] read " + cleanPath);
+            
 
             try
             {
-                lines = File.ReadAllLines(PathFile.Mulligan);
+                lines = System.IO.File.ReadAllLines(path + "_mulligan.txt");
             }
             catch
             {
-                HelpFunctions.Instance.ErrorLog("[Mulligan] _mulligan.txt read error. Continuing without user-defined rules.");
+                Helpfunctions.Instance.ErrorLog("[Mulligan] _mulligan.txt read error. Continuing without user-defined rules.");
                 return;
             }
 
@@ -302,18 +290,18 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog("[Mulligan] cant read: " + ln);
+                        Helpfunctions.Instance.ErrorLog("[Mulligan] cant read: " + ln);
                     }
                     continue;
                 }
                 else
                 {
-                    HelpFunctions.Instance.ErrorLog("[Mulligan] cant read: " + ln);
+                    Helpfunctions.Instance.ErrorLog("[Mulligan] cant read: " + ln);
                 }
             }
 
-            if (cardlist.Count > 0) HelpFunctions.Instance.ErrorLog("[Mulligan] " + cardlist.Count + " rules found");
-            if (concedelist.Count > 0) HelpFunctions.Instance.ErrorLog("[Mulligan] " + concedelist.Count + " concede rules found");
+            if (cardlist.Count > 0) Helpfunctions.Instance.ErrorLog("[Mulligan] " + cardlist.Count + " rules found");
+            if (concedelist.Count > 0) Helpfunctions.Instance.ErrorLog("[Mulligan] " + concedelist.Count + " concede rules found");
         }
 
         private void addRule(string line)
@@ -368,7 +356,7 @@ namespace OpenAI
             }
             catch
             {
-                HelpFunctions.Instance.ErrorLog("[Mulligan] cant read: " + line);
+                Helpfunctions.Instance.ErrorLog("[Mulligan] cant read: " + line);
             }
         }
 
@@ -421,7 +409,7 @@ namespace OpenAI
             }
             catch
             {
-                HelpFunctions.Instance.ErrorLog("[Mulligan] cant read: " + line);
+                Helpfunctions.Instance.ErrorLog("[Mulligan] cant read: " + line);
             }
         }
 
@@ -433,7 +421,7 @@ namespace OpenAI
             {
                 if ((mi.enemyclass == "all" || mi.enemyclass == enemclass) && (mi.ownclass == "all" || mi.ownclass == ownclass)) hasARule = true;
             }
-            if (!hasARule) HelpFunctions.Instance.Log("[Mulligan] using default rules for " + ownclass + " vs " + enemclass);
+            if (!hasARule) Helpfunctions.Instance.logg("[Mulligan] using default rules for " + ownclass + " vs " + enemclass);
             return hasARule;
         }
 
@@ -449,14 +437,14 @@ namespace OpenAI
 
         public List<int> whatShouldIMulligan(List<CardIDEntity> cards, string ownclass, string enemclass, bool hascoin)
         {
-            HelpFunctions.Instance.ErrorLog("[Mulligan] do mulligan...");
+            Helpfunctions.Instance.ErrorLog("[Mulligan] do mulligan...");
             if (hascoin)
             {
-                HelpFunctions.Instance.ErrorLog("[Mulligan] we hold the coin");
+                Helpfunctions.Instance.ErrorLog("[Mulligan] we hold the coin");
             }
             else
             {
-                HelpFunctions.Instance.ErrorLog("[Mulligan] we don't hold the coin");
+                Helpfunctions.Instance.ErrorLog("[Mulligan] we don't hold the coin");
             }
 
             List<int> discarditems = new List<int>();
@@ -482,7 +470,7 @@ namespace OpenAI
             mullstring += ";" + ownclass + ";" + enemclass + ";";
             mullstring += (hascoin) ? "coin" : "nocoin";
 
-            HelpFunctions.Instance.Log("[Mulligan] mulltest string: " + mullstring);
+            Helpfunctions.Instance.logg("[Mulligan] mulltest string: " + mullstring);
             
 
             foreach (CardIDEntity c in cards)
@@ -499,7 +487,7 @@ namespace OpenAI
                         {
                             if (CardDB.Instance.getCardDataFromID(c.id).cost <= mi.manarule)
                             {
-                                HelpFunctions.Instance.ErrorLog("[Mulligan] HOLD MANA rule holding: " + c.idstring);
+                                Helpfunctions.Instance.ErrorLog("[Mulligan] HOLD MANA rule holding: " + c.idstring);
                                 setHoldCount(c.idstring, 2);
                             }
                         }
@@ -507,12 +495,12 @@ namespace OpenAI
                         {
                             if (CardDB.Instance.getCardDataFromID(c.id).cost <= mi.manarule)
                             {
-                                HelpFunctions.Instance.ErrorLog("[Mulligan] DISCARD MANA rule discarding: " + c.idstring);
+                                Helpfunctions.Instance.ErrorLog("[Mulligan] DISCARD MANA rule discarding: " + c.idstring);
                                 setHoldCount(c.idstring, -2);
                             }
                             else
                             {
-                                HelpFunctions.Instance.ErrorLog("[Mulligan] DISCARD MANA rule holding: " + c.idstring);
+                                Helpfunctions.Instance.ErrorLog("[Mulligan] DISCARD MANA rule holding: " + c.idstring);
                                 setHoldCount(c.idstring, 2); //hold 2 so they don't get discarded by default
                             }
                         }
@@ -525,12 +513,12 @@ namespace OpenAI
                         {
                             if (mi.holdrule)
                             {
-                                HelpFunctions.Instance.ErrorLog("[Mulligan] HOLD: " + mi.cardid + " x" + mi.count);
+                                Helpfunctions.Instance.ErrorLog("[Mulligan] HOLD: " + mi.cardid + " x" + mi.count);
                                 setHoldCount(mi.cardid, mi.count);
                             }
                             else
                             {
-                                HelpFunctions.Instance.ErrorLog("[Mulligan] DISCARD: " + mi.cardid + " x" + mi.count);
+                                Helpfunctions.Instance.ErrorLog("[Mulligan] DISCARD: " + mi.cardid + " x" + mi.count);
                                 setHoldCount(mi.cardid, -mi.count);
                             }
                             continue;
@@ -570,12 +558,12 @@ namespace OpenAI
                                     {
                                         if (mi.holdrule)
                                         {
-                                            HelpFunctions.Instance.ErrorLog("[Mulligan] HOLD: " + card.Key + " x" + card.Value + ", for: " + mi.cardid + " x" + mi.count);
+                                            Helpfunctions.Instance.ErrorLog("[Mulligan] HOLD: " + card.Key + " x" + card.Value + ", for: " + mi.cardid + " x" + mi.count);
                                             setHoldCount(card.Key, card.Value);
                                         }
                                         else
                                         {
-                                            HelpFunctions.Instance.ErrorLog("[Mulligan] DISCARD: " + card.Key + " x" + card.Value + ", for: " + mi.cardid + " x" + mi.count);
+                                            Helpfunctions.Instance.ErrorLog("[Mulligan] DISCARD: " + card.Key + " x" + card.Value + ", for: " + mi.cardid + " x" + mi.count);
                                             setHoldCount(card.Key, -card.Value);
                                         }
                                     }
@@ -588,12 +576,12 @@ namespace OpenAI
                             {
                                 if (mi.holdrule)
                                 {
-                                    HelpFunctions.Instance.ErrorLog("[Mulligan] HOLD: " + mi.cardid + " x" + mi.count);
+                                    Helpfunctions.Instance.ErrorLog("[Mulligan] HOLD: " + mi.cardid + " x" + mi.count);
                                     setHoldCount(mi.cardid, mi.count);
                                 }
                                 else
                                 {
-                                    HelpFunctions.Instance.ErrorLog("[Mulligan] DISCARD: " + mi.cardid + " x" + mi.count);
+                                    Helpfunctions.Instance.ErrorLog("[Mulligan] DISCARD: " + mi.cardid + " x" + mi.count);
                                     setHoldCount(mi.cardid, -mi.count);
                                 }
                             }
@@ -626,7 +614,7 @@ namespace OpenAI
                         break;
                 }
             }
-            HelpFunctions.Instance.Log("[Mulligan] final discards:" + discards);
+            Helpfunctions.Instance.logg("[Mulligan] final discards:" + discards);
 
             return discarditems;
 
@@ -680,11 +668,12 @@ namespace OpenAI
             string[] lines = new string[] { };
             try
             {
-                lines = File.ReadAllLines(PathFile.Mulligan);
+                string path = Settings.Instance.path;
+                lines = System.IO.File.ReadAllLines(path + "mulltest.txt");
             }
             catch
             {
-                HelpFunctions.Instance.ErrorLog("[Mulligan] cant find mulltest.txt (only for debugging mulligans)");
+                Helpfunctions.Instance.ErrorLog("[Mulligan] cant find mulltest.txt (only for debugging mulligans)");
                 return;
             }
             foreach (string line in lines)
@@ -695,7 +684,7 @@ namespace OpenAI
                 for (int i = 0; i < ln.Split(';')[0].Split(',').Length; i++)
                 {
                     string card = ln.Split(';')[0].Split(',')[i];
-                    HelpFunctions.Instance.ErrorLog("[Mulligan] hand contains card: " + card);
+                    Helpfunctions.Instance.ErrorLog("[Mulligan] hand contains card: " + card);
                     cards.Add(new CardIDEntity(card, i));
                 }
                 Instance.whatShouldIMulligan(cards, ln.Split(';')[1], ln.Split(';')[2], (ln.Split(';')[3] == "coin"));

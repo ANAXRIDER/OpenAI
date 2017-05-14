@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Set a minion's Attack and Health to 10.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.minionSetAngrToX(target, 10);
             p.minionSetLifetoX(target, 10);

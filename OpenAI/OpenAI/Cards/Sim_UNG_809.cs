@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Add a 1/2 Elemental to your hand.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.CardToHand(CardDB.cardName.flameelemental, own.own);
         }

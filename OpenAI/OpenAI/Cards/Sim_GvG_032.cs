@@ -7,7 +7,7 @@ namespace OpenAI
     class Sim_GVG_032 : SimTemplate //Grove Tender
     {
         //    Choose One - Give each player a Mana Crystal; or Each player draws a card.
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             bool hasfandral = false;
             if (p.ownMinions.Find(a => a.name == CardDB.cardName.fandralstaghelm && !a.silenced) != null) hasfandral = true;

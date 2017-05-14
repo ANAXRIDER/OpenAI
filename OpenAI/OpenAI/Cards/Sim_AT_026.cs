@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Whenever this minion takes damage, also deal that amount to your hero.
 
-        public override void OnMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdMinion)
+        public override void onMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdMinion)
         {
             if (triggerEffectMinion.anzGotDmg >= 1)
             {

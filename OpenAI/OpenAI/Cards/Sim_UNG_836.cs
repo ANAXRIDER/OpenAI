@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Whenever you discard this, give it +2/+2 and return it to your hand.
 
-        public override void OnCardIsDiscarded(Playfield p, CardDB.Card card, bool own)
+        public override void onCardIsDiscarded(Playfield p, CardDB.Card card, bool own)
         {
             if (own)
             {
@@ -24,8 +24,8 @@ namespace OpenAI
                 }
                 foreach (Handmanager.Handcard hccc in p.owncards)
                 {
-                    HelpFunctions.Instance.ErrorLog("" + hccc.card.name);
-                    HelpFunctions.Instance.ErrorLog("addattack : " + hccc.addattack + "addhp : " + hccc.addHp);
+                    Helpfunctions.Instance.ErrorLog("" + hccc.card.name);
+                    Helpfunctions.Instance.ErrorLog("addattack : " + hccc.addattack + "addhp : " + hccc.addHp);
                 }
                 
             }

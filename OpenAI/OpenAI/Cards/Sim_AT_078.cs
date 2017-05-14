@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Destroy all minions except each player's highest Attack minion.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int maxid = 0;
             int maxat = -1;

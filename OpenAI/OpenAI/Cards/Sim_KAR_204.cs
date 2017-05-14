@@ -9,7 +9,7 @@ namespace OpenAI
         // Battlecry: Summon a friendly minion that died this game.
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS1_042); //Goldshire Footman
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own && Probabilitymaker.Instance.ownGraveYardCommonAttack >= 1)
             {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: Give your Demons +1/+1.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             List<Minion> temp = (m.own) ? p.ownMinions : p.enemyMinions;
             foreach (Minion mnn in temp)

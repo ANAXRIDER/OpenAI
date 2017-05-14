@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //This turn, your healing effects deal damage instead.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{			
             if (ownplay)
             {

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    fügt am ende eures zuges allen anderen charakteren 2 schaden zu.
 
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (turnEndOfOwner == triggerEffectMinion.own)
             {

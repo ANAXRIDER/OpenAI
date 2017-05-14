@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    verleiht einem befreundeten diener bis zum ende des zuges +4/+4. dann stirbt er. auf schreckliche art und weise.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.minionGetBuffed(target, 4, 4);
             if (ownplay)

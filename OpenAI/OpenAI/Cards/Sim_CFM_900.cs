@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Whenever you summon a minion, deal 5 damage to your Hero.
 
-        public override void OnMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        public override void onMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if (triggerEffectMinion.own == summonedMinion.own)
             {

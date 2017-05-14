@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    lasst alle diener auf die hand ihrer besitzer zurückkehren.
         //todo clear playfield
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp = new List<Minion>( p.ownMinions);
             foreach (Minion m in temp)

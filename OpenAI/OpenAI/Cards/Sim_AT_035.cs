@@ -10,7 +10,7 @@ namespace OpenAI
         //Shuffle 3 Ambushes into your opponent's deck. When drawn, you summon a 4/4 Nerubian.
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.FP1_007t);//nerub
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int pos = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
 

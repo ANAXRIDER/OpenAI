@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Adapt 5 times.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.minionGetBuffed(own, 6, 0);
             p.minionGetBuffed(own, 0, 3);

@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 
 //    ansturm/, wutanfall:/ +6 angriff
-        public override void OnEnrageStart(Playfield p, Minion m)
+        public override void onEnrageStart(Playfield p, Minion m)
         {
             m.Angr+=6;
         }
 
-        public override void OnEnrageStop(Playfield p, Minion m)
+        public override void onEnrageStop(Playfield p, Minion m)
         {
             m.Angr-=6;
         }

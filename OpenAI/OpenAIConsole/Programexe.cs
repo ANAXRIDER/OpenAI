@@ -1,23 +1,55 @@
-﻿using OpenAI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.IO;
+using System.Net;
 
-namespace OpenAIConsole
+namespace OpenAI
 {
+    public static class SilverFishBotPath
+    {
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return System.IO.Path.GetDirectoryName(path) + System.IO.Path.DirectorySeparatorChar;
+            }
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
+            System.AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
             Bot b = new Bot();
+            bool network = Settings.Instance.useNetwork;
 
             while (true)
             {
                 System.Threading.Thread.Sleep(10);
+                if (network)
+                {
+                    FishNet.Instance.checkConnection();
+                    KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
+                    if (msg.Value == "") continue;
+                    switch (msg.Key)
+                    {
+                        case "crrntbrd.txt":
+                            b.doData(msg.Value);
+                            break;
+                        case "curdeck.txt":
+                            b.doDeckData(msg.Value);
+                            break;
+                    }
+                    continue;
+                }
                 try
                 {
-                    string data = File.ReadAllText(PathFile.CurrentBoard);
+                    string data = System.IO.File.ReadAllText("crrntbrd.txt");
                     //Helpfunctions.Instance.ErrorLog(data);
                     if (data != "" && data != "<EoF>")
                     {
@@ -54,7 +86,7 @@ namespace OpenAIConsole
 
         static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
-            using (StreamWriter sw = File.AppendText(PathFolder.Logs + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
+            using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
             {
                 sw.WriteLine(e.ExceptionObject.ToString());
             }
@@ -81,6 +113,7 @@ namespace OpenAIConsole
         {
             starttime = DateTime.Now;
             this.sf = Silverfish.Instance;
+            sf.setnewLoggFile();
 
             bool teststuff = true;
             bool printstuff = true;
@@ -92,7 +125,7 @@ namespace OpenAIConsole
                 Ai.Instance.autoTester(printstuff);
             }
 
-            if (File.Exists(PathFile.CrashTest))
+            if (System.IO.File.Exists(SilverFishBotPath.AssemblyDirectory + "crashtest.txt"))
             {
                 testing(1);
             }
@@ -112,7 +145,7 @@ namespace OpenAIConsole
             if (Ai.Instance.bestmove != null)
             {
                 Ai.Instance.bestmove.print(true);
-                foreach (OpenAI.Action a in Ai.Instance.bestActions)
+                foreach (Action a in Ai.Instance.bestActions)
                 {
                     a.print(true);
                 }
@@ -145,7 +178,7 @@ namespace OpenAIConsole
             if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
             {
                 Hrtprozis.Instance.setEnemyHeroName(enemyname);
-                Settings.Instance.UpdateInstance();
+                Settings.Instance.updateInstance();
             }
         }
 
@@ -168,7 +201,7 @@ namespace OpenAIConsole
                     card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)i)
                 };
                 Handmanager.Instance.handCards.Add(hc);
-
+                
                 randcard = rand.Next(1, cardenumcount);
                 Handmanager.Handcard hc2 = new Handmanager.Handcard //extra random card to test
                 {
@@ -257,7 +290,7 @@ namespace OpenAIConsole
 
         CardDB.Card heroAbility = new CardDB.Card();
         CardDB.Card enemyAbility = new CardDB.Card();
-
+        
         private int anzOgOwnCThunHpBonus = 0;
         private int anzOgOwnCThunAngrBonus = 0;
         private int anzOgOwnCThunTaunt = 0;
@@ -276,11 +309,48 @@ namespace OpenAIConsole
         {
             this.singleLog = Settings.Instance.writeToSingleFile;
             Helpfunctions.Instance.ErrorLog("init Silverfish V" + versionnumber);
+            string path = "";
+            //System.IO.Directory.CreateDirectory(path);
+            sttngs.setFilePath(SilverFishBotPath.AssemblyDirectory);
 
+            if (!singleLog)
+            {
+                sttngs.setLoggPath(path);
+            }
+            else
+            {
+                sttngs.setLoggPath("");
+                sttngs.setLoggFile("UILogg.txt");
+                try
+                {
+                    Helpfunctions.Instance.createNewLoggfile();
+                }
+                catch
+                {
+                    
+                }
+            }
             PenalityManager.Instance.setCombos();
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
-            Settings.Instance.SetSettings();
+            Settings.Instance.setSettings();
+            if (Settings.Instance.useNetwork) FishNet.Instance.startServer();
+        }
+
+        public void setnewLoggFile()
+        {
+            if (!singleLog)
+            {
+                sttngs.setLoggFile("UILogg" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
+                Helpfunctions.Instance.createNewLoggfile();
+                Helpfunctions.Instance.ErrorLog("#######################################################");
+                Helpfunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
+                Helpfunctions.Instance.ErrorLog("#######################################################");
+            }
+            else
+            {
+                sttngs.setLoggFile("UILogg.txt");
+            }
         }
 
         public bool isCardCreated(Handmanager.Handcard handcard)
@@ -298,6 +368,7 @@ namespace OpenAIConsole
             string boardnumm = "-1";
             int trackingchoice = 0;
             int trackingstate = 0;
+            bool network = Settings.Instance.useNetwork;
 
             while (readed)
             {
@@ -305,8 +376,16 @@ namespace OpenAIConsole
                 {
                     string data = "";
                     System.Threading.Thread.Sleep(10);
-                    data = File.ReadAllText(PathFile.ActionsToDo);
-
+                    if (network)
+                    {
+                        KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
+                        if (msg.Key != "actionstodo.txt") continue;
+                        data = msg.Value;
+                    }
+                    else
+                    {
+                        data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                    }
                     if (data != "" && data != "<EoF>" && data.EndsWith("<EoF>"))
                     {
                         data = data.Replace("<EoF>", "");
@@ -367,11 +446,11 @@ namespace OpenAIConsole
             Helpfunctions.Instance.logg("received " + boardnumm + " actions to do:");
             Ai.Instance.currentCalculatedBoard = "0";
             Playfield p = new Playfield();
-            List<OpenAI.Action> aclist = new List<OpenAI.Action>();
+            List<Action> aclist = new List<Action>();
 
             foreach (string a in alist)
             {
-                aclist.Add(new OpenAI.Action(a, p));
+                aclist.Add(new Action(a, p));
                 Helpfunctions.Instance.logg(a);
             }
 
@@ -405,7 +484,7 @@ namespace OpenAIConsole
         {
             //System.IO.File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
         }
-
+        
         public void loggonoff(bool onoff)
         {
             //writelogg = onoff;
@@ -458,6 +537,11 @@ namespace OpenAIConsole
             this.sendbuffer += data + "\r\n";
         }
 
+        public void writeBufferToNetwork(string msgtype)
+        {
+            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
+        }
+
         public void writeBufferToFile()
         {
             bool writed = true;
@@ -466,7 +550,8 @@ namespace OpenAIConsole
             {
                 try
                 {
-                    File.WriteAllText(PathFile.CurrentBoard, this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -485,7 +570,8 @@ namespace OpenAIConsole
             {
                 try
                 {
-                    File.WriteAllText(PathFile.CurrentDeck, this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -500,12 +586,13 @@ namespace OpenAIConsole
         {
             bool writed = true;
             this.sendbuffer += "<EoF>";
-            this.ErrorLog("write to action file: " + sendbuffer);
+            this.ErrorLog("write to action file: "+ sendbuffer);
             while (writed)
             {
                 try
                 {
-                    File.WriteAllText(PathFile.ActionsToDo, this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -515,7 +602,7 @@ namespace OpenAIConsole
             }
             this.sendbuffer = "";
         }
-
+   
         public void writeBufferToCardDB()
         {
             bool writed = true;
@@ -523,7 +610,7 @@ namespace OpenAIConsole
             {
                 try
                 {
-                    File.WriteAllText(PathFile.NewCardDB, this.sendbuffer);
+                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -534,4 +621,11 @@ namespace OpenAIConsole
             this.sendbuffer = "";
         }
     }
+
+
+    // the ai :D
+    //please ask/write me if you use this in your project
+
+    
+
 }

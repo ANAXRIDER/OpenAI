@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Battlecry: Give your C'Thun +2/+2 (wherever it is). If it's dead, shuffle it into your deck.
 		
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
 			p.anzOgOwnCThunHpBonus += 2;
 			p.anzOgOwnCThunAngrBonus += 2;

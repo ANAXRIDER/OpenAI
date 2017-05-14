@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Battlecry: For each enemy minion, restore 2 Health to your hero.
 		
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 			if (own.own) p.minionGetDamageOrHeal(p.ownHero, -p.getMinionHeal(p.enemyMinions.Count));
 			else p.minionGetDamageOrHeal(p.enemyHero, -p.getEnemyMinionHeal(p.ownMinions.Count));

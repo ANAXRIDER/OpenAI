@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Stealth, Deathrattle: Summon a Jade Golem.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.callKid(p.getNextJadeGolem(m.own), m.zonepos - 1, m.own);
         }

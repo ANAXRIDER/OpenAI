@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         // Battlecry: Give a random minion in your hand +1/+1
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Deathrattle: Add a Spare Part card to your hand.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.PART_001, m.own, true);
         }

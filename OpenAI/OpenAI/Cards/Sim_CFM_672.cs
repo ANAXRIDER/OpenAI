@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: Choose a friendly minion. Swap it with a minion in your deck.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (target != null)
             {

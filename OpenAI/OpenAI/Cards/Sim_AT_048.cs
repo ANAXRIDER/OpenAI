@@ -10,7 +10,7 @@ namespace OpenAI
         //   Restore #7 Health. Reveal a minion in each deck. If yours costs more, Restore #14 instead.
     
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int heal = (ownplay) ? p.getSpellHeal(11) : p.getEnemySpellHeal(11);
             p.minionGetDamageOrHeal(target, -heal);

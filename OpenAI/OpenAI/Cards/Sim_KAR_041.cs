@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Battlecry: Destroy a minion. Deathrattle: Resummon it.
         
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (target != null) p.minionGetDestroyed(target);
         }

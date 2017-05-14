@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Taunt Has +4 Attack during your opponent's turn.
 
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own == turnEndOfOwner)
             {
@@ -17,7 +17,7 @@ namespace OpenAI
             }
         }
 
-        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if (triggerEffectMinion.own == turnStartOfOwner)
             {

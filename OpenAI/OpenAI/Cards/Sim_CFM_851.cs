@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Whenever your opponent draws a card, gain +1/+1.
 
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own == turnEndOfOwner)
             {

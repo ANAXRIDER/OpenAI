@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //Battlecry: discover a spell
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.drawACard(CardDB.cardIDEnum.None, own.own, true);
         }

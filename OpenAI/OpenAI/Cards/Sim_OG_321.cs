@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Taunt. Whenever this minion takes damage, give your C'Thun +1/+1 (wherever it is).
 
-		public override void OnMinionGotDmgTrigger(Playfield p, Minion m, bool ownDmgdmin)
+		public override void onMinionGotDmgTrigger(Playfield p, Minion m, bool ownDmgdmin)
         {
             if (m.anzGotDmg > 0)
             {

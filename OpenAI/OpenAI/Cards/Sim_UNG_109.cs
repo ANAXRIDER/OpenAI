@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: If you're holding a minion with 5 or more Attack, Adapt.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {
@@ -25,7 +25,7 @@ namespace OpenAI
         }
 
 
-        public override void OnAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
+        public override void onAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
         {
             List<Minion> temp = p.ownMinions;
             switch (choice)

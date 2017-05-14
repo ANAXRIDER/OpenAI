@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //bcry: If you have 6 other minions, gain +4/+4.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

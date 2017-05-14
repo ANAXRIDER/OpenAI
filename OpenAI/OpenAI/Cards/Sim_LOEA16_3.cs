@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //giv a minion +10/10
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (target != null)
             {

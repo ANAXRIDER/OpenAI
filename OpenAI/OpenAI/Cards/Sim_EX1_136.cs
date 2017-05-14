@@ -9,7 +9,7 @@ namespace OpenAI
         //todo secret
         //    geheimnis:/ wenn einer eurer diener stirbt, wird er mit 1 leben wiederbelebt.
 
-        public override void OnSecretPlay(Playfield p, bool ownplay, int number)
+        public override void onSecretPlay(Playfield p, bool ownplay, int number)
         {
             int posi = ownplay ? p.ownMinions.Count : p.enemyMinions.Count;
 

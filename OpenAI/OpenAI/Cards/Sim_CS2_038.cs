@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    verleiht einem diener „todesröcheln:/ ruft diesen diener erneut herbei.“
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             target.ancestralspirit++;
 		}

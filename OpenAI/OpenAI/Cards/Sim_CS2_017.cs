@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    heldenfähigkeit/\n+1 angriff in diesem zug.\n+1 rüstung.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay)
             {

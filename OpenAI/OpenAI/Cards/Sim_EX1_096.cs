@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    todesröcheln:/ zieht eine karte.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.None, m.own);
         }

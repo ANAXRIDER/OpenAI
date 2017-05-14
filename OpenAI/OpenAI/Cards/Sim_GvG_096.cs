@@ -12,7 +12,7 @@ namespace OpenAI
         CardDB.Card bloodfen = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_172);
         CardDB.Card treant = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_158t);
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.callKid((m.own ? treant : bloodfen), m.zonepos - 1, m.own);
         }

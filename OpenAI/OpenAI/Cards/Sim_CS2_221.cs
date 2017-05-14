@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    wutanfall:/ eure waffe hat +2 angriff.
-        public override void OnEnrageStart(Playfield p, Minion m)
+        public override void onEnrageStart(Playfield p, Minion m)
         {
             if (m.own)
             {
@@ -28,7 +28,7 @@ namespace OpenAI
             }
         }
 
-        public override void OnEnrageStop(Playfield p, Minion m)
+        public override void onEnrageStop(Playfield p, Minion m)
         {
             if (m.own)
             {

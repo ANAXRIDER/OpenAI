@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    spott/. todesröcheln:/ fügt allen dienern 1 schaden zu.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.allMinionsGetDamage(1);
         }

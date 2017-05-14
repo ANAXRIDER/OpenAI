@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Inspire: Add a random spell to your hand
 
-        public override void OnInspire(Playfield p, Minion m)
+        public override void onInspire(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.None, m.own, true); 
         }

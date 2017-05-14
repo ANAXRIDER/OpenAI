@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Give a minion +2/+4 and Spell Damage +1.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.minionGetBuffed(target, 2, 4);
             target.spellpower++;

@@ -10,7 +10,7 @@ namespace OpenAI
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_116t);//whelp
 
 //    kampfschrei:/ ruft welplinge (1/1) herbei, bis eure seite des schlachtfelds voll ist.
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             int kids = 7 - p.ownMinions.Count;
            

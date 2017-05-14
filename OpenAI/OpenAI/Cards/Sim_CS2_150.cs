@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ verursacht 2 schaden.
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.minionGetDamageOrHeal(target, 2);
 		}

@@ -49,6 +49,9 @@
     <Compile Include="..\OpenAI\Ai\Action.cs">
       <Link>Ai\Action.cs</Link>
     </Compile>
+    <Compile Include="..\OpenAI\Ai\ActionNormalizer.cs">
+      <Link>Ai\ActionNormalizer.cs</Link>
+    </Compile>
     <Compile Include="..\OpenAI\Ai\Ai.cs">
       <Link>Ai\Ai.cs</Link>
     </Compile>
@@ -90,9 +93,6 @@
     </Compile>
     <Compile Include="..\OpenAI\Ai\EnemyTurnSimulator.cs">
       <Link>Ai\EnemyTurnSimulator.cs</Link>
-    </Compile>
-    <Compile Include="..\OpenAI\Ai\Enums.cs">
-      <Link>Ai\Enums.cs</Link>
     </Compile>
     <Compile Include="..\OpenAI\Ai\FishNet.cs">
       <Link>Ai\FishNet.cs</Link>
@@ -139,14 +139,11 @@
     <Compile Include="..\OpenAI\Ai\SimTemplate.cs">
       <Link>Ai\SimTemplate.cs</Link>
     </Compile>
-    <Compile Include="..\OpenAI\Ai\sleep.cs">
-      <Link>Ai\sleep.cs</Link>
+    <Compile Include="..\OpenAI\Ai\Sleep.cs">
+      <Link>Ai\Sleep.cs</Link>
     </Compile>
     <Compile Include="..\OpenAI\Ai\TAGGS.cs">
       <Link>Ai\TAGGS.cs</Link>
-    </Compile>
-    <Compile Include="..\OpenAI\Bot.cs">
-      <Link>Bot.cs</Link>
     </Compile>
     <Compile Include="..\OpenAI\Cards\Sim_AT_001.cs">
       <Link>Cards\Sim_AT_001.cs</Link>
@@ -4621,15 +4618,6 @@
     <Compile Include="..\OpenAI\Cards\Sim_UNG_999t8.cs">
       <Link>Cards\Sim_UNG_999t8.cs</Link>
     </Compile>
-    <Compile Include="..\OpenAI\HelpFunctions.cs">
-      <Link>HelpFunctions.cs</Link>
-    </Compile>
-    <Compile Include="..\OpenAI\OpenAI.cs">
-      <Link>OpenAI.cs</Link>
-    </Compile>
-    <Compile Include="..\OpenAI\Paths.cs">
-      <Link>Paths.cs</Link>
-    </Compile>
     <Compile Include="..\OpenAI\Penalties\Pen_AT_001.cs">
       <Link>Penalties\Pen_AT_001.cs</Link>
     </Compile>
@@ -7447,7 +7435,7 @@
     <Compile Include="..\OpenAI\Penalties\Pen_tt_010a.cs">
       <Link>Penalties\Pen_tt_010a.cs</Link>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Programexe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

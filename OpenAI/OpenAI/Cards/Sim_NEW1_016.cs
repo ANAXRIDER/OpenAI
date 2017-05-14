@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ fügt eurer hand einen zufälligen piraten aus eurem deck hinzu.
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.drawACard(CardDB.cardIDEnum.None, true, true);
 		}

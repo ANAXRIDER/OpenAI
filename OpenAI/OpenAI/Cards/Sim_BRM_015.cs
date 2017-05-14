@@ -11,7 +11,7 @@ namespace OpenAI
         //    Deal $1 damage to all minions. If you have 12 or less Health, deal $3 damage instead.
 
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int dmg = (ownplay) ? p.getSpellDamageDamage(1) : p.getEnemySpellDamageDamage(1);
             if (ownplay && p.ownHero.Hp <= 12) dmg = p.getSpellDamageDamage(3);

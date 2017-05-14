@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Battlecry: Spend all your Mana. Gain +1/+1 for each mana spent.
 		
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
 			if (own.own)
 			{

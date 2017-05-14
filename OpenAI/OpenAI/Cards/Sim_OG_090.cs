@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Add 3 random Mage spells to your hand.
 		
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.drawACard(CardDB.cardName.unknown, ownplay, true);
             p.drawACard(CardDB.cardName.unknown, ownplay, true);

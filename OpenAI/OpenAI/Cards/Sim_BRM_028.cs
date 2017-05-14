@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    At the end of your turn, reduce the Cost of cards in your hand by 1.
 
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (turnEndOfOwner == true && triggerEffectMinion.own == turnEndOfOwner)
             {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         // Battlecry: Restore 6 Health. Overload: (1)
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int heal = (own.own) ? p.getMinionHeal(6) : p.getEnemyMinionHeal(6);
 

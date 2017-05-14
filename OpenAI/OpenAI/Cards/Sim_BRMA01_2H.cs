@@ -10,7 +10,7 @@ namespace OpenAI
 		
 		CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.FP1_007t);//4/4Nerubian
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
 			if (p.ownDeckSize > 0)
             {

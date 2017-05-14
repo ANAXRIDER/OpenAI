@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Gain 5 Armor.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay) p.ownHero.armor += 5;
         }

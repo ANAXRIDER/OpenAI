@@ -10,7 +10,7 @@ namespace OpenAI
 
         //    Battlecry: If your hand is empty, gain +3/+3
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own && p.owncards.Count==0)
             {

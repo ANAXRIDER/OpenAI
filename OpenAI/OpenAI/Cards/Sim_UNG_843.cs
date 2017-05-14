@@ -11,7 +11,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.UNG_999t2t1); //Plant
 
-        public override void OnCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
+        public override void onCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
         {
             if (target != null && target.own == wasOwnCard && triggerEffectMinion.own == wasOwnCard && target.entityID == triggerEffectMinion.entityID && c.type == CardDB.cardtype.SPELL)
             {
@@ -20,7 +20,7 @@ namespace OpenAI
 
                 if (p.ownMinions[zonepos].name == CardDB.cardName.plant)
                 {
-                    c.sim_card.OnCardPlay(p, wasOwnCard, p.ownMinions[zonepos], choice);
+                    c.sim_card.onCardPlay(p, wasOwnCard, p.ownMinions[zonepos], choice);
                     p.doDmgTriggers();
                 }
 

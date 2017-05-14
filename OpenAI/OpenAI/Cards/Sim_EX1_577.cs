@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    todesröcheln:/ ruft finkle einhorn (3/3) für euren gegner herbei.
         CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_finkle);//finkleeinhorn
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
 
             int place = (m.own) ? p.enemyMinions.Count : p.ownMinions.Count;

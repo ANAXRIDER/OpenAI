@@ -8,7 +8,7 @@ namespace OpenAI
     {
 
         //    kampfschrei: /fügt dem feindlichen helden 3 schaden zu.
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.minionGetDamageOrHeal(own.own ? p.enemyHero : p.ownHero, 3);
         }

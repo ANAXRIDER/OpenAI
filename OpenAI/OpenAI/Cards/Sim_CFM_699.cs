@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: The next Murloc you play this turn costs Health instead of Mana.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (m.own) p.nextMurlocThisTurnCostHealth = true;
         }

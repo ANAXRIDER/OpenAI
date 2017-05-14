@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Your opponent's Hero Power costs (5) more next turn.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own) p.anzOwnSaboteur++;
             else p.anzEnemySaboteur++;

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.FP1_012t);
 //    spott.\ntodesröcheln:/ ruft einen schleim (1/2) mit spott/ herbei.
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             
             p.callKid(c, m.zonepos - 1, m.own);

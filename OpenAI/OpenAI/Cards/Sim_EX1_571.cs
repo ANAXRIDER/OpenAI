@@ -10,7 +10,7 @@ namespace OpenAI
 //    ruft drei treants (2/2) mit ansturm/ herbei, die am ende des zuges sterben.
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_tk9);//Treant
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int posi =(ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
 

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Hero Power: Destroy a random damaged enemy minion
 				
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
 			List<Minion> temp = (ownplay) ? new List<Minion>(p.enemyMinions) : new List<Minion>(p.ownMinions);
             temp.Sort((a, b) => a.Angr.CompareTo(b.Angr));

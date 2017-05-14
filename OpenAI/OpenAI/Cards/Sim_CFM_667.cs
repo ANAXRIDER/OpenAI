@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 		// Battlecry: Deal 5 damage to an enemy minion. Deathrattle: Deal 5 damage to your hero.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (target != null) p.minionGetDamageOrHeal(target, 5);
         }
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.minionGetDamageOrHeal(m.own ? p.ownHero : p.enemyHero, 5);
         }

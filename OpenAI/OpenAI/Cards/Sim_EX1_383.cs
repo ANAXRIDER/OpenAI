@@ -9,7 +9,7 @@ namespace OpenAI
         CardDB.Card card = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_383t);
 //    gottesschild/. spott/. todesröcheln:/ legt einen aschenbringer (5/3) an.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.equipWeapon(card,m.own);
         }

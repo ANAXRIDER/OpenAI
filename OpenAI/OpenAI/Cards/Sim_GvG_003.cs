@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Add a random minion to your hand. It costs (3) less.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.drawACard(CardDB.cardIDEnum.None, ownplay, true);
         }

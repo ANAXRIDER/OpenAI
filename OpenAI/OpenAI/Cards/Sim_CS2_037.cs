@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    fügt einem feindlichen charakter $1 schaden zu und friert/ ihn ein.
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int dmg = (ownplay) ? p.getSpellDamageDamage(1) : p.getEnemySpellDamageDamage(1);
             target.frozen = true;

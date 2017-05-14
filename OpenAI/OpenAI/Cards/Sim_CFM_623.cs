@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Shoot three missiles at random enemies that deal 3 damage each.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             //int times = (ownplay) ? p.getSpellDamageDamage(3) : p.getEnemySpellDamageDamage(3);
 

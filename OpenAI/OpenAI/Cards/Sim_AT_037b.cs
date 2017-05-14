@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Choose One - Deal $2 damage; or Summon two 1/1 Saplings..
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_037t);//sapp
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
            
                 int pos = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;

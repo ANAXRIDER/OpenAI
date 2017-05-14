@@ -10,7 +10,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_058); // kings elekk (for a conservative proc)
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             //int pos = (own.own) ? own.zonepos - 1 : p.enemyMinions.Count;
             //p.callKid(kid, pos, own.own);

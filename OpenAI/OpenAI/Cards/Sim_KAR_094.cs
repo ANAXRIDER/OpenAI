@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Deathrattle: Add a 3/2 weapon to your hand.
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.KAR_094a, m.own, true);
         }

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Draw a card, then add a copy of it to your hand.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.CardToHand(CardDB.cardName.unknown, ownplay);
             p.CardToHand(CardDB.cardName.unknown, ownplay);

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ bringt einen diener zum schweigen/.
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (target != null) p.minionGetSilenced(target);
 		}

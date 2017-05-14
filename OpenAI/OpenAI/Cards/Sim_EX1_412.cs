@@ -8,13 +8,13 @@ namespace OpenAI
 	{
 
 //    wutanfall:/ windzorn/ und +1 angriff
-        public override void OnEnrageStart(Playfield p, Minion m)
+        public override void onEnrageStart(Playfield p, Minion m)
         {
             m.Angr++;
             p.minionGetWindfurry(m);
         }
 
-        public override void OnEnrageStop(Playfield p, Minion m)
+        public override void onEnrageStop(Playfield p, Minion m)
         {
             m.Angr--;
             m.windfury = false;

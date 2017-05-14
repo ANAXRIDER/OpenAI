@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: If your deck has no duplicates, summon all Demons from your hand.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (m.own)
             {

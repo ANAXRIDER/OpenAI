@@ -10,7 +10,7 @@ namespace OpenAI
         //Whenever you play a card with Battlecry, gain +1/+1.
 
 
-        public override void OnCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
+        public override void onCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
         {
             if (triggerEffectMinion.own == wasOwnCard)
             {

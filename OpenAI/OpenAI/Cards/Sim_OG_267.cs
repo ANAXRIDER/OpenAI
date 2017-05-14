@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Deathrattle: Give your weapon +2 Attack.
 		
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

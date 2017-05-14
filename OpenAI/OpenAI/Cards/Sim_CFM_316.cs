@@ -10,7 +10,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CFM_316t); //1/1 Rat
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             int pos = (m.own) ? p.ownMinions.Count : p.enemyMinions.Count;
             int anz = m.Angr;

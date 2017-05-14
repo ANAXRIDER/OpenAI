@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Gain 2 Armor and +2 Attack this turn.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay)
             {

@@ -7,7 +7,7 @@ namespace OpenAI
 	class Sim_EX1_558 : SimTemplate //harrisonjones
 	{
 //    kampfschrei:/ zerstört die waffe eures gegners. zieht ihrer haltbarkeit entsprechend karten.
-		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (own.own)
             {

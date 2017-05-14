@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Give each player a Mana Crystal.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 
             p.mana = Math.Min(10, p.mana + 1);

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   At the end of your turn, give another friendly Mech +2/+2.
 
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (turnEndOfOwner == triggerEffectMinion.own)
             {

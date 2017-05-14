@@ -9,7 +9,7 @@ namespace OpenAI
 
         //todo secret
 //    geheimnis:/ wenn euer held angegriffen wird, erhält er 8 rüstung.
-        public override void OnSecretPlay(Playfield p, bool ownplay, Minion target, int number)
+        public override void onSecretPlay(Playfield p, bool ownplay, Minion target, int number)
         {
             
             p.minionGetArmor(target, 8);

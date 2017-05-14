@@ -10,12 +10,12 @@ namespace OpenAI
 		
         CardDB.Card weapon = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRMC_94);
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.equipWeapon(weapon, ownplay);
         }
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
 			CardDB.Card hewHeroPower = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRM_027p); //DIE, INSECT!
             if (m.own)

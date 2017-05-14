@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Summon copies of your damaged minions.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp = (ownplay) ? p.ownMinions : p.enemyMinions;
             foreach (Minion m in (ownplay) ? p.ownMinions.ToArray() : p.enemyMinions.ToArray())

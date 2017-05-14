@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    heldenfähigkeit/\nstellt 2 leben wieder her.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int heal = 2;
             if (ownplay)

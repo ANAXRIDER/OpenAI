@@ -21,14 +21,14 @@
 
         public void setMaxwideFirstStep(bool firstTurn)
         {
-            maxwide = Settings.Instance.EnemyTurnMaxWide;
-            if (!firstTurn) maxwide = Settings.Instance.EnemyTurnMaxWide;
+            maxwide = Settings.Instance.enemyTurnMaxWide;
+            if (!firstTurn) maxwide = Settings.Instance.enemyTurnMaxWide;
         }
 
         public void setMaxwideSecondStep(bool firstTurn)
         {
-            maxwide = Settings.Instance.EnemyTurnMaxWideSecondTime;
-            if (!firstTurn) maxwide = Settings.Instance.EnemyTurnMaxWide;
+            maxwide = Settings.Instance.enemyTurnMaxWideSecondTime;
+            if (!firstTurn) maxwide = Settings.Instance.enemyTurnMaxWide;
         }
 
         public void simulateEnemysTurn(Playfield rootfield, bool simulateTwoTurns, bool playaround, bool print, int pprob, int pprob2)
@@ -39,7 +39,7 @@
             posmoves.Clear();
             if (print)
             {
-                HelpFunctions.Instance.ErrorLog("board at enemyturn start-----------------------------");
+                Helpfunctions.Instance.ErrorLog("board at enemyturn start-----------------------------");
                 rootfield.value = botBase.getPlayfieldValue(rootfield);
                 rootfield.printBoard();
             }
@@ -104,7 +104,7 @@
                     foreach (Minion trgt in trgts)
                     {
                         if (trgt.isHero) continue;//do play his ability in basics
-                        Action a = new Action(ActionType.USE_HERO_POWER, posmoves[0].enemyHeroAblility, null, 0, trgt, abilityPenality, 0);
+                        Action a = new Action(actionEnum.useHeroPower, posmoves[0].enemyHeroAblility, null, 0, trgt, abilityPenality, 0);
                         Playfield pf = new Playfield(posmoves[0]);
                         pf.doAction(a);
                         posmoves.Add(pf);
@@ -120,7 +120,7 @@
                     // the other classes dont have to target####################################################
                     if ((rootfield.enemyHeroName == HeroEnum.thief && rootfield.enemyWeaponDurability == 0) || rootfield.enemyHeroName != HeroEnum.thief || hasinspire)
                     {
-                        Action a = new Action(ActionType.USE_HERO_POWER, posmoves[0].enemyHeroAblility, null, 0, null, abilityPenality, 0);
+                        Action a = new Action(actionEnum.useHeroPower, posmoves[0].enemyHeroAblility, null, 0, null, abilityPenality, 0);
                         Playfield pf = new Playfield(posmoves[0]);
                         pf.doAction(a);
                         posmoves.Add(pf);
@@ -235,7 +235,7 @@
             }
             if (print)
             {
-                HelpFunctions.Instance.ErrorLog("best enemy board----------------------------------");
+                Helpfunctions.Instance.ErrorLog("best enemy board----------------------------------");
                 bestplay.printBoard();
             }
             rootfield.value = bestplay.value;

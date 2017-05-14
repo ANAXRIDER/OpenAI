@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Deal 1 damage to all enemy minions. Summon a random 1-Cost minion.
         
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int dmg = (ownplay) ? p.getSpellDamageDamage(1) : p.getEnemySpellDamageDamage(1);
             p.allMinionOfASideGetDamage(!ownplay, dmg);

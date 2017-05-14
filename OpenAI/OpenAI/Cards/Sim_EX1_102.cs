@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    fügt zu beginn eures zuges einem zufälligen feind 2 schaden zu.
 
-        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if (triggerEffectMinion.own == turnStartOfOwner)
             {

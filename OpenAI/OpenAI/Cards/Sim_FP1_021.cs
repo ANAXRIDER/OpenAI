@@ -8,12 +8,12 @@ namespace OpenAI
     {
         CardDB.Card w = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.FP1_021);
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.equipWeapon(w, ownplay);
         }
 
-        public override void OnDeathrattle(Playfield p, Minion m)
+        public override void onDeathrattle(Playfield p, Minion m)
         {
             p.allMinionsGetDamage(1);
         }

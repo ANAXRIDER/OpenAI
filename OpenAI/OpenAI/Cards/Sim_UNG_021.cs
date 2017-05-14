@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Battlecry: If you played an Elemental last turn add a 'Flame Geyser' to your hand.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (p.anzOwnElementalsLastTurn > 0 && own.own) p.CardToHand(CardDB.cardName.flamegeyser, own.own);
         }

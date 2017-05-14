@@ -11,7 +11,7 @@ namespace OpenAI
         //taunt -> lowest hp -> stealth
         
         //todo list
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             List<Minion> temp2 = (own.own) ? new List<Minion>(p.enemyMinions) : new List<Minion>(p.ownMinions);
             List<Minion> under2taunt = new List<Minion>();

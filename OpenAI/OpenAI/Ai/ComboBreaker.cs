@@ -1,14 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace OpenAI
+﻿namespace OpenAI
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+
+
     public sealed class ComboBreaker
     {
+
+        enum combotype
+        {
+            combo,
+            target,
+            weaponuse
+        }
+
         private Dictionary<CardDB.cardIDEnum, int> playByValue = new Dictionary<CardDB.cardIDEnum, int>();
 
-        private List<Combo> combos = new List<Combo>();
+        private List<combo> combos = new List<combo>();
 
         Handmanager hm = Handmanager.Instance;
         Hrtprozis hp = Hrtprozis.Instance;
@@ -20,9 +29,9 @@ namespace OpenAI
         private string cleanPath = "";
 
 
-        class Combo
+        class combo
         {
-            public ComboType type = ComboType.COMBO;
+            public combotype type = combotype.combo;
             public int neededMana;
             public Dictionary<CardDB.cardIDEnum, int> combocards = new Dictionary<CardDB.cardIDEnum, int>();
             public Dictionary<CardDB.cardIDEnum, int> cardspen = new Dictionary<CardDB.cardIDEnum, int>();
@@ -41,11 +50,11 @@ namespace OpenAI
             public CardDB.cardName requiredWeapon = CardDB.cardName.unknown;
             public HeroEnum oHero = HeroEnum.None;
 
-            public Combo(string s)
+            public combo(string s)
             {
                 this.neededMana = 0;
                 requiredWeapon = CardDB.cardName.unknown;
-                this.type = ComboType.COMBO;
+                this.type = combotype.combo;
                 this.twoTurnCombo = false;
                 bool fixmana = false;
                 if (s.Contains("nxttrn")) this.twoTurnCombo = true;
@@ -68,7 +77,7 @@ namespace OpenAI
                         if (m >= 1) neededMana = m;
                     }
                 */
-                if (type == ComboType.COMBO)
+                if (type == combotype.combo)
                 {
                     this.combolength = 0;
                     this.combot0len = 0;
@@ -199,7 +208,7 @@ namespace OpenAI
                 this.bonusForPlayingT1 = Math.Max(bonusForPlayingT1, 1);
             }
 
-            public int IsInCombo(List<Handmanager.Handcard> hand, int omm)
+            public int isInCombo(List<Handmanager.Handcard> hand, int omm)
             {
                 int cardsincombo = 0;
                 Dictionary<CardDB.cardIDEnum, int> combocardscopy = new Dictionary<CardDB.cardIDEnum, int>(this.combocards);
@@ -258,7 +267,7 @@ namespace OpenAI
                 return 0;
             }
 
-            public int IsMultiTurnComboTurn0(List<Handmanager.Handcard> hand, int omm)
+            public int isMultiTurnComboTurn0(List<Handmanager.Handcard> hand, int omm)
             {
                 if (!twoTurnCombo) return 0;
                 int cardsincombo = 0;
@@ -291,7 +300,7 @@ namespace OpenAI
                 return false;
             }
 
-            public bool IsCardInCombo(CardDB.Card card)
+            public bool isCardInCombo(CardDB.Card card)
             {
                 if (this.combocards.ContainsKey(card.cardIDenum))
                 {
@@ -300,7 +309,7 @@ namespace OpenAI
                 return false;
             }
 
-            public int HasPlayedCombo(List<Handmanager.Handcard> hand)
+            public int hasPlayedCombo(List<Handmanager.Handcard> hand)
             {
                 int cardsincombo = 0;
                 Dictionary<CardDB.cardIDEnum, int> combocardscopy = new Dictionary<CardDB.cardIDEnum, int>(this.combocards);
@@ -317,7 +326,7 @@ namespace OpenAI
                 return 0;
             }
 
-            public int HasPlayedTurn0Combo(List<Handmanager.Handcard> hand)
+            public int hasPlayedTurn0Combo(List<Handmanager.Handcard> hand)
             {
                 if (this.combocardsTurn0All.Count == 0) return 0;
                 int cardsincombo = 0;
@@ -335,7 +344,7 @@ namespace OpenAI
                 return 0;
             }
 
-            public int HasPlayedTurn1Combo(List<Handmanager.Handcard> hand)
+            public int hasPlayedTurn1Combo(List<Handmanager.Handcard> hand)
             {
                 if (this.combocardsTurn1.Count == 0) return 0;
                 int cardsincombo = 0;
@@ -391,7 +400,7 @@ namespace OpenAI
 
         public void loggCleanPath()
         {
-            HelpFunctions.Instance.Log(cleanPath);
+            Helpfunctions.Instance.logg(cleanPath);
         }
 
         private void readCombos()
@@ -399,63 +408,51 @@ namespace OpenAI
             string[] lines = new string[0] { };
             combos.Clear();
 
-            /*
-            string path = OpenAIPath.SettingsPath;
-            string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
-            string datapath = path + "Data" + Path.DirectorySeparatorChar;
-            string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;
-            string classpath = datapath + ownClass + Path.DirectorySeparatorChar;
-            string cleanclasspath = cleandatapath + ownClass + Path.DirectorySeparatorChar;
-            string deckpath = classpath + deckName + Path.DirectorySeparatorChar;
-            string cleandeckpath = cleanclasspath + deckName + Path.DirectorySeparatorChar;
+            string path = Settings.Instance.path;
+            string cleanpath = "Silverfish" + System.IO.Path.DirectorySeparatorChar;
+            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string cleandatapath = cleanpath + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string cleanclasspath = cleandatapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+            string cleandeckpath = cleanclasspath + deckName + System.IO.Path.DirectorySeparatorChar;
             const string filestring = "_combo.txt";
 
 
-            if (deckName != "" && File.Exists(deckpath + filestring))
+            if (deckName != "" && System.IO.File.Exists(deckpath + filestring))
             {
                 path = deckpath;
                 cleanPath = cleandeckpath + filestring;
             }
-            else if (deckName != "" && File.Exists(classpath + filestring))
+            else if (deckName != "" && System.IO.File.Exists(classpath + filestring))
             {
                 path = classpath;
                 cleanPath = cleanclasspath + filestring;
             }
-            else if (deckName != "" && File.Exists(datapath + filestring))
+            else if (deckName != "" && System.IO.File.Exists(datapath + filestring))
             {
                 path = datapath;
                 cleanPath = cleandatapath + filestring;
             }
-            else if (File.Exists(path + filestring))
+            else if (System.IO.File.Exists(path + filestring))
             {
                 cleanPath = cleanpath + filestring;
             }
             else
             {
-                HelpFunctions.Instance.ErrorLog("[Combo] cant find base _combo.txt, consider creating one");
+                Helpfunctions.Instance.ErrorLog("[Combo] cant find base _combo.txt, consider creating one");
                 return;
             }
-            HelpFunctions.Instance.ErrorLog("[Combo] read " + cleanPath);
-            */
+            Helpfunctions.Instance.ErrorLog("[Combo] read " + cleanPath);
 
-            if (File.Exists(PathFile.Combo))
-            {
-                // Do something
-            }
-            else
-            {
-                HelpFunctions.Instance.ErrorLog("[Combo] cant find base _combo.txt, consider creating one");
-                return;
-            }
-            HelpFunctions.Instance.ErrorLog("[Combo] read " + PathFile.Combo);
 
             try
             {
-                lines = File.ReadAllLines(PathFile.Combo);
+                lines = System.IO.File.ReadAllLines(path + filestring);
             }
             catch
             {
-                HelpFunctions.Instance.ErrorLog("_combo.txt read error. Continuing without user-defined rules.");
+                Helpfunctions.Instance.ErrorLog("_combo.txt read error. Continuing without user-defined rules.");
                 return;
             }
 
@@ -473,7 +470,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog("combomaker cant read: " + line);
+                        Helpfunctions.Instance.ErrorLog("combomaker cant read: " + line);
                     }
                 }
                 else
@@ -491,38 +488,38 @@ namespace OpenAI
                         }
                         catch
                         {
-                            HelpFunctions.Instance.ErrorLog("combomaker cant read: " + line);
+                            Helpfunctions.Instance.ErrorLog("combomaker cant read: " + line);
                         }
                     }
                     else
                     {
                         try
                         {
-                            Combo c = new Combo(line);
+                            combo c = new combo(line);
                             this.combos.Add(c);
                         }
                         catch
                         {
-                            HelpFunctions.Instance.ErrorLog("combomaker cant read: " + line);
+                            Helpfunctions.Instance.ErrorLog("combomaker cant read: " + line);
                         }
                     }
                 }
             }
-            if (combos.Count > 0) HelpFunctions.Instance.ErrorLog("[Combo] " + combos.Count + " combo rules found");
-            if (playByValue.Count > 0) HelpFunctions.Instance.ErrorLog("[Combo] " + playByValue.Count + " card value rules found");
+            if (combos.Count > 0) Helpfunctions.Instance.ErrorLog("[Combo] " + combos.Count + " combo rules found");
+            if (playByValue.Count > 0) Helpfunctions.Instance.ErrorLog("[Combo] " + playByValue.Count + " card value rules found");
         }
 
-        public int GetPenalityForDestroyingCombo(CardDB.Card crd, Playfield p)
+        public int getPenalityForDestroyingCombo(CardDB.Card crd, Playfield p)
         {
             if (this.combos.Count == 0) return 0;
             int pen = int.MaxValue;
             bool found = false;
             int mana = Math.Max(hp.ownMaxMana, hp.currentMana);
-            foreach (Combo c in this.combos)
+            foreach (combo c in this.combos)
             {
-                if ((c.oHero == HeroEnum.None || c.oHero == p.ownHeroName) && c.IsCardInCombo(crd))
+                if ((c.oHero == HeroEnum.None || c.oHero == p.ownHeroName) && c.isCardInCombo(crd))
                 {
-                    int iia = c.IsInCombo(hm.handCards, hp.ownMaxMana);//check if we have all cards for a combo, and if the choosen card is one
+                    int iia = c.isInCombo(hm.handCards, hp.ownMaxMana);//check if we have all cards for a combo, and if the choosen card is one
                     int iib = c.isMultiTurnComboTurn1(hm.handCards, mana, p.ownMinions, p.ownWeaponName);
 
                     int iic = Math.Max(iia, iib);
@@ -541,24 +538,24 @@ namespace OpenAI
 
         }
 
-        public int CheckIfComboWasPlayed(List<Action> alist, CardDB.cardName weapon, HeroEnum heroname)
+        public int checkIfComboWasPlayed(List<Action> alist, CardDB.cardName weapon, HeroEnum heroname)
         {
             if (this.combos.Count == 0) return 0;
             //returns a penalty only if the combo could be played, but is not played completely
             List<Handmanager.Handcard> playedcards = new List<Handmanager.Handcard>();
-            List<Combo> searchingCombo = new List<Combo>();
+            List<combo> searchingCombo = new List<combo>();
             // only check the cards, that are in a combo that can be played:
             int mana = Math.Max(hp.ownMaxMana, hp.currentMana);
             foreach (Action a in alist)
             {
-                if (a.actionType != ActionType.PLAY_CARD && a.actionType != ActionType.USE_HERO_POWER) continue;
+                if (a.actionType != actionEnum.playcard && a.actionType != actionEnum.useHeroPower) continue;
                 CardDB.Card crd = a.card.card;
                 //playedcards.Add(a.handcard);
-                foreach (Combo c in this.combos)
+                foreach (combo c in this.combos)
                 {
-                    if ((c.oHero == HeroEnum.None || c.oHero == heroname) && c.IsCardInCombo(crd))
+                    if ((c.oHero == HeroEnum.None || c.oHero == heroname) && c.isCardInCombo(crd))
                     {
-                        int iia = c.IsInCombo(hm.handCards, hp.ownMaxMana);
+                        int iia = c.isInCombo(hm.handCards, hp.ownMaxMana);
                         int iib = c.isMultiTurnComboTurn1(hm.handCards, mana, hp.ownMinions, weapon);
                         int iic = Math.Max(iia, iib);
                         if (iia == 2 && iib != 2 && c.isMultiTurn1Card(crd))
@@ -578,11 +575,11 @@ namespace OpenAI
             bool wholeComboPlayed = false;
 
             int bonus = 0;
-            foreach (Combo c in this.combos)
+            foreach (combo c in this.combos)
             {
-                int iia = c.HasPlayedCombo(playedcards);
-                int iib = c.HasPlayedTurn0Combo(playedcards);
-                int iic = c.HasPlayedTurn1Combo(playedcards);
+                int iia = c.hasPlayedCombo(playedcards);
+                int iib = c.hasPlayedTurn0Combo(playedcards);
+                int iic = c.hasPlayedTurn1Combo(playedcards);
                 int iie = iia + iib + iic;
                 if (iie >= 1)
                 {

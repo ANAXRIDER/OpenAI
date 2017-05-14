@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Whenever you summon a Pirate, gain Stealth.
 
-        public override void OnMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        public override void onMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if ((TAG_RACE)summonedMinion.handcard.card.race == TAG_RACE.PIRATE)
             {

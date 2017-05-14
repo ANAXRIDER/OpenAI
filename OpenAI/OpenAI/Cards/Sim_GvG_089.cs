@@ -9,7 +9,7 @@ namespace OpenAI
 
         //  if you control a Secret at the end of your turn, restore 4 health to your hero. 
 
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (turnEndOfOwner == triggerEffectMinion.own)
             {

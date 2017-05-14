@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: If your deck contains no more than 1 of any card, fully heal your hero.
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    zieht eine karte für jeden verletzten befreundeten charakter.
 
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             List<Minion> temp = (ownplay)? p.ownMinions : p.enemyMinions;
             foreach (Minion mnn in temp )

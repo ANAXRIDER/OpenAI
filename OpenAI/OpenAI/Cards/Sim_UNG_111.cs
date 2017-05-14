@@ -11,7 +11,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.UNG_111t1); //Mana Treant
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp = (ownplay) ? p.ownMinions : p.enemyMinions;
             int summoncount = 7 - temp.Count;

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    ruft am ende jedes zuges alle befreundeten diener herbei, die in diesem zug gestorben sind.
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             foreach (GraveYardItem m in p.diedMinions.ToArray()) // toArray() because a knifejuggler could kill a minion due to the summon :D
             {

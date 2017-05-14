@@ -9,7 +9,7 @@ namespace OpenAI
 
         //  At the end of each turn, destroy this minion if it's your only one. 
 
-        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own)
             {

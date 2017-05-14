@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: If a friendly minion has 5 or more attack, gain +2/+2.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             List<Minion> temp = (m.own) ? p.ownMinions : p.enemyMinions;
             foreach (Minion mnn in temp)

@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Battlecry: Choose a friendly Beast. Summon a copy of it.
         
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (target != null && target.handcard.card.race == TAG_RACE.BEAST)
             {

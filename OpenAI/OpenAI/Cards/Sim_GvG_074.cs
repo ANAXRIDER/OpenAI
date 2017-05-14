@@ -9,7 +9,7 @@ namespace OpenAI
         //todo better!
         //  Battlecry: Take control of a random enemy Secret;. 
 
-        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    fügt einem feind $4 schaden und allen anderen feinden $1 schaden zu.
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int dmg = (ownplay)? p.getSpellDamageDamage(1) : p.getEnemySpellDamageDamage(1);
             int dmg1 = (ownplay) ? p.getSpellDamageDamage(4) : p.getEnemySpellDamageDamage(4);

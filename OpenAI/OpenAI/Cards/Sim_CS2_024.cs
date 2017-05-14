@@ -7,7 +7,7 @@ namespace OpenAI
     class Sim_CS2_024 : SimTemplate//Frostbolt
     {
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int dmg = (ownplay) ? p.getSpellDamageDamage(3) : p.getEnemySpellDamageDamage(3);
             target.frozen = true;

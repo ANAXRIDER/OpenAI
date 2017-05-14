@@ -9,7 +9,7 @@ namespace OpenAI
 
         //insprire: Add a 2/2 Squire to your hand
 
-        public override void OnInspire(Playfield p, Minion m)
+        public override void onInspire(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.CS2_152, m.own, true);
         }

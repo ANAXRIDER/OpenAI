@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    verleiht einem wildtier +2 angriff und immunität/ in diesem zug.
-		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.minionGetTempBuff(target, 2, 0);
             target.immune = true;

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: If you control another Murloc, Discover a_Murloc.
 
-        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (p.ownMinions.Find(a => a.handcard.card.race == TAG_RACE.MURLOC) != null)
             {

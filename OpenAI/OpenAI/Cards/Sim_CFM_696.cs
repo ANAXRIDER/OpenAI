@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Transform all enemy minions into random ones that cost (1) less.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp = (ownplay) ? p.enemyMinions : p.ownMinions;
             foreach (Minion m in temp)

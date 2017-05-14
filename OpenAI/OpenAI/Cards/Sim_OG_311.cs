@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Discover a minion. Give it +1/+1.
 
-        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.drawACard(CardDB.cardName.unknown, ownplay, true);
             p.owncards[p.owncards.Count - 1].addattack++;

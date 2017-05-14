@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace OpenAI
 {
@@ -55,7 +54,7 @@ namespace OpenAI
 
         public void loggCleanPath()
         {
-            HelpFunctions.Instance.Log(cleanPath);
+            Helpfunctions.Instance.logg(cleanPath);
         }
 
         private void readCombos()
@@ -63,62 +62,51 @@ namespace OpenAI
             string[] lines = new string[] { };
             this.discoverylist.Clear();
 
-            /*
-            string path = OpenAIPath.SettingsPath;
-            string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
-            string datapath = path + "Data" + Path.DirectorySeparatorChar;
-            string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;
-            string classpath = datapath + ownClass + Path.DirectorySeparatorChar;
-            string cleanclasspath = cleandatapath + ownClass + Path.DirectorySeparatorChar;
-            string deckpath = classpath + deckName + Path.DirectorySeparatorChar;
-            string cleandeckpath = cleanclasspath + deckName + Path.DirectorySeparatorChar;
+            string path = Settings.Instance.path;
+            string cleanpath = "Silverfish" + System.IO.Path.DirectorySeparatorChar;
+            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string cleandatapath = cleanpath + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string cleanclasspath = cleandatapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+            string cleandeckpath = cleanclasspath + deckName + System.IO.Path.DirectorySeparatorChar;
             const string filestring = "_discovery.txt";
 
 
-            if (deckName != "" && File.Exists(deckpath + filestring))
+            if (deckName != "" && System.IO.File.Exists(deckpath + filestring))
             {
                 path = deckpath;
                 cleanPath = cleandeckpath + filestring;
             }
-            else if (deckName != "" && File.Exists(classpath + filestring))
+            else if (deckName != "" && System.IO.File.Exists(classpath + filestring))
             {
                 path = classpath;
                 cleanPath = cleanclasspath + filestring;
             }
-            else if (deckName != "" && File.Exists(datapath + filestring))
+            else if (deckName != "" && System.IO.File.Exists(datapath + filestring))
             {
                 path = datapath;
                 cleanPath = cleandatapath + filestring;
             }
-            else if (File.Exists(path + filestring))
+            else if (System.IO.File.Exists(path + filestring))
             {
                 cleanPath = cleanpath + filestring;
             }
             else
             {
-                HelpFunctions.Instance.ErrorLog("[Discovery] cant find base _discovery.txt, consider creating one");
+                Helpfunctions.Instance.ErrorLog("[Discovery] cant find base _discovery.txt, consider creating one");
                 return;
             }
-            HelpFunctions.Instance.ErrorLog("[Discovery] read " + cleanPath);
-            */
-            if (File.Exists(PathFile.Discovery))
-            {
-                // Do something
-            }
-            else
-            {
-                HelpFunctions.Instance.ErrorLog("[Discovery] cant find base _discovery.txt, consider creating one");
-                return;
-            }
-            HelpFunctions.Instance.ErrorLog("[Discovery] read " + PathFile.Discovery);
+            Helpfunctions.Instance.ErrorLog("[Discovery] read " + cleanPath);
+
 
             try
             {
-                lines = File.ReadAllLines(PathFile.Discovery);
+                lines = System.IO.File.ReadAllLines(path + "_discovery.txt");
             }
             catch
             {
-                HelpFunctions.Instance.ErrorLog("_discovery.txt read error. Continuing without user-defined rules.");
+                Helpfunctions.Instance.ErrorLog("_discovery.txt read error. Continuing without user-defined rules.");
                 return;
             }
             
@@ -135,10 +123,10 @@ namespace OpenAI
                 }
                 catch
                 {
-                    HelpFunctions.Instance.ErrorLog("[Discovery] cant read line: " + line);
+                    Helpfunctions.Instance.ErrorLog("[Discovery] cant read line: " + line);
                 }
             }
-            HelpFunctions.Instance.ErrorLog("[Discovery] " + discoverylist.Count + " rules found");
+            Helpfunctions.Instance.ErrorLog("[Discovery] " + discoverylist.Count + " rules found");
         }
 
         public int getBonusValue(CardDB.cardIDEnum cardid, string ownclass, string enemyclass)
@@ -314,8 +302,8 @@ namespace OpenAI
 
 
 
-                HelpFunctions.Instance.ErrorLog("card : " + i + " name : " + hc.card.name);
-                HelpFunctions.Instance.Log("card : " + i + " name : " + hc.card.name);
+                Helpfunctions.Instance.ErrorLog("card : " + i + " name : " + hc.card.name);
+                Helpfunctions.Instance.logg("card : " + i + " name : " + hc.card.name);
             }
 
             this.choicebonus = prevbonus;
@@ -329,8 +317,8 @@ namespace OpenAI
                 }
             }
 
-            HelpFunctions.Instance.ErrorLog("Choice : " + choice + " bonus : " + choicebonus);
-            HelpFunctions.Instance.Log("Choice : " + choice + " bonus : " + choicebonus);
+            Helpfunctions.Instance.ErrorLog("Choice : " + choice + " bonus : " + choicebonus);
+            Helpfunctions.Instance.logg("Choice : " + choice + " bonus : " + choicebonus);
             return choice;
         }
     }

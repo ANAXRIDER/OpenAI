@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //todo secret
 //    geheimnis:/ wenn ein diener euren helden angreift, wird er vernichtet.
-        public override void OnSecretPlay(Playfield p, bool ownplay, Minion target, int number)
+        public override void onSecretPlay(Playfield p, bool ownplay, Minion target, int number)
         {
             p.minionGetDestroyed(target);
         }
