@@ -1,8 +1,8 @@
-﻿namespace OpenAI
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace OpenAI
+{
     public class EnemyTurnSimulator
     {
         public bool Aggrodeck;
@@ -65,7 +65,7 @@
             }
 
             if (print)
-            { Console.WriteLine("enemMana "+ enemMana); }
+            { Console.WriteLine("enemMana " + enemMana); }
 
             //playing aoe-effects if activated (and we didnt play loatheb)
             if (playaround && rootfield.anzOwnLoatheb == 0)
@@ -85,8 +85,6 @@
                 }
             }
 
-
-
             //play ability!
 
             if (posmoves[0].enemyAbilityReady && enemMana >= 2 && posmoves[0].enemyHeroAblility.card.canplayCard(posmoves[0], 0) && rootfield.anzOwnSaboteur == 0)
@@ -96,10 +94,8 @@
                 havedonesomething = true;
                 // if we have mage or priest or hunter, we have to target something####################################################
 
-
                 if (penmanager.TargetAbilitysDatabase.ContainsKey(posmoves[0].enemyHeroAblility.card.cardIDenum))
                 {
-
                     List<Minion> trgts = posmoves[0].enemyHeroAblility.card.getTargetsForCard(posmoves[0], false, false);
                     foreach (Minion trgt in trgts)
                     {
@@ -126,9 +122,7 @@
                         posmoves.Add(pf);
                     }
                 }
-
             }
-
 
             foreach (Minion m in posmoves[0].enemyMinions)
             {
@@ -137,7 +131,6 @@
                 m.playedThisTurn = false;
                 m.updateReadyness();
             }
-
 
             int boardcount = 0;
             //movegen...
@@ -149,7 +142,6 @@
 
             while (havedonesomething)
             {
-
                 temp.Clear();
                 temp.AddRange(posmoves);
                 havedonesomething = false;
@@ -208,7 +200,6 @@
             count = posmoves.Count;
             for (i = 0; i < count; i++)
             {
-
                 if (!posmoves[i].complete) posmoves[i].endEnemyTurn();
             }
 
@@ -256,7 +247,6 @@
                 p = posmoves[i];
                 Int64 hash = p.GetHashCode();
                 if (!tempDict.ContainsKey(hash)) tempDict.Add(hash, p);
-
             }
             posmoves.Clear();
             foreach (KeyValuePair<Int64, Playfield> d in tempDict)
@@ -268,15 +258,13 @@
             //Helpfunctions.Instance.logg(max + " enemy boards cut to " + this.posmoves.Count); //lots of spam just for debugging
         }
 
-        CardDB.Card flame = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_614t);
+        private CardDB.Card flame = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_614t);
+
         //CardDB.Card warsong = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_084);// RIP little friend
-        CardDB.Card warriorweapon = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_106);
+        private CardDB.Card warriorweapon = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_106);
 
         private void doSomeBasicEnemyAi(Playfield p)
         {
-
         }
-
     }
-
 }

@@ -1,26 +1,8 @@
-﻿namespace OpenAI
+﻿using System;
+using System.Collections.Generic;
+
+namespace OpenAI
 {
-    using System;
-    using System.Collections.Generic;
-
-    public enum HeroEnum
-    {
-        None,
-        druid,
-        hunter,
-        priest,
-        warlock,
-        thief,
-        pala,
-        warrior,
-        shaman,
-        mage,
-        lordjaraxxus,
-        ragnarosthefirelord,
-        hogger,
-        all
-    }
-
     public sealed class Hrtprozis
     {
         public string deckName = "";
@@ -58,7 +40,6 @@
         public List<Handmanager.Handcard> deckCard = new List<Handmanager.Handcard>();
         public bool noDuplicates = true;
 
-
         public HeroEnum heroname = HeroEnum.druid, enemyHeroname = HeroEnum.druid;
         public CardDB.Card heroAbility;
         public bool ownAbilityisReady;
@@ -73,7 +54,6 @@
         public int Stampede;
 
         public int numberMinionsDiedThisTurn;
-        
 
         public int cardsPlayedThisTurn;
         public int owedRecall;
@@ -95,7 +75,6 @@
         public bool heroImmuneToDamageWhileAttacking;
         public bool heroImmune;
         public bool enemyHeroImmune;
-
 
         public List<Minion> ownMinions = new List<Minion>();
         public List<Minion> enemyMinions = new List<Minion>();
@@ -123,21 +102,22 @@
         public int nextSecretThisTurnCost0;
         public int ownPreparation;
 
-        Helpfunctions help = Helpfunctions.Instance;
+        private Helpfunctions help = Helpfunctions.Instance;
+
         //Imagecomparer icom = Imagecomparer.Instance;
         //HrtNumbers hrtnumbers = HrtNumbers.Instance;
-        CardDB cdb = CardDB.Instance;
+        private CardDB cdb = CardDB.Instance;
 
         private int ownPlayerController;
-        
-        
+
         private static readonly Lazy<Hrtprozis> lazy =
             new Lazy<Hrtprozis>(() => new Hrtprozis());
 
         public static Hrtprozis Instance { get { return lazy.Value; } }
 
-        private Hrtprozis() { }
-
+        private Hrtprozis()
+        {
+        }
 
         public void setAttackFaceHP(int hp)
         {
@@ -220,7 +200,7 @@
                 int num = 1;
                 if (pair.Length > 1) num = Convert.ToInt32(pair[1]);
 
-                if (num >= 2) checkDuplicate++; 
+                if (num >= 2) checkDuplicate++;
 
                 turnDeck.Add(card, num);
                 this.deckCard.Add(newdcard);
@@ -297,7 +277,6 @@
             anzOwnElementalsLastTurn = anzOwnElemLT;
         }
 
-
         public string heroIDtoName(string s)
         {
             switch (s) //keep 1 extra of each for future proofing
@@ -354,7 +333,6 @@
             }
         }
 
-
         public static string heroEnumtoName(HeroEnum he)
         {
             switch (he)
@@ -394,7 +372,7 @@
                 case "lordjaraxxus": return HeroEnum.lordjaraxxus;
                 case "ragnarosthefirelord": return HeroEnum.ragnarosthefirelord;
                 case "hogger": return HeroEnum.hogger;
-                default: return HeroEnum.None;
+                default: return HeroEnum.NONE;
             }
         }
 
@@ -429,10 +407,9 @@
                 case "ROGUE": return HeroEnum.thief;
                 case "WARLOCK": return HeroEnum.warlock;
                 case "WARRIOR": return HeroEnum.warrior;
-                default: return HeroEnum.None;
+                default: return HeroEnum.NONE;
             }
         }
-
 
         public void removeCardFromTurnDeck(CardDB.cardIDEnum crd)
         {
@@ -458,7 +435,7 @@
             }
             //this.enemyMinions.AddRange(em);
 
-            //sort them 
+            //sort them
             updatePositions();
         }
 
@@ -478,21 +455,19 @@
             this.ownMaxMana = maxmana;
             this.cardsPlayedThisTurn = cardsplayedthisturn;
             this.numMinionsPlayedThisTurn = numMinionsplayed;
-            
+
             this.ownHeroEntity = heroentity;
             this.enemyHeroEntitiy = enemyentity;
             this.numOptionsPlayedThisTurn = optionsPlayedThisTurn;
 
             this.numberMinionsDiedThisTurn = numMinsDied;
-            this.ownCurrentRecall= currentRecall;
+            this.ownCurrentRecall = currentRecall;
             this.owedRecall = recall;
             this.enemyRecall = enemRecall;
 
             this.heroPowerUsesThisTurn = hrpwrUsesThisTurn;
             this.lockAndLoads = locknload;
             this.Stampede = stampd;
-
-
         }
 
         public void setPlayereffects(int ownDragonConsorts, int enemyDragonConsorts, int ownLoathebs, int enemyLoathebs, int ownMillhouses, int enemyMillhouses, int nextSecretThisTurnCost0, int ownPrep, int ownSabo, int enemySabo, int ownFenciCoachess, int enemycurses)
@@ -550,7 +525,6 @@
             this.enemyHero = new Minion(enemyHero);
 
             this.enemyHeroPowerUsesThisGame = heroPowerUsesThisGame;
-
         }
 
         public void updateCThunInfo(int OgOwnCThunAngrBonus, int OgOwnCThunHpBonus, int OgOwnCThunTaunt)
@@ -577,7 +551,6 @@
             {
                 i++;
                 m.zonepos = i;
-
             }
             i = 0;
             foreach (Minion m in this.enemyMinions)
@@ -594,7 +567,6 @@
             temp.AddRange(enemyMinions);
             this.enemyMinions.Clear();
             this.enemyMinions.AddRange(temp.OrderBy(x => x.zonepos).ToList());*/
-
         }
 
         private Minion createNewMinion(Handmanager.Handcard hc, int id)
@@ -611,7 +583,6 @@
                 playedThisTurn = true,
                 numAttacksThisTurn = 0
             };
-
 
             if (hc.card.windfury) m.windfury = true;
             if (hc.card.tank) m.taunt = true;
@@ -630,24 +601,20 @@
                 m.Angr = m.Hp;
             }
 
-
             return m;
         }
 
         //these functions are not longer updated (moved to playfield.getCompleteBoardForSimulating)
         public void printHero(bool writetobuffer = false)
         {
-           
         }
 
         public void printOwnMinions(bool writetobuffer = false)
         {
-            
         }
 
         public void printEnemyMinions(bool writetobuffer = false)
         {
-            
         }
 
         public void updateLastPlayedCard(CardDB.cardIDEnum lastplayedcard, int targetentity)
@@ -655,7 +622,5 @@
             LastPlayedCard = lastplayedcard;
             AdaptTargetEntity = targetentity;
         }
-        
     }
-
 }

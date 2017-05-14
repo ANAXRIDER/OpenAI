@@ -1,9 +1,9 @@
-﻿namespace OpenAI
-{
-    using System;
-    using System.Text;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
+namespace OpenAI
+{
     public class Questmanager
     {
         public class QuestItem
@@ -52,7 +52,7 @@
                 {
                     case CardDB.cardIDEnum.UNG_934: if (m.taunt) questProgress++; break;
                     case CardDB.cardIDEnum.UNG_920: if (m.handcard.card.cost == 1) questProgress++; break;
-                    case CardDB.cardIDEnum.UNG_067:                        
+                    case CardDB.cardIDEnum.UNG_067:
                         if (mobsTurn.ContainsKey(m.name)) mobsTurn[m.name]++;
                         else mobsTurn.Add(m.name, 1);
                         int total = mobsTurn[m.name] + Questmanager.Instance.getPlayedCardFromHand(m.name);
@@ -79,7 +79,7 @@
                     case CardDB.cardIDEnum.UNG_028: if (qId > 67) questProgress++; break;
                 }
             }
-            
+
             public void trigger_WasDiscard(int num)
             {
                 switch (Id)
@@ -105,15 +105,15 @@
                 return CardDB.cardIDEnum.None;
             }
         }
-        
-        StringBuilder sb = new StringBuilder("", 500);
+
+        private StringBuilder sb = new StringBuilder("", 500);
         public QuestItem ownQuest = new QuestItem();
         public QuestItem enemyQuest = new QuestItem();
         public Dictionary<CardDB.cardName, int> mobsGame = new Dictionary<CardDB.cardName, int>();
         private CardDB.cardName nextMobName = CardDB.cardName.unknown;
         private int nextMobId = 0;
         private int prevMobId = 0;
-        Helpfunctions help;
+        private Helpfunctions help;
 
         private static Questmanager instance;
 
@@ -124,7 +124,7 @@
                 return instance ?? (instance = new Questmanager());
             }
         }
-        
+
         private Questmanager()
         {
             this.help = Helpfunctions.Instance;
@@ -136,7 +136,7 @@
             if (ownplay) this.ownQuest = tmp;
             else this.enemyQuest = tmp;
         }
-        
+
         public void updatePlayedMobs(int step)
         {
             if (step != 0)
@@ -173,7 +173,7 @@
         }
 
         public void Reset()
-        {            
+        {
             sb.Clear();
             mobsGame.Clear();
             ownQuest = new QuestItem();
@@ -184,15 +184,12 @@
         }
 
         public string getQuestsString()
-        {   
+        {
             sb.Clear();
             sb.Append("quests: ");
             sb.Append(ownQuest.Id).Append(" ").Append(ownQuest.questProgress).Append(" ").Append(ownQuest.maxProgress).Append(" ");
             sb.Append(enemyQuest.Id).Append(" ").Append(enemyQuest.questProgress).Append(" ").Append(enemyQuest.maxProgress);
             return sb.ToString();
         }
-
-
     }
-
 }

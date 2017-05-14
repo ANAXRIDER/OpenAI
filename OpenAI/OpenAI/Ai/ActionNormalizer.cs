@@ -5,9 +5,9 @@ namespace OpenAI
 {
     public class ActionNormalizer
     {
-        PenalityManager penman = PenalityManager.Instance;
-        Helpfunctions help = Helpfunctions.Instance;
-        Settings settings = Settings.Instance;
+        private PenalityManager penman = PenalityManager.Instance;
+        private Helpfunctions help = Helpfunctions.Instance;
+        private Settings settings = Settings.Instance;
 
         public struct targetNdamage
         {
@@ -20,7 +20,6 @@ namespace OpenAI
                 this.receivedDamage = dmg;
             }
         }
-
 
         public void adjustActions(Playfield p, bool isLethalCheck)
         {
@@ -109,6 +108,7 @@ namespace OpenAI
                         case ActionType.USE_HERO_POWER:
                             if (aa.card.card.name == CardDB.cardName.totemiccall) totemiccall = true;
                             break;
+
                         case ActionType.PLAY_CARD:
                             if (penman.DamageAllEnemysDatabase.ContainsKey(aa.card.card.name))
                             {
@@ -174,7 +174,6 @@ namespace OpenAI
                     if (!isActionPossible(tmpPf, a)) return;
                     try
                     {
-
                         if (!(a.actionType == ActionType.PLAY_CARD && rndActIdsDmg.ContainsKey(a.card.entity))) tmpPf.doAction(a);
                         else
                         {
@@ -213,7 +212,6 @@ namespace OpenAI
             p.playactions.AddRange(reorderedActions);
 
             help.logg("New order of actions:");
-
         }
 
         private bool isActionPossible(Playfield p, Action a)
@@ -238,6 +236,7 @@ namespace OpenAI
                         }
                     }
                     break;
+
                 case ActionType.ATTACK_WITH_MINION:
                     foreach (Minion m in p.ownMinions)
                     {
@@ -249,9 +248,11 @@ namespace OpenAI
                         }
                     }
                     break;
+
                 case ActionType.ATTACK_WITH_HERO:
                     if (p.ownHero.Ready) actionFound = true;
                     break;
+
                 case ActionType.USE_HERO_POWER:
                     if (p.ownAbilityReady && p.mana >= p.ownHeroAblility.card.getManaCost(p, p.ownHeroAblility.manacost)) actionFound = true;
                     break;
@@ -320,6 +321,4 @@ namespace OpenAI
             }
         }
     }
-
-    
 }

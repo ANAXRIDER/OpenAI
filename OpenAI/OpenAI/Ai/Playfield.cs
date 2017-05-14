@@ -425,8 +425,8 @@ namespace OpenAI
             adaptTargetEntity = 0;
             enemyHeroStartClass = TAG_CLASS.INVALID;
             ownHeroStartClass = TAG_CLASS.INVALID;
-            enemyHeroName = HeroEnum.None;
-            ownHeroName = HeroEnum.None;
+            enemyHeroName = HeroEnum.NONE;
+            ownHeroName = HeroEnum.NONE;
             enemySecretList = new List<SecretItem>();
             ownSecretsIDList = new List<CardDB.cardIDEnum>();
             value = Int32.MinValue;
@@ -1019,8 +1019,8 @@ namespace OpenAI
             adaptTargetEntity = 0;
             enemyHeroStartClass = TAG_CLASS.INVALID;
             ownHeroStartClass = TAG_CLASS.INVALID;
-            enemyHeroName = HeroEnum.None;
-            ownHeroName = HeroEnum.None;
+            enemyHeroName = HeroEnum.NONE;
+            ownHeroName = HeroEnum.NONE;
             enemySecretList = new List<SecretItem>();
             ownSecretsIDList = new List<CardDB.cardIDEnum>();
             value = Int32.MinValue;

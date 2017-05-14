@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace OpenAI
@@ -20,9 +19,8 @@ namespace OpenAI
         }
     }
 
-
     public class CardDB
-    {
+    {        
         // Data is stored in hearthstone-folder -> data->win cardxml0
         //(data-> cardxml0 seems outdated (blutelfkleriker has 3hp there >_>)
         public enum cardtype
@@ -34,7 +32,6 @@ namespace OpenAI
             HEROPWR,
             ENCHANTMENT,
             HERO,
-
         }
 
         public enum cardtrigers
@@ -89,7 +86,6 @@ namespace OpenAI
             PIRATE,
             DRAGON
         }
-
 
         public enum cardIDEnum
         {
@@ -5546,7 +5542,6 @@ namespace OpenAI
             zombiechow,
             zoobot,
             zwick
-
         }
 
         public cardName cardNamestringToEnum(string s)
@@ -5635,6 +5630,7 @@ namespace OpenAI
         {
             //public string CardID = "";
             public cardName name = cardName.unknown;
+
             public TAG_RACE race = TAG_RACE.INVALID;
             public int rarity;
             public int cost;
@@ -5646,8 +5642,10 @@ namespace OpenAI
             public int Health;
             public int Durability;//for weapons
             public bool target;
+
             //public string targettext = "";
             public bool tank;
+
             public bool Silence;
             public bool choice;
             public bool windfury;
@@ -5677,8 +5675,10 @@ namespace OpenAI
             public bool GrantCharge;
             public bool HealTarget;
             public bool Inspire;
+
             //playRequirements, reqID= siehe PlayErrors->ErrorType
             public int needEmptyPlacesForPlaying;
+
             public int needWithMinAttackValueOf;
             public int needWithMaxAttackValueOf;
             public int needRaceForPlaying;
@@ -5688,9 +5688,9 @@ namespace OpenAI
             public int needMinionsCapIfAvailable;
             public int needControlaSecret = 0;
 
-
             //additional data
             public bool isToken = false;
+
             public int isCarddraw;
             public bool damagesTarget = false;
             public bool damagesTargetWithSpecial = false;
@@ -5699,7 +5699,6 @@ namespace OpenAI
             public int anti_aoe_minion;
             public int Summon_Spell_Minion_Count;
             public bool lethalhelper = false;
-
 
             public int spellpowervalue;
             public cardIDEnum cardIDenum = cardIDEnum.None;
@@ -5784,7 +5783,7 @@ namespace OpenAI
             {
                 //if wereTargets=true and 0 targets at end -> then can not play this card
                 List<Minion> retval = new List<Minion>();
-                if (this.type == CardDB.cardtype.MOB && ((own && p.ownMinions.Count >= 7) || (!own && p.enemyMinions.Count >=7))) return retval; // cant play mob, if we have already 7 minions
+                if (this.type == CardDB.cardtype.MOB && ((own && p.ownMinions.Count >= 7) || (!own && p.enemyMinions.Count >= 7))) return retval; // cant play mob, if we have already 7 minions
                 if (this.Secret && ((own && (p.ownSecretsIDList.Contains(this.cardIDenum) || p.ownSecretsIDList.Count >= 5)) || (!own && p.enemySecretCount >= 5))) return retval;
                 //if (p.mana < this.getManaCost(p, 1)) return retval;
 
@@ -5864,7 +5863,7 @@ namespace OpenAI
                             if ((own ? p.ownWeaponDurability : p.enemyWeaponDurability) == 0) return retval;
                             continue;
                         case ErrorType2.REQ_TARGET_FOR_COMBO:
-                            if (p.cardsPlayedThisTurn >=1) targetAll = true;
+                            if (p.cardsPlayedThisTurn >= 1) targetAll = true;
                             continue;
                         case ErrorType2.REQ_TARGET_MIN_ATTACK:
                             REQ_TARGET_MIN_ATTACK = true;
@@ -5893,7 +5892,7 @@ namespace OpenAI
                             {
                                 foreach (Handmanager.Handcard hc in p.owncards)
                                 {
-                                    if ((TAG_RACE)hc.card.race == TAG_RACE.DRAGON) {targetAll = true; break; }
+                                    if ((TAG_RACE)hc.card.race == TAG_RACE.DRAGON) { targetAll = true; break; }
                                 }
                             }
                             else targetAll = true; // apriori the enemy have a dragon
@@ -5946,16 +5945,16 @@ namespace OpenAI
                         case ErrorType2.REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_SECRETS:
                             if (p.ownSecretsIDList.Count >= needControlaSecret) targetAll = true;
                             continue;
-                        //default:
+                            //default:
                     }
                 }
 
-			    if(targetAll)
-			    {
+                if (targetAll)
+                {
                     wereTargets = true;
                     if (targetAllFriendly != targetAllEnemy)
                     {
-                        if(targetAllFriendly) targets.AddRange(p.ownMinions);
+                        if (targetAllFriendly) targets.AddRange(p.ownMinions);
                         else targets.AddRange(p.enemyMinions);
                     }
                     else
@@ -5963,11 +5962,11 @@ namespace OpenAI
                         targets.AddRange(p.ownMinions);
                         targets.AddRange(p.enemyMinions);
                     }
-				    if(targetOnlyMinion)
-				    {
+                    if (targetOnlyMinion)
+                    {
                         targetEnemyHero = false;
                         targetOwnHero = false;
-				    }
+                    }
                     else
                     {
                         targetEnemyHero = true;
@@ -5975,12 +5974,12 @@ namespace OpenAI
                         if (targetAllEnemy) targetOwnHero = false;
                         if (targetAllFriendly) targetEnemyHero = false;
                     }
-			    }
+                }
 
-                if(extraParam)
+                if (extraParam)
                 {
                     wereTargets = true;
-                    if(REQ_TARGET_WITH_RACE)
+                    if (REQ_TARGET_WITH_RACE)
                     {
                         foreach (Minion m in targets)
                         {
@@ -5989,7 +5988,7 @@ namespace OpenAI
                         targetOwnHero = (p.ownHeroName == HeroEnum.lordjaraxxus && (TAG_RACE)this.needRaceForPlaying == TAG_RACE.DEMON);
                         targetEnemyHero = (p.enemyHeroName == HeroEnum.lordjaraxxus && (TAG_RACE)this.needRaceForPlaying == TAG_RACE.DEMON);
                     }
-                    if(REQ_HERO_TARGET)
+                    if (REQ_HERO_TARGET)
                     {
                         foreach (Minion m in targets)
                         {
@@ -5998,7 +5997,7 @@ namespace OpenAI
                         targetOwnHero = true;
                         targetEnemyHero = true;
                     }
-                    if(REQ_DAMAGED_TARGET)
+                    if (REQ_DAMAGED_TARGET)
                     {
                         foreach (Minion m in targets)
                         {
@@ -6010,7 +6009,7 @@ namespace OpenAI
                         targetOwnHero = false;
                         targetEnemyHero = false;
                     }
-                    if(REQ_TARGET_MAX_ATTACK)
+                    if (REQ_TARGET_MAX_ATTACK)
                     {
                         foreach (Minion m in targets)
                         {
@@ -6022,7 +6021,7 @@ namespace OpenAI
                         targetOwnHero = false;
                         targetEnemyHero = false;
                     }
-                    if(REQ_TARGET_MIN_ATTACK)
+                    if (REQ_TARGET_MIN_ATTACK)
                     {
                         foreach (Minion m in targets)
                         {
@@ -6034,7 +6033,7 @@ namespace OpenAI
                         targetOwnHero = false;
                         targetEnemyHero = false;
                     }
-                    if(REQ_MUST_TARGET_TAUNTER)
+                    if (REQ_MUST_TARGET_TAUNTER)
                     {
                         foreach (Minion m in targets)
                         {
@@ -6046,7 +6045,7 @@ namespace OpenAI
                         targetOwnHero = false;
                         targetEnemyHero = false;
                     }
-                    if(REQ_UNDAMAGED_TARGET)
+                    if (REQ_UNDAMAGED_TARGET)
                     {
                         foreach (Minion m in targets)
                         {
@@ -6068,7 +6067,7 @@ namespace OpenAI
                         targetOwnHero = false;
                         targetEnemyHero = false;
                     }
-                    if(REQ_LEGENDARY_TARGET)
+                    if (REQ_LEGENDARY_TARGET)
                     {
                         wereTargets = false;
                         foreach (Minion m in targets)
@@ -6135,11 +6134,11 @@ namespace OpenAI
                 return retval;
             }
 
-            // todo sepefeets - merge 2 old functions with the new 1 
+            // todo sepefeets - merge 2 old functions with the new 1
             /*
             public List<Minion> getTargetsForCard(Playfield p)
             {
-                //todo make it faster!! 
+                //todo make it faster!!
                 //todo remove the isRequirementInList with an big list of bools to ask the state of the bool
                 bool addOwnHero = false;
                 bool addEnemyHero = false;
@@ -6167,7 +6166,6 @@ namespace OpenAI
                         k++;
                         if ((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) continue;
                         ownMins[k] = true;
-
                     }
                     k = -1;
                     foreach (Minion m in p.enemyMinions)
@@ -6176,7 +6174,6 @@ namespace OpenAI
                         if (((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) || m.stealth) continue;
                         enemyMins[k] = true;
                     }
-
                 }
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_IF_AVAILABLE_AND_DRAGON_IN_HAND))
@@ -6198,7 +6195,6 @@ namespace OpenAI
                         k++;
                         if ((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) continue;
                         ownMins[k] = true;
-
                     }
                     k = -1;
                     foreach (Minion m in p.enemyMinions)
@@ -6209,7 +6205,6 @@ namespace OpenAI
                     }
                     addEnemyHero = true;
                     addOwnHero = true;
-
                 }
 
                 if (moreh)
@@ -6223,7 +6218,6 @@ namespace OpenAI
                             k++;
                             if ((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) continue;
                             ownMins[k] = true;
-
                         }
                         k = -1;
                         foreach (Minion m in p.enemyMinions)
@@ -6239,7 +6233,6 @@ namespace OpenAI
                 {
                     for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
                     for (int i = 0; i < enemyMins.Length; i++) enemyMins[i] = false;
-
                 }
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_MINION_TARGET))
@@ -6259,7 +6252,6 @@ namespace OpenAI
                     addOwnHero = false;
                     for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
                 }
-
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_LEGENDARY_TARGET))
                 {
@@ -6284,7 +6276,6 @@ namespace OpenAI
                         }
                     }
                 }
-
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_DAMAGED_TARGET))
                 {
@@ -6333,7 +6324,6 @@ namespace OpenAI
                         }
                     }
                 }
-                
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_UNDAMAGED_TARGET))
                 {
@@ -6474,12 +6464,11 @@ namespace OpenAI
                 }
 
                 return retval;
-
             }
 
             public List<Minion> getTargetsForCardEnemy(Playfield p)
             {
-                //todo make it faster!! 
+                //todo make it faster!!
                 //todo remove the isRequirementInList with an big list of bools to ask the state of the bool
                 bool addOwnHero = false;
                 bool addEnemyHero = false;
@@ -6504,7 +6493,6 @@ namespace OpenAI
                         k++;
                         if (((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) || m.stealth) continue;
                         ownMins[k] = true;
-
                     }
                     k = -1;
                     foreach (Minion m in p.enemyMinions)
@@ -6513,7 +6501,6 @@ namespace OpenAI
                         if ((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) continue;
                         enemyMins[k] = true;
                     }
-
                 }
 
                 if (moreh)
@@ -6528,9 +6515,7 @@ namespace OpenAI
                             k++;
                             if (((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) || m.stealth) continue;
                             ownMins[k] = true;
-
                         }
-
                     }
                 }
 
@@ -6538,7 +6523,6 @@ namespace OpenAI
                 {
                     for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
                     for (int i = 0; i < enemyMins.Length; i++) enemyMins[i] = false;
-
                 }
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_MINION_TARGET))
@@ -6551,7 +6535,6 @@ namespace OpenAI
                 {
                     addOwnHero = false;
                     for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
-
                 }
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_ENEMY_TARGET))
@@ -6559,7 +6542,6 @@ namespace OpenAI
                     addEnemyHero = false;
                     for (int i = 0; i < enemyMins.Length; i++) enemyMins[i] = false;
                 }
-
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_LEGENDARY_TARGET))
                 {
@@ -6584,8 +6566,6 @@ namespace OpenAI
                         }
                     }
                 }
-
-
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_DAMAGED_TARGET))
                 {
@@ -6750,7 +6730,6 @@ namespace OpenAI
                 }
 
                 return retval;
-
             }*/
 
             public int calculateManaCost(Playfield p)//calculates the mana from orginal mana, needed for back-to hand effects and new draw
@@ -6790,6 +6769,7 @@ namespace OpenAI
                             offset -= p.anzOwnMechwarper;
                         }
                         break;
+
                     case cardtype.SPELL:
                         if (p.nextSpellThisTurnCost0) return 0;
                         offset -= p.anzOwnSorcerersApprentice;
@@ -6799,6 +6779,7 @@ namespace OpenAI
                             offset -= 3;
                         }
                         break;
+
                     case cardtype.WEAPON:
                         offset -= p.anzBlackwaterPirate * 2;
                         break;
@@ -6811,12 +6792,15 @@ namespace OpenAI
                     case CardDB.cardName.wildmagic:
                         retval = offset;
                         break;
+
                     case CardDB.cardName.dreadcorsair:
                         retval = retval + offset - p.ownWeaponAttack;
                         break;
+
                     case CardDB.cardName.volcanicdrake:
                         retval = retval + offset - p.ownMinionsDiedTurn - p.enemyMinionsDiedTurn;
                         break;
+
                     case CardDB.cardName.thingfrombelow:
                         retval = retval + offset - p.tempTrigger.ownTotemSummoned;
                         //retval = retval + offset;
@@ -6855,39 +6839,51 @@ namespace OpenAI
                         }
                         if (retval <= 0) retval = 0;
                         break;
+
                     case CardDB.cardName.knightofthewild:
                         retval = retval + offset - p.tempTrigger.ownBeastSummoned;
                         break;
+
                     case CardDB.cardName.seagiant:
                         retval = retval + offset - p.ownMinions.Count - p.enemyMinions.Count;
                         break;
+
                     case CardDB.cardName.mountaingiant:
                         retval = retval + offset - p.owncards.Count;
                         break;
+
                     case CardDB.cardName.clockworkgiant:
                         retval = retval + offset - p.enemyAnzCards;
                         break;
+
                     case CardDB.cardName.moltengiant:
                         retval = retval + offset - p.ownHero.maxHp + p.ownHero.Hp;
                         break;
+
                     case CardDB.cardName.frostgiant:
                         retval = retval + offset - p.anzUsedOwnHeroPower;
                         break;
+
                     case CardDB.cardName.arcanegiant:
                         retval = retval + offset - p.ownSpellsPlayedThisGame;
                         break;
+
                     case CardDB.cardName.kabalcrystalrunner:
                         retval = retval + offset - 2 * p.secretsplayedSinceRecalc;
                         break;
+
                     case CardDB.cardName.secondratebruiser:
                         retval = retval + offset - ((p.enemyMinions.Count < 3) ? 0 : 2);
                         break;
+
                     case CardDB.cardName.golemagg:
                         retval = retval + offset - p.ownHero.maxHp + p.ownHero.Hp;
                         break;
+
                     case CardDB.cardName.volcaniclumberer:
                         retval = retval + offset - p.ownMinionsDiedTurn - p.enemyMinionsDiedTurn;
                         break;
+
                     case CardDB.cardName.skycapnkragg:
                         int costBonus = 0;
                         foreach (Minion m in p.ownMinions)
@@ -6896,6 +6892,7 @@ namespace OpenAI
                         }
                         retval = retval + offset - costBonus;
                         break;
+
                     case CardDB.cardName.everyfinisawesome:
                         int costBonusM = 0;
                         foreach (Minion m in p.ownMinions)
@@ -6904,6 +6901,7 @@ namespace OpenAI
                         }
                         retval = retval + offset - costBonusM;
                         break;
+
                     case CardDB.cardName.crush:
                         // cost 4 less if we have a dmged minion
                         bool dmgedminions = false;
@@ -6916,11 +6914,12 @@ namespace OpenAI
                             retval = retval + offset - 4;
                         }
                         break;
+
                     default:
                         retval = retval + offset;
                         break;
                 }
-                
+
                 if (this.Secret)
                 {
                     if (p.anzOwnCloakedHuntress > 0 || p.nextSecretThisTurnCost0) retval = 0;
@@ -6940,7 +6939,7 @@ namespace OpenAI
                 // CARDS that increase/decrease the manacosts of others ##############################
                 switch (this.type)
                 {
-                    case cardtype.HEROPWR:                        
+                    case cardtype.HEROPWR:
                         if (p.anzOwnMaidenOfTheLake >= 1)
                         {
                             retval = 1;
@@ -6954,6 +6953,7 @@ namespace OpenAI
                         retval += (p.isOwnTurn) ? p.anzEnemySaboteur * 5 : p.anzOwnSaboteur * 5;
 
                         break;
+
                     case cardtype.MOB:
                         //Manacosts changes with Venture Co. Mercenary
                         offset += p.anzVentureCoMercenary * 3;
@@ -6996,16 +6996,17 @@ namespace OpenAI
                             retval -= (p.isOwnTurn) ? p.anzOwnDragonConsort * 2 : p.anzEnemyDragonConsort * 2;
                         }
                         break;
+
                     case cardtype.SPELL:
                         //Manacosts changes with the Sorcerer's Apprentice
                         offset -= p.anzOwnSorcerersApprentice;
-                        
+
                         //manacosts are lowered, after we played preparation
                         if (p.playedPreparation)
                         {
                             offset -= 3;
                         }
-                        
+
                         //loatheb
                         retval += (p.isOwnTurn) ? p.anzEnemyLoatheb * 5 : p.anzOwnLoatheb * 5;
 
@@ -7016,31 +7017,36 @@ namespace OpenAI
                         }
 
                         break;
+
                     case cardtype.WEAPON:
                         offset += p.anzBlackwaterPirate * 2;
                         break;
                 }
-                
+
                 if ((this.type == cardtype.MOB || this.type == cardtype.SPELL || this.type == cardtype.WEAPON) && p.anzOwnNagaSeaWitch >= 1)
                 {
                     retval = 5;
                 }
-                
+
                 // CARDS that decrease their own manacosts ##############################
                 switch (this.name)
                 {
                     case CardDB.cardName.frostgiant:
                         retval = retval + offset - p.ownHeroPowerUses;
                         break;
+
                     case CardDB.cardName.arcanegiant:
                         retval = retval + offset - p.ownSpellsPlayedThisGame;
                         break;
+
                     case CardDB.cardName.kabalcrystalrunner:
                         retval = retval + offset - 2 * p.secretsplayedSinceRecalc;
                         break;
+
                     case CardDB.cardName.secondratebruiser:
                         retval = retval + offset - ((p.enemyMinions.Count < 3) ? 0 : 2) + ((p.enemyMobsCountStarted < 3) ? 0 : 2);
                         break;
+
                     case CardDB.cardName.skycapnkragg:
                         int pirates = 0;
                         foreach (Minion m in p.ownMinions)
@@ -7049,6 +7055,7 @@ namespace OpenAI
                         }
                         retval = retval + offset - pirates;
                         break;
+
                     case CardDB.cardName.thingfrombelow:
                         retval = retval + offset - p.tempTrigger.ownTotemSummoned;
                         //break;
@@ -7089,24 +7096,31 @@ namespace OpenAI
                         if (retval <= 0) retval = 0;
                         //Helpfunctions.Instance.ErrorLog("찾았다 retval" + retval);
                         break;
+
                     case CardDB.cardName.knightofthewild:
                         retval = retval + offset - p.tempTrigger.ownBeastSummoned;
                         break;
+
                     case CardDB.cardName.dreadcorsair:
                         retval = retval + offset - p.ownWeaponAttack;
                         break;
+
                     case CardDB.cardName.seagiant:
                         retval = retval + offset - p.ownMinions.Count - p.enemyMinions.Count + p.ownMobsCountStarted + p.enemyMobsCountStarted;
                         break;
+
                     case CardDB.cardName.mountaingiant:
                         retval = retval + offset - p.owncards.Count;
                         break;
+
                     case CardDB.cardName.clockworkgiant:
                         retval = retval + offset - p.enemyAnzCards;
                         break;
+
                     case CardDB.cardName.moltengiant:
                         retval = retval + offset - p.ownHero.maxHp + p.ownHero.Hp;
                         break;
+
                     case CardDB.cardName.crush:
                         // cost 4 less if we have a dmged minion
                         retval = retval + offset;
@@ -7129,6 +7143,7 @@ namespace OpenAI
                     case CardDB.cardName.solemnvigil:
                         retval = retval - p.anzMinionsDiedThisTurn;
                         break;
+
                     case CardDB.cardName.everyfinisawesome:
                         int murlocs = 0;
                         foreach (Minion m in p.ownMinions)
@@ -7140,6 +7155,7 @@ namespace OpenAI
                         }
                         retval = retval + offset - murlocs;
                         break;
+
                     default:
                         retval = retval + offset;
                         break;
@@ -7167,7 +7183,6 @@ namespace OpenAI
 
                 if (this.type == cardtype.MOB)
                 {
-
                     //Manacosts changes with soeldner der venture co.
                     offset += -p.anzVentureCoMercenary * 3;
                     offset += -p.anzEmeraldHiveQueen * 2;
@@ -7199,13 +7214,10 @@ namespace OpenAI
                     }
                 }
 
-                
-
                 // CARDS that decrease the manacosts of others ##############################
 
                 if (this.type == cardtype.MOB)
                 {
-
                     //Manacosts changes with the summoning-portal >_>
                     //cant lower the mana to 0
                     offset += p.anzSummoningPortal * 2;
@@ -7223,10 +7235,8 @@ namespace OpenAI
                     }
                 }
 
-
                 if (this.type == cardtype.SPELL)
                 {
-
                     //manacosts are lowered, after we played preparation
                     if (p.playedPreparation)
                     {
@@ -7235,19 +7245,18 @@ namespace OpenAI
 
                     //Manacosts changes with the zauberlehrling summoner
                     offset += p.anzOwnSorcerersApprentice;
-
                 }
-
 
                 switch (this.name)
                 {
-
                     case CardDB.cardName.frostgiant:
                         retval = retval + offset + p.ownHeroPowerUses;
                         break;
+
                     case CardDB.cardName.arcanegiant:
                         retval = retval + offset - p.ownSpellsPlayedThisGame;
                         break;
+
                     case CardDB.cardName.skycapnkragg:
                         int pirates = 0;
                         foreach (Minion m in p.ownMinions)
@@ -7256,21 +7265,27 @@ namespace OpenAI
                         }
                         retval = retval + offset + pirates;
                         break;
+
                     case CardDB.cardName.dreadcorsair:
                         retval = retval + offset + p.ownWeaponAttack;
                         break;
+
                     case CardDB.cardName.seagiant:
                         retval = retval + offset + p.ownMinions.Count + p.enemyMinions.Count;
                         break;
+
                     case CardDB.cardName.mountaingiant:
                         retval = retval + offset + p.owncards.Count;
                         break;
+
                     case CardDB.cardName.clockworkgiant:
                         retval = retval + offset + p.enemyAnzCards;
                         break;
+
                     case CardDB.cardName.moltengiant:
                         retval = retval + offset + p.ownHero.Hp;
                         break;
+
                     case CardDB.cardName.crush:
                         // cost 4 less if we have a dmged minion
                         bool dmgedminions = false;
@@ -7288,6 +7303,7 @@ namespace OpenAI
                     case CardDB.cardName.solemnvigil:
                         retval = retval + p.anzMinionsDiedThisTurn;
                         break;
+
                     default:
                         retval = retval + offset;
                         break;
@@ -7354,13 +7370,11 @@ namespace OpenAI
                     if (this.needMinTotalMinions > p.ownMinions.Count + p.enemyMinions.Count) return false;
                 }
 
-
-
                 if (haveToDoRequires)
                 {
                     if (this.getTargetsForCard(p, false, true).Count == 0) return false;
 
-                    //it requires a target-> return false if 
+                    //it requires a target-> return false if
                 }
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_IF_AVAILABLE) && isRequirementInList(CardDB.ErrorType2.REQ_MINION_CAP_IF_TARGET_AVAILABLE))
@@ -7385,26 +7399,20 @@ namespace OpenAI
                     if (hasheal && haswrath && hastaunt && hassearing) return false;
                 }
 
-
                 if (this.Secret)
                 {
                     if (p.ownSecretsIDList.Contains(this.cardIDenum)) return false;
                     if (p.ownSecretsIDList.Count >= 5) return false;
                 }
 
-
-
                 return true;
             }
-
-
-
         }
 
-        List<string> namelist = new List<string>();
-        List<Card> cardlist = new List<Card>();
-        Dictionary<cardIDEnum, Card> cardidToCardList = new Dictionary<cardIDEnum, Card>();
-        List<string> allCardIDS = new List<string>();
+        private List<string> namelist = new List<string>();
+        private List<Card> cardlist = new List<Card>();
+        private Dictionary<cardIDEnum, Card> cardidToCardList = new Dictionary<cardIDEnum, Card>();
+        private List<string> allCardIDS = new List<string>();
         public Card unknownCard;
         public bool installedWrong;
 
@@ -7500,7 +7508,6 @@ namespace OpenAI
                     name = "";
                     if (c.name != CardDB.cardName.unknown)
                     {
-
                         this.cardlist.Add(c);
                         //Helpfunctions.Instance.logg(c.name);
 
@@ -7509,7 +7516,6 @@ namespace OpenAI
                             this.cardidToCardList.Add(c.cardIDenum, c);
                         }
                     }
-
                 }
                 if (s.Contains("<Entity version=\"") && s.Contains(" CardID=\""))
                 {
@@ -7545,10 +7551,10 @@ namespace OpenAI
                     if (temp.Equals("OG_216a")) c.isToken = true; //Infested Wolf deathrattle
                     if (temp.Equals("CS2_101t")) c.isToken = true; //Silver Hand Recruit
                     if (temp.Equals("OG_114a")) c.isToken = true; //Forbidden Ritual token
-                    if (temp.Equals("CFM_315t")) c.isToken = true; //Alleycat 
+                    if (temp.Equals("CFM_315t")) c.isToken = true; //Alleycat
                     if (temp.Equals("EX1_116t")) c.isToken = true; // Leeroy Jenkins Onyxia
                     if (temp.Equals("EX1_506a")) c.isToken = true; // Murloc Tidehunter
-                    if (temp.Equals("CFM_310t")) c.isToken = true; //Call in the Finishers 
+                    if (temp.Equals("CFM_310t")) c.isToken = true; //Call in the Finishers
                     if (temp.Equals("KAR_044a")) c.isToken = true; //Moroes
                     if (temp.Equals("EX1_554t")) c.isToken = true; //Snake Trap
                     if (temp.Equals("CFM_621_m5")) c.isToken = true; // sheep
@@ -7699,7 +7705,6 @@ namespace OpenAI
                     c.name = this.cardNamestringToEnum(temp);
                     name = temp;
 
-
                     continue;
                 }
 
@@ -7728,7 +7733,6 @@ namespace OpenAI
                         }
                         catch
                         {
-
                         }
                     }
 
@@ -7737,7 +7741,6 @@ namespace OpenAI
                 //targetingarrowtext
                 if (s.Contains("<Tag enumID=\"325\""))
                 {
-
                     string temp = s.Split(new string[] { "type=\"String\">" }, StringSplitOptions.RemoveEmptyEntries)[1];
                     temp = temp.Split(new string[] { "</Tag>" }, StringSplitOptions.RemoveEmptyEntries)[0];
                     temp = temp.Replace("&lt;", "");
@@ -7748,7 +7751,6 @@ namespace OpenAI
                     c.target = true;
                     continue;
                 }
-
 
                 //poisonous
                 if (s.Contains("<Tag enumID=\"363\""))
@@ -8064,12 +8066,10 @@ namespace OpenAI
             this.ligthningJolt = this.getCardDataFromID(CardDB.cardIDEnum.AT_050t);//deal 2 dmg hero power
 
             Helpfunctions.Instance.ErrorLog("CardList:" + cardidToCardList.Count);
-
         }
 
         public Card getCardData(CardDB.cardName cardname)
         {
-
             foreach (Card ca in this.cardlist)
             {
                 if (ca.name == cardname)
@@ -8248,7 +8248,7 @@ namespace OpenAI
                 case cardIDEnum.AT_132_WARLOCK: return new Sim_AT_132_WARLOCK();
                 case cardIDEnum.AT_132_WARRIOR: return new Sim_AT_132_WARRIOR();
                 case cardIDEnum.AT_133: return new Sim_AT_133();
-                
+
                 case cardIDEnum.BRMA01_2: return new Sim_BRMA01_2();
                 case cardIDEnum.BRMA01_2H: return new Sim_BRMA01_2H();
                 case cardIDEnum.BRMA01_2H_2_TB: return new Sim_BRMA01_2H_2_TB();
@@ -8288,9 +8288,9 @@ namespace OpenAI
                 case cardIDEnum.BRMA17_5_TB: return new Sim_BRMA17_5_TB();
                 case cardIDEnum.BRMA17_6: return new Sim_BRMA17_6();
                 case cardIDEnum.BRMA17_6H: return new Sim_BRMA17_6H();
-                
+
                 case cardIDEnum.BRMC_94: return new Sim_BRMC_94();
-                
+
                 case cardIDEnum.BRM_001: return new Sim_BRM_001();
                 case cardIDEnum.BRM_002: return new Sim_BRM_002();
                 case cardIDEnum.BRM_003: return new Sim_BRM_003();
@@ -8613,13 +8613,13 @@ namespace OpenAI
                 case cardIDEnum.CS2_boar: return new Sim_CS2_boar();
                 case cardIDEnum.CS2_mirror: return new Sim_CS2_mirror();
                 case cardIDEnum.CS2_tk1: return new Sim_CS2_tk1();
-                
+
                 case cardIDEnum.DREAM_01: return new Sim_DREAM_01();
                 case cardIDEnum.DREAM_02: return new Sim_DREAM_02();
                 case cardIDEnum.DREAM_03: return new Sim_DREAM_03();
                 case cardIDEnum.DREAM_04: return new Sim_DREAM_04();
                 case cardIDEnum.DREAM_05: return new Sim_DREAM_05();
-                
+
                 case cardIDEnum.DS1_055: return new Sim_DS1_055();
                 case cardIDEnum.DS1_070: return new Sim_DS1_070();
                 case cardIDEnum.DS1_175: return new Sim_DS1_175();
@@ -8911,7 +8911,7 @@ namespace OpenAI
                 case cardIDEnum.EX1_tk33: return new Sim_EX1_tk33();
                 case cardIDEnum.EX1_tk34: return new Sim_EX1_tk34();
                 case cardIDEnum.EX1_tk9: return new Sim_EX1_tk9();
-                
+
                 case cardIDEnum.FP1_001: return new Sim_FP1_001();
                 case cardIDEnum.FP1_002: return new Sim_FP1_002();
                 case cardIDEnum.FP1_002t: return new Sim_FP1_002t();
@@ -8948,11 +8948,11 @@ namespace OpenAI
                 case cardIDEnum.FP1_029: return new Sim_FP1_029();
                 case cardIDEnum.FP1_030: return new Sim_FP1_030();
                 case cardIDEnum.FP1_031: return new Sim_FP1_031();
-                
+
                 case cardIDEnum.GAME_002: return new Sim_GAME_002();
                 case cardIDEnum.GAME_005: return new Sim_GAME_005();
                 case cardIDEnum.GAME_006: return new Sim_GAME_006();
-                
+
                 case cardIDEnum.GVG_001: return new Sim_GVG_001();
                 case cardIDEnum.GVG_002: return new Sim_GVG_002();
                 case cardIDEnum.GVG_003: return new Sim_GVG_003();
@@ -9088,7 +9088,7 @@ namespace OpenAI
                 case cardIDEnum.GVG_121: return new Sim_GVG_121();
                 case cardIDEnum.GVG_122: return new Sim_GVG_122();
                 case cardIDEnum.GVG_123: return new Sim_GVG_123();
-                
+
                 case cardIDEnum.HERO_01: return new Sim_HERO_01();
                 case cardIDEnum.HERO_01a: return new Sim_HERO_01();
                 case cardIDEnum.HERO_01b: return new Sim_HERO_01();
@@ -9180,13 +9180,13 @@ namespace OpenAI
                 case cardIDEnum.KAR_710m: return new Sim_KAR_710m();
                 case cardIDEnum.KAR_711: return new Sim_KAR_711();
                 case cardIDEnum.KAR_712: return new Sim_KAR_712();
-                
+
                 case cardIDEnum.LOEA10_3: return new Sim_LOEA10_3();
                 case cardIDEnum.LOEA16_3: return new Sim_LOEA16_3();
                 case cardIDEnum.LOEA16_4: return new Sim_LOEA16_4();
                 case cardIDEnum.LOEA16_5: return new Sim_LOEA16_5();
                 case cardIDEnum.LOEA16_5t: return new Sim_LOEA16_5t();
-                
+
                 case cardIDEnum.LOE_002: return new Sim_LOE_002();
                 case cardIDEnum.LOE_002t: return new Sim_LOE_002t();
                 case cardIDEnum.LOE_003: return new Sim_LOE_003();
@@ -9240,13 +9240,13 @@ namespace OpenAI
                 case cardIDEnum.LOE_116: return new Sim_LOE_116();
                 case cardIDEnum.LOE_118: return new Sim_LOE_118();
                 case cardIDEnum.LOE_119: return new Sim_LOE_119();
-                
+
                 case cardIDEnum.Mekka1: return new Sim_Mekka1();
                 case cardIDEnum.Mekka2: return new Sim_Mekka2();
                 case cardIDEnum.Mekka3: return new Sim_Mekka3();
                 case cardIDEnum.Mekka4: return new Sim_Mekka4();
                 case cardIDEnum.Mekka4t: return new Sim_Mekka4t();
-                
+
                 case cardIDEnum.NEW1_003: return new Sim_NEW1_003();
                 case cardIDEnum.NEW1_004: return new Sim_NEW1_004();
                 case cardIDEnum.NEW1_005: return new Sim_NEW1_005();
@@ -9286,7 +9286,7 @@ namespace OpenAI
                 case cardIDEnum.NEW1_040: return new Sim_NEW1_040();
                 case cardIDEnum.NEW1_040t: return new Sim_NEW1_040t();
                 case cardIDEnum.NEW1_041: return new Sim_NEW1_041();
-                
+
                 case cardIDEnum.OG_006: return new Sim_OG_006();
                 case cardIDEnum.OG_006a: return new Sim_OG_006a();
                 case cardIDEnum.OG_006b: return new Sim_OG_006b();
@@ -9428,7 +9428,7 @@ namespace OpenAI
                 case cardIDEnum.OG_337: return new Sim_OG_337();
                 case cardIDEnum.OG_339: return new Sim_OG_339();
                 case cardIDEnum.OG_340: return new Sim_OG_340();
-                
+
                 case cardIDEnum.PART_001: return new Sim_PART_001();
                 case cardIDEnum.PART_002: return new Sim_PART_002();
                 case cardIDEnum.PART_003: return new Sim_PART_003();
@@ -9436,13 +9436,13 @@ namespace OpenAI
                 case cardIDEnum.PART_005: return new Sim_PART_005();
                 case cardIDEnum.PART_006: return new Sim_PART_006();
                 case cardIDEnum.PART_007: return new Sim_PART_007();
-                
+
                 case cardIDEnum.PRO_001: return new Sim_PRO_001();
                 case cardIDEnum.PRO_001a: return new Sim_PRO_001a();
                 case cardIDEnum.PRO_001at: return new Sim_PRO_001at();
                 case cardIDEnum.PRO_001b: return new Sim_PRO_001b();
                 case cardIDEnum.PRO_001c: return new Sim_PRO_001c();
-                
+
                 case cardIDEnum.TB_007: return new Sim_TB_007();
                 case cardIDEnum.TU4d_003: return new Sim_TU4d_003();
                 case cardIDEnum.TU4f_004: return new Sim_TU4f_004();
@@ -9624,7 +9624,7 @@ namespace OpenAI
                 case cardIDEnum.tt_004: return new Sim_tt_004();
                 case cardIDEnum.tt_010: return new Sim_tt_010();
                 case cardIDEnum.tt_010a: return new Sim_tt_010a();
-                
+
                 case cardIDEnum.PlaceholderCard: return new Sim_PlaceholderCard();
             }
 
@@ -9793,9 +9793,9 @@ namespace OpenAI
                 case cardIDEnum.AT_132_WARLOCK: return new Pen_AT_132_WARLOCK();
                 case cardIDEnum.AT_132_WARRIOR: return new Pen_AT_132_WARRIOR();
                 case cardIDEnum.AT_133: return new Pen_AT_133();
-                
+
                 case cardIDEnum.BRM_029: return new Pen_BRM_029();
-                
+
                 case cardIDEnum.CS1_042: return new Pen_CS1_042();
                 case cardIDEnum.CS1_069: return new Pen_CS1_069();
                 case cardIDEnum.CS1_112: return new Pen_CS1_112();
@@ -9926,13 +9926,13 @@ namespace OpenAI
                 case cardIDEnum.CS2_boar: return new Pen_CS2_boar();
                 case cardIDEnum.CS2_mirror: return new Pen_CS2_mirror();
                 case cardIDEnum.CS2_tk1: return new Pen_CS2_tk1();
-                
+
                 case cardIDEnum.DREAM_01: return new Pen_DREAM_01();
                 case cardIDEnum.DREAM_02: return new Pen_DREAM_02();
                 case cardIDEnum.DREAM_03: return new Pen_DREAM_03();
                 case cardIDEnum.DREAM_04: return new Pen_DREAM_04();
                 case cardIDEnum.DREAM_05: return new Pen_DREAM_05();
-                
+
                 case cardIDEnum.DS1_055: return new Pen_DS1_055();
                 case cardIDEnum.DS1_070: return new Pen_DS1_070();
                 case cardIDEnum.DS1_175: return new Pen_DS1_175();
@@ -9943,7 +9943,7 @@ namespace OpenAI
                 case cardIDEnum.DS1_188: return new Pen_DS1_188();
                 case cardIDEnum.DS1_233: return new Pen_DS1_233();
                 case cardIDEnum.DS1h_292: return new Pen_DS1h_292();
-                
+
                 case cardIDEnum.EX1_001: return new Pen_EX1_001();
                 case cardIDEnum.EX1_002: return new Pen_EX1_002();
                 case cardIDEnum.EX1_004: return new Pen_EX1_004();
@@ -10222,7 +10222,7 @@ namespace OpenAI
                 case cardIDEnum.EX1_tk33: return new Pen_EX1_tk33();
                 case cardIDEnum.EX1_tk34: return new Pen_EX1_tk34();
                 case cardIDEnum.EX1_tk9: return new Pen_EX1_tk9();
-                
+
                 case cardIDEnum.FP1_001: return new Pen_FP1_001();
                 case cardIDEnum.FP1_002: return new Pen_FP1_002();
                 case cardIDEnum.FP1_002t: return new Pen_FP1_002t();
@@ -10259,11 +10259,11 @@ namespace OpenAI
                 case cardIDEnum.FP1_029: return new Pen_FP1_029();
                 case cardIDEnum.FP1_030: return new Pen_FP1_030();
                 case cardIDEnum.FP1_031: return new Pen_FP1_031();
-                
+
                 case cardIDEnum.GAME_002: return new Pen_GAME_002();
                 case cardIDEnum.GAME_005: return new Pen_GAME_005();
                 case cardIDEnum.GAME_006: return new Pen_GAME_006();
-                
+
                 case cardIDEnum.GVG_001: return new Pen_GVG_001();
                 case cardIDEnum.GVG_002: return new Pen_GVG_002();
                 case cardIDEnum.GVG_003: return new Pen_GVG_003();
@@ -10400,7 +10400,7 @@ namespace OpenAI
                 case cardIDEnum.GVG_121: return new Pen_GVG_121();
                 case cardIDEnum.GVG_122: return new Pen_GVG_122();
                 case cardIDEnum.GVG_123: return new Pen_GVG_123();
-                
+
                 case cardIDEnum.HERO_01: return new Pen_HERO_01();
                 case cardIDEnum.HERO_01a: return new Pen_HERO_01();
                 case cardIDEnum.HERO_01b: return new Pen_HERO_01();
@@ -10482,13 +10482,13 @@ namespace OpenAI
                 case cardIDEnum.LOE_116: return new Pen_LOE_116();
                 case cardIDEnum.LOE_118: return new Pen_LOE_118();
                 case cardIDEnum.LOE_119: return new Pen_LOE_119();
-                
+
                 case cardIDEnum.Mekka1: return new Pen_Mekka1();
                 case cardIDEnum.Mekka2: return new Pen_Mekka2();
                 case cardIDEnum.Mekka3: return new Pen_Mekka3();
                 case cardIDEnum.Mekka4: return new Pen_Mekka4();
                 case cardIDEnum.Mekka4t: return new Pen_Mekka4t();
-                
+
                 case cardIDEnum.NEW1_003: return new Pen_NEW1_003();
                 case cardIDEnum.NEW1_004: return new Pen_NEW1_004();
                 case cardIDEnum.NEW1_005: return new Pen_NEW1_005();
@@ -10528,7 +10528,7 @@ namespace OpenAI
                 case cardIDEnum.NEW1_040: return new Pen_NEW1_040();
                 case cardIDEnum.NEW1_040t: return new Pen_NEW1_040t();
                 case cardIDEnum.NEW1_041: return new Pen_NEW1_041();
-                
+
                 case cardIDEnum.OG_027: return new Pen_OG_027();
                 case cardIDEnum.OG_051: return new Pen_OG_051();
                 case cardIDEnum.OG_086: return new Pen_OG_086();
@@ -10536,7 +10536,7 @@ namespace OpenAI
                 case cardIDEnum.OG_114: return new Pen_OG_114();
                 case cardIDEnum.OG_198: return new Pen_OG_198();
                 case cardIDEnum.OG_202: return new Pen_OG_202();
-                
+
                 case cardIDEnum.PART_001: return new Pen_PART_001();
                 case cardIDEnum.PART_002: return new Pen_PART_002();
                 case cardIDEnum.PART_003: return new Pen_PART_003();
@@ -10544,13 +10544,13 @@ namespace OpenAI
                 case cardIDEnum.PART_005: return new Pen_PART_005();
                 case cardIDEnum.PART_006: return new Pen_PART_006();
                 case cardIDEnum.PART_007: return new Pen_PART_007();
-                
+
                 case cardIDEnum.PRO_001: return new Pen_PRO_001();
                 case cardIDEnum.PRO_001a: return new Pen_PRO_001a();
                 case cardIDEnum.PRO_001at: return new Pen_PRO_001at();
                 case cardIDEnum.PRO_001b: return new Pen_PRO_001b();
                 case cardIDEnum.PRO_001c: return new Pen_PRO_001c();
-                
+
                 case cardIDEnum.PlaceholderCard: return new Pen_PlaceholderCard();
                 case cardIDEnum.ds1_whelptoken: return new Pen_ds1_whelptoken();
                 case cardIDEnum.hexfrog: return new Pen_hexfrog();
@@ -10577,7 +10577,6 @@ namespace OpenAI
             }
             Helpfunctions.Instance.writeToBuffer("}");
 
-            
             // cardName creator:
             List<string> namelist = new List<string>();
             foreach (string cardid in this.namelist)
@@ -10585,7 +10584,7 @@ namespace OpenAI
                 if (namelist.Contains(cardid)) continue;
                 namelist.Add(cardid);
             }
-            
+
             Helpfunctions.Instance.writeToBuffer("public enum cardName");
             Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in namelist)
@@ -10594,7 +10593,6 @@ namespace OpenAI
             }
             Helpfunctions.Instance.writeToBuffer("}");
 
-            
             // getSimCard creator:
             Helpfunctions.Instance.writeToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
             Helpfunctions.Instance.writeToBuffer("{");
@@ -10607,7 +10605,6 @@ namespace OpenAI
             Helpfunctions.Instance.writeToBuffer("return new SimTemplate();");
             Helpfunctions.Instance.writeToBuffer("}");
             Helpfunctions.Instance.writeToBuffer("}");
-
 
             Helpfunctions.Instance.writeBufferToCardDB();
         }
@@ -10657,10 +10654,10 @@ namespace OpenAI
                 {
                     c.Summon_Spell_Minion_Count = pen.summonMinionSpellsDatabase[c.name];
                 }
-                
-                if (pen.buffingMinionsDatabase.ContainsKey(c.name) || 
-                    pen.attackBuffDatabase.ContainsKey(c.name) || 
-                    pen.heroAttackBuffDatabase.ContainsKey(c.name) || 
+
+                if (pen.buffingMinionsDatabase.ContainsKey(c.name) ||
+                    pen.attackBuffDatabase.ContainsKey(c.name) ||
+                    pen.heroAttackBuffDatabase.ContainsKey(c.name) ||
                     pen.lethalHelpers.ContainsKey(c.name) ||
                     pen.buffingMinionsDatabase.ContainsKey(c.name))
                 {
@@ -10673,11 +10670,11 @@ namespace OpenAI
                 {
                     try
                     {
-	                    foreach (var m in trigerType.GetMethods().Where(e=>e.Name.Equals(trigerName, StringComparison.Ordinal)))
-	                    {
-							if (m.DeclaringType == trigerType)
-								c.trigers.Add((cardtrigers)Enum.Parse(typeof(cardtrigers), trigerName));
-						}
+                        foreach (var m in trigerType.GetMethods().Where(e => e.Name.Equals(trigerName, StringComparison.Ordinal)))
+                        {
+                            if (m.DeclaringType == trigerType)
+                                c.trigers.Add((cardtrigers)Enum.Parse(typeof(cardtrigers), trigerName));
+                        }
                     }
                     catch
                     {
@@ -10686,7 +10683,5 @@ namespace OpenAI
                 if (c.trigers.Count > 10) c.trigers.Clear();
             }
         }
-
     }
-
 }

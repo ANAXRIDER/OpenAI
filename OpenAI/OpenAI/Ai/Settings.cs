@@ -5,12 +5,12 @@ namespace OpenAI
 {
     internal sealed class Settings
     {
-        public Behavior setSettings()
+        public Behavior SetSettings()
         {
             return ReadSettings();
         }
 
-        public Behavior setDefaultSettings() //settings not to high to run without external process
+        public Behavior SetDefaultSettings() //settings not to high to run without external process
         {
             // play with these settings###################################
             this.enfacehp = 15;  // hp of enemy when your hero is allowed to attack the enemy face with his weapon
@@ -49,12 +49,12 @@ namespace OpenAI
             this.enemyherovaluemultiply = 100;
             //###########################################################
 
-            applySettings();
+            ApplySettings();
 
             return behave;
         }
 
-        public void applySettings()
+        public void ApplySettings()
         {
             this.SetWeights(alpha);
 
@@ -153,7 +153,7 @@ namespace OpenAI
         {
         }
 
-        public Behavior updateInstance()
+        public Behavior UpdateInstance()
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             enemyClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname);
@@ -187,7 +187,7 @@ namespace OpenAI
             if (!File.Exists(FilePath.Settings))
             {
                 Helpfunctions.Instance.logg("[Settings] cant find base settings.txt, using default settings");
-                return setDefaultSettings();
+                return SetDefaultSettings();
             }
             Helpfunctions.Instance.ErrorLog("[Settings] reading settings.txt ");
 
@@ -199,7 +199,7 @@ namespace OpenAI
             catch
             {
                 Helpfunctions.Instance.logg("[Settings] cant find read settings.txt, using default settings");
-                return setDefaultSettings();
+                return SetDefaultSettings();
             }
 
             foreach (string ss in lines)
@@ -547,7 +547,7 @@ namespace OpenAI
                     }
                 }
             }
-            applySettings();
+            ApplySettings();
 
             return behave;
         }

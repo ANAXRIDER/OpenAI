@@ -8,15 +8,14 @@ namespace OpenAI
     {
         private int maxdeep = 12;
         public int maxwide = 3000;
+
         //public int playaroundprob = 40;
         public int playaroundprob2 = 80;
 
-        
         private bool dontRecalc = true;
         private bool useLethalCheck = true;
 
         public Playfield bestplay = new Playfield();
-
 
         public int lethalMissing = 30; //RR
 
@@ -24,17 +23,18 @@ namespace OpenAI
 
         //public List<EnemyTurnSimulator> enemyTurnSim = new List<EnemyTurnSimulator>();
         public List<MiniSimulatorNextTurn> nextTurnSimulator = new List<MiniSimulatorNextTurn>();
+
         //public List<EnemyTurnSimulator> enemySecondTurnSim = new List<EnemyTurnSimulator>();
 
         public string currentCalculatedBoard = "1";
 
-        PenalityManager penman = PenalityManager.Instance;
+        private PenalityManager penman = PenalityManager.Instance;
 
-        List<Playfield> posmoves = new List<Playfield>(7000);
+        private List<Playfield> posmoves = new List<Playfield>(7000);
 
-        Hrtprozis hp = Hrtprozis.Instance;
-        Handmanager hm = Handmanager.Instance;
-        Helpfunctions help = Helpfunctions.Instance;
+        private Hrtprozis hp = Hrtprozis.Instance;
+        private Handmanager hm = Handmanager.Instance;
+        private Helpfunctions help = Helpfunctions.Instance;
 
         public Action bestmove = null;
         public float bestmoveValue;
@@ -45,6 +45,7 @@ namespace OpenAI
         public List<Action> bestActions = new List<Action>();
 
         public bool secondturnsim;
+
         //public int secondTurnAmount = 256;
         public bool playaround = false;
 
@@ -84,7 +85,6 @@ namespace OpenAI
                 //this.enemyTurnSim[i].thread = i;
                 //this.enemySecondTurnSim[i].thread = i;
             }
-
         }
 
         public void setMaxWide(int mw)
@@ -124,7 +124,6 @@ namespace OpenAI
             //    ets.setMaxwideFirstStep(false);
             //}
 
-
             if (isLethalCheck) this.posmoves[0].enemySecretList.Clear();
             this.mainTurnSimulator.doallmoves(this.posmoves[0], isLethalCheck);
 
@@ -135,10 +134,8 @@ namespace OpenAI
             help.logg("-------------------------------------");
             help.logg("value of best board " + bestval);
 
-            
             if (isLethalCheck)
             {
-
                 this.lethalMissing = bestplay.enemyHero.armor + bestplay.enemyHero.Hp;//RR
                 help.logg("missing dmg to lethal " + this.lethalMissing);
             }
@@ -147,11 +144,10 @@ namespace OpenAI
                 this.lethalMissing = 130;
             }
 
-
             //set best tracking
             this.bestTracking = 0;
             this.bestTrackingStatus = 0;
-            if(Handmanager.Instance.getNumberChoices()>=1) selectBestTracking();
+            if (Handmanager.Instance.getNumberChoices() >= 1) selectBestTracking();
 
             //set best actions
             this.bestActions.Clear();
@@ -182,7 +178,6 @@ namespace OpenAI
             {
                 nextMoveGuess.mana = -100;
             }
-
         }
 
         public void reorderingActions()
@@ -235,6 +230,7 @@ namespace OpenAI
                             }
                         }
                         break;
+
                     case ActionType.ATTACK_WITH_MINION:
                         foreach (Minion m in tmpPf.ownMinions)
                         {
@@ -246,9 +242,11 @@ namespace OpenAI
                             }
                         }
                         break;
+
                     case ActionType.ATTACK_WITH_HERO:
                         if (tmpPf.ownHero.Ready) found = true;
                         break;
+
                     case ActionType.USE_HERO_POWER:
                         if (tmpPf.ownAbilityReady && tmpPf.mana >= tmpPf.ownHeroAblility.card.getManaCost(tmpPf, tmpPf.ownHeroAblility.manacost)) found = true;
                         break;
@@ -315,7 +313,6 @@ namespace OpenAI
                 trackingstatus = 2;//use random card
             }
 
-
             ////adapt
             //CardDB.Card c = CardDB.Instance.getCardDataFromID(Hrtprozis.Instance.LastPlayedCard);
             //Helpfunctions.Instance.ErrorLog("c.name..." + c.name);
@@ -327,7 +324,6 @@ namespace OpenAI
             //    Helpfunctions.Instance.ErrorLog("trackingchoice..." + trackingchoice);
             //    Helpfunctions.Instance.logg("trackingchoice..." + trackingchoice);
             //}
-
 
             this.bestTracking = trackingchoice;
             this.bestTrackingStatus = trackingstatus;
@@ -379,8 +375,6 @@ namespace OpenAI
                     Helpfunctions.Instance.logg("StackTrace ---" + ex.ToString());
                 }
                 //Helpfunctions.Instance.logg("nmgsime-");
-
-
             }
             else
             {
@@ -418,10 +412,8 @@ namespace OpenAI
                 {
                     Helpfunctions.Instance.logg("StackTrace do next calced move---" + ex.ToString());
                     Helpfunctions.Instance.ErrorLog("StackTrace do next calced move---" + ex.ToString());
-
                 }
                 //Helpfunctions.Instance.logg("nmgsime-");
-
             }
             else
             {
@@ -437,7 +429,6 @@ namespace OpenAI
                     Hrtprozis.Instance.updateCThunInfo(nextMoveGuess.anzOgOwnCThunAngrBonus + twilightelderBonus, nextMoveGuess.anzOgOwnCThunHpBonus + twilightelderBonus, nextMoveGuess.anzOgOwnCThunTaunt);
                 }
             }
-
         }
 
         public void dosomethingclever(Behavior bbase)
@@ -494,16 +485,13 @@ namespace OpenAI
                     strt = DateTime.Now;
                     doallmoves(false, false);
                     help.logg("calculated " + (DateTime.Now - strt).TotalSeconds);
-
                 }
             }
 
-
             //help.logging(true);
-
         }
 
-        public void autoTester(bool printstuff, string data = "", bool logg=true)
+        public void autoTester(bool printstuff, string data = "", bool logg = true)
         {
             help.logg("simulating board ");
 
@@ -532,21 +520,19 @@ namespace OpenAI
             foreach (var item in this.posmoves[0].owncards)
             {
                 if (item.canplayCard(posmoves[0])) help.logg("card " + item.card.name + " is playable :" + item.canplayCard(posmoves[0]) + " cost/mana: " + item.manacost + "/" + posmoves[0].mana);
-
             }
             if (Playfield.Instance.ownAbilityReady)
             {
-                if(posmoves[0].ownHeroAblility.card.canplayCard(posmoves[0], 2))  help.logg("ability " + posmoves[0].ownHeroAblility.card.name + " is playable :" + posmoves[0].ownHeroAblility.card.canplayCard(posmoves[0], 2) + " cost/mana: " + posmoves[0].ownHeroAblility.card.getManaCost(posmoves[0], 2) + "/" + posmoves[0].mana);
+                if (posmoves[0].ownHeroAblility.card.canplayCard(posmoves[0], 2)) help.logg("ability " + posmoves[0].ownHeroAblility.card.name + " is playable :" + posmoves[0].ownHeroAblility.card.canplayCard(posmoves[0], 2) + " cost/mana: " + posmoves[0].ownHeroAblility.card.getManaCost(posmoves[0], 2) + "/" + posmoves[0].mana);
             }
             else
             {
                 help.logg("ability is NOT READY");
             }
-            
 
             // lethalcheck + normal
             DateTime strt = DateTime.Now;
-            
+
             doallmoves(false, true);
             help.logg("calculated " + (DateTime.Now - strt).TotalSeconds);
             double timeneeded = 0;
@@ -593,7 +579,7 @@ namespace OpenAI
                     }
                 }
             }
-            else 
+            else
             {
                 //Console.WriteLine("notestmode");
             }
@@ -612,16 +598,13 @@ namespace OpenAI
 
             foreach (Action bestmovee in board.playactions)
             {
-
                 help.logg("stepp");
-
 
                 if (bestmovee != null && bestmovee.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
                 {
                     bestmovee.Print();
 
                     tempbestboard.doAction(bestmovee);
-
                 }
                 else
                 {
@@ -657,7 +640,6 @@ namespace OpenAI
                 bestmove.Print();
 
                 tempbestboard.doAction(bestmove);
-
             }
             else
             {
@@ -669,16 +651,13 @@ namespace OpenAI
 
             foreach (Action bestmovee in this.bestActions)
             {
-
                 help.logg("stepp");
-
 
                 if (bestmovee != null && bestmovee.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
                 {
                     bestmovee.Print();
 
                     tempbestboard.doAction(bestmovee);
-
                 }
                 else
                 {
@@ -710,7 +689,6 @@ namespace OpenAI
 
             if (bestmove != null && bestmove.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
             {
-
                 tempbestboard.doAction(bestmove);
                 tempbestboard.printActionforDummies(tempbestboard.playactions[tempbestboard.playactions.Count - 1]);
 
@@ -725,16 +703,13 @@ namespace OpenAI
                 help.ErrorLog("end turn");
             }
 
-
             foreach (Action bestmovee in this.bestActions)
             {
-
                 if (bestmovee != null && bestmovee.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
                 {
                     //bestmovee.print();
                     tempbestboard.doAction(bestmovee);
                     tempbestboard.printActionforDummies(tempbestboard.playactions[tempbestboard.playactions.Count - 1]);
-
                 }
                 else
                 {
@@ -764,10 +739,7 @@ namespace OpenAI
                 if (a.target != null && a.target.entityID == old) a.target.entityID = newone;
                 if (a.card != null && a.card.entity == old) a.card.entity = newone;
             }
-
         }
-
-
 
         //queue stuff (done by xytrix)
         // Looks through a list of playfields from previous moves to find one that matches our current board state.
@@ -839,10 +811,6 @@ namespace OpenAI
                     return false;
                 if (bestmove.target.taunt || (bestmove.target.hasDeathrattle() && !bestmove.target.silenced)) return false;
 
-
-
-
-
                 if (Ai.Instance.bestmove.actionType == ActionType.ATTACK_WITH_MINION || Ai.Instance.bestmove.actionType == ActionType.ATTACK_WITH_HERO)
                 {
                     Ai daum = Ai.Instance;
@@ -864,15 +832,12 @@ namespace OpenAI
                     }
                 }
 
-
-
-
                 //switch (bestmove.target.name)
                 //{
                 //    case CardDB.cardName.impgangboss:
                 //        return false;
                 //    case CardDB.cardName.dragonegg:
-                //        return false; 
+                //        return false;
                 //    case CardDB.cardName.hoggerdoomofelwynn:
                 //        return false;
                 //    default:
@@ -886,19 +851,14 @@ namespace OpenAI
             }
             else if (this.bestmove.actionType == ActionType.PLAY_CARD)
             {
-
                 if (this.bestmove.card.card.type == CardDB.cardtype.SPELL)
-                {                   
+                {
                     if (this.bestmove.target != null)
                     {
                         bool hastargetdeathrattle = (this.bestmove.target.hasDeathrattle() || this.bestmove.target.deathrattles.Count >= 1 || (this.bestmove.target.handcard.card.deathrattle && !this.bestmove.target.silenced)) && !this.bestmove.target.isHero;
                         if (hastargetdeathrattle) return false;
                     }
                 }
-
-
-
-
 
                 // Check the board prior to applying the last action (this.oldMoveGuess). Was it a random action?
                 return !IsPlayRandomEffect(this.bestmove.card.card, this.oldMoveGuess, this.nextMoveGuess);
@@ -990,13 +950,9 @@ namespace OpenAI
 
         public bool boardContainsGeneratedEntities(Playfield p)
         {
-            if (p.ownMinions.Find(m => m.handcard.entity>=1000) != null) return true;
+            if (p.ownMinions.Find(m => m.handcard.entity >= 1000) != null) return true;
             if (p.enemyMinions.Find(m => m.handcard.entity >= 1000) != null) return true;
             return false;
         }
-
-
     }
-
-
 }

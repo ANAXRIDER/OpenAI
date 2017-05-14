@@ -6,10 +6,10 @@ namespace OpenAI
 {
     public class Discovery
     {
-        string choicenminion = "";
+        private string choicenminion = "";
         public int choicebonus;
 
-        class DiscoveryItem
+        private class DiscoveryItem
         {
             public CardDB.cardIDEnum cardid = CardDB.cardIDEnum.None;
             public int bonus;
@@ -71,7 +71,6 @@ namespace OpenAI
             string cleandeckpath = cleanclasspath + deckName + Path.DirectorySeparatorChar;
             const string filestring = "_discovery.txt";
 
-
             if (deckName != "" && File.Exists(deckpath + filestring))
             {
                 path = deckpath;
@@ -98,7 +97,6 @@ namespace OpenAI
             }
             Helpfunctions.Instance.ErrorLog("[Discovery] read " + cleanPath);
 
-
             try
             {
                 lines = File.ReadAllLines(path + "_discovery.txt");
@@ -108,7 +106,7 @@ namespace OpenAI
                 Helpfunctions.Instance.ErrorLog("_discovery.txt read error. Continuing without user-defined rules.");
                 return;
             }
-            
+
             foreach (string line in lines)
             {
                 string shortline = line.Replace(" ", "");
@@ -181,7 +179,7 @@ namespace OpenAI
                 {
                     case CardDB.cardName.mortalcoil:
                         {
-                            if (p.mana >= 1 && cankillmortalcoil) bonus += 200; 
+                            if (p.mana >= 1 && cankillmortalcoil) bonus += 200;
                             break;
                         }
                     case CardDB.cardName.bloodsailcorsair:
@@ -246,7 +244,6 @@ namespace OpenAI
                             break;
                         }
                     default: break;
-
                 }
 
                 //adaptcards
@@ -263,7 +260,7 @@ namespace OpenAI
                 //    case CardDB.cardIDEnum.UNG_999t14: bonus = 150; break;// +1/+1
                 //    case CardDB.cardIDEnum.UNG_999t4: bonus = 140; break;// 3hp
                 //    case CardDB.cardIDEnum.UNG_999t2: bonus = 100; break;//deathrattle 2 1/1 plants
-                                                                  
+
                 //    case CardDB.cardIDEnum.UNG_999t7:
                 //        {
                 //            bonus = 90;
@@ -281,7 +278,6 @@ namespace OpenAI
                 //    default: break;
                 //}
 
-
                 if (p.owncards.Count == 0)
                 {
                     if (hc.card.cost <= p.mana && p.turnCounter == 0) bonus += 10 * hc.card.cost;
@@ -291,22 +287,17 @@ namespace OpenAI
                     bonus += 1; //bonus for next turn
                 }
 
-
-
                 if (bonus > prevbonus)
                 {
                     choice = i;
                     prevbonus = bonus;
                 }
 
-
-
                 Helpfunctions.Instance.ErrorLog("card : " + i + " name : " + hc.card.name);
                 Helpfunctions.Instance.logg("card : " + i + " name : " + hc.card.name);
             }
 
             this.choicebonus = prevbonus;
-            
 
             if (choicebonus == 0 && hasMinusValue)
             {

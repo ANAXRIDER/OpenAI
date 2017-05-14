@@ -125,11 +125,11 @@ namespace OpenAI
                 {
                     Helpfunctions.Instance.ErrorLog("[Mulligan] CardID: \"" + id + "\" is not a valid card");
                 }
-                if (own != "all" && Hrtprozis.Instance.heroNametoEnum(own) == HeroEnum.None)
+                if (own != "all" && Hrtprozis.Instance.heroNametoEnum(own) == HeroEnum.NONE)
                 {
                     Helpfunctions.Instance.ErrorLog("[Mulligan] Class: \"" + own + "\" is not a valid class");
                 }
-                if (enemy != "all" && Hrtprozis.Instance.heroNametoEnum(enemy) == HeroEnum.None)
+                if (enemy != "all" && Hrtprozis.Instance.heroNametoEnum(enemy) == HeroEnum.NONE)
                 {
                     Helpfunctions.Instance.ErrorLog("[Mulligan] Class: \"" + enemy + "\" is not a valid class");
                 }
@@ -152,7 +152,7 @@ namespace OpenAI
 
         class concedeItem
         {
-            public HeroEnum urhero = HeroEnum.None;
+            public HeroEnum urhero = HeroEnum.NONE;
             public List<HeroEnum> enemhero = new List<HeroEnum>();
         }
         

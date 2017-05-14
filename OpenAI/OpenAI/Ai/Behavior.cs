@@ -1,6 +1,5 @@
 ﻿namespace OpenAI
 {
-
     public abstract class Behavior
     {
         public virtual float getPlayfieldValue(Playfield p)
@@ -22,7 +21,5 @@
         {
             return 0;
         }
-
     }
-
 }

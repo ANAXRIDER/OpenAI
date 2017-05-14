@@ -1,16 +1,19 @@
-﻿namespace OpenAI
+﻿using System;
+using System.Collections.Generic;
+
+namespace OpenAI
 {
-    using System;
-    using System.Collections.Generic;
     public class BehaviorAggroWarlock : Behavior
     {
-        PenalityManager penman = PenalityManager.Instance;
+        private PenalityManager penman = PenalityManager.Instance;
 
         //public int destroyunitattack;
 
         public static readonly BehaviorAggroWarlock instance = new BehaviorAggroWarlock();
 
-        static BehaviorAggroWarlock() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        static BehaviorAggroWarlock()
+        {
+        } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static BehaviorAggroWarlock Instance
         {
@@ -31,32 +34,14 @@
 
             //retval -= p.enemyspellpower * 5;
 
-            if (p.enemyMinions.Count == 0) retval += p.spellpower * 3 ;
+            if (p.enemyMinions.Count == 0) retval += p.spellpower * 3;
 
             //card counts
-            retval += - (p.enemyDeckSize * 3);
+            retval += -(p.enemyDeckSize * 3);
             //Helpfunctions.Instance.ErrorLog("p.enemyDeckSize = " + p.enemyDeckSize);
             //Helpfunctions.Instance.ErrorLog("Hrtprozis.Instance.enemyDeckSize = " + Hrtprozis.Instance.enemyDeckSize);
 
-
-
-
             retval -= p.owedRecall * 3;
-
-
-
-            
-            
-
-
-
-
-
-
-
-
-
-
 
             //check aggrodeck
             //cards check
@@ -103,9 +88,6 @@
                 }
             }
 
-
-
-
             bool pirateaggrowarrior = false;
             if (p.enemyHeroName == HeroEnum.warrior)
             {
@@ -129,31 +111,27 @@
                 if (upgrade >= 1 || bloodsail_raider >= 1 || Bloodsail_Cultist >= 1 || southseadeckhand >= 1 || Small_Time_Buccanee >= 1 || Patches_the_Pirate >= 1 || Dread_Corsair >= 1) pirateaggrowarrior = true; //pirate warrior
             }
 
-
-
-
-
             //hp
             int phase = 0;
             if (p.ownHero.Hp + p.ownHero.armor >= 15) phase = 1; // over 15+
             if (p.ownHero.Hp + p.ownHero.armor <= 14 && p.ownHero.Hp + p.ownHero.armor >= 11) phase = 2; //11-14
             if (p.ownHero.Hp + p.ownHero.armor <= 10) phase = 3; // under 10
-            //if (p.ownHero.Hp + p.ownHero.armor >= 15 && (p.enemyHeroName == HeroEnum.hunter || p.enemyHeroName == HeroEnum.shaman)) phase = 4;
-            //if (p.ownHero.Hp + p.ownHero.armor <= 14 && p.enemyHeroName == HeroEnum.druid && p.ownMaxMana >= 8 && p.anzOwnLoatheb == 0 && !hastaunt) phase = 5;
-            //if (Aggrodeck && p.ownHero.Hp + p.ownHero.armor <= 10) phase = 6;
-            //if (Aggrodeck && p.ownHero.Hp + p.ownHero.armor >= 11) phase = 7;
+                                                                 //if (p.ownHero.Hp + p.ownHero.armor >= 15 && (p.enemyHeroName == HeroEnum.hunter || p.enemyHeroName == HeroEnum.shaman)) phase = 4;
+                                                                 //if (p.ownHero.Hp + p.ownHero.armor <= 14 && p.enemyHeroName == HeroEnum.druid && p.ownMaxMana >= 8 && p.anzOwnLoatheb == 0 && !hastaunt) phase = 5;
+                                                                 //if (Aggrodeck && p.ownHero.Hp + p.ownHero.armor <= 10) phase = 6;
+                                                                 //if (Aggrodeck && p.ownHero.Hp + p.ownHero.armor >= 11) phase = 7;
 
             //Helpfunctions.Instance.ErrorLog("phase : " + phase);
-            
+
             float hpvalue = 0;
             switch (phase)
             {
-                case 1: hpvalue += 8 + ((p.ownHero.Hp + p.ownHero.armor) - 14) * 0.5f; break; 
-                    //15hp이상 15:8.5 16=9 0.5씩오름
-                case 2: hpvalue += 2 * ((p.ownHero.Hp + p.ownHero.armor) - 10); break; 
-                    //11~14 11=2 12 =4 13 =6 14=8
+                case 1: hpvalue += 8 + ((p.ownHero.Hp + p.ownHero.armor) - 14) * 0.5f; break;
+                //15hp이상 15:8.5 16=9 0.5씩오름
+                case 2: hpvalue += 2 * ((p.ownHero.Hp + p.ownHero.armor) - 10); break;
+                //11~14 11=2 12 =4 13 =6 14=8
                 case 3: hpvalue -= (10 - (p.ownHero.Hp + p.ownHero.armor)) * (10 - (p.ownHero.Hp + p.ownHero.armor)); break;
-                    //~10 10=0 9면 -1 제곱으로 8이면 -4..
+                //~10 10=0 9면 -1 제곱으로 8이면 -4..
                 default: break;
             }
             retval += hpvalue;
@@ -161,18 +139,14 @@
             //Helpfunctions.Instance.ErrorLog("phase : " + phase);
             //Helpfunctions.Instance.ErrorLog("hpvalue : " + hpvalue);
 
-
-
             if (phase == 3 && p.turnCounter == 0) // additional value when hero hp under 10
             {
-                foreach(Minion m in p.ownMinions)
+                foreach (Minion m in p.ownMinions)
                 {
                     if (m.taunt) retval += m.Hp * m.Hp;
                 }
                 if (tauntcount == 0) retval -= 15;
             }
-
-
 
             int Fireball = 0;
             int Lava_Burst = 0;
@@ -183,12 +157,9 @@
                 if (e.Key == CardDB.cardIDEnum.CS2_029) Fireball = e.Value; //Fireball CS2_029
                 if (e.Key == CardDB.cardIDEnum.EX1_241) Lava_Burst = e.Value; //Lava Burst EX1_241
                 if (e.Key == CardDB.cardIDEnum.EX1_539) Kill_Command = e.Value; //Kill_Command EX1_539
-
             }
 
             //Helpfunctions.Instance.ErrorLog("Fireball count : " +Fireball);
-
-
 
             int enemypotentialattack = 0;
             switch (p.enemyHeroAblility.card.name)
@@ -232,7 +203,7 @@
                     }
                 case HeroEnum.shaman:
                     {
-                        if (Lava_Burst == 0 && p.ownHero.Hp + p.ownHero.armor <= 5) retval -= 50; 
+                        if (Lava_Burst == 0 && p.ownHero.Hp + p.ownHero.armor <= 5) retval -= 50;
                         else if (Lava_Burst == 0 && p.ownHero.Hp + p.ownHero.armor <= enemypotentialattacktotal + 3)
                         {
                             retval -= enemypotentialattacktotal;
@@ -261,35 +232,21 @@
                     }
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             //hp enemy
             float enemyherohpvalue = 0;
             if (p.enemyHero.Hp + p.enemyHero.armor <= 5)
             {
                 if (p.enemyHero.Hp + p.enemyHero.armor <= 0)
                 {
-                    
                 }
                 else enemyherohpvalue += -8 * (p.enemyHero.Hp + p.enemyHero.armor) + 90; //y = -10x + 100
             }
-            else if (p.enemyHero.Hp + p.enemyHero.armor <= 10) 
+            else if (p.enemyHero.Hp + p.enemyHero.armor <= 10)
             {
                 enemyherohpvalue += -4 * (p.enemyHero.Hp + p.enemyHero.armor) + 70; //y = -4x + 70
                 //retval += -3 * (p.enemyHero.Hp + p.enemyHero.armor) + 60;
             }
-            else if (p.enemyHero.Hp + p.enemyHero.armor >= 11 )//&& p.enemyHero.Hp + p.enemyHero.armor <= 20)
+            else if (p.enemyHero.Hp + p.enemyHero.armor >= 11)//&& p.enemyHero.Hp + p.enemyHero.armor <= 20)
             {
                 enemyherohpvalue += -2 * (p.enemyHero.Hp + p.enemyHero.armor) + 50; //y = - 2x + 50
             }
@@ -317,16 +274,15 @@
             }
             foreach (Minion m in p.ownMinions)
             {
-                if (m.name == CardDB.cardName.manatreant)  retval += 5;
+                if (m.name == CardDB.cardName.manatreant) retval += 5;
             }
 
             if (p.ownMaxMana <= 6 && p.owncards.Count >= 4) retval -= p.manaTurnEnd * 3;
             else if (p.owncards.Count >= 4) retval -= p.manaTurnEnd;
 
-
             if (!p.ownHero.frozen)
             {
-                retval += p.ownWeaponAttack  + p.ownWeaponAttack * (p.ownWeaponDurability - 1) * 0.5f;
+                retval += p.ownWeaponAttack + p.ownWeaponAttack * (p.ownWeaponDurability - 1) * 0.5f;
                 if (p.ownWeaponName == CardDB.cardName.spiritclaws && p.spellpower >= 1) retval -= 2;
                 //if (p.ownWeaponName == CardDB.cardName.truesilverchampion) retval += 2;
             }
@@ -348,7 +304,6 @@
                     retval += 11;
                 }
             }
-
 
             //RR card draw value depending on the turn and distance to lethal
             //RR if lethal is close, carddraw value is increased
@@ -373,7 +328,6 @@
                 }
             }
 
-
             //enemy draw rogue
 
             int Shadowstep = 0;
@@ -390,10 +344,9 @@
             //Helpfunctions.Instance.ErrorLog("Gang_Up: " + Gang_Up);
             //Helpfunctions.Instance.ErrorLog("Coldlight_Oracle: " + Coldlight_Oracle);
 
-
             if (Coldlight_Oracle >= 1)
             {
-                if (p.enemyHeroName == HeroEnum.thief) 
+                if (p.enemyHeroName == HeroEnum.thief)
                 {
                     if (Shadowstep >= 1 || Gang_Up >= 1)
                     {
@@ -408,20 +361,15 @@
                 }
             }
 
-
             retval += (p.anzEnemyCursed) * 5;
-            retval -= p.enemycarddraw * 3; 
+            retval -= p.enemycarddraw * 3;
 
             foreach (Handmanager.Handcard hcc in p.owncards)
             {
                 if (hcc.card.name == CardDB.cardName.cursed && hcc.getManaCost(p) <= p.manaTurnEnd) retval -= 10;
             }
 
-
-
-
             if (p.CountEnemyAcolyteStarted == 1 && p.enemycarddraw >= 2 || p.CountEnemyAcolyteStarted == 2 && p.enemycarddraw >= 4) retval -= p.enemycarddraw * 7;
-
 
             bool hassecretkeeper = false;
             int jugglercount = 0;
@@ -466,12 +414,11 @@
                 if (usecoin >= 1 && p.manaTurnEnd >= 1 && p.owncards.Count <= 8 && p.ownMaxMana != 10) retval -= 5 * p.manaTurnEnd;
                 if (usecoin >= 1 && p.manaTurnEnd >= 1 && p.ownMaxMana <= 4) retval -= 5 * p.manaTurnEnd;
             }
-            
+
             int heropowermana = p.ownHeroAblility.card.getManaCost(p, 2);
             int hppen = 0;
             if (p.manaTurnEnd >= heropowermana && !useAbili && p.ownAbilityReady)
             {
-                
                 if ((p.ownHeroAblility.card.name == CardDB.cardName.thesilverhand ||
                    p.ownHeroAblility.card.name == CardDB.cardName.reinforce ||
                    p.ownHeroAblility.card.name == CardDB.cardName.thetidalhand) && p.ownMinions.Count <= 6) hppen -= 10; //didn't use pala heropower
@@ -495,18 +442,10 @@
                         hppen = 0;
                     }
                 }
-
             }
             //Helpfunctions.Instance.ErrorLog("hppen: " + hppen);
             retval += hppen;
             //if (usecoin && p.mana >= 1) retval -= 20;
-
-
-
-
-
-
-
 
             //rockbiter
             bool rockbiterHero = p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null;
@@ -537,9 +476,8 @@
 
             foreach (Minion m in p.enemyMinions)
             {
-                retval -= this.getEnemyMinionValue(m, p);  
+                retval -= this.getEnemyMinionValue(m, p);
             }
-
 
             int Houndmaster = 0; //Unleash the Hounds EX1_538
             foreach (KeyValuePair<CardDB.cardIDEnum, int> e in Probabilitymaker.Instance.enemyGraveyard)
@@ -551,13 +489,11 @@
                 if (p.enemyMinions.Find(a => (TAG_RACE)a.handcard.card.race == TAG_RACE.BEAST) != null && p.enemyMaxMana >= 3) retval -= 5;
             }
 
-
             retval -= 8 * p.enemySecretCount;
             retval += 3 * p.ownSecretsIDList.Count;
 
-
             /// SECRETS
-            /// 
+            ///
             foreach (CardDB.cardIDEnum secretID in p.ownSecretsIDList)
             {
                 if (secretID == CardDB.cardIDEnum.EX1_136) // redemption
@@ -569,7 +505,7 @@
                     if (temp.Count == 1 && !p.ownSecretsIDList.Contains(CardDB.cardIDEnum.EX1_130))
                     {
                         int secretvalue = 0;
-                        secretvalue ++;
+                        secretvalue++;
                         switch (MINION.name)
                         {
                             case CardDB.cardName.thesilverhand: secretvalue -= 5; break;
@@ -580,16 +516,8 @@
                         retval += secretvalue;
                         //Helpfunctions.Instance.ErrorLog("secretvalue " + secretvalue + " " );
                     }
-
                 }
             }
-
-
-
-
-
-
-
 
             //retval -= 2 * p.lostDamage;//damage which was to high (like killing a 2/1 with an 3/3 -> => lostdamage =2
             //retval -= p.lostWeaponDamage;
@@ -611,8 +539,6 @@
             //    }
             //}
 
-
-
             if (p.enemyHero.Hp <= 0)
             {
                 if (p.turnCounter == 0)
@@ -632,7 +558,6 @@
                     }
                     else
                     {
-
                     }
 
                     bool hasiceblock = false;
@@ -645,7 +570,6 @@
                     }
                     if (hasiceblock || p.enemyHero.immune) retval += 5000;
                     else retval += 10000;
-
                 }
                 else
                 {
@@ -653,11 +577,10 @@
                     {
                         retval += 15;
                     }
-                    
+
                     //retval += 5;//10000
                     if (p.numPlayerMinionsAtTurnStart == 0) retval += 3; // if we can kill the enemy even after a board clear, bigger bonus
                     if (p.loathebLastTurn > 0) retval += 15;  // give a bonus to turn 2 sims where we played loatheb in turn 1 to protect our lethal board
-
                 }
             }
             else if (p.ownHero.Hp > 0)
@@ -681,12 +604,9 @@
                     {
                         retval += 1600 - 200 * p.enemyMinions.Count;
                     }
-                    
                 }
                 if (p.enemyHero.immune) retval += 1000;
             }
-
-
 
             ////soulfire etc
             //int deletecardsAtLast = 0;
@@ -696,10 +616,6 @@
             //    if (a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus) deletecardsAtLast = 1;
             //    if (deletecardsAtLast == 1 && !(a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus)) retval -= 20;
             //}
-
-
-
-
 
             //do face-attack:
             int lethalmissing = p.enemyHero.Hp + p.enemyHero.armor;
@@ -712,9 +628,6 @@
                 if (!p.ownHero.allreadyAttacked && !p.ownHero.frozen && p.enemyWeaponName != CardDB.cardName.foolsbane) attack += p.ownHero.Angr;
                 if (p.ownWeaponName == CardDB.cardName.doomhammer && p.ownWeaponDurability >= 2 && !p.ownHero.allreadyAttacked && !p.ownHero.frozen) attack += p.enemyHero.Angr;
 
-
-
-
                 foreach (Minion m in p.enemyMinions)
                 {
                     if (m.taunt) attack -= m.Hp;
@@ -725,7 +638,6 @@
                     if (m.name == CardDB.cardName.ragnarosthefirelord && p.enemyMinions.Count == 0 && !m.silenced) directattack += 8;
                     if (m.Ready) attack += m.Angr;
                     if (m.Ready && m.windfury && m.numAttacksThisTurn == 0) attack += m.Angr;
-
                 }
 
                 switch (p.ownHeroAblility.card.name)
@@ -764,18 +676,7 @@
                 }
             }
 
-            
-
-
             this.lethalMissed = lethalmissing;
-
-
-
-
-
-
-
-
 
             //do face-attack:
             int concedevalue = p.ownHero.Hp + p.ownHero.armor;
@@ -788,12 +689,11 @@
                 int attack = 0;
                 int directattack = 0;
                 int hasowntaunt = 0;
-                
 
                 List<Minion> hastauntminion = new List<Minion>(p.ownMinions);
                 hastauntminion.Sort((b, a) => a.Hp.CompareTo(b.Hp));//take the strongest hp
-                //if (hastauntminion.Count >= 1 ) hastauntminion.Clear();
-                
+                                                                    //if (hastauntminion.Count >= 1 ) hastauntminion.Clear();
+
                 if (p.enemyWeaponName != CardDB.cardName.foolsbane) attack += p.enemyHero.Angr;
                 potentialenemyattack += p.enemyHero.Angr;
                 if (p.enemyWeaponName == CardDB.cardName.doomhammer && p.enemyWeaponDurability >= 2 && hasowntaunt == 0)
@@ -802,16 +702,11 @@
                     potentialenemyattack += p.enemyHero.Angr;
                 }
 
-
-                
                 List<Minion> ownminionshp = new List<Minion>(p.ownMinions);
                 List<Minion> enemyminionsattack = new List<Minion>(p.enemyMinions);
 
                 ownminionshp.Sort((b, a) => a.Hp.CompareTo(b.Hp));//take the strongest hp
                 enemyminionsattack.Sort((b, a) => a.Angr.CompareTo(b.Angr));//take the strongest angr
-
-
-                
 
                 foreach (Minion m in p.ownMinions)
                 {
@@ -837,12 +732,12 @@
                     {
                         for (int i = 1; i <= hastauntminion.Count; i++)
                         {
-                            if (hastauntminion[i-1].name == m.name)
+                            if (hastauntminion[i - 1].name == m.name)
                             {
                                 hastauntminion.RemoveAt(i - 1);
                             }
                         }
-                    }                    
+                    }
                 }
 
                 //foreach (Minion mnn in hastauntminion)
@@ -873,7 +768,6 @@
                         potentialenemyattack += m.Angr;
                     }
                     if (m.name == CardDB.cardName.savagecombatant) hasInspire2Attack = true;
-
                 }
                 ////Helpfunctions.Instance.ErrorLog(" hasowntaunt " + hasowntaunt);
                 //if (hasowntaunt >= 1)
@@ -888,10 +782,6 @@
                 //    if (p.enemyMinions.Count == 0 && p.enemyWeaponAttack >= 1) attack -= p.enemyWeaponAttack;
                 //}
                 ////Helpfunctions.Instance.ErrorLog(" attack " + attack);
-
-
-
-
 
                 //Helpfunctions.Instance.ErrorLog(" hasowntaunt " + hasowntaunt);
                 if (hasowntaunt >= 1)
@@ -915,7 +805,7 @@
                         bool found = false;
                         for (int i = 1; i <= enemyminionsattack.Count; i++)
                         {
-                            if (mnn.Hp == enemyminionsattack[i-1].Angr || mnn.Hp == tempEnemyweaponattack)
+                            if (mnn.Hp == enemyminionsattack[i - 1].Angr || mnn.Hp == tempEnemyweaponattack)
                             {
                                 found = true;
                                 if (mnn.Hp == enemyminionsattack[i - 1].Angr)
@@ -930,7 +820,7 @@
                                     enemyweaponCanmultipleattack--;
                                     //hastauntminion.Remove(mnn);
                                 }
-                                break;     
+                                break;
                             }
                             //else if (mnn.Hp > enemyminionsattack[i - 1].Angr || mnn.Hp > tempEnemyweaponattack)
                             //{
@@ -945,7 +835,7 @@
                             //        if (enemyweaponCanmultipleattack == 1) tempEnemyweaponattack = 0;
                             //        enemyweaponCanmultipleattack--;
                             //    }
-                                
+
                             //    break;
                             //}
                             //else if (mnn.Hp < enemyminionsattack[i - 1].Angr || mnn.Hp < tempEnemyweaponattack)
@@ -961,7 +851,7 @@
                             //        if (enemyweaponCanmultipleattack == 1) tempEnemyweaponattack = 0;
                             //        enemyweaponCanmultipleattack--;
                             //        //hastauntminion.Remove(mnn);
-                            //    }                                  
+                            //    }
                             //    break;
                             //}
                         }
@@ -1012,11 +902,9 @@
                                 }
                             }
                         }
-
                     }
                     if (p.enemyMinions.Count == 0 && p.enemyWeaponAttack >= 1) attack -= p.enemyWeaponAttack;
                 }
-                
 
                 if (p.ownSecretsIDList.Contains(CardDB.cardIDEnum.EX1_130)) //noble sacrifice
                 {
@@ -1045,7 +933,9 @@
                             {
                                 directattack += 2;
                             }
-                        } break; 
+                        }
+                        break;
+
                     case CardDB.cardName.heal:
                         {
                             if (p.enemyMinions.Find(a => a.name == CardDB.cardName.auchenaisoulpriest && !a.silenced) != null)
@@ -1053,7 +943,8 @@
                                 directattack += 4;
                             }
                         }
-                        break; 
+                        break;
+
                     default: break;
                 }
                 if (hasInspire2Attack) { attack += 2; potentialenemyattack += 2; }
@@ -1061,14 +952,12 @@
                 concedevalue -= attack + directattack + p.destroyunitattack;
                 //if (p.destroyunitattack >= 1) Helpfunctions.Instance.ErrorLog("destroyunitattack = " + p.destroyunitattack);
                 potentialenemyattack += directattack;
-
             }
-
 
             if ((concedevalue <= 0 && p.turnCounter >= 1 && p.enemyHero.Hp >= 1 && hasowntaunthp <= potentialenemyattack) || directenemyheropowerattack >= p.ownHero.Hp + p.ownHero.armor)
             {
                 //worst case: we die on own turn
-                
+
                 foreach (Minion m in p.ownMinions)
                 {
                     if (m.name == CardDB.cardName.manatidetotem && !m.silenced) p.owncarddraw -= 1;
@@ -1078,7 +967,6 @@
                 if (p.enemyHero.immune) retval += 4800;
                 if (p.enemyHero.immune && p.enemyMinions.Count == 0) retval += -500;
                 retval -= 5000;
-
             }
             else
             {
@@ -1094,18 +982,16 @@
                 if (p.enemyHero.Hp + p.enemyHero.armor >= p.ownHero.Hp + p.ownHero.armor) retval -= 700;
             }
 
-
             if (p.enemyHero.immune && p.enemyMinions.Find(a => a.name == CardDB.cardName.violetillusionist && !a.silenced) == null)
             {
                 retval += 50;
             }
 
-
             //if (p.enemyHero.Hp >= 1 && p.ownHero.Hp <= 0)
             //{
             //    //Helpfunctions.Instance.ErrorLog("turncounter " + p.turnCounter + " " + retval);
 
-            //    if (p.turnCounter == 0 || concedevalue <= 0) // own turn 
+            //    if (p.turnCounter == 0 || concedevalue <= 0) // own turn
             //    {
             //        //worst case: we die on own turn
             //        retval += p.owncarddraw * 100;
@@ -1138,12 +1024,9 @@
             return retval;
         }
 
-
         public override float getOwnMinionValue(Minion m, Playfield p)
         {
             float retval = 0;
-
-
 
             int enemypotentialattack = 0;
             switch (p.enemyHeroAblility.card.name)
@@ -1170,9 +1053,7 @@
             }
             enemypotentialattacktotal += p.enemyWeaponAttack;
 
-
-
-            //aoe-spell check 
+            //aoe-spell check
             //druid swipe
             int Swipe = 0; //Swipe CS2_012
             int Holy_Nova = 0; //Holy Nova CS1_112
@@ -1205,7 +1086,6 @@
             }
             //Helpfunctions.Instance.ErrorLog("Execute" + Execute + " Ravaging_Ghoul" + Ravaging_Ghoul);
 
-
             //killcard check
             int Big_Game_Hunter = 0;
             foreach (KeyValuePair<CardDB.cardIDEnum, int> e in Probabilitymaker.Instance.enemyGraveyard)
@@ -1233,7 +1113,6 @@
             //    }
             //}
 
-
             bool pirateaggrowarrior = false;
             if (p.enemyHeroName == HeroEnum.warrior)
             {
@@ -1256,7 +1135,6 @@
                 }
                 if (upgrade >= 1 || bloodsail_raider >= 1 || Bloodsail_Cultist >= 1 || southseadeckhand >= 1 || Small_Time_Buccanee >= 1 || Patches_the_Pirate >= 1 || Dread_Corsair >= 1) pirateaggrowarrior = true; //pirate warrior
             }
-
 
             bool hassecretkeeper = false;
             int jugglercount = 0;
@@ -1301,7 +1179,6 @@
                 //druid
                 if (p.enemyHeroAblility.card.name == CardDB.cardName.shapeshift && p.ownMaxMana >= 7) retval -= strongesthp1minion;
 
-
                 //aoe - spell(3 + my minion)
                 if (p.ownMinions.Count >= 3 && p.anzOwnLoatheb == 0 && p.enemyMinions.Count == 0)
                 {
@@ -1325,7 +1202,6 @@
                     //Blade Flurry CS2_233
                     //if (p.enemyHeroName == HeroEnum.thief && p.enemyMaxMana >= 5 && Blade_Flurry == 0 && m.Hp <= p.enemyWeaponAttack) retval -= m.Hp + m.Angr * 2;
                     if (p.enemyHeroName == HeroEnum.thief && p.enemyMaxMana >= 3 && Fan_of_Knives == 0 && (m.Hp >= 2 + p.enemyspellpower || m.divineshild || m.hasDeathrattle())) retval += m.Angr;
-
                 }
 
                 if (enemyhaschillmaw && (m.Hp <= 3 && !m.divineshild && !m.hasDeathrattle())) retval -= m.Angr * 2;
@@ -1349,8 +1225,6 @@
                 //    default: break;
                 //}
 
-
-
                 //
                 if (p.ownHeroName == HeroEnum.warlock && (TAG_RACE)m.handcard.card.race == TAG_RACE.DEMON) retval += 0.1f;
                 //if (p.ownHeroName == HeroEnum.warlock && m.name == CardDB.cardName.darkshirecouncilman) retval += 1.5f;
@@ -1362,7 +1236,6 @@
                 if (p.ownHeroName == HeroEnum.pala && (TAG_RACE)m.handcard.card.race == TAG_RACE.MURLOC) retval += 0.2f;
                 if (p.ownHeroName == HeroEnum.mage && (TAG_RACE)m.handcard.card.race == TAG_RACE.MECHANICAL) retval += 0.1f;
                 if (p.ownHeroName == HeroEnum.mage && m.name == CardDB.cardName.flamewaker) retval += 5;
-
 
                 if (!hasenemytaunt && !p.enemyHero.immune && m.Ready && m.Angr >= 1 && !m.frozen && m.enemyBlessingOfWisdom == 0 && m.enemyPowerWordGlory == 0 && !m.stealth) retval -= 10 * m.Angr;
                 if (m.enemyBlessingOfWisdom >= 1 || m.enemyPowerWordGlory >= 1) retval -= 8;
@@ -1378,7 +1251,7 @@
                         if ((m.name == CardDB.cardName.darkshirecouncilman || m.name == CardDB.cardName.tundrarhino) && m.Hp <= p.searchRandomMinion(p.enemyMinions, Playfield.searchmode.searchHighestAttack).Angr && m.Angr < p.searchRandomMinion(p.enemyMinions, Playfield.searchmode.searchHighestAttack).Hp) retval -= 5;
                         if (m.name == CardDB.cardName.darkshirecouncilman && (m.Hp <= enemypotentialattacktotal) && p.ownMaxMana <= 3) retval -= 10;
                         if (m.name == CardDB.cardName.tundrarhino && (m.Hp <= enemypotentialattacktotal) && p.ownMaxMana <= 5) retval -= 10;
-                        // 적미니언 공높은놈이랑 비교.. 
+                        // 적미니언 공높은놈이랑 비교..
                         // 적미니언 공높은놈보다 피 작고 (한방에죽음) + 적 미니언 공높은놈보다 공낮으면 -밸류;
                         if (m.name == CardDB.cardName.gadgetzanauctioneer && (m.Hp <= enemypotentialattacktotal) && p.ownMinions.Find(a => a.taunt) == null) retval -= 10;
                         if (m.name == CardDB.cardName.flametonguetotem && (m.Hp <= enemypotentialattacktotal) && p.ownMinions.Find(a => a.taunt) == null) retval -= 10;
@@ -1396,7 +1269,7 @@
 
                 if (m.name == CardDB.cardName.manatidetotem && !m.silenced && (p.ownMaxMana <= 4 || p.owncards.Count <= 2)) retval += 3;
 
-                if (m.name == CardDB.cardName.ravenouspterrordax) 
+                if (m.name == CardDB.cardName.ravenouspterrordax)
                 {
                     if (m.stealth) retval += m.Angr;
                     retval += m.Hp;
@@ -1432,12 +1305,12 @@
                     if (mulroccnt >= 2 && p.enemyMinions.Find(a => a.Hp <= m.Angr) != null && p.enemyMinions.Find(a => a.taunt) == null) retval += 10;
                     else if (mulroccnt >= 2 && p.enemyMinions.Count == 0) retval += 4;
                 }
-                else if (m.name == CardDB.cardName.finjatheflyingstar && (m.Hp <= enemypotentialattacktotal) && !m.stealth) //special value for murloc warleader 
+                else if (m.name == CardDB.cardName.finjatheflyingstar && (m.Hp <= enemypotentialattacktotal) && !m.stealth) //special value for murloc warleader
                 {
                     retval -= 8;
                 }
 
-                if (m.name == CardDB.cardName.murlocwarleader && (m.Hp <= enemypotentialattacktotal) && !m.silenced && p.turnCounter == 0) //special value for murloc warleader 
+                if (m.name == CardDB.cardName.murlocwarleader && (m.Hp <= enemypotentialattacktotal) && !m.silenced && p.turnCounter == 0) //special value for murloc warleader
                 {
                     foreach (Minion mnn in p.ownMinions)
                     {
@@ -1475,7 +1348,6 @@
                 }
                 retval += 1;
 
-
                 retval += m.Hp * 1;
                 if (m.Angr == 0) retval -= m.Hp * 0.3f;
                 //if (m.Hp >= 5) retval += m.Hp * 0.5f;
@@ -1484,10 +1356,6 @@
                 retval -= m.AdjacentAngr * 2;
 
                 //if (m.Angr == 1 && m.Hp == 1 && !m.divineshild) retval -= 0.5f;
-
-
-
-
 
                 if (!pirateaggrowarrior)
                 {
@@ -1548,23 +1416,16 @@
                 {
                     if (m.zonepos == p.ownMinions.Count || m.zonepos == 1) retval -= 2;
                 }
-
             }
-
-
-            
 
             return retval;
         }
-
-
 
         //other value of the board for enemys turn? (currently the same as getplayfield value)
         public override float getPlayfieldValueEnemy(Playfield p)
         {
             return getPlayfieldValue(p);
         }
-
 
         public override float getEnemyMinionValue(Minion m, Playfield p)
         {
@@ -1606,10 +1467,10 @@
                 bool aggrodeck = false;
                 foreach (Minion mm in p.enemyMinions)
                 {
-                    if (mm.name == CardDB.cardName.bloodsailraider || 
-                        mm.name == CardDB.cardName.bloodsailcultist || 
-                        mm.name == CardDB.cardName.southseadeckhand || 
-                        mm.name == CardDB.cardName.smalltimebuccaneer || 
+                    if (mm.name == CardDB.cardName.bloodsailraider ||
+                        mm.name == CardDB.cardName.bloodsailcultist ||
+                        mm.name == CardDB.cardName.southseadeckhand ||
+                        mm.name == CardDB.cardName.smalltimebuccaneer ||
                         mm.name == CardDB.cardName.patchesthepirate ||
                         mm.name == CardDB.cardName.dreadcorsair ||
                         mm.name == CardDB.cardName.alexstraszaschampion)
@@ -1664,7 +1525,7 @@
                 retval += m.handcard.card.cost * 0.5f; //evolve
                 retval += 4;
             }
-            
+
             if (p.enemyHeroName == HeroEnum.thief)
             {
                 if (Questmanager.Instance.enemyQuest.Id == CardDB.cardIDEnum.UNG_067)
@@ -1679,10 +1540,9 @@
             if (!m.frozen && !(m.name == CardDB.cardName.ancientwatcher && !m.silenced))
             {
                 retval += m.Angr * 2;
-                if (m.windfury) 
+                if (m.windfury)
                 {
                     retval += m.Angr * 2;
-                    
                 }
                 if (p.enemyHero.immune) retval += m.Angr;
                 //if (m.Angr >= 5) retval += m.Angr - 2;
@@ -1704,12 +1564,9 @@
                 if (p.ownMinions.Find(a => a.Hp <= m.Angr) != null) retval += 12;
             }
 
-            
-
-
             if (m.spellpower >= 1) retval += m.spellpower * 5;
             if (m.spellpower >= 1 && p.enemyHeroName == HeroEnum.mage) retval += m.spellpower * 5;
-            if (m.taunt) retval+= m.Angr >= 1 ? m.Angr : 1;
+            if (m.taunt) retval += m.Angr >= 1 ? m.Angr : 1;
             if (m.divineshild) retval += m.Angr * 3;
             //if (m.divineshild && m.Angr == 1 && p.enemyHeroName == HeroEnum.pala) retval += 5;
             if (m.frozen) retval -= 1; // because its bad for enemy :D
@@ -1723,7 +1580,7 @@
                 retval += 0.1f;
                 //if (Houndmaster == 0 && p.enemyMaxMana >= 3) retval += 3;
             }
-            
+
             //if (p.enemyHeroName == HeroEnum.shaman && m.name == CardDB.cardName.tunneltrogg && !m.silenced) retval += 5.5f;
             if (p.enemyHeroName == HeroEnum.pala && m.name == CardDB.cardName.silverhandrecruit) retval += 0.1f;
             if (p.enemyHeroName == HeroEnum.mage && (TAG_RACE)m.handcard.card.race == TAG_RACE.MECHANICAL) retval += 0.1f;
@@ -1737,28 +1594,20 @@
             //priority correction
             if (p.enemyHeroAblility.card.name != CardDB.cardName.lesserheal && p.enemyHeroAblility.card.name != CardDB.cardName.heal)
             {
-               if (m.name == CardDB.cardName.northshirecleric) retval -= 10;
+                if (m.name == CardDB.cardName.northshirecleric) retval -= 10;
             }
-            
 
             //if (m.Angr >= 4) retval += m.Angr;
             //if (m.Angr >= 7) retval += m.Angr;
             if (m.name == CardDB.cardName.nerubianegg && m.Angr <= 3 && !m.taunt) retval = 0;
             if (m.destroyOnEnemyTurnEnd || m.destroyOnEnemyTurnStart || m.destroyOnOwnTurnEnd || m.destroyOnOwnTurnStart) retval -= m.Angr * 2 + m.Hp + m.handcard.card.cost;
 
-
-
-
-
             //anti aoe
-            if (m.handcard.card.anti_aoe_minion >= 1)  retval += m.handcard.card.anti_aoe_minion * 0.2f;
-
+            if (m.handcard.card.anti_aoe_minion >= 1) retval += m.handcard.card.anti_aoe_minion * 0.2f;
 
             //buff
             if (m.enemyBlessingOfWisdom >= 1) retval += 8;
             if (m.name == CardDB.cardName.smalltimebuccaneer && p.enemyWeaponDurability == 0) retval += 4;
-
-
 
             int HighestTauntHp = 0;
             int TauntAttack = 0;
@@ -1766,12 +1615,12 @@
             {
                 if (mnn.taunt)
                 {
-                    if (mnn.Hp > HighestTauntHp) 
+                    if (mnn.Hp > HighestTauntHp)
                     {
                         HighestTauntHp = mnn.Hp;
                         TauntAttack = mnn.Angr;
                     }
-                }               
+                }
             }
 
             bool enemyCankillTaunt = false;
@@ -1807,8 +1656,5 @@
 
             return retval;
         }
-
-
     }
-
 }

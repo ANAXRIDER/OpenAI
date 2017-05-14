@@ -1,9 +1,7 @@
 ﻿namespace OpenAI
 {
-
     public class SimTemplate
     {
-
         public virtual void onSecretPlay(Playfield p, bool ownplay, Minion attacker, Minion target, out int number)
         {
             number = 0;
@@ -18,8 +16,6 @@
         {
             return;
         }
-
-
 
         public virtual void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
@@ -111,7 +107,6 @@
             return;
         }
 
-
         public virtual void onCardWasDiscarded(Playfield p, bool wasOwnCard, Minion triggerEffectMinion)
         {
             return;
@@ -131,7 +126,5 @@
         {
             return;
         }
-
     }
-
 }

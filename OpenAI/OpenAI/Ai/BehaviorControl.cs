@@ -1,14 +1,11 @@
 ﻿namespace OpenAI
 {
-
     public class BehaviorControl : Behavior
     {
-        PenalityManager penman = PenalityManager.Instance;
+        private PenalityManager penman = PenalityManager.Instance;
 
-        
         public override float getPlayfieldValue(Playfield p)
         {
-            
             if (p.value >= -2000000) return p.value;
             float retval = 0;
             int hpboarder = 10;
@@ -19,10 +16,9 @@
 
             retval += p.ownMaxMana;
             retval -= p.enemyMaxMana;
-            
+
             retval += p.ownMaxMana * 20 - p.enemyMaxMana * 20;
 
-            
             if (p.enemyHeroName == HeroEnum.mage || p.enemyHeroName == HeroEnum.druid) retval -= 2 * p.enemyspellpower;
 
             if (p.ownHero.Hp + p.ownHero.armor > hpboarder)
@@ -59,10 +55,10 @@
                     retval += 12;
                 }
             }
-            
+
             //RR card draw value depending on the turn and distance to lethal
             //RR if lethal is close, carddraw value is increased
-            if (Ai.Instance.lethalMissing <= 5 && p.turnCounter ==0) //RR
+            if (Ai.Instance.lethalMissing <= 5 && p.turnCounter == 0) //RR
             {
                 retval += p.owncarddraw * 100;
             }
@@ -78,7 +74,7 @@
             }
 
             //retval += p.owncarddraw * 5;
-            retval -= (p.enemycarddraw-p.anzEnemyCursed) * 10;
+            retval -= (p.enemycarddraw - p.anzEnemyCursed) * 10;
 
             //int owntaunt = 0;
             int readycount = 0;
@@ -159,8 +155,6 @@
                     if (m.maxHp >= 4 && (m.Angr > 2 || m.Hp > 3)) ownMinionsCount++;
                 }
             }
-           
-
 
             /*if (p.enemyMinions.Count >= 0)
             {
@@ -197,7 +191,7 @@
                 if (p.ownHeroName == HeroEnum.thief && a.card.card.type == CardDB.cardtype.SPELL && (a.target.isHero && !a.target.own)) retval -= 11;
             }
             //dont waste mana!!
-            if (usecoin>=1 && useAbili && p.ownMaxMana <= 2) retval -= 40;
+            if (usecoin >= 1 && useAbili && p.ownMaxMana <= 2) retval -= 40;
             if (usecoin >= 1 && p.manaTurnEnd >= usecoin && p.owncards.Count <= 8) retval -= 100 * p.manaTurnEnd;
             int heropowermana = p.ownHeroAblility.card.getManaCost(p, 2);
             if (p.manaTurnEnd >= heropowermana && !useAbili && p.ownAbilityReady)
@@ -234,9 +228,7 @@
                 }
             }
 
-
             //bool hasTank = false;
-            
 
             /*foreach (SecretItem si in p.enemySecretList)
             {
@@ -254,14 +246,14 @@
                 }
             }*/
             retval -= p.enemySecretCount;
-            retval -= p.numEnemySecretsTurnEnd*5;
+            retval -= p.numEnemySecretsTurnEnd * 5;
             //Helpfunctions.Instance.ErrorLog("sc:" + p.enemySecretCount+ " " + p.numEnemySecretsTurnEnd);
             retval -= p.lostDamage;//damage which was to high (like killing a 2/1 with an 3/3 -> => lostdamage =2
             retval -= p.lostWeaponDamage;
 
             //if (p.ownMinions.Count == 0) retval -= 20;
             //if (p.enemyMinions.Count == 0) retval += 20;
-            
+
             if (p.enemyHero.Hp <= 0)
             {
                 if (p.turnCounter <= 1)
@@ -273,7 +265,6 @@
                     retval += 50;//10000
                     if (p.numPlayerMinionsAtTurnStart == 0) retval += 50; // if we can kill the enemy even after a board clear, bigger bonus
                     if (p.loathebLastTurn > 0) retval += 50;  // give a bonus to turn 2 sims where we played loatheb in turn 1 to protect our lethal board
-
                 }
             }
             else if (p.ownHero.Hp > 0)
@@ -285,7 +276,7 @@
             if (p.enemyHero.Hp >= 1 && p.ownHero.Hp <= 0)
             {
                 //Helpfunctions.Instance.ErrorLog("turncounter " + p.turnCounter + " " + retval);
-                if (p.turnCounter == 0) // own turn 
+                if (p.turnCounter == 0) // own turn
                 {
                     //worst case: we die on own turn
                     retval += p.owncarddraw * 100;
@@ -304,9 +295,6 @@
                         retval -= 100;
                     }
                 }
-                
-                
-                
             }
 
             //if (p.ownHero.Hp <= 0 && p.turnCounter < 2) retval = -10000;
@@ -325,10 +313,8 @@
             return getPlayfieldValue(p);
         }
 
-
         public override float getEnemyMinionValue(Minion m, Playfield p)
         {
-           
             int retval = 5;
             retval += m.Hp * 2;
             if (!m.frozen && !((m.name == CardDB.cardName.ancientwatcher || m.name == CardDB.cardName.ragnarosthefirelord) && !m.silenced))
@@ -351,7 +337,6 @@
                             enemyTotalAttack += min.Angr;
                             enemyAttackerscount++;
                         }
-
                     }
 
                     foreach (Minion min in p.ownMinions)
@@ -364,7 +349,6 @@
                     }
 
                     if (ownTauntCount < enemyAttackerscount && ownTauntHP <= enemyTotalAttack) retval += 30;
-
                 }
             }
 
@@ -384,11 +368,7 @@
             }
             if (m.name == CardDB.cardName.nerubianegg && m.Angr <= 3 && !m.taunt) retval = 0;
 
-            
-
             return retval;
         }
-
     }
-
 }

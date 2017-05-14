@@ -1,15 +1,11 @@
 ﻿namespace OpenAI
 {
-    using System;
-
     public class BehaviorMana : Behavior
     {
-        PenalityManager penman = PenalityManager.Instance;
-
+        private PenalityManager penman = PenalityManager.Instance;
 
         public override float getPlayfieldValue(Playfield p)
         {
-
             if (p.value >= -2000000) return p.value;
             float retval = 0;
             int hpboarder = 10;
@@ -22,7 +18,6 @@
             retval -= p.enemyMaxMana;
 
             retval += p.ownMaxMana * 20 - p.enemyMaxMana * 20;
-
 
             if (p.enemyHeroName == HeroEnum.mage || p.enemyHeroName == HeroEnum.druid) retval -= 2 * p.enemyspellpower;
 
@@ -92,11 +87,9 @@
             if (p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null) enemyDoomsayer = true;
             if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null) ownDoomsayer = true;
 
-
             //
             bool canPingMinions = (p.ownHeroAblility.card.name == CardDB.cardName.fireblast);
             bool hasPingedMinion = false;
-
 
             if (!enemyDoomsayer && !ownDoomsayer)
             {
@@ -162,8 +155,6 @@
                     if (m.maxHp >= 4 && (m.Angr > 2 || m.Hp > 3)) ownMinionsCount++;
                 }
             }
-
-
 
             /*if (p.enemyMinions.Count >= 0)
             {
@@ -234,9 +225,7 @@
                 }
             }
 
-
             //bool hasTank = false;
-
 
             /*foreach (SecretItem si in p.enemySecretList)
             {
@@ -276,7 +265,6 @@
                     retval += 50;//10000
                     if (p.numPlayerMinionsAtTurnStart == 0) retval += 50; // if we can kill the enemy even after a board clear, bigger bonus
                     if (p.loathebLastTurn > 0) retval += 50;  // give a bonus to turn 2 sims where we played loatheb in turn 1 to protect our lethal board
-
                 }
             }
             else if (p.ownHero.Hp > 0)
@@ -284,7 +272,6 @@
                 // if our damage on board is lethal, give a strong bonus so enemy AI avoids this outcome in its turn (i.e. AI will clear our minions if it can instead of ignoring them)
                 if (p.turnCounter == 1 && p.guessHeroDamage(true) >= p.enemyHero.Hp + p.enemyHero.armor) retval += 100;
             }
-
 
             //soulfire etc
             int deletecardsAtLast = 0;
@@ -298,7 +285,7 @@
             if (p.enemyHero.Hp >= 1 && p.ownHero.Hp <= 0)
             {
                 //Helpfunctions.Instance.ErrorLog("turncounter " + p.turnCounter + " " + retval);
-                if (p.turnCounter == 0) // own turn 
+                if (p.turnCounter == 0) // own turn
                 {
                     //worst case: we die on own turn
                     retval += p.owncarddraw * 100;
@@ -317,9 +304,6 @@
                         retval -= 100;
                     }
                 }
-
-
-
             }
 
             //if (p.ownHero.Hp <= 0 && p.turnCounter < 2) retval = -10000;
@@ -338,10 +322,8 @@
             return getPlayfieldValue(p);
         }
 
-
         public override float getEnemyMinionValue(Minion m, Playfield p)
         {
-
             int retval = 5;
             retval += m.Hp * 2;
             if (!m.frozen && !((m.name == CardDB.cardName.ancientwatcher || m.name == CardDB.cardName.ragnarosthefirelord) && !m.silenced))
@@ -364,7 +346,6 @@
                             enemyTotalAttack += min.Angr;
                             enemyAttackerscount++;
                         }
-
                     }
 
                     foreach (Minion min in p.ownMinions)
@@ -377,7 +358,6 @@
                     }
 
                     if (ownTauntCount < enemyAttackerscount && ownTauntHP <= enemyTotalAttack) retval += 30;
-
                 }
             }
 
@@ -397,12 +377,7 @@
             }
             if (m.name == CardDB.cardName.nerubianegg && m.Angr <= 3 && !m.taunt) retval = 0;
 
-
-
             return retval;
         }
-
     }
-
-
 }

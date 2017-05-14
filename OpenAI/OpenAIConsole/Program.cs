@@ -147,7 +147,7 @@ namespace OpenAI
             if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
             {
                 Hrtprozis.Instance.setEnemyHeroName(enemyname);
-                Settings.Instance.updateInstance();
+                Settings.Instance.UpdateInstance();
             }
         }
 
@@ -281,7 +281,7 @@ namespace OpenAI
             PenalityManager.Instance.setCombos();
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
-            Settings.Instance.setSettings();
+            Settings.Instance.SetSettings();
         }
 
         public void SetNewLogFile()
