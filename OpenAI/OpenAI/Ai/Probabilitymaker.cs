@@ -176,7 +176,7 @@
             string canbe = secdata.Split('.')[1];
             if (canbe.Length < 17)
             {
-                Helpfunctions.Instance.ErrorLog("cant read secret " + secdata + " " + canbe.Length);
+                HelpFunctions.Instance.ErrorLog("cant read secret " + secdata + " " + canbe.Length);
             }
 
             this.canBe_snaketrap = (canbe[0] == '1');
@@ -527,8 +527,8 @@
 
             if (!dontwrite)
             {
-                Helpfunctions.Instance.logg(s);
-                if (writetobuffer) Helpfunctions.Instance.writeToBuffer(s);
+                HelpFunctions.Instance.logg(s);
+                if (writetobuffer) HelpFunctions.Instance.writeToBuffer(s);
             }
 
             data += s + "\r\n";
@@ -541,8 +541,8 @@
 
             if (!dontwrite)
             {
-                Helpfunctions.Instance.logg(s);
-                if (writetobuffer) Helpfunctions.Instance.writeToBuffer(s);
+                HelpFunctions.Instance.logg(s);
+                if (writetobuffer) HelpFunctions.Instance.writeToBuffer(s);
             }
 
             data += s + "\r\n";
@@ -667,12 +667,12 @@
             }
             if (!dontwrite)
             {
-                Helpfunctions.Instance.logg(og);
-                Helpfunctions.Instance.logg(eg);
+                HelpFunctions.Instance.logg(og);
+                HelpFunctions.Instance.logg(eg);
                 if (writetobuffer)
                 {
-                    Helpfunctions.Instance.writeToBuffer(og);
-                    Helpfunctions.Instance.writeToBuffer(eg);
+                    HelpFunctions.Instance.writeToBuffer(og);
+                    HelpFunctions.Instance.writeToBuffer(eg);
                 }
             }
             return og + "\r\n" + eg + "\r\n";
@@ -840,7 +840,7 @@
             foreach (int i in enemySecretIds)
             {
                 if (i >= 1000) continue;
-                Helpfunctions.Instance.logg("detect secret with id" + i);
+                HelpFunctions.Instance.logg("detect secret with id" + i);
                 SecretItem sec = getNewSecretGuessedItem(i, enemyHeroName);
 
                 newlist.Add(new SecretItem(sec));

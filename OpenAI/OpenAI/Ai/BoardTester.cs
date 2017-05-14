@@ -169,7 +169,7 @@ namespace OpenAI
                 catch
                 {
                     this.datareaded = false;
-                    Helpfunctions.Instance.ErrorLog("cant find test.txt");
+                    HelpFunctions.Instance.ErrorLog("cant find test.txt");
                     return;
                 }
             }
@@ -191,7 +191,7 @@ namespace OpenAI
             foreach (string sss in lines)
             {
                 string s = sss + " ";
-                Helpfunctions.Instance.logg(s);
+                HelpFunctions.Instance.logg(s);
 
                 if (s.StartsWith("ailoop"))
                 {
@@ -1072,7 +1072,7 @@ namespace OpenAI
                 counter++;
                 j++;
             }
-            Helpfunctions.Instance.logg("rdy");
+            HelpFunctions.Instance.logg("rdy");
 
 
             Hrtprozis.Instance.setOwnPlayer(ownPlayer);

@@ -54,7 +54,7 @@ namespace OpenAI
 
         public void loggCleanPath()
         {
-            Helpfunctions.Instance.logg(cleanPath);
+            HelpFunctions.Instance.logg(cleanPath);
         }
 
         private void readCombos()
@@ -94,10 +94,10 @@ namespace OpenAI
             }
             else
             {
-                Helpfunctions.Instance.ErrorLog("[Discovery] cant find base _discovery.txt, consider creating one");
+                HelpFunctions.Instance.ErrorLog("[Discovery] cant find base _discovery.txt, consider creating one");
                 return;
             }
-            Helpfunctions.Instance.ErrorLog("[Discovery] read " + cleanPath);
+            HelpFunctions.Instance.ErrorLog("[Discovery] read " + cleanPath);
 
 
             try
@@ -106,7 +106,7 @@ namespace OpenAI
             }
             catch
             {
-                Helpfunctions.Instance.ErrorLog("_discovery.txt read error. Continuing without user-defined rules.");
+                HelpFunctions.Instance.ErrorLog("_discovery.txt read error. Continuing without user-defined rules.");
                 return;
             }
             
@@ -123,10 +123,10 @@ namespace OpenAI
                 }
                 catch
                 {
-                    Helpfunctions.Instance.ErrorLog("[Discovery] cant read line: " + line);
+                    HelpFunctions.Instance.ErrorLog("[Discovery] cant read line: " + line);
                 }
             }
-            Helpfunctions.Instance.ErrorLog("[Discovery] " + discoverylist.Count + " rules found");
+            HelpFunctions.Instance.ErrorLog("[Discovery] " + discoverylist.Count + " rules found");
         }
 
         public int getBonusValue(CardDB.cardIDEnum cardid, string ownclass, string enemyclass)
@@ -302,8 +302,8 @@ namespace OpenAI
 
 
 
-                Helpfunctions.Instance.ErrorLog("card : " + i + " name : " + hc.card.name);
-                Helpfunctions.Instance.logg("card : " + i + " name : " + hc.card.name);
+                HelpFunctions.Instance.ErrorLog("card : " + i + " name : " + hc.card.name);
+                HelpFunctions.Instance.logg("card : " + i + " name : " + hc.card.name);
             }
 
             this.choicebonus = prevbonus;
@@ -317,8 +317,8 @@ namespace OpenAI
                 }
             }
 
-            Helpfunctions.Instance.ErrorLog("Choice : " + choice + " bonus : " + choicebonus);
-            Helpfunctions.Instance.logg("Choice : " + choice + " bonus : " + choicebonus);
+            HelpFunctions.Instance.ErrorLog("Choice : " + choice + " bonus : " + choicebonus);
+            HelpFunctions.Instance.logg("Choice : " + choice + " bonus : " + choicebonus);
             return choice;
         }
     }

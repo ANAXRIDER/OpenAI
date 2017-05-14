@@ -123,7 +123,7 @@
         public int nextSecretThisTurnCost0;
         public int ownPreparation;
 
-        Helpfunctions help = Helpfunctions.Instance;
+        HelpFunctions help = HelpFunctions.Instance;
         //Imagecomparer icom = Imagecomparer.Instance;
         //HrtNumbers hrtnumbers = HrtNumbers.Instance;
         CardDB cdb = CardDB.Instance;

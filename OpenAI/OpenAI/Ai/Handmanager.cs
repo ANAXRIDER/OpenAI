@@ -65,7 +65,7 @@
 
         private int ownPlayerController;
 
-        Helpfunctions help;
+        HelpFunctions help;
         CardDB cdb = CardDB.Instance;
 
         private static Handmanager instance;
@@ -80,7 +80,7 @@
 
         private Handmanager()
         {
-            this.help = Helpfunctions.Instance;
+            this.help = HelpFunctions.Instance;
         }
 
 
@@ -127,7 +127,7 @@
                     manacost = cardc.cost
                 };
                 this.handcardchoices.Add(nehc);
-                Helpfunctions.Instance.ErrorLog("choices " + cardc.name);
+                HelpFunctions.Instance.ErrorLog("choices " + cardc.name);
             }
             CardDB.Card tempcard = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_029);//=fireball, just to make sure its not a mob (movegen will ignore mobs if own minions >= 7)
             tempcard.name = CardDB.cardName.placeholdercard;

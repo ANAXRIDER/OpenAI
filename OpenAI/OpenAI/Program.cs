@@ -75,19 +75,19 @@ namespace OpenAI
             CardDB cdb = CardDB.Instance;
             if (cdb.installedWrong)
             {
-                Helpfunctions.Instance.ErrorLog("cant find CardDB");
+                HelpFunctions.Instance.ErrorLog("cant find CardDB");
                 return;
             }
 
             bool teststuff = false; // set to true, to run a testfile (requires test.txt file in folder where _cardDB.txt file is located)
             bool printstuff = false; // if true, the best board of the tested file is printet stepp by stepp
 
-            Helpfunctions.Instance.ErrorLog("----------------------------");
-            Helpfunctions.Instance.ErrorLog("you are now running uai V" + sf.versionnumber);
-            Helpfunctions.Instance.ErrorLog("----------------------------");
+            HelpFunctions.Instance.ErrorLog("----------------------------");
+            HelpFunctions.Instance.ErrorLog("you are now running uai V" + sf.versionnumber);
+            HelpFunctions.Instance.ErrorLog("----------------------------");
             //Helpfunctions.Instance.ErrorLog("test... " + Settings.Instance.logpath + Settings.Instance.logfile);
-            if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
-            if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
+            if (set.useExternalProcess) HelpFunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
+            if (set.useExternalProcess) HelpFunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
             
             if (!sf.startedexe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
             {
@@ -174,7 +174,7 @@ namespace OpenAI
             {
                 if (heroname != Hrtprozis.Instance.heroname)
                 {
-                    Helpfunctions.Instance.ErrorLog("New Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(heroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname) + "\"");
+                    HelpFunctions.Instance.ErrorLog("New Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(heroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname) + "\"");
                 }
                 Hrtprozis.Instance.setHeroName(ownName);
                 ComboBreaker.Instance.updateInstance();
@@ -187,7 +187,7 @@ namespace OpenAI
                 Hrtprozis.Instance.setEnemyHeroName(enemName);
                 if (enemyHeroname != Hrtprozis.Instance.enemyHeroname)
                 {
-                    Helpfunctions.Instance.ErrorLog("New Enemy Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(enemyHeroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname) + "\"");
+                    HelpFunctions.Instance.ErrorLog("New Enemy Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(enemyHeroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname) + "\"");
                 }
 
                 behave = Settings.Instance.updateInstance();
@@ -210,13 +210,13 @@ namespace OpenAI
                     if (card.Value > 1) deckcards += "," + card.Value;
                     deckcards += ";";
                 }
-                Helpfunctions.Instance.logg(deckcards);
+                HelpFunctions.Instance.logg(deckcards);
             }
 
             //reload external process settings too
-            Helpfunctions.Instance.resetBuffer();
-            Helpfunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + ownName + ";" + enemName + ";");
-            Helpfunctions.Instance.writeBufferToDeckFile();
+            HelpFunctions.Instance.resetBuffer();
+            HelpFunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + ownName + ";" + enemName + ";");
+            HelpFunctions.Instance.writeBufferToDeckFile();
 
             if (Mulligan.Instance.hasmulliganrules(ownName, enemName))
             {
@@ -225,7 +225,7 @@ namespace OpenAI
 
                 foreach (var item in list)
                 {
-                    Helpfunctions.Instance.ErrorLog("cards on hand for mulligan: " + item.CardId);
+                    HelpFunctions.Instance.ErrorLog("cards on hand for mulligan: " + item.CardId);
                     if (item.CardId != "GAME_005")// dont mulligan coin
                     {
                         celist.Add(new Mulligan.CardIDEntity(item.CardId, item.EntityId));
@@ -242,7 +242,7 @@ namespace OpenAI
                 {
                     if (mullentities.Contains(item.EntityId))
                     {
-                        Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because of your rules");
+                        HelpFunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because of your rules");
                         //toggle this card
                         e.replace_list.Add(item);
                     }
@@ -255,14 +255,14 @@ namespace OpenAI
                 {
                     if (item.Cost >= 4)
                     {
-                        Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because it cost is >= 4.");
+                        HelpFunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because it cost is >= 4.");
 
                         e.replace_list.Add(item);
 
                     }
                     if (item.CardId == "EX1_308" || item.CardId == "EX1_622" || item.CardId == "EX1_005")
                     {
-                        Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because it is soulfire or shadow word: death");
+                        HelpFunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because it is soulfire or shadow word: death");
                         e.replace_list.Add(item);
                     }
                 }
@@ -423,7 +423,7 @@ namespace OpenAI
 
             if (Hrtprozis.Instance.deckName != e.deck_name)
             {
-                Helpfunctions.Instance.ErrorLog("New Deck: \"" + e.deck_name + "\", Old Deck: \"" + Hrtprozis.Instance.deckName + "\"");
+                HelpFunctions.Instance.ErrorLog("New Deck: \"" + e.deck_name + "\", Old Deck: \"" + Hrtprozis.Instance.deckName + "\"");
                 deckChanged = true;
                 Hrtprozis.Instance.setDeckName(e.deck_name);
             }
@@ -522,12 +522,12 @@ namespace OpenAI
 
             if (target != null)
             {
-                Helpfunctions.Instance.ErrorLog("GetActionType: wrong action type! " +
+                HelpFunctions.Instance.ErrorLog("GetActionType: wrong action type! " +
                                             sf_action_type.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(actor.CardId)
                                                          + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(target.CardId));
             }else
             {
-                Helpfunctions.Instance.ErrorLog("GetActionType: wrong action type! " +
+                HelpFunctions.Instance.ErrorLog("GetActionType: wrong action type! " +
                                             sf_action_type.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(actor.CardId)
                                                          + " target none.");
             }
@@ -555,8 +555,8 @@ namespace OpenAI
 
                     lastplayedcard = CardDB.Instance.cardIdstringToEnum(ranger_action.Actor.CardId);
                     if (daum.bestmove.target != null) targetentity = daum.bestmove.target.entityID;
-                    Helpfunctions.Instance.ErrorLog("lastplayedcard " + lastplayedcard.ToString());
-                    if (targetentity >= 1) Helpfunctions.Instance.ErrorLog("lastplayedcardtarget " + targetentity);
+                    HelpFunctions.Instance.ErrorLog("lastplayedcard " + lastplayedcard.ToString());
+                    if (targetentity >= 1) HelpFunctions.Instance.ErrorLog("lastplayedcardtarget " + targetentity);
                     Hrtprozis.Instance.updateLastPlayedCard(lastplayedcard, targetentity);
                     Ai.Instance.playedlastcard = lastplayedcard;
 
@@ -672,10 +672,10 @@ namespace OpenAI
                                 if (!m.silenced && (m.handcard.card.deathrattle || m.hasDeathrattle())) hasdamageeffectminion = true;
                             }
                             if (hasdamageeffectminion) this.POWERFULSINGLEACTION++;
-                            Helpfunctions.Instance.logg("찾는거 저글러 몹" + daum.bestmove.card.card.name);
-                            Helpfunctions.Instance.logg("찾는거 저글러 몹" + daum.bestmove.card.card.name);
-                            Helpfunctions.Instance.ErrorLog("찾는거 저글러 몹" + daum.bestmove.card.card.name);
-                            Helpfunctions.Instance.ErrorLog("찾는거 저글러 몹" + daum.bestmove.card.card.name);
+                            HelpFunctions.Instance.logg("찾는거 저글러 몹" + daum.bestmove.card.card.name);
+                            HelpFunctions.Instance.logg("찾는거 저글러 몹" + daum.bestmove.card.card.name);
+                            HelpFunctions.Instance.ErrorLog("찾는거 저글러 몹" + daum.bestmove.card.card.name);
+                            HelpFunctions.Instance.ErrorLog("찾는거 저글러 몹" + daum.bestmove.card.card.name);
                         }
 
                         
@@ -839,8 +839,8 @@ namespace OpenAI
                     {
                         lastplayedcard = CardDB.Instance.cardIdstringToEnum(ranger_action.Actor.CardId);
                         if (daum.bestmove.target != null) targetentity = daum.bestmove.own.entityID;
-                        Helpfunctions.Instance.ErrorLog("lastplayedcard " + lastplayedcard.ToString());
-                        if (targetentity >= 1) Helpfunctions.Instance.ErrorLog("lastplayedcardtarget " + targetentity);
+                        HelpFunctions.Instance.ErrorLog("lastplayedcard " + lastplayedcard.ToString());
+                        if (targetentity >= 1) HelpFunctions.Instance.ErrorLog("lastplayedcardtarget " + targetentity);
                         Hrtprozis.Instance.updateLastPlayedCard(lastplayedcard, targetentity);
                         Ai.Instance.playedlastcard = lastplayedcard;
                     }
@@ -884,9 +884,9 @@ namespace OpenAI
                  //ranger stuff :D
                  ranger_action.ID = moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId);
 
-                 Helpfunctions.Instance.ErrorLog(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
+                 HelpFunctions.Instance.ErrorLog(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
                                                   + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Target.CardId));
-                 Helpfunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
+                 HelpFunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
                                                   + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Target.CardId)
                                                   + " choice: " + moveTodo.druidchoice + " place" + moveTodo.place);
 
@@ -897,9 +897,9 @@ namespace OpenAI
                  //ranger stuff :D
                  ranger_action.ID = moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId);
 
-                 Helpfunctions.Instance.ErrorLog(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
+                 HelpFunctions.Instance.ErrorLog(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
                                                   + " target nothing");
-                 Helpfunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
+                 HelpFunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
                                                   + " choice: " + moveTodo.druidchoice + " place" + moveTodo.place);
              }
 
@@ -1171,7 +1171,7 @@ namespace OpenAI
 
             try
             {
-                Helpfunctions.Instance.ErrorLog("start things...");
+                HelpFunctions.Instance.ErrorLog("start things...");
                 //HR-only fix for being too fast
                 //IsProcessingPowers not good enough so always sleep
                 //System.Threading.Thread.Sleep(200);
@@ -1179,15 +1179,15 @@ namespace OpenAI
                 //better test... we checked if isprocessing is true.. after that, we wait little time and test it again.
                 if (this.gameState.IsProcessingPowers || this.gameState.IsBlockingServer || this.gameState.IsBusy || this.gameState.IsMulliganBlockingPowers)
                 {
-                    Helpfunctions.Instance.logg("HR is too fast...");
-                    Helpfunctions.Instance.ErrorLog("HR is too fast...");
-                    if (this.gameState.IsProcessingPowers) Helpfunctions.Instance.logg("IsProcessingPowers");
-                    if (this.gameState.IsBlockingServer) Helpfunctions.Instance.logg("IsBlockingServer");
-                    if (this.gameState.IsBusy) Helpfunctions.Instance.logg("IsBusy");
-                    if (this.gameState.IsMulliganBlockingPowers) Helpfunctions.Instance.logg("IsMulliganBlockingPowers");
+                    HelpFunctions.Instance.logg("HR is too fast...");
+                    HelpFunctions.Instance.ErrorLog("HR is too fast...");
+                    if (this.gameState.IsProcessingPowers) HelpFunctions.Instance.logg("IsProcessingPowers");
+                    if (this.gameState.IsBlockingServer) HelpFunctions.Instance.logg("IsBlockingServer");
+                    if (this.gameState.IsBusy) HelpFunctions.Instance.logg("IsBusy");
+                    if (this.gameState.IsMulliganBlockingPowers) HelpFunctions.Instance.logg("IsMulliganBlockingPowers");
                 }
 
-                Helpfunctions.Instance.ErrorLog("proc check done...");
+                HelpFunctions.Instance.ErrorLog("proc check done...");
 
 
                 //we are conceding
@@ -1210,7 +1210,7 @@ namespace OpenAI
                     return;
                 }
 
-                Helpfunctions.Instance.ErrorLog("update everything...");
+                HelpFunctions.Instance.ErrorLog("update everything...");
                 bool templearn = sf.updateEverything(this, behave, doMultipleThingsAtATime, Settings.Instance.useExternalProcess, false); // cant use passive waiting (in this mode i return nothing)
                 if (templearn == true) Settings.Instance.printlearnmode = true;
 
@@ -1236,12 +1236,12 @@ namespace OpenAI
                     return;
                 }
 
-                if (Settings.Instance.enemyConcede) Helpfunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
+                if (Settings.Instance.enemyConcede) HelpFunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
 
                 if (Ai.Instance.bestmoveValue <= Settings.Instance.enemyConcedeValue && Settings.Instance.enemyConcede)
                 {
-                    Helpfunctions.Instance.ErrorLog("concede! because value: " + Ai.Instance.bestmoveValue);
-                    Helpfunctions.Instance.logg("concede! because value: " + Ai.Instance.bestmoveValue);
+                    HelpFunctions.Instance.ErrorLog("concede! because value: " + Ai.Instance.bestmoveValue);
+                    HelpFunctions.Instance.logg("concede! because value: " + Ai.Instance.bestmoveValue);
                     e.action_list.Add(CreateRangerConcedeAction());
                     return;
                 }
@@ -1258,11 +1258,11 @@ namespace OpenAI
 
                     int trackingchoice = Ai.Instance.bestTracking;
                     //int trackingchoice = Ai.Instance.bestTracking;
-                    if (Ai.Instance.bestTrackingStatus == 4) Helpfunctions.Instance.logg("dll discovering adapt best choice" + trackingchoice);
-                    if (Ai.Instance.bestTrackingStatus == 3) Helpfunctions.Instance.logg("dll discovering using user choice..." + trackingchoice);
-                    if (Ai.Instance.bestTrackingStatus == 0) Helpfunctions.Instance.logg("dll discovering using optimal choice..." + trackingchoice);
-                    if (Ai.Instance.bestTrackingStatus == 1) Helpfunctions.Instance.logg("dll discovering using suboptimal choice..." + trackingchoice);
-                    if (Ai.Instance.bestTrackingStatus == 2) Helpfunctions.Instance.logg("dll discovering using random choice..." + trackingchoice);
+                    if (Ai.Instance.bestTrackingStatus == 4) HelpFunctions.Instance.logg("dll discovering adapt best choice" + trackingchoice);
+                    if (Ai.Instance.bestTrackingStatus == 3) HelpFunctions.Instance.logg("dll discovering using user choice..." + trackingchoice);
+                    if (Ai.Instance.bestTrackingStatus == 0) HelpFunctions.Instance.logg("dll discovering using optimal choice..." + trackingchoice);
+                    if (Ai.Instance.bestTrackingStatus == 1) HelpFunctions.Instance.logg("dll discovering using suboptimal choice..." + trackingchoice);
+                    if (Ai.Instance.bestTrackingStatus == 2) HelpFunctions.Instance.logg("dll discovering using random choice..." + trackingchoice);
                     if (trackingchoice >= 1) trackingchoice = Silverfish.Instance.choiceCardsEntitys[trackingchoice - 1];
                     //there is a tracking/discover effect ongoing! (not druid choice)
                     BotAction trackingaction = new HSRangerLib.BotAction();
@@ -1271,14 +1271,14 @@ namespace OpenAI
 
                     foreach (var item in Silverfish.Instance.choiceCards)
                     {
-                        Helpfunctions.Instance.logg("" + item.ToString() + " " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.ToString()));
+                        HelpFunctions.Instance.logg("" + item.ToString() + " " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.ToString()));
                     }
 
 
                     if (trackingaction.Actor != null)
                     {
                         //DEBUG stuff
-                        Helpfunctions.Instance.logg("discovering choice entity" + trackingchoice + " card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(trackingaction.Actor.CardId));
+                        HelpFunctions.Instance.logg("discovering choice entity" + trackingchoice + " card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(trackingaction.Actor.CardId));
                         //Helpfunctions.Instance.logg("actor: cardid " + trackingaction.Actor.CardId + " entity " + trackingaction.Actor.EntityId);
 
                         if (trackingaction != null)
@@ -1307,7 +1307,7 @@ namespace OpenAI
 
                         BotAction endturnmove = new HSRangerLib.BotAction();
                         endturnmove.Type = BotActionType.END_TURN;
-                        Helpfunctions.Instance.ErrorLog("end turn action");
+                        HelpFunctions.Instance.ErrorLog("end turn action");
                         e.action_list.Add(endturnmove);
                         if (POWERFULSINGLEACTION >= 1 || dontmultiactioncount >= 1)
                         {
@@ -1330,7 +1330,7 @@ namespace OpenAI
                     }
 
 
-                    Helpfunctions.Instance.ErrorLog("play action");
+                    HelpFunctions.Instance.ErrorLog("play action");
                     moveTodo.print();
                     e.action_list.Add(ConvertToRangerAction(moveTodo));
                 }
@@ -1344,12 +1344,12 @@ namespace OpenAI
                     bool hasMoreActions = false;
                     do
                     {
-                        Helpfunctions.Instance.ErrorLog("play action..." + (e.action_list.Count() + 1));
+                        HelpFunctions.Instance.ErrorLog("play action..." + (e.action_list.Count() + 1));
                         Action moveTodo = Ai.Instance.bestmove;
 
                         if (!hasMoreActions && (moveTodo == null || moveTodo.actionType == actionEnum.endturn))
                         {
-                            Helpfunctions.Instance.ErrorLog("enturn");
+                            HelpFunctions.Instance.ErrorLog("enturn");
                             //simply clear action list, hearthranger bot will endturn if no action can do.
                             BotAction endturnmove = new HSRangerLib.BotAction();
                             endturnmove.Type = BotActionType.END_TURN;
@@ -1358,7 +1358,7 @@ namespace OpenAI
                         }
                         else
                         {
-                            Helpfunctions.Instance.ErrorLog("play action");
+                            HelpFunctions.Instance.ErrorLog("play action");
                             moveTodo.print();
 
                             BotAction nextMove = ConvertToRangerAction(moveTodo);
@@ -1377,7 +1377,7 @@ namespace OpenAI
                     while (hasMoreActions);
 
                     numActionsSent = e.action_list.Count();
-                    Helpfunctions.Instance.ErrorLog("sending HR " + numActionsSent + " queued actions");
+                    HelpFunctions.Instance.ErrorLog("sending HR " + numActionsSent + " queued actions");
                     numExecsReceived = 0;
                 }//##########################################################################
             }
@@ -1387,10 +1387,10 @@ namespace OpenAI
                 {
                     sw.WriteLine(Exception.ToString());
                 }
-                Helpfunctions.Instance.logg("\r\nDLL Crashed! " + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + "\r\nStackTrace ---" + Exception.ToString() + "\r\n\r\n");
-                Helpfunctions.Instance.ErrorLog("\r\nDLL Crashed! " + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + "\r\nStackTrace ---" + Exception.ToString() + "\r\n\r\n");
-                Helpfunctions.Instance.flushLogg();
-                Helpfunctions.Instance.flushErrorLog();
+                HelpFunctions.Instance.logg("\r\nDLL Crashed! " + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + "\r\nStackTrace ---" + Exception.ToString() + "\r\n\r\n");
+                HelpFunctions.Instance.ErrorLog("\r\nDLL Crashed! " + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + "\r\nStackTrace ---" + Exception.ToString() + "\r\n\r\n");
+                HelpFunctions.Instance.flushLogg();
+                HelpFunctions.Instance.flushErrorLog();
 
                 if (Settings.Instance.learnmode)
                 {
@@ -1412,13 +1412,13 @@ namespace OpenAI
             switch (e.done_result)
             {
                 case ActionDoneEventArgs.ActionResult.Executed:
-                    Helpfunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <executed>: " + e.action_id); break;
+                    HelpFunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <executed>: " + e.action_id); break;
                 case ActionDoneEventArgs.ActionResult.SourceInvalid:
-                    Helpfunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <invalid_source>: " + e.action_id); break;
+                    HelpFunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <invalid_source>: " + e.action_id); break;
                 case ActionDoneEventArgs.ActionResult.TargetInvalid:
-                    Helpfunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <invalid_target>: " + e.action_id); break;
+                    HelpFunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <invalid_target>: " + e.action_id); break;
                 default:
-                    Helpfunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <default>: " + e.action_id + " " + e.ToString()); break;
+                    HelpFunctions.Instance.ErrorLog("HR action " + numExecsReceived + " done <default>: " + e.action_id + " " + e.ToString()); break;
             }
 
         }
@@ -1511,7 +1511,7 @@ namespace OpenAI
                 {
                     this.lossedtodo--;
                 }
-                Helpfunctions.Instance.ErrorLog("not today!! (you won a game)");
+                HelpFunctions.Instance.ErrorLog("not today!! (you won a game)");
                 this.isgoingtoconcede = true;
                 return true;
             }
@@ -1519,7 +1519,7 @@ namespace OpenAI
             if (this.lossedtodo > 0)
             {
                 this.lossedtodo--;
-                Helpfunctions.Instance.ErrorLog("not today!");
+                HelpFunctions.Instance.ErrorLog("not today!");
                 this.isgoingtoconcede = true;
                 return true;
             }
@@ -1527,8 +1527,8 @@ namespace OpenAI
             if (curlvl < this.concedeLvl)
             {
                 this.lossedtodo = 3;
-                Helpfunctions.Instance.ErrorLog("your rank is " + curlvl + " targeted rank is " + this.concedeLvl + " -> concede!");
-                Helpfunctions.Instance.ErrorLog("not today!!!");
+                HelpFunctions.Instance.ErrorLog("your rank is " + curlvl + " targeted rank is " + this.concedeLvl + " -> concede!");
+                HelpFunctions.Instance.ErrorLog("not today!!!");
                 this.isgoingtoconcede = true;
                 return true;
             }
@@ -1542,7 +1542,7 @@ namespace OpenAI
 
             if (Mulligan.Instance.shouldConcede(Hrtprozis.Instance.heroNametoEnum(ownh), Hrtprozis.Instance.heroNametoEnum(enemyh)))
             {
-                Helpfunctions.Instance.ErrorLog("not today!!!!");
+                HelpFunctions.Instance.ErrorLog("not today!!!!");
                 this.isgoingtoconcede = true;
                 return true;
             }
@@ -1560,13 +1560,13 @@ namespace OpenAI
             int totallose = this.loses;
             if ((totalwin + totallose - KeepConcede) != 0)
             {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
+                HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
             }
             else
             {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
+                HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
             }
-            Helpfunctions.Instance.logg("Match Won!");
+            HelpFunctions.Instance.logg("Match Won!");
         }
 
         private void HandleLosing(bool is_concede)
@@ -1582,13 +1582,13 @@ namespace OpenAI
             int totallose = this.loses;
             if ((totalwin + totallose - KeepConcede) != 0)
             {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
+                HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
             }
             else
             {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
+                HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
             }
-            Helpfunctions.Instance.logg("Match Lost :(");
+            HelpFunctions.Instance.logg("Match Lost :(");
 
         }
 
@@ -1728,22 +1728,22 @@ namespace OpenAI
             {
                 sttngs.setLoggPath(FolderPath.Logs + System.IO.Path.DirectorySeparatorChar);
                 sttngs.setLoggFile("SilverLog.txt");
-                Helpfunctions.Instance.createNewLoggfile();
+                HelpFunctions.Instance.createNewLoggfile();
             }
             else
             {
                 sttngs.setLoggPath(path);
             }
             
-            Helpfunctions.Instance.ErrorLog("init Silverfish");
-            Helpfunctions.Instance.ErrorLog("setlogpath to:" + path);
+            HelpFunctions.Instance.ErrorLog("init Silverfish");
+            HelpFunctions.Instance.ErrorLog("setlogpath to:" + path);
 
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
             Discovery d = Discovery.Instance; // read the discover list
             Settings.Instance.setSettings();
             if (Settings.Instance.useNetwork) FishNet.Instance.startClient();
-            Helpfunctions.Instance.startFlushingLogBuffers();
+            HelpFunctions.Instance.startFlushingLogBuffers();
         }
 
         public void setnewLoggFile()
@@ -1753,14 +1753,14 @@ namespace OpenAI
             EnemyCrystalCore = 0;
             ownMinionsCost0 = false;
 
-            Helpfunctions.Instance.flushLogg(); // flush the buffer before creating a new log
+            HelpFunctions.Instance.flushLogg(); // flush the buffer before creating a new log
             if (!singleLog)
             {
                 sttngs.setLoggFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
-                Helpfunctions.Instance.createNewLoggfile();
-                Helpfunctions.Instance.ErrorLog("#######################################################");
-                Helpfunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
-                Helpfunctions.Instance.ErrorLog("#######################################################");
+                HelpFunctions.Instance.createNewLoggfile();
+                HelpFunctions.Instance.ErrorLog("#######################################################");
+                HelpFunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
+                HelpFunctions.Instance.ErrorLog("#######################################################");
             }
             else
             {
@@ -2403,7 +2403,7 @@ namespace OpenAI
             }
 
 
-            Helpfunctions.Instance.ErrorLog("updateEverything");
+            HelpFunctions.Instance.ErrorLog("updateEverything");
             latestGameState = rangerbot.gameState;
 
             this.updateBehaveString(botbase);
@@ -2509,8 +2509,8 @@ namespace OpenAI
                 Bot currentBot = (Bot)rangerbot;
                 if (currentBot.numActionsSent > currentBot.numExecsReceived && !p.isEqualf(Ai.Instance.nextMoveGuess))
                 {
-                    Helpfunctions.Instance.ErrorLog("HR action queue did not complete!");
-                    Helpfunctions.Instance.logg("board state out-of-sync due to action queue!");
+                    HelpFunctions.Instance.ErrorLog("HR action queue did not complete!");
+                    HelpFunctions.Instance.logg("board state out-of-sync due to action queue!");
 
                     //if (Ai.Instance.restoreBestMoves(p, currentBot.queuedMoveGuesses))
                     //{
@@ -2521,16 +2521,16 @@ namespace OpenAI
             }
             if (p.mana > Ai.Instance.nextMoveGuess.mana && p.ownMaxMana > Ai.Instance.nextMoveGuess.ownMaxMana && Ai.Instance.bestActions.Count > 0)
             {
-                Helpfunctions.Instance.logg("You may have roped last turn!");
+                HelpFunctions.Instance.logg("You may have roped last turn!");
                 //Helpfunctions.Instance.logg("Mana: " + p.mana + ">" + Ai.Instance.nextMoveGuess.mana);
                 //Helpfunctions.Instance.logg("Max Mana: " + p.ownMaxMana + ">" + Ai.Instance.nextMoveGuess.ownMaxMana);
                 //Helpfunctions.Instance.logg("Actions left: " + Ai.Instance.bestActions.Count);
             }
 
-            Helpfunctions.Instance.ErrorLog("calculating stuff... " + DateTime.Now.ToString("HH:mm:ss.ffff"));
+            HelpFunctions.Instance.ErrorLog("calculating stuff... " + DateTime.Now.ToString("HH:mm:ss.ffff"));
             if (runExtern)
             {
-                Helpfunctions.Instance.logg("recalc-check###########");
+                HelpFunctions.Instance.logg("recalc-check###########");
                 //p.printBoard();
                 //Ai.Instance.nextMoveGuess.printBoard();
                 if (p.isEqual(Ai.Instance.nextMoveGuess, true))
@@ -2556,7 +2556,7 @@ namespace OpenAI
                 Ai.Instance.dosomethingclever(botbase);
             }
             
-            Helpfunctions.Instance.ErrorLog("calculating ended! " + DateTime.Now.ToString("HH:mm:ss.ffff"));
+            HelpFunctions.Instance.ErrorLog("calculating ended! " + DateTime.Now.ToString("HH:mm:ss.ffff"));
 
             return true;
         }
@@ -2849,7 +2849,7 @@ namespace OpenAI
             //this.Stampede = (rangerbot.gameState.LocalPlayerLockAndLoad) ? 1 : 0;
 
             //saboteur test:
-            if (ownHeroAbility.Cost >= 3) Helpfunctions.Instance.ErrorLog("heroabilitymana " + ownHeroAbility.Cost);
+            if (ownHeroAbility.Cost >= 3) HelpFunctions.Instance.ErrorLog("heroabilitymana " + ownHeroAbility.Cost);
             if (this.enemysabo == 0 && ownHeroAbility.Cost >= 3) this.enemysabo++;
             if (this.enemysabo == 1 && ownHeroAbility.Cost >= 8) this.enemysabo++;
 
@@ -2952,9 +2952,9 @@ namespace OpenAI
 
                     m.entityID = entity.EntityId;
 
-                    if(m.name == CardDB.cardName.unknown) Helpfunctions.Instance.ErrorLog("unknown card error");
+                    if(m.name == CardDB.cardName.unknown) HelpFunctions.Instance.ErrorLog("unknown card error");
 
-                    Helpfunctions.Instance.ErrorLog(m.entityID + " ." + entity.CardId + ". " + m.name + " ready params ex: " + m.exhausted + " charge: " + m.charge + " attcksthisturn: " + m.numAttacksThisTurn + " playedthisturn " + m.playedThisTurn);
+                    HelpFunctions.Instance.ErrorLog(m.entityID + " ." + entity.CardId + ". " + m.name + " ready params ex: " + m.exhausted + " charge: " + m.charge + " attcksthisturn: " + m.numAttacksThisTurn + " playedthisturn " + m.playedThisTurn);
                     //Helpfunctions.Instance.ErrorLog("spellpower check " + entitiy.SpellPowerAttack + " " + entitiy.SpellPowerHealing + " " + entitiy.SpellPower);
 
 
@@ -3061,7 +3061,7 @@ namespace OpenAI
             int missingSpellpower = ownspellpower - spellpowerfield;
             if (missingSpellpower != 0 )
             {
-                Helpfunctions.Instance.ErrorLog("spellpower correction: " + ownspellpower + " " + spellpowerfield + " " + numberDalaranAspirant);
+                HelpFunctions.Instance.ErrorLog("spellpower correction: " + ownspellpower + " " + spellpowerfield + " " + numberDalaranAspirant);
             }
             if (missingSpellpower >= 1 && numberDalaranAspirant >= 1)
             {
@@ -3225,7 +3225,7 @@ namespace OpenAI
 
             foreach (var any in rangerbot.gameState.MyDeckCards)
             {
-                Helpfunctions.Instance.logg("Value " + any.Value + "Key " + any.Key);
+                HelpFunctions.Instance.logg("Value " + any.Value + "Key " + any.Key);
             }
 
             int owncontroler = rangerbot.gameState.LocalControllerId;
@@ -3236,7 +3236,7 @@ namespace OpenAI
 
             foreach (Entity ent in allEntitys.Values)
             {
-                if ((TAG_ZONE)ent.Zone == TAG_ZONE.GRAVEYARD) Helpfunctions.Instance.ErrorLog("ent.Zone" + ent.Zone + "ent.id" + ent.EntityId);
+                if ((TAG_ZONE)ent.Zone == TAG_ZONE.GRAVEYARD) HelpFunctions.Instance.ErrorLog("ent.Zone" + ent.Zone + "ent.id" + ent.EntityId);
                 //Helpfunctions.Instance.logg("Zone=" + ent.Zone + " id=" + ent.EntityId + ent.CardState);
                 //Helpfunctions.Instance.ErrorLog("Zone=" + ent.Zone + " id=" + ent.EntityId  + ent.CardState );
                 if (ent.Zone == HSRangerLib.TAG_ZONE.SECRET && ent.ControllerId == enemycontroler) continue; // cant know enemy secrets :D
@@ -3287,8 +3287,8 @@ namespace OpenAI
                             if (cardid == CardDB.cardIDEnum.UNG_067t1)
                             {
                                 EnemyCrystalCore = 5;
-                                Helpfunctions.Instance.logg("ENEMYCRYSTALCOREFOUND");
-                                Helpfunctions.Instance.ErrorLog("ENEMYCRYSTALCOREFOUND");
+                                HelpFunctions.Instance.logg("ENEMYCRYSTALCOREFOUND");
+                                HelpFunctions.Instance.ErrorLog("ENEMYCRYSTALCOREFOUND");
                             }
                         }
 
@@ -3409,20 +3409,20 @@ namespace OpenAI
             string dtimes = DateTime.Now.ToString("HH:mm:ss:ffff");
             String completeBoardString = p.getCompleteBoardForSimulating(this.botbehave, this.versionnumber, dtimes);
             
-            Helpfunctions.Instance.logg(completeBoardString);
+            HelpFunctions.Instance.logg(completeBoardString);
 
             if (runEx)
             {
                 Ai.Instance.currentCalculatedBoard = dtimes;
-                Helpfunctions.Instance.resetBuffer();
+                HelpFunctions.Instance.resetBuffer();
                 if (!Settings.Instance.useNetwork)
                 {
-                    Helpfunctions.Instance.writeBufferToActionFile();
-                    Helpfunctions.Instance.resetBuffer();
+                    HelpFunctions.Instance.writeBufferToActionFile();
+                    HelpFunctions.Instance.resetBuffer();
                 }
 
-                Helpfunctions.Instance.writeToBuffer(completeBoardString);
-                Helpfunctions.Instance.writeBufferToFile();
+                HelpFunctions.Instance.writeToBuffer(completeBoardString);
+                HelpFunctions.Instance.writeBufferToFile();
             }
 
         }
@@ -3449,10 +3449,10 @@ namespace OpenAI
                         KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
                         if (msg.Key != "actionstodo.txt")
                         {
-                            Helpfunctions.Instance.ErrorLog("[Program] Ignoring Message: " + msg.Key);
+                            HelpFunctions.Instance.ErrorLog("[Program] Ignoring Message: " + msg.Key);
                             continue;
                         }
-                        Helpfunctions.Instance.ErrorLog("[Program] Message Type: " + msg.Key);
+                        HelpFunctions.Instance.ErrorLog("[Program] Message Type: " + msg.Key);
                         data = msg.Value;
                     }
                     else
@@ -3470,8 +3470,8 @@ namespace OpenAI
                         //Helpfunctions.Instance.ErrorLog(data);
                         if (!network)
                         {
-                            Helpfunctions.Instance.resetBuffer();
-                            Helpfunctions.Instance.writeBufferToActionFile();
+                            HelpFunctions.Instance.resetBuffer();
+                            HelpFunctions.Instance.writeBufferToActionFile();
                         }
                         alist.AddRange(data.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
                         string board = alist[0];
@@ -3522,7 +3522,7 @@ namespace OpenAI
                 }
             }
             this.waitingForSilver = false;
-            Helpfunctions.Instance.logg("received " + boardnumm + " actions to do: (currtime = " + DateTime.Now.ToString("HH:mm:ss.ffff") + ")");
+            HelpFunctions.Instance.logg("received " + boardnumm + " actions to do: (currtime = " + DateTime.Now.ToString("HH:mm:ss.ffff") + ")");
             Ai.Instance.currentCalculatedBoard = "0";
             Playfield p = new Playfield();
             List<Action> aclist = new List<Action>();
@@ -3530,7 +3530,7 @@ namespace OpenAI
             foreach (string a in alist)
             {
                 aclist.Add(new Action(a, p));
-                Helpfunctions.Instance.logg(a);
+                HelpFunctions.Instance.logg(a);
             }
 
             Ai.Instance.setBestMoves(aclist, value, trackingchoice, trackingstate);
@@ -3540,204 +3540,4 @@ namespace OpenAI
 
 
     }
-
-    public sealed class Helpfunctions
-    {
-        private static Helpfunctions instance;
-
-        public static Helpfunctions Instance
-        {
-            get
-            {
-                return instance ?? (instance = new Helpfunctions());
-            }
-        }
-
-        private Helpfunctions()
-        {
-            //System.IO.File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
-        }
-
-        private bool writelogg = true;
-        public void loggonoff(bool onoff)
-        {
-            //writelogg = onoff;
-        }
-
-        private bool filecreated = false;
-        public void createNewLoggfile()
-        {
-            filecreated = false;
-        }
-
-        private List<string> loggBuffer = new List<string>(Settings.Instance.logBuffer + 1);
-        public void logg(string s)
-        {
-            loggBuffer.Add(s);
-
-            if (loggBuffer.Count > Settings.Instance.logBuffer) flushLogg();
-        }
-
-        public void flushLogg()
-        {
-            if (loggBuffer.Count == 0) return;
-            try
-            {
-                File.AppendAllLines(Settings.Instance.logpath + Settings.Instance.logfile, loggBuffer);
-                loggBuffer.Clear();
-            }
-            catch
-            {
-
-            }
-        }
-
-        public DateTime UnixTimeStampToDateTime(int unixTimeStamp)
-        {
-            // Unix timestamp is seconds past epoch
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
-        }
-
-        private List<string> errorLogBuffer = new List<string>(Settings.Instance.logBuffer + 1);
-        public void ErrorLog(string s)
-        {
-            if (!writelogg) return;
-            errorLogBuffer.Add(DateTime.Now.ToString("HH:mm:ss: ") + s);
-
-            if (errorLogBuffer.Count > Settings.Instance.logBuffer) flushErrorLog();
-        }
-
-        public void flushErrorLog()
-        {
-            if (errorLogBuffer.Count == 0) return;
-            try
-            {
-                File.AppendAllLines(Settings.Instance.logpath + "Logging.txt", errorLogBuffer);
-                errorLogBuffer.Clear();
-            }
-            catch
-            {
-
-            }
-        }
-
-        public Task startFlushingLogBuffers(CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return Task.Run(() => Instance.flushLogBuffersAsync(cancellationToken), cancellationToken);
-        }
-
-        public async Task flushLogBuffersAsync(CancellationToken cancellationToken)
-        {
-            while (true)
-            {
-                Instance.flushLogg();
-                Instance.flushErrorLog();
-                await Task.Delay(50, cancellationToken);
-            }
-        }
-
-
-        string sendbuffer = "";
-        public void resetBuffer()
-        {
-            this.sendbuffer = "";
-        }
-
-        public void writeToBuffer(string data)
-        {
-            this.sendbuffer += data + "\r\n";
-        }
-
-        public void writeBufferToNetwork(string msgtype)
-        {
-            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
-        }
-
-        public void writeBufferToFile()
-        {
-            bool writed = true;
-            this.sendbuffer += "<EoF>";
-            //this.ErrorLog("write to crrntbrd file: " + sendbuffer);
-            while (writed)
-            {
-                try
-                {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
-                    writed = false;
-                }
-                catch
-                {
-                    writed = true;
-                }
-            }
-            this.sendbuffer = "";
-        }
-
-        public void writeBufferToDeckFile()
-        {
-            bool writed = true;
-            this.sendbuffer += "<EoF>";
-            while (writed)
-            {
-                try
-                {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
-                    writed = false;
-                }
-                catch
-                {
-                    writed = true;
-                }
-            }
-            this.sendbuffer = "";
-        }
-
-        public void writeBufferToActionFile()
-        {
-            bool writed = true;
-            this.sendbuffer += "<EoF>";
-            //this.ErrorLog("write to action file: "+ sendbuffer);
-            while (writed)
-            {
-                try
-                {
-                    if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
-                    writed = false;
-                }
-                catch
-                {
-                    writed = true;
-                }
-            }
-            this.sendbuffer = "";
-        }
-
-        public void writeBufferToCardDB()
-        {
-            bool writed = true;
-            while (writed)
-            {
-                try
-                {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
-                    writed = false;
-                }
-                catch
-                {
-                    writed = true;
-                }
-            }
-            this.sendbuffer = "";
-        }
-    }
-
-
-    // the ai :D
-    //please ask/write me if you use this in your project
-
 }
