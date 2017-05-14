@@ -424,8 +424,8 @@
                 if (s.StartsWith("quests: "))
                 {
                     String[] ss = s.Split(' ');
-                    Questmanager.Instance.updateQuestStuff(ss[1], Convert.ToInt32(ss[2]), Convert.ToInt32(ss[3]), true);
-                    Questmanager.Instance.updateQuestStuff(ss[4], Convert.ToInt32(ss[5]), Convert.ToInt32(ss[6]), false);
+                    QuestManager.Instance.UpdateQuestProgress(ss[1], Convert.ToInt32(ss[2]), Convert.ToInt32(ss[3]), true);
+                    QuestManager.Instance.UpdateQuestProgress(ss[4], Convert.ToInt32(ss[5]), Convert.ToInt32(ss[6]), false);
                 }
 
                 if (s.StartsWith("crystal: "))

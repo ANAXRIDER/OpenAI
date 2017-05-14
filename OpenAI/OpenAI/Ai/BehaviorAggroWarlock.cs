@@ -1528,7 +1528,7 @@ namespace OpenAI
 
             if (p.enemyHeroName == HeroEnum.thief)
             {
-                if (Questmanager.Instance.enemyQuest.Id == CardDB.cardIDEnum.UNG_067)
+                if (QuestManager.Instance.enemyQuest.Id == CardDB.cardIDEnum.UNG_067)
                 {
                     if (m.crystalcored == 0) retval += 10; // big value quest rogue before quest active
                 }
