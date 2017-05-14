@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Combo: Destroy a minion.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (p.cardsPlayedThisTurn >= 1 && target != null) p.minionGetDestroyed(target);
         }

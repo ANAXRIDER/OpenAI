@@ -9,7 +9,7 @@ namespace OpenAI
 
         //insprire: Give your Totems +2 Attack
 
-        public override void onInspire(Playfield p, Minion m)
+        public override void OnInspire(Playfield p, Minion m)
         {
             foreach (Minion min in (m.own) ? p.ownMinions : p.enemyMinions)
             {

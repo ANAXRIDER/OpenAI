@@ -9,7 +9,7 @@ namespace OpenAI
 
         //  Battlecry: Draw a card. If it's a minion, transform it into a Chicken. 
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.drawACard(CardDB.cardIDEnum.None, own.own);
         }

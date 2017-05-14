@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Deathrattle: Shuffle a 4/3 Raptor into your deck.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         CardDB.Card card = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_131t);
 //    combo:/ ruft einen banditen der defias (2/1) herbei.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (p.cardsPlayedThisTurn >= 1)
             {

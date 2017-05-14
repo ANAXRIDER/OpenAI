@@ -9,7 +9,7 @@ namespace OpenAI
     {
 
         //    fügt einem zufälligen feind 1 schaden zu, nachdem ihr einen diener herbeigerufen habt.
-        public override void onMinionWasSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        public override void OnMinionWasSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if (triggerEffectMinion.entityID != summonedMinion.entityID && triggerEffectMinion.own == summonedMinion.own)
             {

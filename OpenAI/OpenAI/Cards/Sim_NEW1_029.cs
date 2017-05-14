@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    kampfschrei:/ im nächsten zug kosten zauber für euren gegner (0) mana.
         //todo implement the nomanacosts for the enemyturn
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (own.own)
             {

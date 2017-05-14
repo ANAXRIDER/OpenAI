@@ -9,7 +9,7 @@ namespace OpenAI
 
         //insprire: gain Spell Damage +1
 
-        public override void onInspire(Playfield p, Minion m)
+        public override void OnInspire(Playfield p, Minion m)
         {
             p.minionGetTempBuff((m.own) ? p.ownHero : p.enemyHero, 2, 0);
         }

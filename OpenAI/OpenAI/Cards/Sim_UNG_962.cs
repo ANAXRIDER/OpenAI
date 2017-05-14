@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Adapt your Silver_Hand Recruits.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             List<Minion> temp = (own.own) ? p.ownMinions : p.enemyMinions;
             bool hasreadyminion = false;

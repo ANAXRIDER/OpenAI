@@ -9,7 +9,7 @@ namespace OpenAI
 
         // Whenever a character is healed, deal 1 damage to a random enemy.  
 
-        public override void onAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
+        public override void OnAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
         {
             Minion t = p.searchRandomMinion((triggerEffectMinion.own) ? p.enemyMinions : p.ownMinions, Playfield.searchmode.searchHighestHP);
             if (t != null)

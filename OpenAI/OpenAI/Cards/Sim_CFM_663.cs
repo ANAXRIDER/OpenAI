@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// At the end of your turn, add a random Demon to your hand.
 
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own == turnEndOfOwner)
             {

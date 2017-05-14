@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Battlecry: Look at 3 cards. Guess which one started in your opponent's deck to get a copy of it.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.CardToHand(CardDB.cardName.unknown, own.own);
         }

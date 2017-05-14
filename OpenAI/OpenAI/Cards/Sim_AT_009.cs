@@ -10,7 +10,7 @@ namespace OpenAI
         //Deathrattle: Add 3 copies of Arcane Missiles to your hand.
 
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.EX1_277, m.own, true);
             p.drawACard(CardDB.cardIDEnum.EX1_277, m.own, true);

@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Battlecry: Give a random friendly Beast, Dragon, and Murloc +1/+1.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (p.ownMinions != null)
             {

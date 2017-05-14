@@ -10,7 +10,7 @@ namespace OpenAI
         //    Put a random minion from each player's hand into the battlefield.
         CardDB.Card enemymob = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_593);
         
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             Handmanager.Handcard c = null;
             int sum = 10000;

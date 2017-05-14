@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Give a Demon +3/+3. Give your opponent a Mana Crystal.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
 
             if (target != null)

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    verdoppelt das leben eines dieners.
 
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.minionGetBuffed(target, 0, target.Hp);
 		}

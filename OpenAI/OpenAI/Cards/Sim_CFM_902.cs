@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 		// Battlecry and Deathrattle: Summon a Jade Golem.
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             p.callKid(p.getNextJadeGolem(m.own), m.zonepos, m.own);
         }
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.callKid(p.getNextJadeGolem(m.own), m.zonepos - 1, m.own);
         }

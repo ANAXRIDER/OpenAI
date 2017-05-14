@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    windzorn/, überladung:/ (2)
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.changeRecall(own.own, 2);
 		}

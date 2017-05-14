@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //todo make it better
 //    kampfschrei:/ verursacht 3 schaden, der zufällig auf alle anderen charaktere aufgeteilt wird.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             int anz = 3;
             for (int i = 0; i < anz; i++)

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Destroy your opponent's weapon and gain Armor equal to its Attack.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

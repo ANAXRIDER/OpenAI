@@ -12,7 +12,7 @@ namespace OpenAI
         {
             if (target != null && target.own == wasOwnCard && triggerEffectMinion.own == wasOwnCard && target.entityID != triggerEffectMinion.entityID && c.type == CardDB.cardtype.SPELL)
             {
-                c.sim_card.onCardPlay(p, wasOwnCard, triggerEffectMinion, choice);
+                c.sim_card.OnCardPlay(p, wasOwnCard, triggerEffectMinion, choice);
                 p.doDmgTriggers();
             }
         }

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //insprire: Can attack as normal this turn.
 
-        public override void onInspire(Playfield p, Minion m)
+        public override void OnInspire(Playfield p, Minion m)
         {
             m.canAttackNormal = true;
             m.updateReadyness();

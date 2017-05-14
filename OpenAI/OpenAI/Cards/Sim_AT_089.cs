@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Inspire: Gain +1 Health.
 
-        public override void onInspire(Playfield p, Minion m)
+        public override void OnInspire(Playfield p, Minion m)
         {
             p.minionGetBuffed(m, 0, 1);
         }

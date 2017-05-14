@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    übernehmt bis zum ende des zuges die kontrolle über einen feindlichen diener mit max. 3 angriff.
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             target.shadowmadnessed = true;
             p.minionGetControlled(target, ownplay, true);

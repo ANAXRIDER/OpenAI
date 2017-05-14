@@ -518,12 +518,12 @@
 
             if (woundedbefore && !this.wounded)
             {
-                this.handcard.card.sim_card.onEnrageStop(p, this);
+                this.handcard.card.sim_card.OnEnrageStop(p, this);
             }
 
             if (!woundedbefore && this.wounded)
             {
-                this.handcard.card.sim_card.onEnrageStart(p, this);
+                this.handcard.card.sim_card.OnEnrageStart(p, this);
             }
 
             if (this.Hp <= 0)
@@ -660,7 +660,7 @@
 
         public void endAura(Playfield p)
         {
-            if(!this.silenced) this.handcard.card.sim_card.onAuraEnds(p, this);
+            if(!this.silenced) this.handcard.card.sim_card.OnAuraEnds(p, this);
 
             if (this.own)
             {
@@ -726,7 +726,7 @@
             //delete enrage (if minion is silenced the first time)
             if (wounded && handcard.card.Enrage && !silenced)
             {
-                handcard.card.sim_card.onEnrageStop(p, this);
+                handcard.card.sim_card.OnEnrageStop(p, this);
             }
 
             //reset attack
@@ -759,7 +759,7 @@
 
             if (!silenced)//minion WAS not silenced, deactivate his aura
             {
-                handcard.card.sim_card.onAuraEnds(p, this);
+                handcard.card.sim_card.OnAuraEnds(p, this);
             }
 
             silenced = true;

@@ -10,7 +10,7 @@ namespace OpenAI
         //Deathrattle: Return this to your hand and summon a 4/4 Nerubian.
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_036t);//nerub
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             int pos = (m.own) ? p.ownMinions.Count : p.enemyMinions.Count;
             p.callKid(kid, pos, m.own);

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Deal $2 damage to a minion. This spell gets double bonus from Spell Damage;
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
 
             int dmg = (ownplay) ? 2+p.spellpower : 2+p.enemyspellpower;

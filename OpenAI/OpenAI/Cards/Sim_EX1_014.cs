@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ gebt eurem gegner 2 bananen.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.drawACard(CardDB.cardIDEnum.EX1_014t, !own.own, true);
             if (own.own)

@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Restore 6 Health. Summon a random 6-Cost minion.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay)
             {

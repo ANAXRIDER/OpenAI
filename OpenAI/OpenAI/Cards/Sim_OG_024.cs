@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Overload: (2)
 		
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (own != null)
             {

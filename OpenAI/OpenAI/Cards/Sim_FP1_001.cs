@@ -8,7 +8,7 @@ namespace OpenAI
     {
 
         //    todesröcheln:/ stellt beim feindlichen helden 5 leben wieder her.
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             int heal = (m.own) ? p.getMinionHeal(5) : p.getEnemyMinionHeal(5);
 

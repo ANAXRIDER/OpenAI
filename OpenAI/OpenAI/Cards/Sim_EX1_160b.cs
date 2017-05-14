@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    verleiht euren dienern +1/+1.
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             List<Minion> temp = (ownplay) ? p.ownMinions : p.enemyMinions;
             foreach (Minion m in temp)

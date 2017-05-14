@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    todesröcheln:/ lasst einen zufälligen befreundeten diener auf eure hand zurückkehren.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             List<Minion> temp = new List<Minion>();
 

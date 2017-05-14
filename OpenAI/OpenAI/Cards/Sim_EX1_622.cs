@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         // Destroy a minion with an Attack of 5 or more.
 
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             if (target.Angr >= 5)
             {

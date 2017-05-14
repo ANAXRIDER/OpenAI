@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    zu beginn eures zuges besteht eine chance von 50%, dass ihr eine zusätzliche karte zieht.
-        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if (triggerEffectMinion.own == turnStartOfOwner)
             {

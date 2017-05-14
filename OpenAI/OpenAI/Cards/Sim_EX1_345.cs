@@ -12,7 +12,7 @@ namespace OpenAI
         CardDB.Card shadow = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_345t); // server :D
         CardDB.Card copymin = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_182); // we take a icewindjety :D
 
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.callKid(copymin, p.ownMinions.Count, true);
 		}

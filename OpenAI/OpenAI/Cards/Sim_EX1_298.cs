@@ -6,7 +6,7 @@ namespace OpenAI
 {
     class Sim_EX1_298 : SimTemplate //ragnarosthefirelord
     {
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own == turnEndOfOwner)
             {

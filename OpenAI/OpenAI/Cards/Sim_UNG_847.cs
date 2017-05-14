@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: If you played an_Elemental last turn, deal 5 damage.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (true) // an_Elemental last turn require
             {

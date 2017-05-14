@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Taunt Battlecry: Set yourhero's Health to 40.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.minionGetDamageOrHeal(p.ownHero, p.ownHero.Hp - p.ownHero.maxHp, true);//fully heal //like reno... 
 

@@ -13,7 +13,7 @@ namespace OpenAI
         CardDB.Card taunt35 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.UNG_101t2);// 3/5 tunt minion.
         CardDB.Card StealthTaunt55 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.UNG_101t3);// 5/5 minion.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             bool hasfandral = false;
             if (p.ownMinions.Find(a => a.name == CardDB.cardName.fandralstaghelm && !a.silenced) != null) hasfandral = true;

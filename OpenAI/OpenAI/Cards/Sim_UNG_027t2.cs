@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Deathrattle: Return this to_your hand as a 10/10 that costs (10).
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.UNG_027t4, m.own, true);
         }

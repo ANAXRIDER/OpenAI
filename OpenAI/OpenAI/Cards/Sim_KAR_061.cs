@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Taunt Battlecry: Draw a Beast, Dragon, and Murloc from your deck.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.drawACard(CardDB.cardName.unknown, own.own);
             p.drawACard(CardDB.cardName.unknown, own.own);

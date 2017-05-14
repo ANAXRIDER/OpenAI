@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    verstohlenheit/. verleiht am ende eures zuges einem anderen zufälligen befreundeten diener +1 leben.
 
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own == turnEndOfOwner)
             {

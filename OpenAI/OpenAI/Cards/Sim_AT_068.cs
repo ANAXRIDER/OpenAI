@@ -9,7 +9,7 @@ namespace OpenAI
 
         //  Give your Taunt minions +2/+2
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
 
             foreach (Minion m in (ownplay) ? p.ownMinions : p.enemyMinions)

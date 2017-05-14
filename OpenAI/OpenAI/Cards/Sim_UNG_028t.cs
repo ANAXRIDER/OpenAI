@@ -8,7 +8,7 @@ namespace OpenAI
     {
 
         //Take an extra turn.
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (p.ownMaxMana <= 9) p.ownMaxMana++;
             p.mana = p.ownMaxMana;

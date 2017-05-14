@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Taunt Battlecry: Restore 3_Health.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int heal = (own.own) ? p.getMinionHeal(3) : p.getEnemyMinionHeal(3);
             p.minionGetDamageOrHeal(target, -heal);

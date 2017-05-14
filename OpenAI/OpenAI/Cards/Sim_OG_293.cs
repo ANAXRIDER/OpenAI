@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Taunt. Battlecry: Give your C'Thun +3/+3 (wherever it is).
 		
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
 			if (own.own)
 			{

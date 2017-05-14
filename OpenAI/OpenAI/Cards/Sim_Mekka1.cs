@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    vernichtet zu beginn eures zuges diesen diener und zieht 3 karten.
 
-        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if (turnStartOfOwner == triggerEffectMinion.own)
             {

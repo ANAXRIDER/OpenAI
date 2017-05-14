@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Taunt Deathrattle: Shuffle a 6/9 Direhorn with Taunt into your deck.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

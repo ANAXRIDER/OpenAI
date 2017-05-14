@@ -10,7 +10,7 @@ namespace OpenAI
 //    todesröcheln:/ ruft zwei spektrale spinnen (1/1) herbei.
 		
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             
             p.callKid(c, m.zonepos-1, m.own);

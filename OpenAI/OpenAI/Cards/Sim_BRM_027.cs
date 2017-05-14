@@ -11,7 +11,7 @@ namespace OpenAI
 
         CardDB.Card card = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRM_027p);
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

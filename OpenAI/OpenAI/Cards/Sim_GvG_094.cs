@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   At the end of each player's turn, that player draws until they have 3 cards.
 
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
 
             int cardstodraw = 0;

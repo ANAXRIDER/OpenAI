@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Destroy all minions. Draw a card for each.
 		
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int anz = p.ownMinions.Count + p.enemyMinions.Count;
 			p.allMinionsGetDestroyed();

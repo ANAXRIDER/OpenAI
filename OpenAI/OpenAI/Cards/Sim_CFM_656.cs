@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: Enemy minions lose Stealth.
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             List<Minion> temp = (m.own) ? p.enemyMinions : p.ownMinions;
             foreach (Minion mnn in temp)

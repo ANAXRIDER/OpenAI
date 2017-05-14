@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Battlecry: Deal 2 damage to all minions with Deathrattle.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 
             foreach (Minion m in p.ownMinions)

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// At the end of your turn, give a random minion in your hand +2/+2.
 
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (turnEndOfOwner == triggerEffectMinion.own)
             {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Combo: Return a friendly minion to your hand.
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (p.cardsPlayedThisTurn > 0 && target != null) p.minionReturnToHand(target, target.own, 0);
         }

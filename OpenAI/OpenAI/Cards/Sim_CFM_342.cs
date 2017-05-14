@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: If your weapon has at least 3 Attack, gain +4/+4.
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (m.own)
             {

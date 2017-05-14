@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Freeze an enemy.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             target.frozen = true;
         }

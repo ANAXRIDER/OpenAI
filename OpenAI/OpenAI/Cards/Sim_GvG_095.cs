@@ -9,7 +9,7 @@ namespace OpenAI
 
         //  Has +4 Attack while your opponent has 6 or more cards in hand. 
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int anz = (own.own) ? p.enemyAnzCards : p.owncards.Count;
             if (anz >= 6)

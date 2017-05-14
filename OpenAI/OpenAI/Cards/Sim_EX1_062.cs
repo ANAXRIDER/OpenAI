@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    ansturm/. hat +1 angriff für jeden anderen murloc auf dem schlachtfeld.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             foreach (Minion m in p.ownMinions)
             {
@@ -27,7 +27,7 @@ namespace OpenAI
             }
 		}
 
-        public override void onMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        public override void OnMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if (summonedMinion.handcard.card.race == TAG_RACE.MURLOC)
             {
@@ -35,7 +35,7 @@ namespace OpenAI
             }
         }
 
-        public override void onMinionDiedTrigger(Playfield p, Minion triggerEffectMinion, Minion diedMinion)
+        public override void OnMinionDiedTrigger(Playfield p, Minion triggerEffectMinion, Minion diedMinion)
         {
             if (diedMinion.handcard.card.race == TAG_RACE.MURLOC)
             {

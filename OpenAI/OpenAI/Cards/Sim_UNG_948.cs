@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Choose a friendly minion. Summon a copy of it.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (target != null)
             {

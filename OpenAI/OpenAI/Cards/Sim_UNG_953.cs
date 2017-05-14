@@ -20,7 +20,7 @@ namespace OpenAI
             }           
         }
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             for (int i = 1; i <= m.ReturnSpellCount; i++)
             {

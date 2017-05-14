@@ -11,7 +11,7 @@ namespace OpenAI
         CardDB CardDBI = CardDB.Instance;
         CardDB.Card kid = null;
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int kids = 7 - p.ownMinions.Count;
 

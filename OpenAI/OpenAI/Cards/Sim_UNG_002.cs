@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Battlecry: Adapt, then Adapt.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.getBestAdapt(own);
             p.getBestAdapt(own);

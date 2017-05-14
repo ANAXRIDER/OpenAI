@@ -20,7 +20,7 @@ namespace OpenAI
 
                 if (p.ownMinions[zonepos].name == CardDB.cardName.plant)
                 {
-                    c.sim_card.onCardPlay(p, wasOwnCard, p.ownMinions[zonepos], choice);
+                    c.sim_card.OnCardPlay(p, wasOwnCard, p.ownMinions[zonepos], choice);
                     p.doDmgTriggers();
                 }
 

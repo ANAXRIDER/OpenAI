@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Battlecry:&lt;/b&gt; Gain 5 Armor.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.minionGetArmor(own.own ? p.ownHero : p.enemyHero, 5);
         }

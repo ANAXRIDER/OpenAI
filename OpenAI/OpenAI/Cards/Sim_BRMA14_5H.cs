@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//   At the start of your turn, deal 1 damage to all other minions.
 
-		public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+		public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
 		{
 		   if (triggerEffectMinion.own == turnStartOfOwner)
 		   {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: If your deck has no duplicates, create a custom spell.
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (m.own && Hrtprozis.Instance.noDuplicates) p.drawACard(CardDB.cardName.unknown, m.own, true);
         }

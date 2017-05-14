@@ -10,7 +10,7 @@ namespace OpenAI
 
 		CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRMA17_6);//2/1Bone Construct
 		
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int place = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
             p.callKid(kid, place, ownplay, false);

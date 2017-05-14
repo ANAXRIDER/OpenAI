@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Taunt. Battlecry: Draw cards until you draw one that isn't a Dragon.
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             p.drawACard(CardDB.cardName.unknown, m.own);
             p.drawACard(CardDB.cardName.unknown, m.own);

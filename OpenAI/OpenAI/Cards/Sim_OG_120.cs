@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Deathrattle: Deal 8 damage to all minions.
 		
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.allMinionsGetDamage(8);
         }

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Spend all your Mana. Deal that much damage to a minion.
 		
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int dmg = (ownplay) ? p.getSpellDamageDamage(p.mana) : p.getEnemySpellDamageDamage(p.enemyMaxMana);
             p.minionGetDamageOrHeal(target, dmg);

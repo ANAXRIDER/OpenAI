@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Draw 2 cards. Overload: (2)
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.changeRecall(ownplay, 2);
             p.drawACard(CardDB.cardIDEnum.None, ownplay);

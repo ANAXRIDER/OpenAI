@@ -9,12 +9,12 @@ namespace OpenAI
 
         //Your minions cost (2) more.
 
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
         {
             if (own.own) p.anzEmeraldHiveQueen++;
         }
 
-        public override void onAuraEnds(Playfield p, Minion own)
+        public override void OnAuraEnds(Playfield p, Minion own)
         {
             if (own.own) p.anzEmeraldHiveQueen--;
         }

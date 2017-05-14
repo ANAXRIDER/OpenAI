@@ -8,19 +8,19 @@ namespace OpenAI
     {
         // During your turn, your hero is Immune.
 
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
         {
             if (own.own) p.ownHero.immune = true;
             else p.enemyHero.immune = true;
         }
 
-        public override void onAuraEnds(Playfield p, Minion own)
+        public override void OnAuraEnds(Playfield p, Minion own)
         {
             if (own.own) p.ownHero.immune = false;
             else p.enemyHero.immune = false;
         }
 
-        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if (triggerEffectMinion.own == turnStartOfOwner)
             {
@@ -29,7 +29,7 @@ namespace OpenAI
             }
         }
 
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (turnEndOfOwner == true && triggerEffectMinion.own == turnEndOfOwner)
             {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//After you summon a minion, give it +1/+1.
 		
-		public override void onMinionWasSummoned(Playfield p, Minion m, Minion summonedMinion)
+		public override void OnMinionWasSummoned(Playfield p, Minion m, Minion summonedMinion)
         {
 			if (m.own == summonedMinion.own && m.entityID != summonedMinion.entityID)
 			{

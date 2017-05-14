@@ -11,7 +11,7 @@ namespace OpenAI
 
         private CardDB.Card sheep = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_005t);
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.minionTransform(target, sheep);
         }

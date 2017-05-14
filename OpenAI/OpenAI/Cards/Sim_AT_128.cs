@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Deathrattle: Reveal a minion in each deck. If yours costs more, return this to your hand.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.AT_128, m.own, true);
         }

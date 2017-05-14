@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ fügt allen anderen charakteren 1 schaden zu.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             int dmg = 1;
             p.allCharsGetDamage(dmg); // dreadinfernal is not on board yet!

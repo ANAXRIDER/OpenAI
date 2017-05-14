@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //At the start of your turn, set this minion's Attack to 7.
 
-        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if (triggerEffectMinion.own == turnStartOfOwner)
             {

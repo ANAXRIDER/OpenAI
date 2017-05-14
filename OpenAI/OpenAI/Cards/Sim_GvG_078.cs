@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Deathrattle: Give each player a Spare Part
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardIDEnum.PART_001, false, true);
             p.drawACard(CardDB.cardIDEnum.PART_001, true, true);

@@ -7,7 +7,7 @@ namespace OpenAI
     class Sim_LOE_061 : SimTemplate// Anubisath Sentinel
     {
         //Deathrattle: Give a random friendly minion +3/+3
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             List<Minion> temp = new List<Minion>();
 

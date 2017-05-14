@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Battlecry: Deal 2 damage to all undamaged enemy minions.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int dmg = 2;
             List<Minion> temp = (own.own) ? p.enemyMinions : p.ownMinions;

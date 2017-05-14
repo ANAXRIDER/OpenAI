@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Whenever another friendly Murloc dies, draw a card. Overload: (1)
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.changeRecall(own.own, 1);
         }

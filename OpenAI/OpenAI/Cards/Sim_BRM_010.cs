@@ -11,7 +11,7 @@ namespace OpenAI
         CardDB.Card fireHawk25 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRM_010t2);// 2/5 minion.
         CardDB.Card CatHawk55 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.OG_044b);// 5/5 minion.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             bool hasfandral = false;
             if (p.ownMinions.Find(a => a.name == CardDB.cardName.fandralstaghelm && !a.silenced) != null) hasfandral = true;

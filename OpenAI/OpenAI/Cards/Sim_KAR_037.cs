@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Battlecry: If you control a Secret, gain +1/+1 and Taunt.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (((own.own) ? p.ownSecretsIDList.Count : p.enemySecretList.Count) >= 1)
             {

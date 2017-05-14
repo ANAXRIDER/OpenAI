@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    fügt zwei zufälligen feindlichen dienern $2 schaden zu. überladung:/ (2)
         //todo list
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.changeRecall(ownplay, 2);
             

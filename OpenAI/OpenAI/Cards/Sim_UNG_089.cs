@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Adapt your_Murlocs.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             List<Minion> temp = (own.own) ? p.ownMinions : p.enemyMinions;
             bool hasreadymurloc = false;

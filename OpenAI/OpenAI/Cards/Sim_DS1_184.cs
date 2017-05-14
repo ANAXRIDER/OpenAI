@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    schaut euch die drei obersten karten eures decks an. zieht eine davon und werft die anderen beiden ab.
 
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int decksize = (ownplay) ? p.ownDeckSize : p.enemyDeckSize;
             if(decksize >=1) p.drawACard(CardDB.cardIDEnum.None, ownplay);

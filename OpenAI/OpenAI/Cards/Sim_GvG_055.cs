@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Battlecry&lt;/b&gt;: Give a friendly Mech +2/+2.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
 
             if (target == null) return;

@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 		//Taunt. Enrage:+3 Attack.
 		
-        public override void onEnrageStart(Playfield p, Minion m)
+        public override void OnEnrageStart(Playfield p, Minion m)
         {
             m.Angr += 3;
         }
 
-        public override void onEnrageStop(Playfield p, Minion m)
+        public override void OnEnrageStop(Playfield p, Minion m)
         {
             m.Angr -= 3;
         }

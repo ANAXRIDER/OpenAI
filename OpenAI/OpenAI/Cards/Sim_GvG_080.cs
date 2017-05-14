@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Battlecry:If you have a Beast, transform this minion into a 7/7.
         CardDB.Card betterguy = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_080t);
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             List<Minion> temp = (own.own) ? p.ownMinions : p.enemyMinions;
             bool hasbeast = false;

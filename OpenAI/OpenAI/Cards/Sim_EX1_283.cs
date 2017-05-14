@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ friert/ einen charakter ein.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             target.frozen = true;
 		}
