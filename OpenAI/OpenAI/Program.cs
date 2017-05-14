@@ -398,7 +398,6 @@ namespace OpenAI
                         {
                             this.doMultipleThingsAtATime = false;
                             this.dontmultiactioncount++;
-                            //Helpfunctions.Instance.ErrorLog("doMultipleThingsAtATime " + doMultipleThingsAtATime + " because IsPlayRandomEffect 찾는거");
                         }
                         else this.doMultipleThingsAtATime = true;
 
