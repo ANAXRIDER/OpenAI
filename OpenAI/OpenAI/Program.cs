@@ -399,13 +399,9 @@ namespace OpenAI
                         {
                             this.doMultipleThingsAtATime = false;
                             this.dontmultiactioncount++;
-                            //Helpfunctions.Instance.ErrorLog("doMultipleThingsAtATime " + doMultipleThingsAtATime + " because IsPlayRandomEffect 찾는거");
 
                         }
                         else this.doMultipleThingsAtATime = true;
-
-
-                        //if (daum.bestmove.card.card.name == CardDB.cardName.barnes) POWERFULSINGLEACTION++;
 
                         switch (daum.bestmove.card.card.name)
                         {
@@ -418,9 +414,6 @@ namespace OpenAI
                             case CardDB.cardName.tuskarrtotemic:
                             case CardDB.cardName.flametonguetotem:
                             case CardDB.cardName.leeroyjenkins:
-                                //Helpfunctions.Instance.logg("찾는거 " + daum.bestmove.card.card.name + " 드로우카드 찾는거");
-                                //Helpfunctions.Instance.ErrorLog("찾는거 " + daum.bestmove.card.card.name + " 드로우카드 찾는거");
-                                //case CardDB.cardName.defenderofargus:
                                 this.doMultipleThingsAtATime = false;
                                 this.dontmultiactioncount++; break;
                             default: break;
@@ -505,10 +498,6 @@ namespace OpenAI
                                 if (!m.silenced && (m.handcard.card.deathrattle || m.hasDeathrattle())) hasdamageeffectminion = true;
                             }
                             if (hasdamageeffectminion) this.POWERFULSINGLEACTION++;
-                            Helpfunctions.Instance.logg("찾는거 저글러 몹" + daum.bestmove.card.card.name);
-                            Helpfunctions.Instance.logg("찾는거 저글러 몹" + daum.bestmove.card.card.name);
-                            Helpfunctions.Instance.ErrorLog("찾는거 저글러 몹" + daum.bestmove.card.card.name);
-                            Helpfunctions.Instance.ErrorLog("찾는거 저글러 몹" + daum.bestmove.card.card.name);
                         }
 
                         
@@ -1116,12 +1105,6 @@ namespace OpenAI
                         e.action_list.Add(endturnmove);
                         if (POWERFULSINGLEACTION >= 1 || dontmultiactioncount >= 1)
                         {
-                            //Helpfunctions.Instance.ErrorLog("찾는거종료1" + POWERFULSINGLEACTION);
-                            //Helpfunctions.Instance.logg("찾는거종료1" + POWERFULSINGLEACTION);
-                            //Helpfunctions.Instance.ErrorLog("찾는거종료1" + dontmultiactioncount);
-                            //Helpfunctions.Instance.logg("찾는거종료1" + dontmultiactioncount);
-                            //Helpfunctions.Instance.ErrorLog("찾는거종료1 doMultipleThingsAtATime " + doMultipleThingsAtATime);
-                            //Helpfunctions.Instance.logg("찾는거종료1 doMultipleThingsAtATime " + doMultipleThingsAtATime);
                             POWERFULSINGLEACTION = 0;
                             dontmultiactioncount = 0;
                             doMultipleThingsAtATime = true;
@@ -1480,7 +1463,6 @@ namespace OpenAI
                 switch (daum.bestmove.actionType)
                 {
                     case ActionType.END_TURN:
-                        //Helpfunctions.Instance.logg("엔드턴 확인  ");
                         break;
                     case ActionType.ATTACK_WITH_HERO:
                         {
@@ -1514,10 +1496,6 @@ namespace OpenAI
                                 if (daum.bestmove.target.taunt && daum.bestmove.own.Angr >= daum.bestmove.target.Hp && !daum.bestmove.target.isHero)
                                 {
                                     System.Threading.Thread.Sleep(800);
-                                    //Helpfunctions.Instance.logg("Target Taunt detected sleep 800ms");
-                                    //Helpfunctions.Instance.logg("Target Taunt detected sleep 800ms");
-                                    //Helpfunctions.Instance.ErrorLog("Target Taunt detected sleep 800ms");
-                                    //Helpfunctions.Instance.ErrorLog("Target Taunt detected sleep 800ms");
                                 }
 
                                 if (this.enemySecretCount >= 1)
@@ -1528,8 +1506,6 @@ namespace OpenAI
                                         if (si.canBe_noblesacrifice)
                                         {
                                             System.Threading.Thread.Sleep(time);
-                                            //Helpfunctions.Instance.logg("찾는거 덫발견 덫8 time: " + time);
-                                            //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫8 time: " + time);
                                         }
                                         else if (daum.bestmove.target.isHero)
                                         {
@@ -1538,8 +1514,6 @@ namespace OpenAI
                                                 || si.canBe_beartrap)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                //Helpfunctions.Instance.logg("찾는거 덫발견 덫9 time: " + time);
-                                                //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫9 time: " + time);
                                             }
                                         }
                                         else if (!daum.bestmove.target.isHero)
@@ -1547,16 +1521,12 @@ namespace OpenAI
                                             if (si.canBe_snaketrap)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                //Helpfunctions.Instance.logg("찾는거 덫발견 덫10 time: " + time);
-                                                //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫10 time: " + time);
                                             }
                                             else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp)
                                             {
                                                 if (si.canBe_iceblock)
                                                 {
                                                     System.Threading.Thread.Sleep(time);
-                                                    //Helpfunctions.Instance.logg("찾는거 덫발견 덫13 time: " + time);
-                                                    //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫13 time: " + time);
                                                 }
                                             }
 
@@ -1569,8 +1539,6 @@ namespace OpenAI
                                                 || si.canBe_duplicate)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                //Helpfunctions.Instance.logg("찾는거 덫발견 덫11 time: " + time);
-                                                //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫11 time: " + time);
                                             }
                                         }
                                     }
@@ -1588,8 +1556,6 @@ namespace OpenAI
                     case ActionType.ATTACK_WITH_MINION:
                         {
                             //System.Threading.Thread.Sleep(55);
-                            //Helpfunctions.Instance.logg("미니언공격 확인  " + daum.bestmove.own.name + " 으로 공격 " + daum.bestmove.target.name);
-                            //Helpfunctions.Instance.ErrorLog("미니언공격 확인  " + daum.bestmove.own.name + " 으로 공격 " + daum.bestmove.target.name);
 
                             if (rangerbot.gameState.TimerState != TurnTimerState.COUNTDOWN)
                             {
@@ -1625,10 +1591,6 @@ namespace OpenAI
                                 if (targethasdamageeffect && !daum.bestmove.target.isHero)
                                 {
                                     System.Threading.Thread.Sleep(5200);
-                                    //Helpfunctions.Instance.logg("타겟 맞을떄마다 소환합니다 sleep 3500ms");
-                                    //Helpfunctions.Instance.logg("타겟 맞을떄마다 소환합니다 3500ms");
-                                    //Helpfunctions.Instance.ErrorLog("타겟 맞을떄마다 소환합니다 1200ms");
-                                    //Helpfunctions.Instance.ErrorLog("타겟 맞을떄마다 소환합니다 1200ms");
                                 }
 
 
@@ -1637,10 +1599,8 @@ namespace OpenAI
 
 
                                 bool hastargetdeathrattle = (daum.bestmove.target.hasDeathrattle() || daum.bestmove.target.deathrattles.Count >= 1 || (daum.bestmove.target.handcard.card.deathrattle && !daum.bestmove.target.silenced)) && !daum.bestmove.target.isHero;
-                                //Helpfunctions.Instance.logg("hasdeathrattle " + hastargetdeathrattle);
 
                                 bool hasowndeathrattle = (daum.bestmove.own.hasDeathrattle() || daum.bestmove.own.deathrattles.Count >= 1 || (daum.bestmove.own.handcard.card.deathrattle && !daum.bestmove.own.silenced)) && !daum.bestmove.target.isHero;
-                                //Helpfunctions.Instance.logg("hasdeathrattle " + hasowndeathrattle);
 
 
 
@@ -1648,8 +1608,6 @@ namespace OpenAI
                                 if (hastargetdeathrattle && daum.bestmove.own.Angr >= daum.bestmove.target.Hp && !daum.bestmove.target.isHero)
                                 {
                                     System.Threading.Thread.Sleep(3500);
-                                    //Helpfunctions.Instance.logg("Target deathrattle detected sleep 3500ms");
-                                    //Helpfunctions.Instance.ErrorLog("Target deathrattle detected sleep 3500ms");
                                 }
 
                                 if (hasowndeathrattle && daum.bestmove.own.Hp <= daum.bestmove.target.Angr && !daum.bestmove.target.isHero)
@@ -1689,31 +1647,15 @@ namespace OpenAI
                                         if (mnn.name == CardDB.cardName.knifejuggler && !mnn.silenced && spawnMinions)
                                         {
                                             System.Threading.Thread.Sleep(1500);
-                                            //Helpfunctions.Instance.logg("저글러 own minion's deathrattle detected sleep 1500ms");
-                                            //Helpfunctions.Instance.ErrorLog("저글러 own minion's deathrattle detected sleep 1500ms");
                                         }
                                         if (mnn.name == CardDB.cardName.tundrarhino && !mnn.silenced && hasDeathrattleBeast)
                                         {
                                             System.Threading.Thread.Sleep(500);
-                                            //Helpfunctions.Instance.logg("라이노 own minion's deathrattle detected sleep 500ms");
-                                            //Helpfunctions.Instance.ErrorLog("라이노 own minion's deathrattle detected sleep 500ms");
+
                                         }
                                     }
 
-
-                                    //System.Threading.Thread.Sleep(1500);
-                                    //Helpfunctions.Instance.logg("own minion's deathrattle detected sleep 1500ms");
-                                    //Helpfunctions.Instance.ErrorLog("own minion's deathrattle detected sleep 1500ms");
                                 }
-
-                                //if (daum.bestmove.target.taunt && daum.bestmove.own.Angr >= daum.bestmove.target.Hp && !daum.bestmove.target.isHero)
-                                //{
-                                //    System.Threading.Thread.Sleep(500);
-                                //    Helpfunctions.Instance.logg("Target Taunt detected sleep 500ms");
-                                //    Helpfunctions.Instance.logg("Target Taunt detected sleep 500ms");
-                                //    Helpfunctions.Instance.ErrorLog("Target Taunt detected sleep 500ms");
-                                //    Helpfunctions.Instance.ErrorLog("Target Taunt detected sleep 500ms");
-                                //}
 
 
                                 bool hashyena = false;
@@ -1749,8 +1691,6 @@ namespace OpenAI
                                        || si.canBe_freezing)
                                         {
                                             System.Threading.Thread.Sleep(time * 4 / 3);
-                                            //Helpfunctions.Instance.logg("찾는거 덫발견 덫1 슬립 time: " + time * 4 / 3);
-                                            //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫1 time: " + time * 4 / 3);
                                         }
 
                                         else if (daum.bestmove.target.isHero)
@@ -1761,8 +1701,6 @@ namespace OpenAI
                                                 || si.canBe_vaporize)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                //Helpfunctions.Instance.logg("찾는거 덫발견 덫2 time: " + time);
-                                                //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫2 time: " + time);
                                             }
                                         }
                                         else if (!daum.bestmove.target.isHero)
@@ -1770,16 +1708,12 @@ namespace OpenAI
                                             if (si.canBe_snaketrap)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                //Helpfunctions.Instance.logg("찾는거 덫발견 덫3 time: " + time);
-                                                //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫3 time: " + time);
                                             }
                                             else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp)
                                             {
                                                 if (si.canBe_iceblock)
                                                 {
                                                     System.Threading.Thread.Sleep(time);
-                                                    //Helpfunctions.Instance.logg("찾는거 덫발견 덫13 time: " + time);
-                                                    //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫13 time: " + time);
                                                 }
                                             }
                                         }
@@ -1791,8 +1725,6 @@ namespace OpenAI
                                                 || si.canBe_duplicate)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                //Helpfunctions.Instance.logg("찾는거 덫발견 덫7 time: " + time);
-                                                //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫7 time: " + time);
                                             }
                                         }
                                     }
@@ -1818,26 +1750,12 @@ namespace OpenAI
                                         if (si.canBe_mirrorentity)
                                         {
                                             System.Threading.Thread.Sleep(time);
-                                            //Helpfunctions.Instance.logg("찾는거 덫발견 덫4 time: " + time);
-                                            //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫4 time: " + time);
                                         }
                                         else if ((si.canBe_snipe)
                                                 || (si.canBe_Trial && this.ownMinions.Count >= 3))
                                         {
                                             System.Threading.Thread.Sleep(time);
-                                            //Helpfunctions.Instance.logg("찾는거 덫발견 덫5 time: " + time);
-                                            //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫5 time: " + time);
                                         }
-                                        //else if (daum.bestmove.card.card.Charge)
-                                        //{
-                                        //    if ((si.canBe_snipe && daum.bestmove.card.card.Health <= 4)
-                                        //        || (si.canBe_Trial && this.ownMinions.Count >= 3))
-                                        //    {
-                                        //        System.Threading.Thread.Sleep(time);
-                                        //        Helpfunctions.Instance.logg("찾는거 덫발견 덫5 time: " + time);
-                                        //        Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫5 time: " + time);
-                                        //    }
-                                        //}
                                     }
                                     else if (daum.bestmove.card.card.type == CardDB.cardtype.SPELL)
                                     {
@@ -1846,8 +1764,6 @@ namespace OpenAI
                                                 || si.canBe_cattrick)
                                         {
                                             System.Threading.Thread.Sleep(time);
-                                            //Helpfunctions.Instance.logg("찾는거 덫발견 덫6 time: " + time);
-                                            //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫6 time: " + time);
                                         }
                                         else if (this.enemyMinions.Count >= 1 &&
                                             (PenalityManager.Instance.DamageAllDatabase.ContainsKey(daum.bestmove.card.card.name)
@@ -1863,8 +1779,6 @@ namespace OpenAI
                                                 || si.canBe_duplicate)
                                             {
                                                 System.Threading.Thread.Sleep(time);
-                                                //Helpfunctions.Instance.logg("찾는거 덫발견 덫7 time: " + time);
-                                                //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫7 time: " + time);
                                             }
                                         }
                                     }
@@ -1873,8 +1787,6 @@ namespace OpenAI
 
                             if (daum.bestmove.card.card.battlecry)
                             {
-                                //Helpfunctions.Instance.logg("배틀크라이 발견!!!!!!!");
-                                //Helpfunctions.Instance.ErrorLog("배틀크라이 발견!!!!!!!");
 
                                 switch (daum.bestmove.card.card.name)
                                 {
@@ -1901,7 +1813,6 @@ namespace OpenAI
                                             System.Threading.Thread.Sleep(3200);
                                         }
                                         break;
-                                    //case CardDB.cardName.: System.Threading.Thread.Sleep(2200); break;
                                     default: break;
                                 }
                             }
@@ -1926,29 +1837,19 @@ namespace OpenAI
                                     {
                                         time = time * (Math.Min(7 - this.ownMinions.Count, this.currentMana));
                                         System.Threading.Thread.Sleep(time);
-                                        //Helpfunctions.Instance.logg("darkshirecouncilman or knifejuggler effect detected sleep" + time + "ms");
-                                        //Helpfunctions.Instance.logg("darkshirecouncilman or knifejuggler effect detected sleep" + time + "ms");
-                                        //Helpfunctions.Instance.ErrorLog("darkshirecouncilman or knifejuggler effect detected sleep" + time + "ms");
-                                        //Helpfunctions.Instance.ErrorLog("darkshirecouncilman or knifejuggler effect detected sleep" + time + "ms");
+
                                     }
                                     else if (daum.bestmove.card.card.name == CardDB.cardName.unleashthehounds)
                                     {
                                         time = time * (Math.Min(7 - this.ownMinions.Count, this.enemyMinions.Count));
                                         time = time * 13 / 10;
                                         System.Threading.Thread.Sleep(time);
-                                        //Helpfunctions.Instance.logg("darkshirecouncilman or knifejuggler effect detected sleep" + time + "ms");
-                                        //Helpfunctions.Instance.logg("darkshirecouncilman or knifejuggler effect detected sleep" + time + "ms");
-                                        //Helpfunctions.Instance.ErrorLog("darkshirecouncilman or knifejuggler effect detected sleep" + time + "ms");
-                                        //Helpfunctions.Instance.ErrorLog("darkshirecouncilman or knifejuggler effect detected sleep" + time + "ms");
+
                                     }
                                     else if (PenalityManager.Instance.summonMinionSpellsDatabase.ContainsKey(daum.bestmove.card.card.name))
                                     {
                                         time = time * daum.bestmove.card.card.Summon_Spell_Minion_Count;
                                         System.Threading.Thread.Sleep(time);
-                                        //Helpfunctions.Instance.logg("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
-                                        //Helpfunctions.Instance.logg("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
-                                        //Helpfunctions.Instance.ErrorLog("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
-                                        //Helpfunctions.Instance.ErrorLog("darkshirecouncilman or knifejuggler effect detected sleep " + time + "ms" + daum.bestmove.card.card.Summon_Spell_Minion_Count + "enemy minions");
                                     }
                                     else
                                     {
@@ -1982,7 +1883,6 @@ namespace OpenAI
                                 {
                                     System.Threading.Thread.Sleep(2200);
                                 }
-                                //적시바 나 데드리샷
 
                                 if (daum.bestmove.card.card.name == CardDB.cardName.deadlyshot)
                                 {
@@ -2069,21 +1969,6 @@ namespace OpenAI
 
                         break;
                     case ActionType.USE_HERO_POWER:
-                        //if (this.enemySecretCount >= 1)
-                        //{
-                        //    int time = 6000 / this.enemySecretCount;
-                        //    foreach (SecretItem si in Probabilitymaker.Instance.enemySecrets)
-                        //    {
-                        //        if (si.canBe_Dart)
-                        //        {
-                        //            System.Threading.Thread.Sleep(time);
-                        //            Helpfunctions.Instance.logg("찾는거 덫발견 덫21 time: " + time);
-                        //            Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫21 time: " + time);
-                        //        }
-                        //    }
-                        //}
-                        //if (heroAbility.name == CardDB.cardName.shapeshift || heroAbility.name == CardDB.cardName.direshapeshift) System.Threading.Thread.Sleep(1200);
-                        //if (rangerbot.gameState.TimerState != TurnTimerState.COUNTDOWN) System.Threading.Thread.Sleep(1800);
                         break;
                     default:
                         break;
