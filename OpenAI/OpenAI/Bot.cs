@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using HSRangerLib;
-
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using HSRangerLib;
 
 namespace OpenAI
 {
@@ -19,19 +18,20 @@ namespace OpenAI
                 string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
                 UriBuilder uri = new UriBuilder(codeBase);
                 string path = Uri.UnescapeDataString(uri.Path);
-                string temp = System.IO.Path.GetDirectoryName(path) + System.IO.Path.DirectorySeparatorChar;
+                string temp = Path.GetDirectoryName(path) + Path.DirectorySeparatorChar;
 
                 return temp;
             }
         }
 
-        public static  string SettingsPath
+        public static string SettingsPath
         {
-            get{
-                string temp = AssemblyDirectory + System.IO.Path.DirectorySeparatorChar + "Common" + System.IO.Path.DirectorySeparatorChar;
-                if (System.IO.Directory.Exists(temp) == false)
+            get
+            {
+                string temp = AssemblyDirectory + Path.DirectorySeparatorChar + "Common" + Path.DirectorySeparatorChar;
+                if (Directory.Exists(temp) == false)
                 {
-                    System.IO.Directory.CreateDirectory(temp);
+                    Directory.CreateDirectory(temp);
                 }
 
                 return temp;
@@ -42,10 +42,10 @@ namespace OpenAI
         {
             get
             {
-                string temp = AssemblyDirectory + System.IO.Path.DirectorySeparatorChar + "Logs" + System.IO.Path.DirectorySeparatorChar;
-                if (System.IO.Directory.Exists(temp) == false)
+                string temp = AssemblyDirectory + Path.DirectorySeparatorChar + "Logs" + Path.DirectorySeparatorChar;
+                if (Directory.Exists(temp) == false)
                 {
-                    System.IO.Directory.CreateDirectory(temp);
+                    Directory.CreateDirectory(temp);
                 }
 
                 return temp;
@@ -95,7 +95,6 @@ namespace OpenAI
         public Bot()
         {
             base.HasBestMoveAI = true;
-
             StartTime = DateTime.Now;
 
             Settings set = Settings.Instance;
@@ -307,17 +306,6 @@ namespace OpenAI
 
             Ai.Instance.bestmoveValue = 0; // not concede
             //Helpfunctions.Instance.logg("Ai.Instance.bestmoveValue " + Ai.Instance.bestmoveValue);
-
-            if (Mulligan.Instance.loserLoserLoser)
-            {
-                if (!AutoConcede())
-                {
-                    ConcedeVSenemy(ownName, enemName);
-                }
-
-                //set concede flag
-                e.concede = this.IsGoingToConcede;
-            }
         }
 
         /// <summary>
@@ -496,71 +484,73 @@ namespace OpenAI
             return ranger_action;
         }
 
-        private HSRangerLib.BotActionType GetRangerActionType(Entity actor, Entity target, ActionType sf_action_type)
+        private HSRangerLib.BotActionType GetRangerActionType(Entity actor, Entity target, ActionType actionType)
         {
-            
-            if (sf_action_type == ActionType.END_TURN)
+            switch (actionType)
             {
-                if (POWERFULSINGLEACTION >= 1) POWERFULSINGLEACTION = 0;
-                return BotActionType.END_TURN;
-            }
-
-            if (sf_action_type == ActionType.USE_HERO_POWER)
-            {
-                return BotActionType.CAST_ABILITY;
-            }
-
-            if (sf_action_type == ActionType.ATTACK_WITH_HERO)
-            {
-                return BotActionType.HERO_ATTACK;
-            }
-
-            if (sf_action_type == ActionType.ATTACK_WITH_MINION)
-            {
-                if (actor.Zone == HSRangerLib.TAG_ZONE.HAND && actor.IsMinion)
-                {
-                    return BotActionType.CAST_MINION;// that should not occour >_>
-                }else if (actor.Zone == HSRangerLib.TAG_ZONE.PLAY && actor.IsMinion)
-                {
-                    return BotActionType.MINION_ATTACK;
-                }
-            }
-
-            if (sf_action_type == ActionType.PLAY_CARD)
-            {
-                if (actor.Zone == HSRangerLib.TAG_ZONE.HAND)
-                {
+                case ActionType.INVALID:
+                    break;
+                case ActionType.ATTACK_WITH_HERO:
+                    return BotActionType.HERO_ATTACK;
+                case ActionType.ATTACK_WITH_MINION:
                     if (actor.IsMinion)
                     {
-                        return BotActionType.CAST_MINION;
-                    }else if (actor.IsWeapon)
-                    {
-                        return BotActionType.CAST_WEAPON;
-                    }else
-                    {
-                        return BotActionType.CAST_SPELL;
-                    }                    
-                }else if (actor.Zone == HSRangerLib.TAG_ZONE.PLAY)
-                {
-                    if (actor.IsMinion)
-                    {
-                        return BotActionType.MINION_ATTACK;
-                    }else if (actor.IsWeapon)
-                    {
-                        return BotActionType.HERO_ATTACK;
+                        switch (actor.Zone)
+                        {
+                            case HSRangerLib.TAG_ZONE.PLAY:
+                                return BotActionType.MINION_ATTACK;
+                            case HSRangerLib.TAG_ZONE.HAND:
+                                return BotActionType.CAST_MINION;
+                            default:
+                                throw new NotImplementedException();
+                        }
                     }
-                }
+                    throw new NotImplementedException();
+                case ActionType.END_TURN:
+                    if (POWERFULSINGLEACTION >= 1) POWERFULSINGLEACTION = 0;
+                    return BotActionType.END_TURN;
+                case ActionType.PLAY_CARD:
+                    switch (actor.Zone)
+                    {
+                        case HSRangerLib.TAG_ZONE.PLAY:
+                            if (actor.IsMinion)
+                            {
+                                return BotActionType.MINION_ATTACK;
+                            }
+                            else if (actor.IsWeapon)
+                            {
+                                return BotActionType.HERO_ATTACK;
+                            }
+                            break;
+                        case HSRangerLib.TAG_ZONE.HAND:
+                            if (actor.IsMinion)
+                            {
+                                return BotActionType.CAST_MINION;
+                            }
+                            else if (actor.IsWeapon)
+                            {
+                                return BotActionType.CAST_WEAPON;
+                            }
+                            return BotActionType.CAST_SPELL;
+                        default:
+                            break;
+                    }
+                    break;
+                case ActionType.USE_HERO_POWER:
+                    return BotActionType.CAST_ABILITY;
+                default:
+                    break;
             }
 
             if (target != null)
             {
                 HelpFunctions.Instance.ErrorLog("GetActionType: wrong action type! " +
-                                            sf_action_type.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(actor.CardId)
+                                            actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(actor.CardId)
                                                          + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(target.CardId));
             }else
             {
                 HelpFunctions.Instance.ErrorLog("GetActionType: wrong action type! " +
-                                            sf_action_type.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(actor.CardId)
+                                            actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(actor.CardId)
                                                          + " target none.");
             }
 
@@ -680,7 +670,6 @@ namespace OpenAI
                                 default: break;
                             }
                         }
-
 
                         bool hasjuggler = false;
                         foreach (Minion m in Playfield.Instance.ownMinions)
@@ -1536,59 +1525,6 @@ namespace OpenAI
             return true;
         }
 
-
-        int lossedtodo = 0;
-        int KeepConcede = 0;
-        int oldwin = 0;
-        private bool AutoConcede()
-        {
-            if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena) return false;
-            if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.Play_Ranked) return false;
-            int totalwin = this.NumWins;
-            int totallose = this.NumLoses;
-            /*if ((totalwin + totallose - KeepConcede) != 0)
-            {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
-            }*/
-
-
-            if (this.oldwin != totalwin)
-            {
-                this.oldwin = totalwin;
-                if (this.lossedtodo > 0)
-                {
-                    this.lossedtodo--;
-                }
-                HelpFunctions.Instance.ErrorLog("not today!! (you won a game)");
-                this.IsGoingToConcede = true;
-                return true;
-            }
-
-            if (this.lossedtodo > 0)
-            {
-                this.lossedtodo--;
-                HelpFunctions.Instance.ErrorLog("not today!");
-                this.IsGoingToConcede = true;
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool ConcedeVSenemy(string ownh, string enemyh)
-        {
-            if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena) return false;
-            if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.Play_Ranked) return false;
-
-            if (Mulligan.Instance.shouldConcede(Hrtprozis.Instance.heroNametoEnum(ownh), Hrtprozis.Instance.heroNametoEnum(enemyh)))
-            {
-                HelpFunctions.Instance.ErrorLog("not today!!!!");
-                this.IsGoingToConcede = true;
-                return true;
-            }
-            return false;
-        }
-
         private void HandleWining()
         {
             this.NumWins++;
@@ -1596,15 +1532,14 @@ namespace OpenAI
             {
                 this.IsGoingToConcede = false;
             }
-            int totalwin = this.NumWins;
-            int totallose = this.NumLoses;
-            if ((totalwin + totallose - KeepConcede) != 0)
+
+            if ((NumWins + NumLoses - NumConcedes) != 0)
             {
-                HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
+                HelpFunctions.Instance.ErrorLog("#info: win:" + NumWins + " concede:" + NumConcedes + " lose:" + (NumLoses - NumConcedes) + " real winrate:" + (NumWins * 100 / (NumWins + NumLoses - NumConcedes)));
             }
             else
             {
-                HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
+                HelpFunctions.Instance.ErrorLog("#info: win:" + NumWins + " concede:" + NumConcedes + " lose:" + (NumLoses - NumConcedes) + " real winrate: 100");
             }
             HelpFunctions.Instance.logg("Match Won!");
         }
@@ -1615,21 +1550,17 @@ namespace OpenAI
             if (is_concede)
             {
                 this.IsGoingToConcede = false;
-                this.KeepConcede++;
             }
-            this.IsGoingToConcede = false;
-            int totalwin = this.NumWins;
-            int totallose = this.NumLoses;
-            if ((totalwin + totallose - KeepConcede) != 0)
+
+            if ((NumWins + NumLoses - NumConcedes) != 0)
             {
-                HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate:" + (totalwin * 100 / (totalwin + totallose - KeepConcede)));
+                HelpFunctions.Instance.ErrorLog("#info: win:" + NumWins + " concede:" + NumConcedes + " lose:" + (NumLoses - NumConcedes) + " real winrate:" + (NumWins * 100 / (NumWins + NumLoses - NumConcedes)));
             }
             else
             {
-                HelpFunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
+                HelpFunctions.Instance.ErrorLog("#info: win:" + NumWins + " concede:" + NumConcedes + " lose:" + (NumLoses - NumConcedes) + " real winrate: 100");
             }
             HelpFunctions.Instance.logg("Match Lost :(");
-
         }
 
         private Entity GetEntityWithNumber(int number)
