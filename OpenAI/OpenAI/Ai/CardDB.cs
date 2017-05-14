@@ -36,7 +36,6 @@ namespace OpenAI
 
         public enum CardTriggers
         {
-            newtriger, // BB - Should this be removed??
             GetBattlecryEffect,
             OnAHeroGotHealedTrigger,
             OnAMinionGotHealedTrigger,
@@ -10666,18 +10665,19 @@ namespace OpenAI
 
                 c.triggers = new List<CardTriggers>();
                 Type trigerType = c.sim_card.GetType();
-                foreach (string trigerName in Enum.GetNames(typeof(CardTriggers)))
+                foreach (string triggerName in Enum.GetNames(typeof(CardTriggers)))
                 {
                     try
                     {
-                        foreach (var m in trigerType.GetMethods().Where(e => e.Name.Equals(trigerName, StringComparison.Ordinal)))
+                        foreach (var m in trigerType.GetMethods().Where(e => e.Name.Equals(triggerName, StringComparison.Ordinal)))
                         {
                             if (m.DeclaringType == trigerType)
-                                c.triggers.Add((CardTriggers)Enum.Parse(typeof(CardTriggers), trigerName));
+                                c.triggers.Add((CardTriggers)Enum.Parse(typeof(CardTriggers), triggerName));
                         }
                     }
                     catch
                     {
+                        Helpfunctions.Instance.ErrorLog("Can't find method with name: " + triggerName);
                     }
                 }
                 if (c.triggers.Count > 10) c.triggers.Clear();
