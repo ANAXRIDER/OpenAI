@@ -121,32 +121,22 @@ namespace OpenAI
 
             if (hasToOpen)
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo(directory);
-                startInfo.WorkingDirectory = Settings.Instance.path;
+                ProcessStartInfo startInfo = new ProcessStartInfo(directory)
+                {
+                    WorkingDirectory = Settings.Instance.path
+                };
                 Process.Start(startInfo);
             }
             //reset it in case user closes exe
             sf.startedexe = false; 
         }
 
-        /// <summary>
-        /// HRanger Code
-        /// invoke when game enter mulligan
-        /// </summary>
-        /// <param name="e">
-        ///     e.card_list -- mulligan card list
-        ///     e.replace_list -- toggle card list (output)
-        /// </param>
         public override void OnGameMulligan(GameMulliganEventArgs e)
         {
-            if (e.handled || e.card_list.Count == 0) // if count==0 then HR is conceding
+            if (e.handled || e.card_list.Count == 0)
             {
                 return;
             }
-
-            //set e.handled to true, 
-            //then bot will toggle cards by e.replace_list 
-            //and will not use internal mulligan logic anymore.
             e.handled = true;
 
             if (Settings.Instance.learnmode)
@@ -193,8 +183,6 @@ namespace OpenAI
             Mulligan.Instance.loggCleanPath();
             Discovery.Instance.loggCleanPath();
             ComboBreaker.Instance.loggCleanPath();
-
-
 
             if (Hrtprozis.Instance.startDeck.Count > 0)
             {
@@ -296,10 +284,6 @@ namespace OpenAI
 
         }
 
-        /// <summary>
-        /// invoke when game ends.
-        /// </summary>
-        /// <param name="e"></param>
         public override void OnGameOver(GameOverEventArgs e)
         {
             if (e.win)
@@ -1000,11 +984,6 @@ namespace OpenAI
             return ranger_action;
         }
 
-        /// <summary>
-        /// if uses extern a.i.,
-        /// invoke when hearthranger did all the actions.
-        /// </summary>
-        /// <param name="e"></param>
         public override void OnQueryBestMove(QueryBestMoveEventArgs e)
         {
 
@@ -1228,9 +1207,6 @@ namespace OpenAI
 
         public override void OnActionDone(ActionDoneEventArgs e)
         {
-            //do nothing here
-
-            //queue stuff
             numExecsReceived++;
 
             switch (e.done_result)
