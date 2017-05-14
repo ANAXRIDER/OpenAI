@@ -21,33 +21,38 @@ namespace OpenAI
 
         private HelpFunctions() { }
 
-        private bool writelogg = true;
-        public void Loggonoff(bool onoff)
+        private bool WriteLog { get; set; } = true;
+        private bool FileCreated { get; set; } = false;
+
+        public void ToggleLog(bool toggle)
         {
-            //writelogg = onoff;
+            WriteLog = toggle;
         }
 
-        private bool filecreated = false;
         public void CreateNewLogfile()
         {
-            filecreated = false;
+            FileCreated = false;
         }
 
-        private List<string> loggBuffer = new List<string>(Settings.Instance.logBuffer + 1);
+        /*** Cleaned ***/
+
+        private List<string> logBuffer = new List<string>(Settings.Instance.logBuffer + 1);
         public void Log(string s)
         {
-            loggBuffer.Add(s);
+            logBuffer.Add(s);
 
-            if (loggBuffer.Count > Settings.Instance.logBuffer) FlushLog();
+            if (logBuffer.Count > Settings.Instance.logBuffer) FlushLog();
         }
 
         public void FlushLog()
         {
-            if (loggBuffer.Count == 0) return;
+            if (logBuffer.Count == 0)
+                return;
+
             try
             {
-                File.AppendAllLines(Settings.Instance.logpath + Settings.Instance.logfile, loggBuffer);
-                loggBuffer.Clear();
+                File.AppendAllLines(Settings.Instance.logpath + Settings.Instance.logfile, logBuffer);
+                logBuffer.Clear();
             }
             catch
             {
@@ -66,7 +71,9 @@ namespace OpenAI
         private List<string> errorLogBuffer = new List<string>(Settings.Instance.logBuffer + 1);
         public void ErrorLog(string s)
         {
-            if (!writelogg) return;
+            if (!WriteLog)
+                return;
+
             errorLogBuffer.Add(DateTime.Now.ToString("HH:mm:ss: ") + s);
 
             if (errorLogBuffer.Count > Settings.Instance.logBuffer) FlushErrorLog();
@@ -111,33 +118,33 @@ namespace OpenAI
             }
         }
 
-        string sendbuffer = "";
+        string sendBuffer = "";
         public void ResetBuffer()
         {
-            this.sendbuffer = "";
+            this.sendBuffer = "";
         }
 
         public void WriteToBuffer(string data)
         {
-            this.sendbuffer += data + "\r\n";
+            this.sendBuffer += data + "\r\n";
         }
 
         public void WriteBufferToNetwork(string msgtype)
         {
-            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
+            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendBuffer);
         }
 
         public void WriteBufferToFile()
         {
             bool writed = true;
-            this.sendbuffer += "<EoF>";
+            this.sendBuffer += "<EoF>";
             //this.ErrorLog("write to crrntbrd file: " + sendbuffer);
             while (writed)
             {
                 try
                 {
                     if (Settings.Instance.useNetwork) WriteBufferToNetwork("crrntbrd.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendBuffer);
                     writed = false;
                 }
                 catch
@@ -145,19 +152,19 @@ namespace OpenAI
                     writed = true;
                 }
             }
-            this.sendbuffer = "";
+            this.sendBuffer = "";
         }
 
         public void WriteBufferToDeckFile()
         {
             bool writed = true;
-            this.sendbuffer += "<EoF>";
+            this.sendBuffer += "<EoF>";
             while (writed)
             {
                 try
                 {
                     if (Settings.Instance.useNetwork) WriteBufferToNetwork("curdeck.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendBuffer);
                     writed = false;
                 }
                 catch
@@ -165,20 +172,20 @@ namespace OpenAI
                     writed = true;
                 }
             }
-            this.sendbuffer = "";
+            this.sendBuffer = "";
         }
 
         public void WriteBufferToActionFile()
         {
             bool writed = true;
-            this.sendbuffer += "<EoF>";
+            this.sendBuffer += "<EoF>";
             //this.ErrorLog("write to action file: "+ sendbuffer);
             while (writed)
             {
                 try
                 {
                     if (Settings.Instance.useNetwork) WriteBufferToNetwork("actionstodo.txt");
-                    else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendBuffer);
                     writed = false;
                 }
                 catch
@@ -186,7 +193,7 @@ namespace OpenAI
                     writed = true;
                 }
             }
-            this.sendbuffer = "";
+            this.sendBuffer = "";
         }
 
         public void WriteBufferToCardDB()
@@ -196,7 +203,7 @@ namespace OpenAI
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
+                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendBuffer);
                     writed = false;
                 }
                 catch
@@ -204,7 +211,7 @@ namespace OpenAI
                     writed = true;
                 }
             }
-            this.sendbuffer = "";
+            this.sendBuffer = "";
         }
     }
 }

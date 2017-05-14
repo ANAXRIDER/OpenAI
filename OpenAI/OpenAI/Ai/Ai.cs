@@ -132,7 +132,7 @@ namespace OpenAI
             bestplay = this.mainTurnSimulator.bestboard;
             float bestval = this.mainTurnSimulator.bestmoveValue;
 
-            help.Loggonoff(true);
+            help.ToggleLog(true);
             help.Log("-------------------------------------");
             help.Log("value of best board " + bestval);
 
@@ -460,7 +460,7 @@ namespace OpenAI
              */
             //help.logg("is hero ready?" + posmoves[0].ownHeroReady);
 
-            help.Loggonoff(false);
+            help.ToggleLog(false);
             //do we need to recalc?
             help.Log("recalc-check###########");
             if (this.dontRecalc && posmoves[0].isEqual(this.nextMoveGuess, true))
