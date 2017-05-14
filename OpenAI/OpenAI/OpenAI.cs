@@ -124,17 +124,17 @@ namespace OpenAI
 
             /*** Cleaned ***/
 
-            sttngs.setFilePath(OpenAIPath.AssemblyDirectory);
+            sttngs.SetFilePath(OpenAIPath.AssemblyDirectory);
 
             if (SingleLog)
             {
-                sttngs.setLoggPath(OpenAIPath.LogPath + Path.DirectorySeparatorChar);
-                sttngs.setLoggFile("SilverLog.txt");
+                sttngs.SetLogPath(OpenAIPath.LogPath + Path.DirectorySeparatorChar);
+                sttngs.SetLogFile("SilverLog.txt");
                 HelpFunctions.Instance.CreateNewLogfile();
             }
             else
             {
-                sttngs.setLoggPath(OpenAIPath.LogPath);
+                sttngs.SetLogPath(OpenAIPath.LogPath);
             }
 
             HelpFunctions.Instance.ErrorLog("Started OpenAI");
@@ -143,7 +143,7 @@ namespace OpenAI
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
             Discovery d = Discovery.Instance; // read the discover list
-            Settings.Instance.setSettings();
+            Settings.Instance.SetSettings();
             if (Settings.Instance.useNetwork) FishNet.Instance.startClient();
             HelpFunctions.Instance.StartFlushingLogBuffers();
         }
@@ -158,7 +158,7 @@ namespace OpenAI
             HelpFunctions.Instance.FlushLog(); // flush the buffer before creating a new log
             if (!SingleLog)
             {
-                sttngs.setLoggFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
+                sttngs.SetLogFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
                 HelpFunctions.Instance.CreateNewLogfile();
                 HelpFunctions.Instance.ErrorLog("#######################################################");
                 HelpFunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
@@ -166,7 +166,7 @@ namespace OpenAI
             }
             else
             {
-                sttngs.setLoggFile("UILogg.txt");
+                sttngs.SetLogFile("UILogg.txt");
             }
         }
 
@@ -1723,27 +1723,27 @@ namespace OpenAI
             if (botbase is BehaviorAggroshaman) this.BotBehave = "aggroshaman";
             this.BotBehave += " " + Ai.Instance.maxwide;
             this.BotBehave += " face " + ComboBreaker.Instance.attackFaceHP;
-            if (Settings.Instance.secondTurnAmount > 0)
+            if (Settings.Instance.SecondTurnAmount > 0)
             {
                 if (Ai.Instance.nextMoveGuess.mana == -100)
                 {
                     Ai.Instance.updateTwoTurnSim();
                 }
-                this.BotBehave += " twoturnsim " + Settings.Instance.secondTurnAmount + " ntss " + Settings.Instance.nextTurnDeep + " " + Settings.Instance.nextTurnMaxWide + " " + Settings.Instance.nextTurnTotalBoards;
+                this.BotBehave += " twoturnsim " + Settings.Instance.SecondTurnAmount + " ntss " + Settings.Instance.NextTurnDeep + " " + Settings.Instance.NextTurnMaxWide + " " + Settings.Instance.NextTurnTotalBoards;
             }
 
-            if (Settings.Instance.playarround)
+            if (Settings.Instance.PlayAround)
             {
                 this.BotBehave += " playaround";
-                this.BotBehave += " " + Settings.Instance.playaroundprob + " " + Settings.Instance.playaroundprob2;
+                this.BotBehave += " " + Settings.Instance.PlayAroundProb + " " + Settings.Instance.PlayAroundProb2;
             }
 
-            this.BotBehave += " ets " + Settings.Instance.enemyTurnMaxWide;
+            this.BotBehave += " ets " + Settings.Instance.EnemyTurnMaxWide;
 
-            if (Settings.Instance.simEnemySecondTurn)
+            if (Settings.Instance.SimEnemySecondTurn)
             {
-                this.BotBehave += " ets2 " + Settings.Instance.enemyTurnMaxWideSecondTime;
-                this.BotBehave += " ents " + Settings.Instance.enemySecondTurnMaxWide;
+                this.BotBehave += " ets2 " + Settings.Instance.EnemyTurnMaxWideSecondTime;
+                this.BotBehave += " ents " + Settings.Instance.EnemySecondTurnMaxWide;
             }
 
             if (Settings.Instance.useSecretsPlayArround)

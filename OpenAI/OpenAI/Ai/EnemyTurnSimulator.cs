@@ -21,14 +21,14 @@
 
         public void setMaxwideFirstStep(bool firstTurn)
         {
-            maxwide = Settings.Instance.enemyTurnMaxWide;
-            if (!firstTurn) maxwide = Settings.Instance.enemyTurnMaxWide;
+            maxwide = Settings.Instance.EnemyTurnMaxWide;
+            if (!firstTurn) maxwide = Settings.Instance.EnemyTurnMaxWide;
         }
 
         public void setMaxwideSecondStep(bool firstTurn)
         {
-            maxwide = Settings.Instance.enemyTurnMaxWideSecondTime;
-            if (!firstTurn) maxwide = Settings.Instance.enemyTurnMaxWide;
+            maxwide = Settings.Instance.EnemyTurnMaxWideSecondTime;
+            if (!firstTurn) maxwide = Settings.Instance.EnemyTurnMaxWide;
         }
 
         public void simulateEnemysTurn(Playfield rootfield, bool simulateTwoTurns, bool playaround, bool print, int pprob, int pprob2)

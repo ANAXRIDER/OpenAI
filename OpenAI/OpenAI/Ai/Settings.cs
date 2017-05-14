@@ -5,32 +5,31 @@ namespace OpenAI
 {
     internal sealed class Settings
     {
-
-        public Behavior setSettings()
+        public Behavior SetSettings()
         {
-            return readSettings();
+            return ReadSettings();
         }
 
-        public Behavior setDefaultSettings() //settings not to high to run without external process
+        public Behavior SetDefaultSettings() //settings not to high to run without external process
         {
             // play with these settings###################################
-            this.enfacehp = 15;  // hp of enemy when your hero is allowed to attack the enemy face with his weapon
-            this.maxwide = 3000;   // numer of boards which are taken to the next deep-lvl
-            this.twotsamount = 0;          // number of boards where the next turn is simulated
-            this.simEnemySecondTurn = true; // if he simulates the next players-turn, he also simulates the enemys respons
+            this.EnfaceHp = 15;  // hp of enemy when your hero is allowed to attack the enemy face with his weapon
+            this.MaxWide = 3000;   // numer of boards which are taken to the next deep-lvl
+            this.TwotsAmount = 0;          // number of boards where the next turn is simulated
+            this.SimEnemySecondTurn = true; // if he simulates the next players-turn, he also simulates the enemys respons
 
-            this.playarround = false;  //play around some enemys aoe-spells?
+            this.PlayAround = false;  //play around some enemys aoe-spells?
             //these two probs are >= 0 and <= 100
-            this.playaroundprob = 50;    //probability where the enemy plays the aoe-spell, but your minions will not die through it
-            this.playaroundprob2 = 80;   // probability where the enemy plays the aoe-spell, and your minions can die!
+            this.PlayAroundProb = 50;    //probability where the enemy plays the aoe-spell, but your minions will not die through it
+            this.PlayAroundProb2 = 80;   // probability where the enemy plays the aoe-spell, and your minions can die!
 
-            this.enemyTurnMaxWide = 40; // bords calculated in enemys-first-turn in first AI step (lower than enemySecondTurnMaxWide)
-            this.enemyTurnMaxWideSecondTime = 200; // bords calculated in enemys-first-turn BUT in the second AI step (higher than enemyTurnMaxWide)
-            this.enemySecondTurnMaxWide = 20; // number of enemy-board calculated in enemys second TURN
+            this.EnemyTurnMaxWide = 40; // bords calculated in enemys-first-turn in first AI step (lower than enemySecondTurnMaxWide)
+            this.EnemyTurnMaxWideSecondTime = 200; // bords calculated in enemys-first-turn BUT in the second AI step (higher than enemyTurnMaxWide)
+            this.EnemySecondTurnMaxWide = 20; // number of enemy-board calculated in enemys second TURN
 
-            this.nextTurnDeep = 6; //maximum combo-deep in your second turn (dont change this!)
-            this.nextTurnMaxWide = 20; //maximum boards calculated in one second-turn-"combo-step"
-            this.nextTurnTotalBoards = 200;//maximum boards calculated in second turn simulation
+            this.NextTurnDeep = 6; //maximum combo-deep in your second turn (dont change this!)
+            this.NextTurnMaxWide = 20; //maximum boards calculated in one second-turn-"combo-step"
+            this.NextTurnTotalBoards = 200;//maximum boards calculated in second turn simulation
 
             this.useSecretsPlayArround = false; // playing arround enemys secrets
 
@@ -54,26 +53,26 @@ namespace OpenAI
             this.enemyherovaluemultiply = 100;
             //###########################################################
 
-            applySettings();
+            ApplySettings();
 
             return behave;
         }
 
-        public void applySettings()
+        public void ApplySettings()
         {
-            this.setWeights(alpha);
+            this.SetWeights(alpha);
 
             Mulligan.Instance.setAutoConcede(Settings.Instance.concede);
-            HelpFunctions.Instance.ErrorLog("[Settings] set enemy-face-hp to: " + this.enfacehp);
-            ComboBreaker.Instance.attackFaceHP = this.enfacehp;
-            Ai.Instance.setMaxWide(this.maxwide);
-            HelpFunctions.Instance.ErrorLog("[Settings] set maxwide to: " + this.maxwide);
+            HelpFunctions.Instance.ErrorLog("[Settings] set enemy-face-hp to: " + this.EnfaceHp);
+            ComboBreaker.Instance.attackFaceHP = this.EnfaceHp;
+            Ai.Instance.setMaxWide(this.MaxWide);
+            HelpFunctions.Instance.ErrorLog("[Settings] set maxwide to: " + this.MaxWide);
 
             //Ai.Instance.setTwoTurnSimulation(false, this.twotsamount);
-            HelpFunctions.Instance.ErrorLog("[Settings] calculate the second turn of the " + this.twotsamount + " best boards");
-            if (this.twotsamount >= 1)
+            HelpFunctions.Instance.ErrorLog("[Settings] calculate the second turn of the " + this.TwotsAmount + " best boards");
+            if (this.TwotsAmount >= 1)
             {
-                if (this.simEnemySecondTurn) HelpFunctions.Instance.ErrorLog("[Settings] simulates the enemy turn on your second turn");
+                if (this.SimEnemySecondTurn) HelpFunctions.Instance.ErrorLog("[Settings] simulates the enemy turn on your second turn");
             }
 
             if (this.useSecretsPlayArround)
@@ -86,26 +85,26 @@ namespace OpenAI
         }
 
 
-        public int enfacehp = 15;
+        public int EnfaceHp { get; set; } = 15;
 
-        public int maxwide = 3000;
-        public int twotsamount;
-        public int secondTurnAmount = 256;
+        public int MaxWide { get; set; } = 3000;
+        public int TwotsAmount { get; set; }
+        public int SecondTurnAmount { get; set; } = 256;
 
-        public bool simulateEnemysTurn = true;
-        public bool simEnemySecondTurn = true; //todo sepefeets - wasn't this dead code too?
+        public bool SimulateEnemysTurn { get; set; } = true;
+        public bool SimEnemySecondTurn { get; set; } = true; //todo sepefeets - wasn't this dead code too?
 
-        public bool playarround;
-        public int playaroundprob = 50;
-        public int playaroundprob2 = 80; //todo - and this
+        public bool PlayAround { get; set; }
+        public int PlayAroundProb { get; set; } = 50;
+        public int PlayAroundProb2 { get; set; } = 80; //todo - and this
 
-        public int enemyTurnMaxWide = 20;
-        public int enemyTurnMaxWideSecondTime = 200;
-        public int enemySecondTurnMaxWide = 20;
+        public int EnemyTurnMaxWide { get; set; } = 20;
+        public int EnemyTurnMaxWideSecondTime { get; set; } = 200;
+        public int EnemySecondTurnMaxWide { get; set; } = 20;
 
-        public int nextTurnDeep = 6;
-        public int nextTurnMaxWide = 20;
-        public int nextTurnTotalBoards = 50;
+        public int NextTurnDeep { get; set; } = 6;
+        public int NextTurnMaxWide { get; set; } = 20;
+        public int NextTurnTotalBoards { get; set; } = 50;
 
         public bool useSecretsPlayArround;
 
@@ -132,7 +131,6 @@ namespace OpenAI
         public bool SecretStandard = true;
         public int enemyherovaluemultiply = 100;
 
-        public string path = "";
         public string logpath = "";
         public string logfile = "Logg.txt";
 
@@ -141,7 +139,7 @@ namespace OpenAI
         public bool learnmode = false;
         public bool printlearnmode = true;
 
-        public int numberOfThreads = Environment.ProcessorCount;//32;//
+        public int numberOfThreads = Environment.ProcessorCount;
 
         private string ownClass = "";
         private string enemyClass = "";
@@ -164,23 +162,23 @@ namespace OpenAI
         private Settings() { }
 
         
-        public Behavior updateInstance()
+        public Behavior UpdateInstance()
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             enemyClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname);
             deckName = Hrtprozis.Instance.deckName;
             lock(instance)
             {
-                return readSettings();
+                return ReadSettings();
             }
         }
 
-        public void loggCleanPath()
+        public void LogCleanPath()
         {
             HelpFunctions.Instance.Log(cleanPath);
         }
 
-        public void setWeights(int alpha)
+        public void SetWeights(int alpha)
         {
             float a = ((float)alpha) / 100f;
             this.firstweight = 1f - a;
@@ -188,25 +186,21 @@ namespace OpenAI
             HelpFunctions.Instance.ErrorLog("[Settings] current alpha is " + this.secondweight);
         }
 
-        public void setFilePath(string path)
-        {
-            this.path = path;
-        }
-        public void setLoggPath(string path)
+        public void SetLogPath(string path)
         {
             this.logpath = path;
         }
 
-        public void setLoggFile(string path)
+        public void SetLogFile(string path)
         {
             this.logfile = path;
         }
 
-        public Behavior readSettings() //takes same path as carddb
+        public Behavior ReadSettings() //takes same path as carddb
         {
             string[] lines = new string[] { };
 
-            string path = this.path;
+            string path = OpenAIPath.SettingsPath;
             string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
             string datapath = path + "Data" + Path.DirectorySeparatorChar;
             string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;
@@ -264,7 +258,7 @@ namespace OpenAI
             else
             {
                 HelpFunctions.Instance.Log("[Settings] cant find base settings.txt, using default settings");
-                return setDefaultSettings();
+                return SetDefaultSettings();
             }
             HelpFunctions.Instance.ErrorLog("[Settings] read " + cleanPath);
 
@@ -279,7 +273,7 @@ namespace OpenAI
                 catch
                 {
                     HelpFunctions.Instance.ErrorLog(enemyfilestring + readerror);
-                    return setDefaultSettings();
+                    return SetDefaultSettings();
                 }
             }
             else
@@ -291,7 +285,7 @@ namespace OpenAI
                 catch
                 {
                     HelpFunctions.Instance.Log(filestring + readerror);
-                    return setDefaultSettings();
+                    return SetDefaultSettings();
                 }
             }
 
@@ -312,7 +306,7 @@ namespace OpenAI
                     string a = s.Replace(searchword,"");
                     try
                     {
-                        this.maxwide = Convert.ToInt32(a);
+                        this.MaxWide = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -326,7 +320,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.twotsamount = Convert.ToInt32(a);
+                        this.TwotsAmount = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -340,7 +334,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.simEnemySecondTurn = Convert.ToBoolean(a);
+                        this.SimEnemySecondTurn = Convert.ToBoolean(a);
                     }
                     catch
                     {
@@ -354,7 +348,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.enfacehp = Convert.ToInt32(a);
+                        this.EnfaceHp = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -368,7 +362,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.playarround = Convert.ToBoolean(a);
+                        this.PlayAround = Convert.ToBoolean(a);
                     }
                     catch
                     {
@@ -382,7 +376,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.playaroundprob = Convert.ToInt32(a);
+                        this.PlayAroundProb = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -396,7 +390,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.playaroundprob2 = Convert.ToInt32(a);
+                        this.PlayAroundProb2 = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -410,7 +404,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.enemyTurnMaxWide = Convert.ToInt32(a);
+                        this.EnemyTurnMaxWide = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -424,7 +418,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.enemyTurnMaxWideSecondTime = Convert.ToInt32(a);
+                        this.EnemyTurnMaxWideSecondTime = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -438,7 +432,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.enemySecondTurnMaxWide = Convert.ToInt32(a);
+                        this.EnemySecondTurnMaxWide = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -452,7 +446,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.nextTurnDeep = Convert.ToInt32(a);
+                        this.NextTurnDeep = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -466,7 +460,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.nextTurnMaxWide = Convert.ToInt32(a);
+                        this.NextTurnMaxWide = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -480,7 +474,7 @@ namespace OpenAI
                     string a = s.Replace(searchword, "");
                     try
                     {
-                        this.nextTurnTotalBoards = Convert.ToInt32(a);
+                        this.NextTurnTotalBoards = Convert.ToInt32(a);
                     }
                     catch
                     {
@@ -703,13 +697,12 @@ namespace OpenAI
             }
             //foreach ended----------
 
-            applySettings();
+            ApplySettings();
 
 
             return behave;
         }
 
     }
-
 }
  

@@ -99,17 +99,17 @@ namespace OpenAI
         {
             this.mainTurnSimulator.setSecondTurnSimu(stts, amount);
             this.secondturnsim = stts;
-            Settings.Instance.secondTurnAmount = amount;
+            Settings.Instance.SecondTurnAmount = amount;
         }
 
         public void updateTwoTurnSim()
         {
-            this.mainTurnSimulator.setSecondTurnSimu(Settings.Instance.simulateEnemysTurn, Settings.Instance.secondTurnAmount);
+            this.mainTurnSimulator.setSecondTurnSimu(Settings.Instance.SimulateEnemysTurn, Settings.Instance.SecondTurnAmount);
         }
 
         public void setPlayAround()
         {
-            this.mainTurnSimulator.setPlayAround(Settings.Instance.playarround, Settings.Instance.playaroundprob, Settings.Instance.playaroundprob2);
+            this.mainTurnSimulator.setPlayAround(Settings.Instance.PlayAround, Settings.Instance.PlayAroundProb, Settings.Instance.PlayAroundProb2);
         }
 
         public void doallmoves(bool test, bool isLethalCheck)
@@ -452,7 +452,7 @@ namespace OpenAI
 
             posmoves.Clear();
             posmoves.Add(new Playfield());
-            posmoves[0].sEnemTurn = Settings.Instance.simulateEnemysTurn;
+            posmoves[0].sEnemTurn = Settings.Instance.SimulateEnemysTurn;
             /* foreach (var item in this.posmoves[0].owncards)
              {
                  help.logg("card " + item.handcard.card.name + " is playable :" + item.handcard.card.canplayCard(posmoves[0]) + " cost/mana: " + item.handcard.card.cost + "/" + posmoves[0].mana);
@@ -483,7 +483,7 @@ namespace OpenAI
                 {
                     posmoves.Clear();
                     posmoves.Add(new Playfield());
-                    posmoves[0].sEnemTurn = Settings.Instance.simulateEnemysTurn;
+                    posmoves[0].sEnemTurn = Settings.Instance.SimulateEnemysTurn;
 
                     List<Handmanager.Handcard> newcards = posmoves[0].getNewHandCards(Ai.Instance.nextMoveGuess);
                     foreach (var card in newcards)
@@ -513,7 +513,7 @@ namespace OpenAI
             //calculate the stuff
             posmoves.Clear();
             posmoves.Add(new Playfield());
-            posmoves[0].sEnemTurn = Settings.Instance.simulateEnemysTurn;
+            posmoves[0].sEnemTurn = Settings.Instance.SimulateEnemysTurn;
             if (logg)
             {
                 help.Log("readed:");
@@ -555,7 +555,7 @@ namespace OpenAI
             {
                 posmoves.Clear();
                 posmoves.Add(new Playfield());
-                posmoves[0].sEnemTurn = Settings.Instance.simulateEnemysTurn;
+                posmoves[0].sEnemTurn = Settings.Instance.SimulateEnemysTurn;
                 strt = DateTime.Now;
                 doallmoves(false, false);
                 timeneeded = (DateTime.Now - strt).TotalSeconds;
@@ -635,7 +635,7 @@ namespace OpenAI
 
             //help.logg("AFTER ENEMY TURN:" );
             tempbestboard.sEnemTurn = true;
-            tempbestboard.endTurn(false, this.playaround, false, Settings.Instance.playaroundprob, Settings.Instance.playaroundprob2);
+            tempbestboard.endTurn(false, this.playaround, false, Settings.Instance.PlayAroundProb, Settings.Instance.PlayAroundProb2);
             //help.logg("ENEMY TURN:-----------------------------");
             //tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
             //tempbestboard.prepareNextTurn(tempbestboard.isOwnTurn);
@@ -692,7 +692,7 @@ namespace OpenAI
 
             //help.logg("AFTER ENEMY TURN:" );
             tempbestboard.sEnemTurn = true;
-            tempbestboard.endTurn(false, this.playaround, false, Settings.Instance.playaroundprob, Settings.Instance.playaroundprob2);
+            tempbestboard.endTurn(false, this.playaround, false, Settings.Instance.PlayAroundProb, Settings.Instance.PlayAroundProb2);
             //help.logg("ENEMY TURN:-----------------------------");
             //tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
             //tempbestboard.prepareNextTurn(tempbestboard.isOwnTurn);

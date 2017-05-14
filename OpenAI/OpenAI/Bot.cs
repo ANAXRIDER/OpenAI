@@ -214,11 +214,11 @@ namespace OpenAI
                     HelpFunctions.Instance.ErrorLog("New Enemy Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(enemyHeroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname) + "\"");
                 }
 
-                behave = Settings.Instance.updateInstance();
+                behave = Settings.Instance.UpdateInstance();
             }
             
             sf.SetnewLogFile();
-            Settings.Instance.loggCleanPath();
+            Settings.Instance.LogCleanPath();
             Mulligan.Instance.loggCleanPath();
             Discovery.Instance.loggCleanPath();
             ComboBreaker.Instance.loggCleanPath();

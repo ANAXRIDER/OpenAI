@@ -329,7 +329,7 @@ namespace OpenAI
         
         public float getAttackWithHeroPenality(Minion target, Playfield p, bool lethal)
         {
-            if (enfacehp == -142) enfacehp = Settings.Instance.enfacehp;
+            if (enfacehp == -142) enfacehp = Settings.Instance.EnfaceHp;
             float retval = 0;
 
             bool AttacksEnemyHeroCanTrigger = false;
