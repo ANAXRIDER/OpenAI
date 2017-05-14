@@ -6,20 +6,6 @@ using System.Net;
 
 namespace OpenAI
 {
-    public static class SilverFishBotPath
-    {
-        public static string AssemblyDirectory
-        {
-            get
-            {
-                string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-                UriBuilder uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
-                return System.IO.Path.GetDirectoryName(path) + System.IO.Path.DirectorySeparatorChar;
-            }
-        }
-    }
-
     class Program
     {
         static void Main(string[] args)
@@ -125,7 +111,7 @@ namespace OpenAI
                 Ai.Instance.autoTester(printstuff);
             }
 
-            if (System.IO.File.Exists(SilverFishBotPath.AssemblyDirectory + "crashtest.txt"))
+            if (File.Exists(FilePath.CrashTest))
             {
                 testing(1);
             }
@@ -311,7 +297,7 @@ namespace OpenAI
             Helpfunctions.Instance.ErrorLog("init Silverfish V" + versionnumber);
             string path = "";
             //System.IO.Directory.CreateDirectory(path);
-            sttngs.setFilePath(SilverFishBotPath.AssemblyDirectory);
+            sttngs.setFilePath(FolderPath.Common);
 
             if (!singleLog)
             {

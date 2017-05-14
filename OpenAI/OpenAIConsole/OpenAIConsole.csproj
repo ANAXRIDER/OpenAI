@@ -4618,6 +4618,9 @@
     <Compile Include="..\OpenAI\Cards\Sim_UNG_999t8.cs">
       <Link>Cards\Sim_UNG_999t8.cs</Link>
     </Compile>
+    <Compile Include="..\OpenAI\Paths.cs">
+      <Link>Paths.cs</Link>
+    </Compile>
     <Compile Include="..\OpenAI\Penalties\Pen_AT_001.cs">
       <Link>Penalties\Pen_AT_001.cs</Link>
     </Compile>
@@ -7435,7 +7438,7 @@
     <Compile Include="..\OpenAI\Penalties\Pen_tt_010a.cs">
       <Link>Penalties\Pen_tt_010a.cs</Link>
     </Compile>
-    <Compile Include="Programexe.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

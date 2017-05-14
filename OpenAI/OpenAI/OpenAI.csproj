@@ -1568,6 +1568,7 @@
     <Compile Include="Cards\Sim_UNG_999t6.cs" />
     <Compile Include="Cards\Sim_UNG_999t7.cs" />
     <Compile Include="Cards\Sim_UNG_999t8.cs" />
+    <Compile Include="Paths.cs" />
     <Compile Include="Penalties\Pen_AT_001.cs" />
     <Compile Include="Penalties\Pen_AT_002.cs" />
     <Compile Include="Penalties\Pen_AT_003.cs" />

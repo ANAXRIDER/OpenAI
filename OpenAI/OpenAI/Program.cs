@@ -1,61 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using HSRangerLib;
-
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using HSRangerLib;
 
 namespace OpenAI
 {
-
-    public static class SilverFishBotPath
-    {
-        public static string AssemblyDirectory
-        {
-            get
-            {
-                string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-                UriBuilder uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
-                return System.IO.Path.GetDirectoryName(path) + System.IO.Path.DirectorySeparatorChar;
-            }
-        }
-
-        public static  string SettingsPath
-        {
-            get{
-                string temp = AssemblyDirectory + System.IO.Path.DirectorySeparatorChar + "Common" + System.IO.Path.DirectorySeparatorChar;
-                if (System.IO.Directory.Exists(temp) == false)
-                {
-                    System.IO.Directory.CreateDirectory(temp);
-                }
-
-                return temp;
-            }
-        }
-
-        public static string LogPath
-        {
-            get
-            {
-                string temp = AssemblyDirectory + System.IO.Path.DirectorySeparatorChar + "Logs" + System.IO.Path.DirectorySeparatorChar;
-                if (System.IO.Directory.Exists(temp) == false)
-                {
-                    System.IO.Directory.CreateDirectory(temp);
-                }
-
-                return temp;
-            }
-        }
-    }
-
     public class Bot : BotBase
     {
         private static Bot instance;
-
         public static Bot Instance
         {
             get
@@ -63,15 +18,14 @@ namespace OpenAI
                 return instance ?? (instance = new Bot());
             }
         }
+
         public override string Description
         {
             get
             {
-                
                 return "Silverfish A.I. version V" + Silverfish.Instance.versionnumber +" )\r\n" +
                        "\r\n\r\n\r\n\r\n\r\ni hope you dont see the following version number :P"
                        ;
-
             }
         }
 
@@ -1766,13 +1720,13 @@ namespace OpenAI
         private Silverfish()
         {
             this.singleLog = Settings.Instance.writeToSingleFile;
-            string path = SilverFishBotPath.AssemblyDirectory + "SilverLogs" + System.IO.Path.DirectorySeparatorChar;
+            string path = FolderPath.OpenAI + "SilverLogs" + System.IO.Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            sttngs.setFilePath(SilverFishBotPath.AssemblyDirectory);
+            sttngs.setFilePath(FolderPath.OpenAI);
 
             if (singleLog)
             {
-                sttngs.setLoggPath(SilverFishBotPath.LogPath + System.IO.Path.DirectorySeparatorChar);
+                sttngs.setLoggPath(FolderPath.Logs + System.IO.Path.DirectorySeparatorChar);
                 sttngs.setLoggFile("SilverLog.txt");
                 Helpfunctions.Instance.createNewLoggfile();
             }
