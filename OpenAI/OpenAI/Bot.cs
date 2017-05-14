@@ -90,8 +90,6 @@ namespace OpenAI
         int targetentity = 0;
 
         //
-
-
         public Bot()
         {
             base.HasBestMoveAI = true;
@@ -123,7 +121,6 @@ namespace OpenAI
                 sf.StartedExe = true;
                 Task.Run(() => StartExeAsync());
             }
-
 
             if (teststuff)//run autotester for developpers
             {
@@ -159,7 +156,6 @@ namespace OpenAI
                 startInfo.WorkingDirectory = Settings.Instance.path;
                 System.Diagnostics.Process.Start(startInfo);
             }
-
             sf.StartedExe = false; //reset it in case user closes exe
         }
 
@@ -180,24 +176,14 @@ namespace OpenAI
         /// <param name="e"></param>
         public override void OnGameMulligan(GameMulliganEventArgs e)
         {
-            if (e.handled || e.card_list.Count == 0) // if count==0 then HR is conceding
+            // True when HearthRanger is going to concede
+            if (e.handled || e.card_list.Count == 0)
             {
                 return;
             }
-
-            //set e.handled to true, 
-            //then bot will toggle cards by e.replace_list 
-            //and will not use internal mulligan logic anymore.
             e.handled = true;
 
-            if (Settings.Instance.learnmode)
-            {
-                e.handled = false;
-                return;
-            }
-
             var list = e.card_list;
-
             Entity enemyPlayer = base.EnemyHero;
             Entity ownPlayer = base.FriendHero;
             string enemName = Hrtprozis.Instance.heroIDtoName(enemyPlayer.CardId);
@@ -234,8 +220,6 @@ namespace OpenAI
             Mulligan.Instance.loggCleanPath();
             Discovery.Instance.loggCleanPath();
             ComboBreaker.Instance.loggCleanPath();
-
-
 
             if (Hrtprozis.Instance.startDeck.Count > 0)
             {
@@ -326,110 +310,7 @@ namespace OpenAI
             //    return;
             //}
 
-        }
-
-        //private int CountDeckCardNum(int cost,bool is_minion, bool is_spell,List<HSRangerLib.GameArenaDraftEventArgs.DeckCard> deck)
-        //{
-        //    int num = 0;
-
-        //    foreach (var item in deck)
-        //    {
-        //        CardDef def = CardDefDB.Instance.GetCardDef(item.card_id);
-
-        //        if (def.Cost == cost)
-        //        {
-        //            if (is_minion)
-        //            {
-        //                if (def.CardType == TAG_CARDTYPE.MINION)
-        //                {
-        //                    num += item.num;
-        //                }
-        //            }
-
-        //            if (is_spell)
-        //            {
-        //                if (def.CardType == TAG_CARDTYPE.ABILITY ||
-        //                    def.CardType == TAG_CARDTYPE.ENCHANTMENT)
-        //                {
-        //                    num += item.num;
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return num;
-        //}
-
-        //private int f(string hero_id)
-        //{
-        //    CardDef def = CardDefDB.Instance.GetCardDef(hero_id);
-
-        //    //No.1 choice (Your best choice)
-        //    if (def.Class == TAG_CLASS.DRUID)
-        //    {
-        //        return 1;
-        //    }
-
-        //    //No.2 choice
-        //    if (def.Class == TAG_CLASS.HUNTER)
-        //    {
-        //        return 2;
-        //    }
-
-        //    //No.3 choice
-        //    if (def.Class == TAG_CLASS.MAGE)
-        //    {
-        //        return 3;
-        //    }
-
-        //    //No.4 choice
-        //    if (def.Class == TAG_CLASS.PALADIN)
-        //    {
-        //        return 4; 
-        //    }
-
-        //    //No.5 choice
-        //    if (def.Class == TAG_CLASS.PRIEST)
-        //    {
-        //        return 5;
-        //    }
-
-        //    //No.6 choice
-        //    if (def.Class == TAG_CLASS.ROGUE)
-        //    {
-        //        return 6;
-        //    }
-        //    //No.7 choice
-        //    if (def.Class == TAG_CLASS.SHAMAN)
-        //    {
-        //        return 7;
-        //    }
-        //    //No.8 choice
-        //    if (def.Class == TAG_CLASS.WARLOCK)
-        //    {
-        //        return 8;
-        //    }
-        //    //No.9 choice
-        //    if (def.Class == TAG_CLASS.WARRIOR)
-        //    {
-        //        return 9;
-        //    }
-
-        //    return 100;
-        //}
-
-        //private string GetBestHeroCardId(GameArenaDraftEventArgs e)
-        //{
-        //    string best_hero_id = "";
-        //    foreach (var card_id in e.draft_choices.OrderBy( hero => GetHeroPriority(hero)))
-        //    {
-        //        best_hero_id = card_id;
-        //        break;
-        //    }
-
-        //    return best_hero_id;
-        //}
-    
+        }   
 
         /// <summary>
         /// 
@@ -437,7 +318,6 @@ namespace OpenAI
         /// <param name="e"></param>
         public override void OnGameStart(GameStartEventArgs e)
         {
-            // reset instance vars
             NumExecsReceived = 0;
             NumActionsSent = 0;
 
@@ -457,7 +337,6 @@ namespace OpenAI
             {
                 Hrtprozis.Instance.addCardToDecks(CardDB.Instance.cardIdstringToEnum(card.card_id), card.num);
             }
-
         }
 
         /// <summary>
@@ -475,16 +354,14 @@ namespace OpenAI
             }
         }
 
-        private HSRangerLib.BotAction CreateRangerConcedeAction()
-        {
-            HSRangerLib.BotAction ranger_action = new HSRangerLib.BotAction();
-            ranger_action.Actor = base.FriendHero;
-            ranger_action.Type = BotActionType.CONCEDE;
-
-            return ranger_action;
-        }
-
-        private HSRangerLib.BotActionType GetRangerActionType(Entity actor, Entity target, ActionType actionType)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="target"></param>
+        /// <param name="actionType"></param>
+        /// <returns></returns>
+        private BotActionType GetRangerActionType(Entity actor, Entity target, ActionType actionType)
         {
             switch (actionType)
             {
@@ -1154,7 +1031,6 @@ namespace OpenAI
 
             }
 
-
             if (moveTodo.actionType == ActionType.ATTACK_WITH_MINION && ranger_action.Target.IsHero && this.EnemyMinion.Count == 0)
             {
                 this.DoMultipleThingsAtATime = true;
@@ -1170,16 +1046,11 @@ namespace OpenAI
         }
 
         /// <summary>
-        /// if uses extern a.i.,
-        /// invoke when hearthranger did all the actions.
+        /// 
         /// </summary>
         /// <param name="e"></param>
         public override void OnQueryBestMove(QueryBestMoveEventArgs e)
         {
-
-            //don't forget to set HasBestMoveAI property to true in class constructor.
-            //or Hearthranger will never query best move !
-            //base.HasBestMoveAI = true;
             e.handled = true;
             HSRangerLib.BotAction ranger_action;
 
@@ -1205,21 +1076,6 @@ namespace OpenAI
 
                 HelpFunctions.Instance.ErrorLog("proc check done...");
 
-
-                //we are conceding
-                if (this.IsGoingToConcede)
-                {
-                    if (HSRangerLib.RangerBotSettings.CurrentSettingsGameType == HSRangerLib.enGameType.The_Arena)
-                    {
-                        this.IsGoingToConcede = false;
-                    }
-                    else
-                    {
-                        ranger_action = CreateRangerConcedeAction();
-                        e.action_list.Add(ranger_action);
-                        return;
-                    }
-                }
                 if (Settings.Instance.learnmode)
                 {
                     e.handled = false;
@@ -1321,12 +1177,6 @@ namespace OpenAI
 
                         if (Settings.Instance.enemyConcede) HelpFunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
 
-                        if (Ai.Instance.bestmoveValue <= Settings.Instance.enemyConcedeValue && Settings.Instance.enemyConcede)
-                        {
-                            e.action_list.Add(CreateRangerConcedeAction());
-                            return;
-                        }
-
                         BotAction endturnmove = new HSRangerLib.BotAction();
                         endturnmove.Type = BotActionType.END_TURN;
                         HelpFunctions.Instance.ErrorLog("end turn action");
@@ -1373,11 +1223,6 @@ namespace OpenAI
                         {
                             if (Settings.Instance.enemyConcede) HelpFunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
 
-                            if (Ai.Instance.bestmoveValue <= Settings.Instance.enemyConcedeValue && Settings.Instance.enemyConcede)
-                            {
-                                e.action_list.Add(CreateRangerConcedeAction());
-                                return;
-                            }
                             HelpFunctions.Instance.ErrorLog("enturn");
                             //simply clear action list, hearthranger bot will endturn if no action can do.
                             BotAction endturnmove = new HSRangerLib.BotAction();
@@ -1401,13 +1246,6 @@ namespace OpenAI
                             if (hasMoreActions) Ai.Instance.doNextCalcedMove();
 
                             if (Settings.Instance.enemyConcede) HelpFunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
-
-                            if (Ai.Instance.bestmoveValue <= Settings.Instance.enemyConcedeValue && Settings.Instance.enemyConcede)
-                            {
-                                e.action_list.Add(CreateRangerConcedeAction());
-                                return;
-                            }
-
                         }
                     }
                     while (hasMoreActions);
@@ -1416,20 +1254,8 @@ namespace OpenAI
                     HelpFunctions.Instance.ErrorLog("sending HR " + NumActionsSent + " queued actions");
                     NumExecsReceived = 0;
                     if (Settings.Instance.enemyConcede) HelpFunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
-
-                    if (Ai.Instance.bestmoveValue <= Settings.Instance.enemyConcedeValue && Settings.Instance.enemyConcede)
-                    {
-                        e.action_list.Add(CreateRangerConcedeAction());
-                        return;
-                    }
                 }//##########################################################################
                 if (Settings.Instance.enemyConcede) HelpFunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
-
-                if (Ai.Instance.bestmoveValue <= Settings.Instance.enemyConcedeValue && Settings.Instance.enemyConcede)
-                {
-                    e.action_list.Add(CreateRangerConcedeAction());
-                    return;
-                }
             }
             catch (Exception Exception)
             {
@@ -1451,12 +1277,12 @@ namespace OpenAI
             return;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
         public override void OnActionDone(ActionDoneEventArgs e)
         {
-            //do nothing here
-
-            //queue stuff
             NumExecsReceived++;
 
             switch (e.done_result)
@@ -1470,9 +1296,7 @@ namespace OpenAI
                 default:
                     HelpFunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <default>: " + e.action_id + " " + e.ToString()); break;
             }
-
         }
-
 
         private bool CanQueueNextActions()
         {
