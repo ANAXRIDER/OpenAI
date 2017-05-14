@@ -28,15 +28,6 @@ namespace OpenAI
 
         public CardDB.cardName name = CardDB.cardName.unknown;
 
-        private static Action instance;
-        public static Action Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-
         public Action(ActionType type, Handmanager.Handcard hc, Minion ownCardEntity, int place, Minion target, float pen, int choice, int track = 0)
         {
             this.actionType = type;
