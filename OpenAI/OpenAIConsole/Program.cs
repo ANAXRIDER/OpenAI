@@ -113,10 +113,10 @@ namespace OpenAI
 
             if (Ai.Instance.bestmove != null)
             {
-                Ai.Instance.bestmove.print(true);
+                Ai.Instance.bestmove.Print(true);
                 foreach (Action a in Ai.Instance.bestActions)
                 {
-                    a.print(true);
+                    a.Print(true);
                 }
             }
             Helpfunctions.Instance.writeBufferToActionFile();
@@ -141,7 +141,7 @@ namespace OpenAI
                 Hrtprozis.Instance.setDeckName(deckname);
                 Hrtprozis.Instance.setHeroName(ownname);
                 ComboBreaker.Instance.updateInstance();
-                Discovery.Instance.updateInstance();
+                Discovery.Instance.UpdateInstance();
                 Mulligan.Instance.updateInstance();
             }
             if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)

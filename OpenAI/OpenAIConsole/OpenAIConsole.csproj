@@ -94,6 +94,9 @@
     <Compile Include="..\OpenAI\Ai\EnemyTurnSimulator.cs">
       <Link>Ai\EnemyTurnSimulator.cs</Link>
     </Compile>
+    <Compile Include="..\OpenAI\Ai\Enums.cs">
+      <Link>Ai\Enums.cs</Link>
+    </Compile>
     <Compile Include="..\OpenAI\Ai\Handmanager.cs">
       <Link>Ai\Handmanager.cs</Link>
     </Compile>

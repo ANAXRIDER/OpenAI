@@ -1,36 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace OpenAI
 {
-
     public class Discovery
     {
-
         string choicenminion = "";
         public int choicebonus;
-        class discoveryitem
+
+        class DiscoveryItem
         {
             public CardDB.cardIDEnum cardid = CardDB.cardIDEnum.None;
             public int bonus;
             public string ownclass = "";
             public string enemyclass = "";
 
-            public discoveryitem(string line)
+            public DiscoveryItem(string line)
             {
                 this.cardid = CardDB.Instance.cardIdstringToEnum(line.Split(',')[0]);
                 this.bonus = Convert.ToInt32(line.Split(';')[0].Split(',')[1]);
                 this.ownclass = line.Split(';')[1];
                 this.enemyclass = line.Split(';')[2];
             }
-
         }
 
         private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
         private string deckName = Hrtprozis.Instance.deckName;
         private string cleanPath = "";
 
-        private List<discoveryitem> discoverylist = new List<discoveryitem>();
+        private List<DiscoveryItem> discoverylist = new List<DiscoveryItem>();
 
         private static Discovery instance;
 
@@ -42,22 +41,22 @@ namespace OpenAI
             }
         }
 
-        public void updateInstance()
+        public void UpdateInstance()
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             deckName = Hrtprozis.Instance.deckName;
             lock (instance)
             {
-                readCombos();
+                ReadCombos();
             }
         }
 
-        public void loggCleanPath()
+        public void LogCleanPath()
         {
-            Helpfunctions.Instance.logg(cleanPath);
+            Helpfunctions.Instance.Log(cleanPath);
         }
 
-        private void readCombos()
+        private void ReadCombos()
         {
             string[] lines = new string[] { };
             this.discoverylist.Clear();
@@ -102,7 +101,7 @@ namespace OpenAI
 
             try
             {
-                lines = System.IO.File.ReadAllLines(path + "_discovery.txt");
+                lines = File.ReadAllLines(path + "_discovery.txt");
             }
             catch
             {
@@ -118,7 +117,7 @@ namespace OpenAI
 
                 try
                 {
-                    discoveryitem d = new discoveryitem(line);
+                    DiscoveryItem d = new DiscoveryItem(line);
                     this.discoverylist.Add(d);
                 }
                 catch
@@ -129,10 +128,10 @@ namespace OpenAI
             Helpfunctions.Instance.ErrorLog("[Discovery] " + discoverylist.Count + " rules found");
         }
 
-        public int getBonusValue(CardDB.cardIDEnum cardid, string ownclass, string enemyclass)
+        public int GetBonusValue(CardDB.cardIDEnum cardid, string ownclass, string enemyclass)
         {
             int bonus = 0;
-            foreach (discoveryitem di in this.discoverylist)
+            foreach (DiscoveryItem di in this.discoverylist)
             {
                 if (di.cardid == cardid && (di.ownclass == "all" || di.ownclass == ownclass) && (di.enemyclass == "all" || di.enemyclass == enemyclass))
                 {
@@ -143,7 +142,7 @@ namespace OpenAI
             return bonus;
         }
 
-        public int getChoice(Playfield p)
+        public int GetChoice(Playfield p)
         {
             this.choicebonus = 0;
             int i = 0;
@@ -176,7 +175,7 @@ namespace OpenAI
                 CardDB.Card c = hc.card;
                 i++;
 
-                int bonus = getBonusValue(c.cardIDenum, Hrtprozis.heroEnumtoName(p.ownHeroName), Hrtprozis.heroEnumtoName(p.enemyHeroName));
+                int bonus = GetBonusValue(c.cardIDenum, Hrtprozis.heroEnumtoName(p.ownHeroName), Hrtprozis.heroEnumtoName(p.enemyHeroName));
 
                 switch (hc.card.name)
                 {
@@ -303,7 +302,7 @@ namespace OpenAI
 
 
                 Helpfunctions.Instance.ErrorLog("card : " + i + " name : " + hc.card.name);
-                Helpfunctions.Instance.logg("card : " + i + " name : " + hc.card.name);
+                Helpfunctions.Instance.Log("card : " + i + " name : " + hc.card.name);
             }
 
             this.choicebonus = prevbonus;
@@ -318,7 +317,7 @@ namespace OpenAI
             }
 
             Helpfunctions.Instance.ErrorLog("Choice : " + choice + " bonus : " + choicebonus);
-            Helpfunctions.Instance.logg("Choice : " + choice + " bonus : " + choicebonus);
+            Helpfunctions.Instance.Log("Choice : " + choice + " bonus : " + choicebonus);
             return choice;
         }
     }

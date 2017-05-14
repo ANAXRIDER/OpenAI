@@ -44,8 +44,8 @@ namespace OpenAI
                     int useability = 0;
                     foreach (Action a in p.playactions)
                     {
-                        if (a.actionType == actionEnum.useHeroPower) useability = 1;
-                        if (a.actionType == actionEnum.attackWithHero) useability++;
+                        if (a.actionType == ActionType.USE_HERO_POWER) useability = 1;
+                        if (a.actionType == ActionType.ATTACK_WITH_HERO) useability++;
                         int actDmd = tmpPf.enemyHero.Hp + tmpPf.enemyHero.armor;
                         tmpPf.doAction(a);
                         actDmd -= (tmpPf.enemyHero.Hp + tmpPf.enemyHero.armor);
@@ -87,7 +87,7 @@ namespace OpenAI
                     aa = p.playactions[i];
                     switch (aa.actionType)
                     {
-                        case actionEnum.playcard:
+                        case ActionType.PLAY_CARD:
                             if (damageRandom && penman.DamageAllEnemysDatabase.ContainsKey(aa.card.card.name)) rndBeforeDamageAll = true;
                             else if (penman.DamageRandomDatabase.ContainsKey(aa.card.card.name)) damageRandom = true;
                             break;
@@ -106,10 +106,10 @@ namespace OpenAI
                     reorderedActions.Add(aa);
                     switch (aa.actionType)
                     {
-                        case actionEnum.useHeroPower:
+                        case ActionType.USE_HERO_POWER:
                             if (aa.card.card.name == CardDB.cardName.totemiccall) totemiccall = true;
                             break;
-                        case actionEnum.playcard:
+                        case ActionType.PLAY_CARD:
                             if (penman.DamageAllEnemysDatabase.ContainsKey(aa.card.card.name))
                             {
                                 if (i != aoeEnNum)
@@ -175,7 +175,7 @@ namespace OpenAI
                     try
                     {
 
-                        if (!(a.actionType == actionEnum.playcard && rndActIdsDmg.ContainsKey(a.card.entity))) tmpPf.doAction(a);
+                        if (!(a.actionType == ActionType.PLAY_CARD && rndActIdsDmg.ContainsKey(a.card.entity))) tmpPf.doAction(a);
                         else
                         {
                             tmpPf.playactions.Add(a);
@@ -206,13 +206,13 @@ namespace OpenAI
 
                 if (oldval > newval) return;
             }
-            help.logg("Old order of actions:");
-            foreach (Action a in p.playactions) a.print();
+            help.Log("Old order of actions:");
+            foreach (Action a in p.playactions) a.Print();
 
             p.playactions.Clear();
             p.playactions.AddRange(reorderedActions);
 
-            help.logg("New order of actions:");
+            help.Log("New order of actions:");
 
         }
 
@@ -221,7 +221,7 @@ namespace OpenAI
             bool actionFound = false;
             switch (a.actionType)
             {
-                case actionEnum.playcard:
+                case ActionType.PLAY_CARD:
                     foreach (Handmanager.Handcard hc in p.owncards)
                     {
                         if (hc.entity == a.card.entity)
@@ -238,7 +238,7 @@ namespace OpenAI
                         }
                     }
                     break;
-                case actionEnum.attackWithMinion:
+                case ActionType.ATTACK_WITH_MINION:
                     foreach (Minion m in p.ownMinions)
                     {
                         if (m.entityID == a.own.entityID)
@@ -249,10 +249,10 @@ namespace OpenAI
                         }
                     }
                     break;
-                case actionEnum.attackWithHero:
+                case ActionType.ATTACK_WITH_HERO:
                     if (p.ownHero.Ready) actionFound = true;
                     break;
-                case actionEnum.useHeroPower:
+                case ActionType.USE_HERO_POWER:
                     if (p.ownAbilityReady && p.mana >= p.ownHeroAblility.card.getManaCost(p, p.ownHeroAblility.manacost)) actionFound = true;
                     break;
             }
@@ -292,12 +292,12 @@ namespace OpenAI
         private void printError(List<Action> mainActList, List<Action> newActList, Action aError)
         {
             help.ErrorLog("Reordering actions error!");
-            help.logg("Reordering actions error!\r\nError in action:");
-            aError.print();
-            help.logg("Main order of actions:");
-            foreach (Action a in mainActList) a.print();
-            help.logg("New order of actions:");
-            foreach (Action a in newActList) a.print();
+            help.Log("Reordering actions error!\r\nError in action:");
+            aError.Print();
+            help.Log("Main order of actions:");
+            foreach (Action a in mainActList) a.Print();
+            help.Log("New order of actions:");
+            foreach (Action a in newActList) a.Print();
             return;
         }
 

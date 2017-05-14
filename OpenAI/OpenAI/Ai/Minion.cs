@@ -1,8 +1,8 @@
-﻿namespace OpenAI
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace OpenAI
+{
     public class miniEnch
     {
         public CardDB.cardIDEnum CARDID = CardDB.cardIDEnum.None;
@@ -24,13 +24,13 @@
             this.controllerOfCreator = controler;
             this.copyDeathrattle = copydr;
         }
-
     }
 
     public class Minion
     {
         //dont silence----------------------------
         public int anzGotDmg;
+
         public int gotDmgRaw;
         public int GotDmgValue;
         public int anzGotHealed;
@@ -44,8 +44,10 @@
         public int synergy;
         public Handmanager.Handcard handcard;
         public int entityID = -1;
+
         //public int id = -1;//delete this
         public int zonepos;
+
         public CardDB.Card deathrattle2;
 
         public bool playedThisTurn;
@@ -56,6 +58,7 @@
 
         //---------------------------------------
         public bool shadowmadnessed;//´can be silenced :D
+
         public bool canAttackNormal;
 
         public bool destroyOnOwnTurnStart; // depends on own!
@@ -140,12 +143,10 @@
 
             this.allreadyAttacked = m.allreadyAttacked;
 
-
             this.playedThisTurn = m.playedThisTurn;
             this.numAttacksThisTurn = m.numAttacksThisTurn;
             this.immuneWhileAttacking = m.immuneWhileAttacking;
 
-            
             this.shadowmadnessed = m.shadowmadnessed;
 
             this.ancestralspirit = m.ancestralspirit;
@@ -205,7 +206,7 @@
                 this.deathrattles = new List<int>();
                 foreach (int dr in m.deathrattles)
                 {
-                    this.deathrattles.Add(dr);  
+                    this.deathrattles.Add(dr);
                 }
             }
         }
@@ -227,7 +228,6 @@
             this.deathrattle2 = m.deathrattle2;
             //this.entitiyID = m.entitiyID;
             this.zonepos = m.zonepos;
-
 
             this.allreadyAttacked = m.allreadyAttacked;
 
@@ -296,7 +296,6 @@
             this.AdaptedCantBeTargetedBySpellsOrHeroPowers = m.AdaptedCantBeTargetedBySpellsOrHeroPowers;
             this.cantAttack = m.cantAttack;
 
-
             if (m.deathrattles != null)
             {
                 this.deathrattles = new List<int>();
@@ -327,7 +326,7 @@
                     if (p.anzOwnAnimatedArmor > 0 && dmg > 0) dmg = 1;
                     if (p.anzOwnBolfRamshield > 0 && dmg > 0)
                     {
-                        int rest = - dmg;
+                        int rest = -dmg;
                         this.armor = Math.Max(0, rest);
                         if (rest < 0)
                         {
@@ -350,7 +349,7 @@
                     if (p.enemyWeaponCard.name == CardDB.cardName.cursedblade) dmg += dmg;
                     if (p.anzEnemyBolfRamshield > 0 && dmg > 0)
                     {
-                        int rest = - dmg;
+                        int rest = -dmg;
                         this.armor = Math.Max(0, rest);
                         if (rest < 0)
                         {
@@ -389,7 +388,6 @@
                 {
                     if (this.armor > 0 && dmg > 0)
                     {
-
                         int rest = this.armor - dmg;
                         if (rest < 0)
                         {
@@ -397,7 +395,6 @@
                             p.secretTrigger_HeroGotDmg(this.own, rest);
                         }
                         this.armor = Math.Max(0, this.armor - dmg);
-
                     }
                 }
                 if (this.cantLowerHPbelowONE && this.Hp <= 0) this.Hp = 1;
@@ -413,7 +410,6 @@
             }
 
             //its a Minion--------------------------------------------------------------
-
 
             int damage = dmg;
             int heal = 0;
@@ -473,8 +469,6 @@
                 this.Hp = this.Hp + Math.Min(heal, this.maxHp - this.Hp);
             }
 
-
-
             if (this.Hp > hpcopy)
             {
                 //minionWasHealed
@@ -509,8 +503,6 @@
                 this.wounded = true;
             }
 
-
-
             if (this.name == CardDB.cardName.lightspawn && !this.silenced)
             {
                 this.Angr = this.Hp;
@@ -530,7 +522,6 @@
             {
                 this.minionDied(p);
             }
-
         }
 
         public void minionDied(Playfield p)
@@ -544,10 +535,8 @@
                 if (this.name == CardDB.cardName.feugen) p.feugenDead = true;
             }
 
-
             if (own)
             {
-
                 p.tempTrigger.ownMinionsDied++;
                 if (this.taunt) p.anzOwnTaunt--;
                 if (this.handcard.card.race == TAG_RACE.BEAST)
@@ -617,7 +606,6 @@
                 (name == CardDB.cardName.eeriestatue && !this.canAttackNormal))) return;
 
             if (!frozen && ((charge >= 1 && playedThisTurn) || !playedThisTurn || shadowmadnessed) && (numAttacksThisTurn == 0 || (numAttacksThisTurn == 1 && windfury) || (!silenced && this.name == CardDB.cardName.v07tr0n && numAttacksThisTurn <= 3))) Ready = true;
-
         }
 
         public void updateReadyness(Playfield p)
@@ -630,7 +618,7 @@
                 return;
             }
 
-            if (!silenced && (name == CardDB.cardName.ragnarosthefirelord || 
+            if (!silenced && (name == CardDB.cardName.ragnarosthefirelord ||
                 name == CardDB.cardName.ancientwatcher ||
                 name == CardDB.cardName.humongousrazorleaf ||
                 (name == CardDB.cardName.argentwatchman && !this.canAttackNormal))) return;
@@ -655,12 +643,11 @@
             }
 
             if (!frozen && ((charge >= 1 && playedThisTurn) || !playedThisTurn || shadowmadnessed) && (numAttacksThisTurn == 0 || (numAttacksThisTurn == 1 && windfury) || (!silenced && this.name == CardDB.cardName.v07tr0n && numAttacksThisTurn <= 3))) Ready = true;
-
         }
 
         public void endAura(Playfield p)
         {
-            if(!this.silenced) this.handcard.card.sim_card.onAuraEnds(p, this);
+            if (!this.silenced) this.handcard.card.sim_card.onAuraEnds(p, this);
 
             if (this.own)
             {
@@ -709,7 +696,7 @@
             immune = false;
             poisonous = false;
             cantLowerHPbelowONE = false;
-            if(this.deathrattles!=null) this.deathrattles.Clear();
+            if (this.deathrattles != null) this.deathrattles.Clear();
 
             if (own)
             {
@@ -733,7 +720,6 @@
             Angr = handcard.card.Attack;
             tempAttack = 0;//we dont toutch the adjacent buffs!
 
-
             //reset hp and heal it
             if (maxHp < handcard.card.Health)//minion has lower maxHp as his card -> heal his hp
             {
@@ -755,7 +741,6 @@
                 Angr = p.enemyCrystalCore;
                 maxHp = p.enemyCrystalCore;
             }
-
 
             if (!silenced)//minion WAS not silenced, deactivate his aura
             {
@@ -832,7 +817,6 @@
                 switch (me.CARDID)
                 {
                     //ToDo: TBUD_1	Each turn, if you have less health then a your opponent, summon a free minion
-                    
 
                     // special stuff-------------------------------------------------
                     case CardDB.cardIDEnum.AT_013e: //power word: glory
@@ -943,9 +927,6 @@
                     this.spellpower += this.handcard.card.spellpowervalue;
                 }
             }
-
         }
-
     }
-
 }

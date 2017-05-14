@@ -6824,7 +6824,7 @@ namespace OpenAI
                         {
                             foreach (Action a in p.playactions)
                             {
-                                if (a.actionType == actionEnum.playcard)
+                                if (a.actionType == ActionType.PLAY_CARD)
                                 {
                                     switch (a.card.card.name)
                                     {
@@ -6841,7 +6841,7 @@ namespace OpenAI
                                         }
                                     }
                                 }
-                                else if (a.actionType == actionEnum.useHeroPower)
+                                else if (a.actionType == ActionType.USE_HERO_POWER)
                                 {
                                     //Helpfunctions.Instance.ErrorLog("찾았다");
                                     switch (p.ownHeroAblility.card.name)
@@ -7057,7 +7057,7 @@ namespace OpenAI
                         {
                             foreach (Action a in p.playactions)
                             {
-                                if (a.actionType == actionEnum.playcard)
+                                if (a.actionType == ActionType.PLAY_CARD)
                                 {
                                     switch (a.card.card.name)
                                     {
@@ -7074,7 +7074,7 @@ namespace OpenAI
                                         }
                                     }
                                 }
-                                else if (a.actionType == actionEnum.useHeroPower)
+                                else if (a.actionType == ActionType.USE_HERO_POWER)
                                 {
                                     //Helpfunctions.Instance.ErrorLog("찾았다");
                                     switch (p.ownHeroAblility.card.name)
@@ -7445,18 +7445,17 @@ namespace OpenAI
             string[] lines = new string[] { };
             try
             {
-                string path = Settings.Instance.path;
-                lines = System.IO.File.ReadAllLines(path + "_carddb.txt");
+                lines = File.ReadAllLines(FilePath.CardDB);
                 Helpfunctions.Instance.ErrorLog("read carddb.txt " + lines.Length + " lines");
             }
             catch
             {
-                Helpfunctions.Instance.logg("cant find _carddb.txt");
+                Helpfunctions.Instance.Log("cant find _carddb.txt");
                 Helpfunctions.Instance.ErrorLog("ERROR#################################################");
                 Helpfunctions.Instance.ErrorLog("ERROR#################################################");
                 Helpfunctions.Instance.ErrorLog("ERROR#################################################");
                 Helpfunctions.Instance.ErrorLog("ERROR#################################################");
-                Helpfunctions.Instance.ErrorLog("cant find _carddb.txt in " + Settings.Instance.path);
+                Helpfunctions.Instance.ErrorLog("cant find _carddb.txt in " + FolderPath.OpenAI);
                 Helpfunctions.Instance.ErrorLog("ERROR#################################################");
                 Helpfunctions.Instance.ErrorLog("ERROR#################################################");
                 Helpfunctions.Instance.ErrorLog("ERROR#################################################");
@@ -10569,14 +10568,14 @@ namespace OpenAI
         private void enumCreator()
         {
             // cardIDEnum creator:
-            Helpfunctions.Instance.writeToBuffer("public enum cardIDEnum");
-            Helpfunctions.Instance.writeToBuffer("{");
-            Helpfunctions.Instance.writeToBuffer("None,");
+            Helpfunctions.Instance.WriteToBuffer("public enum cardIDEnum");
+            Helpfunctions.Instance.WriteToBuffer("{");
+            Helpfunctions.Instance.WriteToBuffer("None,");
             foreach (string cardid in this.allCardIDS)
             {
-                Helpfunctions.Instance.writeToBuffer(cardid + ",");
+                Helpfunctions.Instance.WriteToBuffer(cardid + ",");
             }
-            Helpfunctions.Instance.writeToBuffer("}");
+            Helpfunctions.Instance.WriteToBuffer("}");
 
             
             // cardName creator:
@@ -10587,27 +10586,27 @@ namespace OpenAI
                 namelist.Add(cardid);
             }
             
-            Helpfunctions.Instance.writeToBuffer("public enum cardName");
-            Helpfunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.WriteToBuffer("public enum cardName");
+            Helpfunctions.Instance.WriteToBuffer("{");
             foreach (string cardid in namelist)
             {
-                Helpfunctions.Instance.writeToBuffer(cardid + ",");
+                Helpfunctions.Instance.WriteToBuffer(cardid + ",");
             }
-            Helpfunctions.Instance.writeToBuffer("}");
+            Helpfunctions.Instance.WriteToBuffer("}");
 
             
             // getSimCard creator:
-            Helpfunctions.Instance.writeToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
-            Helpfunctions.Instance.writeToBuffer("{");
-            Helpfunctions.Instance.writeToBuffer("switch (id)");
-            Helpfunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.WriteToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
+            Helpfunctions.Instance.WriteToBuffer("{");
+            Helpfunctions.Instance.WriteToBuffer("switch (id)");
+            Helpfunctions.Instance.WriteToBuffer("{");
             foreach (string cardid in this.allCardIDS)
             {
-                Helpfunctions.Instance.writeToBuffer("case cardIDEnum." + cardid + ": return new Sim_" + cardid + "();");
+                Helpfunctions.Instance.WriteToBuffer("case cardIDEnum." + cardid + ": return new Sim_" + cardid + "();");
             }
-            Helpfunctions.Instance.writeToBuffer("return new SimTemplate();");
-            Helpfunctions.Instance.writeToBuffer("}");
-            Helpfunctions.Instance.writeToBuffer("}");
+            Helpfunctions.Instance.WriteToBuffer("return new SimTemplate();");
+            Helpfunctions.Instance.WriteToBuffer("}");
+            Helpfunctions.Instance.WriteToBuffer("}");
 
 
             Helpfunctions.Instance.writeBufferToCardDB();
