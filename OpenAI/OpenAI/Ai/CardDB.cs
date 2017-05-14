@@ -7447,25 +7447,25 @@ namespace OpenAI
             {
                 string path = Settings.Instance.path;
                 lines = System.IO.File.ReadAllLines(path + "_carddb.txt");
-                HelpFunctions.Instance.ErrorLog("read carddb.txt " + lines.Length + " lines");
+                Helpfunctions.Instance.ErrorLog("read carddb.txt " + lines.Length + " lines");
             }
             catch
             {
-                HelpFunctions.Instance.logg("cant find _carddb.txt");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("cant find _carddb.txt in " + Settings.Instance.path);
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("you installed it wrong");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.logg("cant find _carddb.txt");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("cant find _carddb.txt in " + Settings.Instance.path);
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("you installed it wrong");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
+                Helpfunctions.Instance.ErrorLog("ERROR#################################################");
                 this.installedWrong = true;
             }
             cardlist.Clear();
@@ -8064,7 +8064,7 @@ namespace OpenAI
             this.imp = this.getCardDataFromID(CardDB.cardIDEnum.BRM_006t);//imp from blackrock
             this.ligthningJolt = this.getCardDataFromID(CardDB.cardIDEnum.AT_050t);//deal 2 dmg hero power
 
-            HelpFunctions.Instance.ErrorLog("CardList:" + cardidToCardList.Count);
+            Helpfunctions.Instance.ErrorLog("CardList:" + cardidToCardList.Count);
 
         }
 
@@ -10569,14 +10569,14 @@ namespace OpenAI
         private void enumCreator()
         {
             // cardIDEnum creator:
-            HelpFunctions.Instance.writeToBuffer("public enum cardIDEnum");
-            HelpFunctions.Instance.writeToBuffer("{");
-            HelpFunctions.Instance.writeToBuffer("None,");
+            Helpfunctions.Instance.writeToBuffer("public enum cardIDEnum");
+            Helpfunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("None,");
             foreach (string cardid in this.allCardIDS)
             {
-                HelpFunctions.Instance.writeToBuffer(cardid + ",");
+                Helpfunctions.Instance.writeToBuffer(cardid + ",");
             }
-            HelpFunctions.Instance.writeToBuffer("}");
+            Helpfunctions.Instance.writeToBuffer("}");
 
             
             // cardName creator:
@@ -10587,30 +10587,30 @@ namespace OpenAI
                 namelist.Add(cardid);
             }
             
-            HelpFunctions.Instance.writeToBuffer("public enum cardName");
-            HelpFunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("public enum cardName");
+            Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in namelist)
             {
-                HelpFunctions.Instance.writeToBuffer(cardid + ",");
+                Helpfunctions.Instance.writeToBuffer(cardid + ",");
             }
-            HelpFunctions.Instance.writeToBuffer("}");
+            Helpfunctions.Instance.writeToBuffer("}");
 
             
             // getSimCard creator:
-            HelpFunctions.Instance.writeToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
-            HelpFunctions.Instance.writeToBuffer("{");
-            HelpFunctions.Instance.writeToBuffer("switch (id)");
-            HelpFunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
+            Helpfunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("switch (id)");
+            Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in this.allCardIDS)
             {
-                HelpFunctions.Instance.writeToBuffer("case cardIDEnum." + cardid + ": return new Sim_" + cardid + "();");
+                Helpfunctions.Instance.writeToBuffer("case cardIDEnum." + cardid + ": return new Sim_" + cardid + "();");
             }
-            HelpFunctions.Instance.writeToBuffer("return new SimTemplate();");
-            HelpFunctions.Instance.writeToBuffer("}");
-            HelpFunctions.Instance.writeToBuffer("}");
+            Helpfunctions.Instance.writeToBuffer("return new SimTemplate();");
+            Helpfunctions.Instance.writeToBuffer("}");
+            Helpfunctions.Instance.writeToBuffer("}");
 
 
-            HelpFunctions.Instance.writeBufferToCardDB();
+            Helpfunctions.Instance.writeBufferToCardDB();
         }
 
         private static string removeSpecialChars(string s)

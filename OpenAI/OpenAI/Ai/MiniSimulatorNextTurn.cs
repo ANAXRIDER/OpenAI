@@ -216,7 +216,7 @@
 
                 if (print)
                 {
-                    HelpFunctions.Instance.ErrorLog("best board after your second turn (value included enemy second turn)----------");
+                    Helpfunctions.Instance.ErrorLog("best board after your second turn (value included enemy second turn)----------");
                     bestplay.printBoard();
                     bestplay.value = int.MinValue;
                     //bestplay.sEnemTurn = this.doEnemySecondTurn;

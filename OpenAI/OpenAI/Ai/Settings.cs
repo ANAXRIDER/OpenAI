@@ -64,25 +64,25 @@ namespace OpenAI
             this.setWeights(alpha);
 
             Mulligan.Instance.setAutoConcede(Settings.Instance.concede);
-            HelpFunctions.Instance.ErrorLog("[Settings] set enemy-face-hp to: " + this.enfacehp);
+            Helpfunctions.Instance.ErrorLog("[Settings] set enemy-face-hp to: " + this.enfacehp);
             ComboBreaker.Instance.attackFaceHP = this.enfacehp;
             Ai.Instance.setMaxWide(this.maxwide);
-            HelpFunctions.Instance.ErrorLog("[Settings] set maxwide to: " + this.maxwide);
+            Helpfunctions.Instance.ErrorLog("[Settings] set maxwide to: " + this.maxwide);
 
             //Ai.Instance.setTwoTurnSimulation(false, this.twotsamount);
-            HelpFunctions.Instance.ErrorLog("[Settings] calculate the second turn of the " + this.twotsamount + " best boards");
+            Helpfunctions.Instance.ErrorLog("[Settings] calculate the second turn of the " + this.twotsamount + " best boards");
             if (this.twotsamount >= 1)
             {
-                if (this.simEnemySecondTurn) HelpFunctions.Instance.ErrorLog("[Settings] simulates the enemy turn on your second turn");
+                if (this.simEnemySecondTurn) Helpfunctions.Instance.ErrorLog("[Settings] simulates the enemy turn on your second turn");
             }
 
             if (this.useSecretsPlayArround)
             {
-                HelpFunctions.Instance.ErrorLog("[Settings] playing arround secrets is " + this.useSecretsPlayArround);
+                Helpfunctions.Instance.ErrorLog("[Settings] playing arround secrets is " + this.useSecretsPlayArround);
             }
             Ai.Instance.setPlayAround();
 
-            if (this.writeToSingleFile) HelpFunctions.Instance.ErrorLog("[Settings] write log to single file");
+            if (this.writeToSingleFile) Helpfunctions.Instance.ErrorLog("[Settings] write log to single file");
         }
 
 
@@ -177,7 +177,7 @@ namespace OpenAI
 
         public void loggCleanPath()
         {
-            HelpFunctions.Instance.logg(cleanPath);
+            Helpfunctions.Instance.logg(cleanPath);
         }
 
         public void setWeights(int alpha)
@@ -185,7 +185,7 @@ namespace OpenAI
             float a = ((float)alpha) / 100f;
             this.firstweight = 1f - a;
             this.secondweight = a;
-            HelpFunctions.Instance.ErrorLog("[Settings] current alpha is " + this.secondweight);
+            Helpfunctions.Instance.ErrorLog("[Settings] current alpha is " + this.secondweight);
         }
 
         public void setFilePath(string path)
@@ -263,10 +263,10 @@ namespace OpenAI
             }
             else
             {
-                HelpFunctions.Instance.logg("[Settings] cant find base settings.txt, using default settings");
+                Helpfunctions.Instance.logg("[Settings] cant find base settings.txt, using default settings");
                 return setDefaultSettings();
             }
-            HelpFunctions.Instance.ErrorLog("[Settings] read " + cleanPath);
+            Helpfunctions.Instance.ErrorLog("[Settings] read " + cleanPath);
 
 
             const string readerror = " read error. Continuing without user-defined rules.";
@@ -278,7 +278,7 @@ namespace OpenAI
                 }
                 catch
                 {
-                    HelpFunctions.Instance.ErrorLog(enemyfilestring + readerror);
+                    Helpfunctions.Instance.ErrorLog(enemyfilestring + readerror);
                     return setDefaultSettings();
                 }
             }
@@ -290,7 +290,7 @@ namespace OpenAI
                 }
                 catch
                 {
-                    HelpFunctions.Instance.logg(filestring + readerror);
+                    Helpfunctions.Instance.logg(filestring + readerror);
                     return setDefaultSettings();
                 }
             }
@@ -316,7 +316,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -330,7 +330,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -344,7 +344,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -358,7 +358,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -372,7 +372,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -386,7 +386,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -400,7 +400,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -414,7 +414,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -428,7 +428,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -442,7 +442,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
                
@@ -456,7 +456,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -470,7 +470,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -484,7 +484,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -498,7 +498,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -512,7 +512,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -526,7 +526,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -540,7 +540,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -554,7 +554,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -580,7 +580,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -594,7 +594,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -608,7 +608,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -622,7 +622,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -636,7 +636,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -650,7 +650,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -681,7 +681,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -695,7 +695,7 @@ namespace OpenAI
                     }
                     catch
                     {
-                        HelpFunctions.Instance.ErrorLog(ignoring + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 

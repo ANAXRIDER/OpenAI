@@ -32,12 +32,12 @@ namespace OpenAI
             {
                 listener = new TcpListener(IPAddress.Any, Settings.Instance.tcpPort);
                 listener.Start();
-                HelpFunctions.Instance.ErrorLog("[Network] Listening for client on port " + Settings.Instance.tcpPort);
+                Helpfunctions.Instance.ErrorLog("[Network] Listening for client on port " + Settings.Instance.tcpPort);
                 listener.BeginAcceptTcpClient(handleConnectionAsync, listener);
             }
             catch (SocketException)
             {
-                HelpFunctions.Instance.ErrorLog("[Network] Cant bind to port " + Settings.Instance.tcpPort);
+                Helpfunctions.Instance.ErrorLog("[Network] Cant bind to port " + Settings.Instance.tcpPort);
             }
         }
 
@@ -49,7 +49,7 @@ namespace OpenAI
 
             if (client != null) client.Close();
             client = newclient; //new connections replace old, only 1 is intended
-            HelpFunctions.Instance.ErrorLog("[Network] New connection from " + getIp(client.Client));
+            Helpfunctions.Instance.ErrorLog("[Network] New connection from " + getIp(client.Client));
         }
 
         public void checkConnection()
@@ -68,7 +68,7 @@ namespace OpenAI
 
         public async Task startClientAsync(CancellationToken cancellationToken)
         {
-            HelpFunctions.Instance.ErrorLog("[Network] Connecting to " + Settings.Instance.netAddress + ":" + Settings.Instance.tcpPort);
+            Helpfunctions.Instance.ErrorLog("[Network] Connecting to " + Settings.Instance.netAddress + ":" + Settings.Instance.tcpPort);
             while (true)
             {
                 try
@@ -84,11 +84,11 @@ namespace OpenAI
                 }
                 catch (SocketException)
                 {
-                    HelpFunctions.Instance.ErrorLog("[Network] Connection Error: SocketException");
+                    Helpfunctions.Instance.ErrorLog("[Network] Connection Error: SocketException");
                 }
                 catch (Exception ex)
                 {
-                    HelpFunctions.Instance.ErrorLog("[Network] Connection Error: " + ex);
+                    Helpfunctions.Instance.ErrorLog("[Network] Connection Error: " + ex);
                 }
 
                 await Task.Delay(5000, cancellationToken);
@@ -103,7 +103,7 @@ namespace OpenAI
             }
             catch (SocketException)
             {
-                HelpFunctions.Instance.ErrorLog("[Network] Connection Terminated: " + getIp(socket) + ":" + getPort(socket));
+                Helpfunctions.Instance.ErrorLog("[Network] Connection Terminated: " + getIp(socket) + ":" + getPort(socket));
                 return false;
             }
         }
@@ -160,7 +160,7 @@ namespace OpenAI
             }
             catch (Exception e)
             {
-                HelpFunctions.Instance.ErrorLog("[Network] Send Message Error: " + e);
+                Helpfunctions.Instance.ErrorLog("[Network] Send Message Error: " + e);
             }
         }
         
@@ -186,7 +186,7 @@ namespace OpenAI
             {
                 client.Close();
                 client = null;
-                HelpFunctions.Instance.ErrorLog("[Network] Read Message Error: " + e.Message);
+                Helpfunctions.Instance.ErrorLog("[Network] Read Message Error: " + e.Message);
             }
 
             //Helpfunctions.Instance.ErrorLog($"[Network] Message: {header}\r\n{lines}");

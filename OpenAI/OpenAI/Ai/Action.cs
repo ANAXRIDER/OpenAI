@@ -179,7 +179,7 @@ namespace OpenAI
 
         public void print(bool tobuffer = false)
         {
-            HelpFunctions help = HelpFunctions.Instance;
+            Helpfunctions help = Helpfunctions.Instance;
             string discover = "";
             if (this.tracking >= 1) discover = " discover " + tracking;
             if (tobuffer)

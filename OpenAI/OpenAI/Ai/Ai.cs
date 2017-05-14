@@ -35,7 +35,7 @@
 
         Hrtprozis hp = Hrtprozis.Instance;
         Handmanager hm = Handmanager.Instance;
-        HelpFunctions help = HelpFunctions.Instance;
+        Helpfunctions help = Helpfunctions.Instance;
 
         public Action bestmove = null;
         public float bestmoveValue;
@@ -263,7 +263,7 @@
                 bestplay.playactions.Clear();
                 bestActions.Clear();
                 bestplay.playactions.AddRange(reorderedActions);
-                HelpFunctions.Instance.logg("Reordered actions:");
+                Helpfunctions.Instance.logg("Reordered actions:");
 
                 foreach (Action a in bestplay.playactions)
                 {
@@ -377,7 +377,7 @@
                 }
                 catch (Exception ex)
                 {
-                    HelpFunctions.Instance.logg("StackTrace ---" + ex.ToString());
+                    Helpfunctions.Instance.logg("StackTrace ---" + ex.ToString());
                 }
                 //Helpfunctions.Instance.logg("nmgsime-");
 
@@ -417,8 +417,8 @@
                 }
                 catch (Exception ex)
                 {
-                    HelpFunctions.Instance.logg("StackTrace do next calced move---" + ex.ToString());
-                    HelpFunctions.Instance.ErrorLog("StackTrace do next calced move---" + ex.ToString());
+                    Helpfunctions.Instance.logg("StackTrace do next calced move---" + ex.ToString());
+                    Helpfunctions.Instance.ErrorLog("StackTrace do next calced move---" + ex.ToString());
 
                 }
                 //Helpfunctions.Instance.logg("nmgsime-");
@@ -747,7 +747,7 @@
 
         public void updateEntitiy(int old, int newone, bool logg)
         {
-            if (logg) HelpFunctions.Instance.logg("entityupdate! " + old + " to " + newone);
+            if (logg) Helpfunctions.Instance.logg("entityupdate! " + old + " to " + newone);
             if (this.nextMoveGuess != null)
             {
                 foreach (Minion m in this.nextMoveGuess.ownMinions)
