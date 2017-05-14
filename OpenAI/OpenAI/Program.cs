@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using HSRangerLib;
+using System.Diagnostics;
 
 namespace OpenAI
 {
@@ -92,7 +93,7 @@ namespace OpenAI
             if (!sf.startedexe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
             {
                 sf.startedexe = true;
-                Task.Run(() => startExeAsync());
+                Task.Run(() => StartExeAsync());
             }
 
 
@@ -107,18 +108,16 @@ namespace OpenAI
             //will be false until xytrix fixes it (@xytrix end the action list, after playing a tracking/discover card)
         }
 
-        private void startExeAsync()
+        private void StartExeAsync()
         {
-            System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("Redfish");
-            string directory = Settings.Instance.path + "Redfish.exe";
+            Process[] pname = Process.GetProcessesByName("OpenAIConsole");
+            string directory = Settings.Instance.path + "OpenAIConsole.exe";
             bool hasToOpen = true;
 
             if (pname.Length >= 1)
             {
-
                 for (int i = 0; i < pname.Length; i++)
                 {
-
                     string fullPath = pname[i].Modules[0].FileName;
                     if (fullPath == directory) hasToOpen = false;
                 }
@@ -126,12 +125,12 @@ namespace OpenAI
 
             if (hasToOpen)
             {
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(directory);
+                ProcessStartInfo startInfo = new ProcessStartInfo(directory);
                 startInfo.WorkingDirectory = Settings.Instance.path;
-                System.Diagnostics.Process.Start(startInfo);
+                Process.Start(startInfo);
             }
-
-            sf.startedexe = false; //reset it in case user closes exe
+            //reset it in case user closes exe
+            sf.startedexe = false; 
         }
 
         /// <summary>
