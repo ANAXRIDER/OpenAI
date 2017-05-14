@@ -62,10 +62,10 @@ namespace OpenAI
 
         public DateTime UnixTimeStampToDateTime(int unixTimeStamp)
         {
-            // Unix timestamp is seconds past epoch
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+
+            return dateTime;
         }
 
         private List<string> errorLogBuffer = new List<string>(Settings.Instance.logBuffer + 1);
