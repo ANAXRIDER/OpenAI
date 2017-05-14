@@ -113,7 +113,7 @@ namespace OpenAI
             HelpFunctions.Instance.ErrorLog("----------------------------");
             //Helpfunctions.Instance.ErrorLog("test... " + Settings.Instance.logpath + Settings.Instance.logfile);
             if (set.useExternalProcess) HelpFunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
-            if (set.useExternalProcess) HelpFunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
+            if (set.useExternalProcess) HelpFunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + OpenAIPath.SettingsPath);
             
             if (!sf.StartedExe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
             {

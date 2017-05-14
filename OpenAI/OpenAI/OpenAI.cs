@@ -124,8 +124,6 @@ namespace OpenAI
 
             /*** Cleaned ***/
 
-            sttngs.SetFilePath(OpenAIPath.AssemblyDirectory);
-
             if (SingleLog)
             {
                 sttngs.SetLogPath(OpenAIPath.LogPath + Path.DirectorySeparatorChar);

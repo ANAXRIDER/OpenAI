@@ -152,7 +152,6 @@ namespace OpenAI
 
 
         private static Settings instance;
-
         public static Settings Instance
         {
             get
@@ -163,7 +162,6 @@ namespace OpenAI
 
         private Settings() { }
 
-        
         public Behavior UpdateInstance()
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);

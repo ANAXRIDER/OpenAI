@@ -399,7 +399,7 @@ namespace OpenAI
             string[] lines = new string[0] { };
             combos.Clear();
 
-            string path = Settings.Instance.path;
+            string path = OpenAIPath.SettingsPath;
             string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
             string datapath = path + "Data" + Path.DirectorySeparatorChar;
             string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;

@@ -162,7 +162,7 @@ namespace OpenAI
                 this.datareaded = false;
                 try
                 {
-                    string path = Settings.Instance.path;
+                    string path = OpenAIPath.SettingsPath;
                     lines = File.ReadAllLines(path + "test.txt");
                     this.datareaded = true;
                 }
