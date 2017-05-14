@@ -1863,7 +1863,7 @@ namespace OpenAI
                     }
                     else
                     {
-                        data = File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                        data = File.ReadAllText(OpenAIPath.SettingsPath + "actionstodo.txt");
                     }
                     //if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
                     //if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");

@@ -7456,7 +7456,7 @@ namespace OpenAI
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
-                HelpFunctions.Instance.ErrorLog("cant find _carddb.txt in " + Settings.Instance.path);
+                HelpFunctions.Instance.ErrorLog("cant find _carddb.txt in " + OpenAIPath.SettingsPath);
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
                 HelpFunctions.Instance.ErrorLog("ERROR#################################################");
