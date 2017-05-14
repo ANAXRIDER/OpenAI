@@ -5,10 +5,9 @@ namespace OpenAI
 {
     internal sealed class Settings
     {
-
         public Behavior setSettings()
         {
-            return readSettings();
+            return ReadSettings();
         }
 
         public Behavior setDefaultSettings() //settings not to high to run without external process
@@ -57,8 +56,8 @@ namespace OpenAI
 
         public void applySettings()
         {
-            this.setWeights(alpha);
-            
+            this.SetWeights(alpha);
+
             Helpfunctions.Instance.ErrorLog("[Settings] set enemy-face-hp to: " + this.enfacehp);
             ComboBreaker.Instance.attackFaceHP = this.enfacehp;
             Ai.Instance.setMaxWide(this.maxwide);
@@ -79,7 +78,6 @@ namespace OpenAI
 
             if (this.writeToSingleFile) Helpfunctions.Instance.ErrorLog("[Settings] write log to single file");
         }
-
 
         public int enfacehp = 15;
 
@@ -141,7 +139,6 @@ namespace OpenAI
 
         public Behavior behave = new BehaviorControl();
 
-
         private static Settings instance;
 
         public static Settings Instance
@@ -152,26 +149,27 @@ namespace OpenAI
             }
         }
 
-        private Settings() { }
+        private Settings()
+        {
+        }
 
-        
         public Behavior updateInstance()
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             enemyClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname);
             deckName = Hrtprozis.Instance.deckName;
-            lock(instance)
+            lock (instance)
             {
-                return readSettings();
+                return ReadSettings();
             }
         }
 
-        public void loggCleanPath()
+        public void LogCleanPath()
         {
             Helpfunctions.Instance.logg(cleanPath);
         }
 
-        public void setWeights(int alpha)
+        public void SetWeights(int alpha)
         {
             float a = ((float)alpha) / 100f;
             this.firstweight = 1f - a;
@@ -179,111 +177,29 @@ namespace OpenAI
             Helpfunctions.Instance.ErrorLog("[Settings] current alpha is " + this.secondweight);
         }
 
-        public void setFilePath(string path)
+        public void SetFilePath(string path)
         {
             this.path = path;
         }
-        public void setLoggPath(string path)
+
+        public Behavior ReadSettings()
         {
-            this.logpath = path;
-        }
-
-        public void setLoggFile(string path)
-        {
-            this.logfile = path;
-        }
-
-        public Behavior readSettings() //takes same path as carddb
-        {
-            string[] lines = new string[] { };
-
-            string path = this.path;
-            string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
-            string datapath = path + "Data" + Path.DirectorySeparatorChar;
-            string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;
-            string classpath = datapath + ownClass + Path.DirectorySeparatorChar;
-            string cleanclasspath = cleandatapath + ownClass + Path.DirectorySeparatorChar;
-            string deckpath = classpath + deckName + Path.DirectorySeparatorChar;
-            string cleandeckpath = cleanclasspath + deckName + Path.DirectorySeparatorChar;
-            string enemyfilestring = "settings-" + enemyClass + ".txt";
-            const string filestring = "settings.txt";
-            bool enemysettings = false;
-
-            // if we have a deckName then we have a real ownClass too, not the default "druid"
-            if (deckName != "" && File.Exists(deckpath + enemyfilestring))
-            {
-                enemysettings = true;
-                path = deckpath;
-                cleanPath = cleandeckpath + enemyfilestring;
-            }
-            else if (deckName != "" && File.Exists(deckpath + filestring))
-            {
-                path = deckpath;
-                cleanPath = cleandeckpath + filestring;
-            }
-            else if (deckName != "" && File.Exists(classpath + enemyfilestring))
-            {
-                enemysettings = true;
-                path = classpath;
-                cleanPath = cleanclasspath + enemyfilestring;
-            }
-            else if (deckName != "" && File.Exists(classpath + filestring))
-            {
-                path = classpath;
-                cleanPath = cleanclasspath + filestring;
-            }
-            else if (deckName != "" && File.Exists(datapath + enemyfilestring))
-            {
-                enemysettings = true;
-                path = datapath;
-                cleanPath = cleandatapath + enemyfilestring;
-            }
-            else if (deckName != "" && File.Exists(datapath + filestring))
-            {
-                path = datapath;
-                cleanPath = cleandatapath + filestring;
-            }
-            else if (File.Exists(path + enemyfilestring))
-            {
-                enemysettings = true;
-                cleanPath = cleanpath + enemyfilestring;
-            }
-            else if (File.Exists(path + filestring))
-            {
-                cleanPath = cleanpath + filestring;
-            }
-            else
+            if (!File.Exists(FilePath.Settings))
             {
                 Helpfunctions.Instance.logg("[Settings] cant find base settings.txt, using default settings");
                 return setDefaultSettings();
             }
-            Helpfunctions.Instance.ErrorLog("[Settings] read " + cleanPath);
+            Helpfunctions.Instance.ErrorLog("[Settings] reading settings.txt ");
 
-
-            const string readerror = " read error. Continuing without user-defined rules.";
-            if (enemysettings)
+            string[] lines = new string[] { };
+            try
             {
-                try
-                {
-                    lines = File.ReadAllLines(path + enemyfilestring);
-                }
-                catch
-                {
-                    Helpfunctions.Instance.ErrorLog(enemyfilestring + readerror);
-                    return setDefaultSettings();
-                }
+                lines = File.ReadAllLines(FilePath.Settings);
             }
-            else
+            catch
             {
-                try
-                {
-                    lines = File.ReadAllLines(path + filestring);
-                }
-                catch
-                {
-                    Helpfunctions.Instance.logg(filestring + readerror);
-                    return setDefaultSettings();
-                }
+                Helpfunctions.Instance.logg("[Settings] cant find read settings.txt, using default settings");
+                return setDefaultSettings();
             }
 
             foreach (string ss in lines)
@@ -291,7 +207,7 @@ namespace OpenAI
                 string s = ss.Replace(" ", "");
                 if (s.Contains(";")) s = s.Split(';')[0];
                 if (s.Contains("#")) s = s.Split('#')[0];
-                if (s.Contains("//")) s = s.Split(new string[]{"//"}, StringSplitOptions.RemoveEmptyEntries)[0];
+                if (s.Contains("//")) s = s.Split(new string[] { "//" }, StringSplitOptions.RemoveEmptyEntries)[0];
                 if (s.Contains(",")) s = s.Split(',')[0];
                 if (s == "" || s == " ") continue;
                 s = s.ToLower();
@@ -300,7 +216,7 @@ namespace OpenAI
                 string searchword = "maxwide=";
                 if (s.StartsWith(searchword))
                 {
-                    string a = s.Replace(searchword,"");
+                    string a = s.Replace(searchword, "");
                     try
                     {
                         this.maxwide = Convert.ToInt32(a);
@@ -436,7 +352,7 @@ namespace OpenAI
                         Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
-               
+
                 searchword = "nextturndeep=";
                 if (s.StartsWith(searchword))
                 {
@@ -557,7 +473,7 @@ namespace OpenAI
                     if (a.StartsWith("rush")) behave = new BehaviorRush();
                     if (a.StartsWith("mana")) behave = new BehaviorMana();
                     if (a.StartsWith("face")) behave = new BehaviorFace();
-					if (a.StartsWith("aggrowarlock")) behave = new BehaviorAggroWarlock();
+                    if (a.StartsWith("aggrowarlock")) behave = new BehaviorAggroWarlock();
                     if (a.StartsWith("aggroshaman")) behave = new BehaviorAggroshaman();
                 }
 
@@ -602,24 +518,6 @@ namespace OpenAI
                         Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
-               
-
-                //always enabled now so ignore user setting
-                /*
-                searchword = "logbuffer=";
-                if (s.StartsWith(searchword))
-                {
-                    string a = s.Replace(searchword, "");
-                    try
-                    {
-                        this.logBuffer = Convert.ToInt32(a);
-                    }
-                    catch
-                    {
-                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
-                    }
-                }
-                */
 
                 searchword = "secretstandard =";
                 if (s.StartsWith(searchword))
@@ -648,18 +546,10 @@ namespace OpenAI
                         Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
-
-
             }
-            //foreach ended----------
-
             applySettings();
-
 
             return behave;
         }
-
     }
-
 }
- 

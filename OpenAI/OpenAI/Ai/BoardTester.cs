@@ -1185,7 +1185,7 @@ namespace OpenAI
 
             Settings.Instance.useSecretsPlayArround = dosecrets;
 
-            Settings.Instance.setWeights(alpha);
+            Settings.Instance.SetWeights(alpha);
 
         }
 

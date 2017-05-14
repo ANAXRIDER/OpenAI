@@ -59,7 +59,7 @@ namespace OpenAI
             Settings set = Settings.Instance;
             this.sf = Silverfish.Instance;
             behave = set.behave;
-            sf.setnewLoggFile();
+            sf.SetNewLogFile();
             CardDB cdb = CardDB.Instance;
             if (cdb.installedWrong)
             {
@@ -180,8 +180,8 @@ namespace OpenAI
                 behave = Settings.Instance.updateInstance();
             }
             
-            sf.setnewLoggFile();
-            Settings.Instance.loggCleanPath();
+            sf.SetNewLogFile();
+            Settings.Instance.LogCleanPath();
             Mulligan.Instance.loggCleanPath();
             Discovery.Instance.LogCleanPath();
             ComboBreaker.Instance.loggCleanPath();
@@ -1408,57 +1408,30 @@ namespace OpenAI
 
         private Silverfish()
         {
-            this.singleLog = Settings.Instance.writeToSingleFile;
-            string path = FolderPath.OpenAI + "SilverLogs" + Path.DirectorySeparatorChar;
-            Directory.CreateDirectory(path);
-            sttngs.setFilePath(FolderPath.OpenAI);
-
-            if (singleLog)
-            {
-                sttngs.setLoggPath(FolderPath.Logs + Path.DirectorySeparatorChar);
-                sttngs.setLoggFile("SilverLog.txt");
-                Helpfunctions.Instance.createNewLoggfile();
-            }
-            else
-            {
-                sttngs.setLoggPath(path);
-            }
-            
-            Helpfunctions.Instance.ErrorLog("init Silverfish");
-            Helpfunctions.Instance.ErrorLog("setlogpath to:" + path);
+            Helpfunctions.Instance.ErrorLog("Started OpenAI");
+            Helpfunctions.Instance.ErrorLog("Paths:");
+            Helpfunctions.Instance.ErrorLog("   Assembly:");
+            Helpfunctions.Instance.ErrorLog("      - " + FolderPath.OpenAI);
+            Helpfunctions.Instance.ErrorLog("   Common:");
+            Helpfunctions.Instance.ErrorLog("      - " + FolderPath.Common);
+            Helpfunctions.Instance.ErrorLog("   Logs:");
+            Helpfunctions.Instance.ErrorLog("      - " + FolderPath.Logs);
 
             PenalityManager.Instance.setCombos();
-            Mulligan m = Mulligan.Instance; // read the mulligan list
-            Discovery d = Discovery.Instance; // read the discover list
+            Mulligan m = Mulligan.Instance;
+            Discovery d = Discovery.Instance;
             Settings.Instance.setSettings();
             Helpfunctions.Instance.startFlushingLogBuffers();
         }
 
-        public void setnewLoggFile()
+        public void SetNewLogFile()
         {
             Questmanager.Instance.Reset();
             OwnCrystalCore = 0;
             EnemyCrystalCore = 0;
             ownMinionsCost0 = false;
 
-            Helpfunctions.Instance.flushLogg(); // flush the buffer before creating a new log
-            if (!singleLog)
-            {
-                sttngs.setLoggFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
-                Helpfunctions.Instance.createNewLoggfile();
-                Helpfunctions.Instance.ErrorLog("#######################################################");
-                Helpfunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
-                Helpfunctions.Instance.ErrorLog("#######################################################");
-            }
-            else
-            {
-                sttngs.setLoggFile("UILogg.txt");
-            }
-        }
-
-        public void setNewGame()
-        {
-            //todo sepefeets - move stuff here to make things more consistant between HR/HB versions
+            Helpfunctions.Instance.flushLogg();
         }
 
         public bool updateEverything(HSRangerLib.BotBase rangerbot, Behavior botbase, bool queueActions, bool runExtern = false, bool passiveWait = false)
@@ -2231,7 +2204,7 @@ namespace OpenAI
                     List < Handmanager.Handcard > newcards = p.getNewHandCards(Ai.Instance.nextMoveGuess);
                     foreach (var card in newcards)
                     {
-                        if (!isCardCreated(card)) Hrtprozis.Instance.removeCardFromTurnDeck(card.card.cardIDenum);
+                        if (!IsCardCreated(card)) Hrtprozis.Instance.removeCardFromTurnDeck(card.card.cardIDenum);
                     }
 
                     printstuff(p, true);
@@ -2249,7 +2222,7 @@ namespace OpenAI
             return true;
         }
 
-        public bool isCardCreated(Handmanager.Handcard handcard)
+        public bool IsCardCreated(Handmanager.Handcard handcard)
         {
             foreach (var card in latestGameState.GameEntityList)
             {

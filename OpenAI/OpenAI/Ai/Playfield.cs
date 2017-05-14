@@ -1,11 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OpenAI
 {
-    using System;
-    using System.Collections.Generic;
-
-    public struct triggerCounter
+    public struct TriggerCounter
     {
         public int minionsGotHealed;
         public int ownMinionsGotHealed;
@@ -59,7 +57,7 @@ namespace OpenAI
 
         public int nextEntity;
 
-        public triggerCounter tempTrigger;
+        public TriggerCounter tempTrigger;
         private Hrtprozis prozis = Hrtprozis.Instance;
         public PenalityManager penman = PenalityManager.Instance;
 

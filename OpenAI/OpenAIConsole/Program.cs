@@ -82,7 +82,7 @@ namespace OpenAI
         {
             starttime = DateTime.Now;
             this.sf = Silverfish.Instance;
-            sf.setnewLoggFile();
+            sf.SetNewLogFile();
 
             bool teststuff = true;
             bool printstuff = true;
@@ -276,52 +276,26 @@ namespace OpenAI
 
         private Silverfish()
         {
-            this.singleLog = Settings.Instance.writeToSingleFile;
             Helpfunctions.Instance.ErrorLog("init Silverfish V" + versionnumber);
-            string path = "";
-            //System.IO.Directory.CreateDirectory(path);
-            sttngs.setFilePath(FolderPath.Common);
 
-            if (!singleLog)
-            {
-                sttngs.setLoggPath(path);
-            }
-            else
-            {
-                sttngs.setLoggPath("");
-                sttngs.setLoggFile("UILogg.txt");
-                try
-                {
-                    Helpfunctions.Instance.createNewLoggfile();
-                }
-                catch
-                {
-                    
-                }
-            }
             PenalityManager.Instance.setCombos();
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
             Settings.Instance.setSettings();
         }
 
-        public void setnewLoggFile()
+        public void SetNewLogFile()
         {
             if (!singleLog)
             {
-                sttngs.setLoggFile("UILogg" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
                 Helpfunctions.Instance.createNewLoggfile();
                 Helpfunctions.Instance.ErrorLog("#######################################################");
                 Helpfunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
                 Helpfunctions.Instance.ErrorLog("#######################################################");
             }
-            else
-            {
-                sttngs.setLoggFile("UILogg.txt");
-            }
         }
 
-        public bool isCardCreated(Handmanager.Handcard handcard)
+        public bool IsCardCreated(Handmanager.Handcard handcard)
         {
             return false;
         }
