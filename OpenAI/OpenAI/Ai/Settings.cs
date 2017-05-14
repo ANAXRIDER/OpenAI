@@ -168,7 +168,7 @@ namespace OpenAI
 
         public void loggCleanPath()
         {
-            Helpfunctions.Instance.Log(cleanPath);
+            Helpfunctions.Instance.logg(cleanPath);
         }
 
         public void setWeights(int alpha)
@@ -254,7 +254,7 @@ namespace OpenAI
             }
             else
             {
-                Helpfunctions.Instance.Log("[Settings] cant find base settings.txt, using default settings");
+                Helpfunctions.Instance.logg("[Settings] cant find base settings.txt, using default settings");
                 return setDefaultSettings();
             }
             Helpfunctions.Instance.ErrorLog("[Settings] read " + cleanPath);
@@ -281,7 +281,7 @@ namespace OpenAI
                 }
                 catch
                 {
-                    Helpfunctions.Instance.Log(filestring + readerror);
+                    Helpfunctions.Instance.logg(filestring + readerror);
                     return setDefaultSettings();
                 }
             }
