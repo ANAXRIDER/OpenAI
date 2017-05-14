@@ -27,7 +27,7 @@ namespace OpenAI
         {
             get
             {
-                return Path.Combine(FolderPath.Common + "crrntbrd.txt.txt");
+                return Path.Combine(FolderPath.Common + "crrntbrd.txt");
             }
         }
     }
