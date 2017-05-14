@@ -10,42 +10,41 @@ namespace OpenAI
             return ReadSettings();
         }
 
-        public Behavior SetDefaultSettings() //settings not to high to run without external process
+        public Behavior SetDefaultSettings()
         {
-            // play with these settings###################################
-            this.EnfaceHp = 15;  // hp of enemy when your hero is allowed to attack the enemy face with his weapon
-            this.MaxWide = 3000;   // numer of boards which are taken to the next deep-lvl
-            this.TwotsAmount = 0;          // number of boards where the next turn is simulated
+            this.EnfaceHp = 15;             // hp of enemy when your hero is allowed to attack the enemy face with his weapon
+            this.MaxWide = 3000;            // numer of boards which are taken to the next deep-lvl
+            this.TwotsAmount = 0;           // number of boards where the next turn is simulated
             this.SimEnemySecondTurn = true; // if he simulates the next players-turn, he also simulates the enemys respons
 
-            this.PlayAround = false;  //play around some enemys aoe-spells?
+            this.PlayAround = false;    //play around some enemys aoe-spells?
             //these two probs are >= 0 and <= 100
-            this.PlayAroundProb = 50;    //probability where the enemy plays the aoe-spell, but your minions will not die through it
-            this.PlayAroundProb2 = 80;   // probability where the enemy plays the aoe-spell, and your minions can die!
+            this.PlayAroundProb = 50;   //probability where the enemy plays the aoe-spell, but your minions will not die through it
+            this.PlayAroundProb2 = 80;  // probability where the enemy plays the aoe-spell, and your minions can die!
 
-            this.EnemyTurnMaxWide = 40; // bords calculated in enemys-first-turn in first AI step (lower than enemySecondTurnMaxWide)
-            this.EnemyTurnMaxWideSecondTime = 200; // bords calculated in enemys-first-turn BUT in the second AI step (higher than enemyTurnMaxWide)
-            this.EnemySecondTurnMaxWide = 20; // number of enemy-board calculated in enemys second TURN
+            this.EnemyTurnMaxWide = 40;             // bords calculated in enemys-first-turn in first AI step (lower than enemySecondTurnMaxWide)
+            this.EnemyTurnMaxWideSecondTime = 200;  // bords calculated in enemys-first-turn BUT in the second AI step (higher than enemyTurnMaxWide)
+            this.EnemySecondTurnMaxWide = 20;       // number of enemy-board calculated in enemys second TURN
 
-            this.NextTurnDeep = 6; //maximum combo-deep in your second turn (dont change this!)
-            this.NextTurnMaxWide = 20; //maximum boards calculated in one second-turn-"combo-step"
-            this.NextTurnTotalBoards = 200;//maximum boards calculated in second turn simulation
+            this.NextTurnDeep = 6;          //maximum combo-deep in your second turn (dont change this!)
+            this.NextTurnMaxWide = 20;      //maximum boards calculated in one second-turn-"combo-step"
+            this.NextTurnTotalBoards = 200; //maximum boards calculated in second turn simulation
 
             this.useSecretsPlayArround = false; // playing arround enemys secrets
 
             this.alpha = 50; // weight of the second turn in calculation (0<= alpha <= 100)
 
-            this.simulatePlacement = false;  // set this true, and ai will simulate all placements, whether you have a alpha/flametongue/argus
-            this.behave = new BehaviorControl(); //select the behavior of the ai: control, rush, face (new) or mana (very experimental, dont use that :D)
+            this.simulatePlacement = false;         // set this true, and ai will simulate all placements, whether you have a alpha/flametongue/argus
+            this.behave = new BehaviorControl();    //select the behavior of the ai: control, rush, face (new) or mana (very experimental, dont use that :D)
 
-            this.useExternalProcess = false; // use silver.exe for calculations a lot faster than turning it off (true = recomended)
-            this.passiveWaiting = false; // process will wait passive for silver.exe to finish
+            this.useExternalProcess = false;    // use silver.exe for calculations a lot faster than turning it off (true = recomended)
+            this.passiveWaiting = false;        // process will wait passive for silver.exe to finish
 
             this.speedy = false; // send multiple actions together to HR
             
-            this.useNetwork = false; // use networking to communicate with silver.exe instead of a file
-            this.netAddress = "127.0.0.1"; // address where the bot is running
-            this.tcpPort = 14804; // TCP port to connect on
+            this.useNetwork = false;        // use networking to communicate with silver.exe instead of a file
+            this.netAddress = "127.0.0.1";  // address where the bot is running
+            this.tcpPort = 14804;           // TCP port to connect on
 
             this.logBuffer = 100; // max log messages to buffer before writing to disk
 
@@ -84,6 +83,7 @@ namespace OpenAI
             if (this.writeToSingleFile) HelpFunctions.Instance.ErrorLog("[Settings] write log to single file");
         }
 
+        //
 
         public int EnfaceHp { get; set; } = 15;
 
@@ -105,6 +105,8 @@ namespace OpenAI
         public int NextTurnDeep { get; set; } = 6;
         public int NextTurnMaxWide { get; set; } = 20;
         public int NextTurnTotalBoards { get; set; } = 50;
+
+        //
 
         public bool useSecretsPlayArround;
 
