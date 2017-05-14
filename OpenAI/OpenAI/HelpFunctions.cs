@@ -28,7 +28,7 @@ namespace OpenAI
         }
 
         private bool filecreated = false;
-        public void createNewLoggfile()
+        public void CreateNewLogfile()
         {
             filecreated = false;
         }

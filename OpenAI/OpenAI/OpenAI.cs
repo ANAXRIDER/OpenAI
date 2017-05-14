@@ -130,7 +130,7 @@ namespace OpenAI
             {
                 sttngs.setLoggPath(OpenAIPath.LogPath + System.IO.Path.DirectorySeparatorChar);
                 sttngs.setLoggFile("SilverLog.txt");
-                HelpFunctions.Instance.createNewLoggfile();
+                HelpFunctions.Instance.CreateNewLogfile();
             }
             else
             {
@@ -159,7 +159,7 @@ namespace OpenAI
             if (!SingleLog)
             {
                 sttngs.setLoggFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
-                HelpFunctions.Instance.createNewLoggfile();
+                HelpFunctions.Instance.CreateNewLogfile();
                 HelpFunctions.Instance.ErrorLog("#######################################################");
                 HelpFunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
                 HelpFunctions.Instance.ErrorLog("#######################################################");
