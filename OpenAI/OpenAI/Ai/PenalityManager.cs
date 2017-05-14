@@ -1686,7 +1686,7 @@ namespace OpenAI
                 }
                 if (p.ownMaxMana <= 6) return 10;
                 if (carddraw <= 0) return 500;
-                if (p.owncards.Count == hasdivinefavor && p.ownMaxMana >= 7) return -5;
+                if (p.owncards.Count == hasdivinefavor && p.ownAbilityReady) return -5;
             }
 
             if (name == CardDB.cardName.battlerage)
