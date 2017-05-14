@@ -300,19 +300,8 @@ namespace OpenAI
         /// <param name="e"></param>
         public override void OnGameArenaDraft(GameArenaDraftEventArgs e)
         {
-            //must set e.handled to true if you handle draft in this function.
-            e.handled = false;
-
-
-            //if (e.is_hero_choices)
-            //{
-            //    //choose hero here
-            //    e.draft_pick_id = GetBestHeroCardId(e);
-
-            //    return;
-            //}
-
-        }   
+            base.OnGameArenaDraft(e);
+        }
 
         /// <summary>
         /// 
