@@ -25,7 +25,7 @@ namespace OpenAI
         {
             get
             {
-                return Path.Combine(FolderPath.OpenAI + "_carddb.txt");
+                return Path.Combine(FolderPath.OpenAI + "settings.txt");
             }
         }
 
