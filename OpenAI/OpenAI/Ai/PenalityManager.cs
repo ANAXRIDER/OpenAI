@@ -5244,6 +5244,9 @@ namespace OpenAI
             attackBuffDatabase.Add(CardDB.cardName.shadowsensei, 2); //to a stealth
             attackBuffDatabase.Add(CardDB.cardName.bloodfurypotion, 3);
             attackBuffDatabase.Add(CardDB.cardName.crystalweaver, 1); //to demons
+            
+            //ungoro
+            attackBuffDatabase.Add(CardDB.cardName.rockpoolhunter, 1); //to murloc
             attackBuffDatabase.Add(CardDB.cardName.spikeridgedsteed, 2);
             attackBuffDatabase.Add(CardDB.cardName.earthenscales, 1);
         }
@@ -5286,6 +5289,9 @@ namespace OpenAI
             healthBuffDatabase.Add(CardDB.cardName.bloodfurypotion, 3); //if demon
             healthBuffDatabase.Add(CardDB.cardName.crystalweaver, 1); //to demons
             healthBuffDatabase.Add(CardDB.cardName.kabaltalonpriest, 3);
+
+            //ungoro
+            healthBuffDatabase.Add(CardDB.cardName.rockpoolhunter, 1); //to murloc
             healthBuffDatabase.Add(CardDB.cardName.spikeridgedsteed, 6);
             healthBuffDatabase.Add(CardDB.cardName.earthenscales, 1);
 
