@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    stellt am ende eures zuges bei allen befreundeten dienern 1 leben wieder her.
 
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own == turnEndOfOwner)
             {

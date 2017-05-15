@@ -8,13 +8,13 @@ namespace OpenAI
 	{
 		//Whenever a character is healed, give your C'Thun +1/+1 (wherever it is)
 		
-        public override void onAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
+        public override void OnAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
         {
             p.anzOgOwnCThunHpBonus++;
             p.anzOgOwnCThunAngrBonus++;
         }
 
-        public override void onAMinionGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
+        public override void OnAMinionGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
         {
             p.anzOgOwnCThunHpBonus++;
             p.anzOgOwnCThunAngrBonus++;

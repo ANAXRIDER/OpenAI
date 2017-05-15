@@ -121,14 +121,7 @@ namespace OpenAI
         public bool SecretStandard = true;
         public int enemyherovaluemultiply = 100;
 
-        public string path = "";
-        public string logpath = "";
-        public string logfile = "Logg.txt";
-
         public bool writeToSingleFile = false;
-
-        public bool learnmode = false;
-        public bool printlearnmode = true;
 
         public int numberOfThreads = Environment.ProcessorCount;//32;//
 
@@ -175,11 +168,6 @@ namespace OpenAI
             this.firstweight = 1f - a;
             this.secondweight = a;
             Helpfunctions.Instance.ErrorLog("[Settings] current alpha is " + this.secondweight);
-        }
-
-        public void SetFilePath(string path)
-        {
-            this.path = path;
         }
 
         public Behavior ReadSettings()

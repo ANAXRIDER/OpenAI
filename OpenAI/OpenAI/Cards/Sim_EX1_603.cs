@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ fügt einem diener 1 schaden zu und verleiht ihm +2 angriff.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (target != null)
             {

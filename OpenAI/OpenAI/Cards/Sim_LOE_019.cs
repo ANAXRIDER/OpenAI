@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //Battlecry: Choose a friendly minion. Gain a copy of its Deathrattle effect.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             //TODO
         }

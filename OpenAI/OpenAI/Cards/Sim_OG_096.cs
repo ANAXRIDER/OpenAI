@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Battlecry: If your C'Thun has at least 10 Attack, restore 10 Health to your hero.
 		
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (own.own && (p.anzOgOwnCThunAngrBonus + 6) > 9)
 			{

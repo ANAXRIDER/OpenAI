@@ -12,7 +12,7 @@ namespace OpenAI
         CardDB.Card c2 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_033);//Leokk
         CardDB.Card c3 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_032);//Misha
         
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             int pos = (ownplay)?  p.ownMinions.Count : p.enemyMinions.Count;
             p.callKid(c1, pos, ownplay);

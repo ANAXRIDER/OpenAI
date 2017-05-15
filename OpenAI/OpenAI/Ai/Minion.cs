@@ -510,12 +510,12 @@ namespace OpenAI
 
             if (woundedbefore && !this.wounded)
             {
-                this.handcard.card.sim_card.onEnrageStop(p, this);
+                this.handcard.card.sim_card.OnEnrageStop(p, this);
             }
 
             if (!woundedbefore && this.wounded)
             {
-                this.handcard.card.sim_card.onEnrageStart(p, this);
+                this.handcard.card.sim_card.OnEnrageStart(p, this);
             }
 
             if (this.Hp <= 0)
@@ -647,7 +647,7 @@ namespace OpenAI
 
         public void endAura(Playfield p)
         {
-            if (!this.silenced) this.handcard.card.sim_card.onAuraEnds(p, this);
+            if (!this.silenced) this.handcard.card.sim_card.OnAuraEnds(p, this);
 
             if (this.own)
             {
@@ -713,7 +713,7 @@ namespace OpenAI
             //delete enrage (if minion is silenced the first time)
             if (wounded && handcard.card.Enrage && !silenced)
             {
-                handcard.card.sim_card.onEnrageStop(p, this);
+                handcard.card.sim_card.OnEnrageStop(p, this);
             }
 
             //reset attack
@@ -744,7 +744,7 @@ namespace OpenAI
 
             if (!silenced)//minion WAS not silenced, deactivate his aura
             {
-                handcard.card.sim_card.onAuraEnds(p, this);
+                handcard.card.sim_card.OnAuraEnds(p, this);
             }
 
             silenced = true;

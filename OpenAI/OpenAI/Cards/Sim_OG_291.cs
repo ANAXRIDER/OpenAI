@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Battlecry: Choose a friendly minion. Add a 1/1 copy to your hand that costs (1).
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (target != null)
             {

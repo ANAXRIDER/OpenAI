@@ -9,12 +9,12 @@ namespace OpenAI
 
         //Whenever another minion takes damage, destroy it
         //destroying done in triggerAMinionGotDmg
-        public override void onAuraStarts(Playfield p, Minion m)
+        public override void OnAuraStarts(Playfield p, Minion m)
         {
             p.anzAcidmaw++;
         }
 
-        public override void onAuraEnds(Playfield p, Minion m)
+        public override void OnAuraEnds(Playfield p, Minion m)
         {
             p.anzAcidmaw--;
         }

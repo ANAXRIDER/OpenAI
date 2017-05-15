@@ -10,7 +10,7 @@ namespace OpenAI
         //Battlecry: Reveal a minion in each deck. If yours costs more, gain +1/+1.
 
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             //we assume we get the buff!
             p.minionGetBuffed(own, 1, 1);

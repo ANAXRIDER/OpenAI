@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 //    geheimnis:/ wenn euer gegner einen diener ausspielt, wird dessen leben auf 1 verringert.
 
-        public override void onSecretPlay(Playfield p, bool ownplay, Minion target, int number)
+        public override void OnSecretPlay(Playfield p, bool ownplay, Minion target, int number)
         {
             target.Hp = 1;
             target.maxHp = 1;

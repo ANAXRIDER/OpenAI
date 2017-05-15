@@ -4618,6 +4618,9 @@
     <Compile Include="..\OpenAI\Cards\Sim_UNG_999t8.cs">
       <Link>Cards\Sim_UNG_999t8.cs</Link>
     </Compile>
+	<Compile Include="..\OpenAI\Cards\UnknownCard.cs">
+      <Link>Cards\UnknownCard.cs</Link>
+    </Compile>
     <Compile Include="..\OpenAI\Paths.cs">
       <Link>Paths.cs</Link>
     </Compile>

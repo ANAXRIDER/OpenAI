@@ -7,12 +7,12 @@ namespace OpenAI
     using System.Collections.Generic;
     using System.IO;
 
-    public struct targett
+    public struct TargetInfo
     {
         public int target;
         public int targetEntity;
 
-        public targett(int targ, int ent)
+        public TargetInfo(int targ, int ent)
         {
             this.target = targ;
             this.targetEntity = ent;
@@ -34,28 +34,27 @@ namespace OpenAI
             HERO,
         }
 
-        public enum cardtrigers
+        public enum CardTriggers
         {
-            newtriger,
-            getBattlecryEffect,
-            onAHeroGotHealedTrigger,
-            onAMinionGotHealedTrigger,
-            onAuraEnds,
-            onAuraStarts,
-            onCardIsGoingToBePlayed,
-            onCardPlay,
-            onCardWasPlayed,
-            onDeathrattle,
-            onEnrageStart,
-            onEnrageStop,
-            onMinionDiedTrigger,
-            onMinionGotDmgTrigger,
-            onMinionIsSummoned,
-            onMinionWasSummoned,
-            onSecretPlay,
-            onTurnEndsTrigger,
-            onTurnStartTrigger,
-            triggerInspire
+            GetBattlecryEffect,
+            OnAHeroGotHealedTrigger,
+            OnAMinionGotHealedTrigger,
+            OnAuraEnds,
+            OnAuraStarts,
+            OnCardIsGoingToBePlayed,
+            OnCardPlay,
+            OnCardWasPlayed,
+            OnDeathrattle,
+            OnEnrageStart,
+            OnEnrageStop,
+            OnMinionDiedTrigger,
+            OnMinionGotDmgTrigger,
+            OnMinionIsSummoned,
+            OnMinionWasSummoned,
+            OnSecretPlay,
+            OnTurnEndsTrigger,
+            OnTurnStartTrigger,
+            OnInspire
         }
 
         public enum cardrace
@@ -5703,7 +5702,7 @@ namespace OpenAI
             public int spellpowervalue;
             public cardIDEnum cardIDenum = cardIDEnum.None;
             public List<ErrorType2> playrequires;
-            public List<cardtrigers> trigers;
+            public List<CardTriggers> triggers;
 
             public SimTemplate sim_card;
             public PenTemplate pen_card;
@@ -7483,7 +7482,7 @@ namespace OpenAI
             {
                 name = cardName.unknown,
                 cost = 1000,
-                sim_card = new SimTemplate(),
+                sim_card = new UnknownCard(),
                 pen_card = new PenTemplate()
             };
             this.namelist.Add("unknown");
@@ -9628,7 +9627,7 @@ namespace OpenAI
                 case cardIDEnum.PlaceholderCard: return new Sim_PlaceholderCard();
             }
 
-            return new SimTemplate();
+            return new UnknownCard();
         }
 
         public PenTemplate getPenCard(cardIDEnum id)
@@ -10664,23 +10663,24 @@ namespace OpenAI
                     c.lethalhelper = true;
                 }
 
-                c.trigers = new List<cardtrigers>();
-                Type trigerType = c.sim_card.GetType();
-                foreach (string trigerName in Enum.GetNames(typeof(cardtrigers)))
+                c.triggers = new List<CardTriggers>();
+                Type triggerType = c.sim_card.GetType();
+                foreach (string triggerName in Enum.GetNames(typeof(CardTriggers)))
                 {
                     try
                     {
-                        foreach (var m in trigerType.GetMethods().Where(e => e.Name.Equals(trigerName, StringComparison.Ordinal)))
+                        foreach (var m in triggerType.GetMethods().Where(e => e.Name.Equals(triggerName, StringComparison.Ordinal)))
                         {
-                            if (m.DeclaringType == trigerType)
-                                c.trigers.Add((cardtrigers)Enum.Parse(typeof(cardtrigers), trigerName));
+                            if (m.DeclaringType == triggerType)
+                                c.triggers.Add((CardTriggers)Enum.Parse(typeof(CardTriggers), triggerName));
                         }
                     }
                     catch
                     {
+                        Helpfunctions.Instance.ErrorLog("Can't find method with name: " + triggerName);
                     }
                 }
-                if (c.trigers.Count > 10) c.trigers.Clear();
+                if (c.triggers.Count > 10) c.triggers.Clear();
             }
         }
     }

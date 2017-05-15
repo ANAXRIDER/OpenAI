@@ -290,7 +290,7 @@ namespace OpenAI
             {
                 Helpfunctions.Instance.createNewLoggfile();
                 Helpfunctions.Instance.ErrorLog("#######################################################");
-                Helpfunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
+                Helpfunctions.Instance.ErrorLog("fight is logged in: " + FilePath.Log);
                 Helpfunctions.Instance.ErrorLog("#######################################################");
             }
         }
@@ -538,7 +538,7 @@ namespace OpenAI
             {
                 try
                 {
-                    File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
+                    File.WriteAllText(FilePath.NewCardDB, this.sendbuffer);
                     writed = false;
                 }
                 catch

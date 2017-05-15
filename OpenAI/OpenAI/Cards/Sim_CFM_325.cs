@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Has +2 Attack while you have a weapon equipped.
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             if (m.own)
             {

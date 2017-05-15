@@ -9,7 +9,7 @@ namespace OpenAI
     {
         private PenalityManager penman = PenalityManager.Instance;
 
-        public override float getPlayfieldValue(Playfield p)
+        public override float GetPlayfieldValue(Playfield p)
         {
             if (p.value >= -2000000) return p.value;
             float retval = 0;
@@ -173,7 +173,7 @@ namespace OpenAI
             {
                 if (m.name == CardDB.cardName.grimpatron && !m.silenced) enemyhaspatron = true;
 
-                float currMinionValue = this.getEnemyMinionValue(m, p);
+                float currMinionValue = this.GetEnemyMinionValue(m, p);
 
                 // Give a bonus for 1 hp minions as a mage, since we can remove it easier in the future with ping.
                 // But we make sure we only give this bonus once among all enemies. We also give another +1 bonus once if the atk >= 4.
@@ -333,7 +333,7 @@ namespace OpenAI
 
             foreach (Minion m in p.enemyMinions)
             {
-                retval -= this.getEnemyMinionValue(m, p);
+                retval -= this.GetEnemyMinionValue(m, p);
             }
 
             retval -= 5 * p.enemySecretCount;
@@ -430,12 +430,12 @@ namespace OpenAI
         }
 
         //other value of the board for enemys turn? (currently the same as getplayfield value)
-        public override float getPlayfieldValueEnemy(Playfield p)
+        public override float GetPlayfieldValueEnemy(Playfield p)
         {
-            return getPlayfieldValue(p);
+            return GetPlayfieldValue(p);
         }
 
-        public override float getEnemyMinionValue(Minion m, Playfield p)
+        public override float GetEnemyMinionValue(Minion m, Playfield p)
         {
             float retval = 2;
             retval += m.Hp * 1;

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ zerstört die waffe eures gegners.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.lowerWeaponDurability(1000, !own.own);
 		}

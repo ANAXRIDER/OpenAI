@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Deathrattle: Give a random minion in your hand +2/+2.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

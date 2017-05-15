@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Add a random Paladin card to your hand
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.drawACard(CardDB.cardIDEnum.CS2_093, own.own, true); //consecration
         }

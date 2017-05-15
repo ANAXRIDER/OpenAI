@@ -8,7 +8,7 @@ namespace OpenAI
     {
 
         //    todesröcheln:/ fügt dem feindlichen helden 2 schaden zu.
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.minionGetDamageOrHeal(m.own ? p.enemyHero : p.ownHero, 2);
         }

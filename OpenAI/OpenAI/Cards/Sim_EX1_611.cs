@@ -9,7 +9,7 @@ namespace OpenAI
         //todo secret
         //    geheimnis:/ wenn ein feindlicher diener angreift, lasst ihn auf die hand seines besitzers zurückkehren. zusätzlich kostet er (2) mehr.
 
-        public override void onSecretPlay(Playfield p, bool ownplay, Minion target, int number)
+        public override void OnSecretPlay(Playfield p, bool ownplay, Minion target, int number)
         {
             p.minionReturnToHand(target, !ownplay, 2);
             if (target.entityID <= 999) target.Hp = -100;

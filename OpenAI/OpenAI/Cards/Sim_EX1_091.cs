@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ übernehmt die kontrolle über einen feindlichen diener mit max. 2 angriff.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (target != null) p.minionGetControlled(target, own.own, false);
 		}

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Draw a card. Add 2 extra copies of it to your hand.
 		
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.drawACard(CardDB.cardName.unknown, ownplay);
             p.drawACard(CardDB.cardName.unknown, ownplay, true);

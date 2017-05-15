@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //Your other Murlocs have +1 Attack.
 
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
         {
             if (own.own) p.anzOwnGrimscaleOracle++;
             else p.anzEnemyGrimscaleOracle++;
@@ -20,7 +20,7 @@ namespace OpenAI
             }
         }
 
-        public override void onAuraEnds(Playfield p, Minion m)
+        public override void OnAuraEnds(Playfield p, Minion m)
         {
             if (m.own) p.anzOwnGrimscaleOracle--;
             else p.anzEnemyGrimscaleOracle--;

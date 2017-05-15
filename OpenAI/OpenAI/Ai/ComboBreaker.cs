@@ -393,7 +393,7 @@ namespace OpenAI
             string[] lines = new string[0] { };
             combos.Clear();
 
-            string path = Settings.Instance.path;
+            string path = FolderPath.OpenAI;
             string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
             string datapath = path + "Data" + Path.DirectorySeparatorChar;
             string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;
@@ -492,7 +492,7 @@ namespace OpenAI
             if (playByValue.Count > 0) Helpfunctions.Instance.ErrorLog("[Combo] " + playByValue.Count + " card value rules found");
         }
 
-        public int getPenalityForDestroyingCombo(CardDB.Card crd, Playfield p)
+        public int GetPenalityForDestroyingCombo(CardDB.Card crd, Playfield p)
         {
             if (this.combos.Count == 0) return 0;
             int pen = int.MaxValue;
@@ -519,7 +519,7 @@ namespace OpenAI
             return 0;
         }
 
-        public int checkIfComboWasPlayed(List<Action> alist, CardDB.cardName weapon, HeroEnum heroname)
+        public int CheckIfComboWasPlayed(List<Action> alist, CardDB.cardName weapon, HeroEnum heroname)
         {
             if (this.combos.Count == 0) return 0;
             //returns a penalty only if the combo could be played, but is not played completely
@@ -572,7 +572,7 @@ namespace OpenAI
             return 250;
         }
 
-        public int getPlayValue(CardDB.cardIDEnum ce)
+        public int GetPlayValue(CardDB.cardIDEnum ce)
         {
             if (this.playByValue.Count == 0) return 0;
             if (this.playByValue.ContainsKey(ce))

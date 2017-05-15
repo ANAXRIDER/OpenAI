@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 		//Battlecry and Deathrattle: Add a random Toxin card to your hand.
 		
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.drawACard(CardDB.cardName.unknown, own.own, true);
         }
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.drawACard(CardDB.cardName.unknown, m.own, true);
         }

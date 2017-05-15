@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    erhält jedes mal +3 angriff, wenn dieser diener schaden erleidet.
-        public override void onMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdmin)
+        public override void OnMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdmin)
         {
             if (triggerEffectMinion.anzGotDmg>=1)
             {

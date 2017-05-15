@@ -12,7 +12,7 @@ namespace OpenAI
         CardDB.Card hp = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.DS1h_292);//hunter
         CardDB.Card hp2 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_034);//mage
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

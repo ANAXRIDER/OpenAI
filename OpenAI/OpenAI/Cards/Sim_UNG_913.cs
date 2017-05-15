@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Draw two 1-Cost minions from your deck.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

@@ -9,7 +9,7 @@ namespace OpenAI
 
         //insprire: If your hand is empty, deal 2 damage to the enemy hero.
 
-        public override void onInspire(Playfield p, Minion m)
+        public override void OnInspire(Playfield p, Minion m)
         {
             if (m.own && p.owncards.Count == 0)
             {

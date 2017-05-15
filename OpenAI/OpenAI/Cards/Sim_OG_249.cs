@@ -10,7 +10,7 @@ namespace OpenAI
 		
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NAX11_03);
 		
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.callKid(kid, m.zonepos - 1, m.own);
         }

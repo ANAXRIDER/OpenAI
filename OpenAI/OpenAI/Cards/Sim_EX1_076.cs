@@ -9,12 +9,12 @@ namespace OpenAI
 
         //todo enemy stuff
 //    der erste diener, den ihr in einem zug ausspielt, kostet (1) weniger.
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
 		{
             if (own.own) p.anzPintSizedSummoner++;
 		}
 
-        public override void onAuraEnds(Playfield p, Minion m)
+        public override void OnAuraEnds(Playfield p, Minion m)
         {
             if (m.own) p.anzPintSizedSummoner--;
         }

@@ -11,7 +11,7 @@ namespace OpenAI
         CardDB.Card kid2 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.Mekka3);
         CardDB.Card kid3 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.Mekka4);
 //    kampfschrei:/ konstruiert eine fantastische erfindung.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.callKid(kid, own.zonepos, own.own, true);
 		}

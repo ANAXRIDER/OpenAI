@@ -43,7 +43,7 @@ namespace OpenAI
                 if (pf.isEqual(p, false)) return;
             }*/
             this.posmoves.Add(pf);
-            //posmoves.Sort((a, b) => -(botBase.getPlayfieldValue(a)).CompareTo(botBase.getPlayfieldValue(b)));//want to keep the best
+            //posmoves.Sort((a, b) => -(botBase.GetPlayfieldValue(a)).CompareTo(botBase.GetPlayfieldValue(b)));//want to keep the best
             //if (posmoves.Count > this.maxwide) posmoves.RemoveAt(this.maxwide);
             if (totalboards >= 1)
             {
@@ -128,9 +128,9 @@ namespace OpenAI
 
                     //sort stupid stuff ouf
 
-                    if (botBase.getPlayfieldValue(p) > bestoldval)
+                    if (botBase.GetPlayfieldValue(p) > bestoldval)
                     {
-                        bestoldval = botBase.getPlayfieldValue(p);
+                        bestoldval = botBase.GetPlayfieldValue(p);
                         bestold = p;
                     }
                     if (!test)
@@ -194,7 +194,7 @@ namespace OpenAI
                 Playfield bestplay = posmoves[0];//temp[0]
                 foreach (Playfield p in posmoves)//temp
                 {
-                    float val = botBase.getPlayfieldValue(p);
+                    float val = botBase.GetPlayfieldValue(p);
                     if (bestval <= val)
                     {
                         if (bestval == val && bestanzactions < p.playactions.Count) continue;
@@ -231,7 +231,7 @@ namespace OpenAI
         {
             // take the x best values
             List<Playfield> temp = new List<Playfield>();
-            posmoves.Sort((a, b) => -(botBase.getPlayfieldValue(a)).CompareTo(botBase.getPlayfieldValue(b)));//want to keep the best
+            posmoves.Sort((a, b) => -(botBase.GetPlayfieldValue(a)).CompareTo(botBase.GetPlayfieldValue(b)));//want to keep the best
 
             if (this.useComparison)
             {
@@ -275,14 +275,14 @@ namespace OpenAI
             //posmoves.AddRange(Helpfunctions.TakeList(temp, takenumber));
         }
 
-        public List<targett> cutAttackTargets(List<targett> oldlist, Playfield p, bool own)
+        public List<TargetInfo> cutAttackTargets(List<TargetInfo> oldlist, Playfield p, bool own)
         {
-            List<targett> retvalues = new List<targett>();
+            List<TargetInfo> retvalues = new List<TargetInfo>();
             List<Minion> addedmins = new List<Minion>(8);
 
             bool priomins = false;
-            List<targett> retvaluesPrio = new List<targett>();
-            foreach (targett t in oldlist)
+            List<TargetInfo> retvaluesPrio = new List<TargetInfo>();
+            foreach (TargetInfo t in oldlist)
             {
                 if ((own && t.target == 200) || (!own && t.target == 100))
                 {

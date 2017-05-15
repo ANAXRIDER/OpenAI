@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    heldenfähigkeit/\nzieht eine karte und erleidet 2 schaden.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             bool reduceToZero = false;
             if(ownplay && p.anzOwnFizzlebang >=1)

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    wählt einen feindlichen diener aus. vernichtet ihn zu beginn eures zuges.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             //if ownplay == true -> destroyOnOwnturnstart =true   else  destroyonenemyturnstart
             //target.destroyOnOwnTurnStart = target.destroyOnOwnTurnStart || ownplay;

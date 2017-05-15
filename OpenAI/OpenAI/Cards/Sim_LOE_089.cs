@@ -10,7 +10,7 @@ namespace OpenAI
         //    Dr: summon three 2/2 runts
         CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.LOE_089t);//hyena
         
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.callKid(c, m.zonepos-1, m.own);
             p.callKid(c, m.zonepos-1, m.own);

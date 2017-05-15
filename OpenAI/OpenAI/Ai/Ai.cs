@@ -184,7 +184,7 @@ namespace OpenAI
         {
             if (bestplay.enemySecretCount > 0) return;
             if (bestplay.playactions.Count < 2) return;
-            if (Ai.Instance.botBase.getPlayfieldValue(bestplay) < 5000) return;
+            if (Ai.Instance.botBase.GetPlayfieldValue(bestplay) < 5000) return;
             Playfield tmpPf = new Playfield();
             if (tmpPf.anzEnemyTaunt > 0) return;
 
@@ -255,7 +255,7 @@ namespace OpenAI
                 tmpPf.doAction(a);
             }
 
-            if (Ai.Instance.botBase.getPlayfieldValue(tmpPf) >= 8000)
+            if (Ai.Instance.botBase.GetPlayfieldValue(tmpPf) >= 8000)
             {
                 bestplay.playactions.Clear();
                 bestActions.Clear();
@@ -510,7 +510,7 @@ namespace OpenAI
             {
                 foreach (Playfield p in this.posmoves)
                 {
-                    p.value = botBase.getPlayfieldValue(p);
+                    p.value = botBase.GetPlayfieldValue(p);
                     p.printBoard();
                 }
             }
@@ -593,7 +593,7 @@ namespace OpenAI
             //this.bestboard.printActions();
 
             Playfield tempbestboard = new Playfield();
-            tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
+            tempbestboard.value = botBase.GetPlayfieldValue(tempbestboard);
             tempbestboard.printBoard();
 
             foreach (Action bestmovee in board.playactions)
@@ -611,7 +611,7 @@ namespace OpenAI
                     tempbestboard.mana = -100;
                 }
                 help.logg("-------------");
-                tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
+                tempbestboard.value = botBase.GetPlayfieldValue(tempbestboard);
                 tempbestboard.printBoard();
             }
 
@@ -619,7 +619,7 @@ namespace OpenAI
             tempbestboard.sEnemTurn = true;
             tempbestboard.endTurn(false, this.playaround, false, Settings.Instance.playaroundprob, Settings.Instance.playaroundprob2);
             //help.logg("ENEMY TURN:-----------------------------");
-            //tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
+            //tempbestboard.value = botBase.GetPlayfieldValue(tempbestboard);
             //tempbestboard.prepareNextTurn(tempbestboard.isOwnTurn);
             //Ai.Instance.enemyTurnSim[0].simulateEnemysTurn(tempbestboard, true, playaround, true, Settings.Instance.playaroundprob, Settings.Instance.playaroundprob2);
         }
@@ -632,7 +632,7 @@ namespace OpenAI
             //this.bestboard.printActions();
 
             Playfield tempbestboard = new Playfield();
-            tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
+            tempbestboard.value = botBase.GetPlayfieldValue(tempbestboard);
             tempbestboard.printBoard();
 
             if (bestmove != null && bestmove.actionType != ActionType.END_TURN)  // save the guessed move, so we doesnt need to recalc!
@@ -646,7 +646,7 @@ namespace OpenAI
                 tempbestboard.mana = -100;
             }
             help.logg("-------------");
-            tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
+            tempbestboard.value = botBase.GetPlayfieldValue(tempbestboard);
             tempbestboard.printBoard();
 
             foreach (Action bestmovee in this.bestActions)
@@ -664,7 +664,7 @@ namespace OpenAI
                     tempbestboard.mana = -100;
                 }
                 help.logg("-------------");
-                tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
+                tempbestboard.value = botBase.GetPlayfieldValue(tempbestboard);
                 tempbestboard.printBoard();
             }
 
@@ -672,7 +672,7 @@ namespace OpenAI
             tempbestboard.sEnemTurn = true;
             tempbestboard.endTurn(false, this.playaround, false, Settings.Instance.playaroundprob, Settings.Instance.playaroundprob2);
             //help.logg("ENEMY TURN:-----------------------------");
-            //tempbestboard.value = botBase.getPlayfieldValue(tempbestboard);
+            //tempbestboard.value = botBase.GetPlayfieldValue(tempbestboard);
             //tempbestboard.prepareNextTurn(tempbestboard.isOwnTurn);
             //Ai.Instance.enemyTurnSim[0].simulateEnemysTurn(tempbestboard, true, playaround, true, Settings.Instance.playaroundprob, Settings.Instance.playaroundprob2);
         }

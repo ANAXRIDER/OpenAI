@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Your Charge minions have +1 Attack. //new :D
 
-        /*public override void onMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
+        /*public override void OnMinionIsSummoned(Playfield p, Minion triggerEffectMinion, Minion summonedMinion)
         {
             if (triggerEffectMinion.own == summonedMinion.own && summonedMinion.handcard.card.Attack <= 3 )
             {
@@ -17,7 +17,7 @@ namespace OpenAI
             }
         }*/
 
-        public override void onAuraStarts(Playfield p, Minion own)
+        public override void OnAuraStarts(Playfield p, Minion own)
         {
             
             if (own.own)
@@ -38,7 +38,7 @@ namespace OpenAI
             }
         }
 
-        public override void onAuraEnds(Playfield p, Minion own)
+        public override void OnAuraEnds(Playfield p, Minion own)
         {
             if (own.own)
             {

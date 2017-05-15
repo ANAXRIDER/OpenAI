@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Destroy a minion and one of your Mana Crystals.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.minionGetDestroyed(target);
             if (ownplay) p.ownMaxMana--;

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    draw a card. combo:/ draw 2 cards instead.
 
-		public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+		public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
 		{
             p.drawACard(CardDB.cardIDEnum.None, ownplay);
             if (p.cardsPlayedThisTurn >= 1) p.drawACard(CardDB.cardIDEnum.None, ownplay);

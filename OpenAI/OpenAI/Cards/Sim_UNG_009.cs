@@ -8,13 +8,13 @@ namespace OpenAI
     {
         //Battlecry: If you control at least 2 other minions, Adapt.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int num = (own.own) ? p.ownMinions.Count : p.enemyMinions.Count;
             if (num > 1) p.getBestAdapt(own);
         }
 
-        public override void onAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
+        public override void OnAdaptChoice(Playfield p, bool ownplay, Minion target, CardDB.cardIDEnum choice)
         {
             List<Minion> temp = p.ownMinions;
             switch (choice)

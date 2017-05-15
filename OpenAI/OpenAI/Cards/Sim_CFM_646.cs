@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Deathrattle: Deal 2 damage to the enemy hero.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             p.minionGetDamageOrHeal(m.own ? p.enemyHero : p.ownHero, 2);
         }

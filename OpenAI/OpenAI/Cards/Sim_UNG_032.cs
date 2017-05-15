@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Deathrattle: Copy a cardfrom your opponent's deck_and add it to your hand.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             if (p.enemyDeckSize >= 1) p.CardToHand(CardDB.cardName.unknown, m.own);
         }

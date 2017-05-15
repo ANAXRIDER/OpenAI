@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Whenever another minion takes damage, destroy it
         //destroying done in triggerAMinionGotDmg
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own == turnEndOfOwner)
             {

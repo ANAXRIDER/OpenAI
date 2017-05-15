@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    erhält jedes mal +1 angriff, wenn ein diener schaden erleidet.
 
-        public override void onMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdmin)
+        public override void OnMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdmin)
         {
             p.minionGetBuffed(triggerEffectMinion, 1, 0);
         }

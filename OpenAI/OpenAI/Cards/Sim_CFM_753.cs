@@ -7,7 +7,7 @@ namespace OpenAI
 	class Sim_CFM_753 : SimTemplate //* Grimestreet Outfitter
 	{
 		// Battlecry: Give all minions in your hand +1/+1.
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

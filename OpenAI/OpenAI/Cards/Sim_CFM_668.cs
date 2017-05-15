@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: Summon 2 copies of this minion.
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             p.callKid(m.handcard.card, m.zonepos, m.own, true);
             p.callKid(m.handcard.card, m.zonepos, m.own, true);

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kann nicht als ziel von zaubern oder heldenfähigkeiten gewählt werden.
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             own.cantBeTargetedBySpellsOrHeroPowers = true;
         }

@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    erhaltet jedes mal 1 rüstung, wenn ein befreundeter diener schaden erleidet.
 
-        public override void onMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdmin)
+        public override void OnMinionGotDmgTrigger(Playfield p, Minion triggerEffectMinion, bool ownDmgdmin)
         {
             if (triggerEffectMinion.own == ownDmgdmin)
             {

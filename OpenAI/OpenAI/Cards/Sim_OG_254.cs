@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Destroy all enemy Secrets. Gain +1/+1 for each.
 		
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             int buff = (own.own) ? p.enemySecretList.Count : p.ownSecretsIDList.Count;
             p.minionGetBuffed(own, buff, buff);

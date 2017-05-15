@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 
         //   Whenever a character is healed, gain +2 Attack.
-        public override void onAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
+        public override void OnAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
         {
             p.minionGetBuffed(triggerEffectMinion, 2, 0);
         }
 
-        public override void onAMinionGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
+        public override void OnAMinionGotHealedTrigger(Playfield p, Minion triggerEffectMinion)
         {
             p.minionGetBuffed(triggerEffectMinion, 2, 0);
         }

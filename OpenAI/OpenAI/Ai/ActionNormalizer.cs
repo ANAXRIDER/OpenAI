@@ -32,7 +32,7 @@ namespace OpenAI
 
             if (isLethalCheck)
             {
-                if (Ai.Instance.botBase.getPlayfieldValue(p) < 10000) return;
+                if (Ai.Instance.botBase.GetPlayfieldValue(p) < 10000) return;
                 Playfield tmpPf = new Playfield();
                 if (tmpPf.anzEnemyTaunt > 0) return;
 
@@ -74,7 +74,7 @@ namespace OpenAI
                     }
                 }
 
-                if (Ai.Instance.botBase.getPlayfieldValue(tmpPf) < 10000) return;
+                if (Ai.Instance.botBase.GetPlayfieldValue(tmpPf) < 10000) return;
             }
             else
             {
@@ -200,8 +200,8 @@ namespace OpenAI
                 }
 
                 tmpPf.lostDamage = tmpPlOld.lostDamage;
-                float newval = Ai.Instance.botBase.getPlayfieldValue(tmpPf);
-                float oldval = Ai.Instance.botBase.getPlayfieldValue(tmpPlOld);
+                float newval = Ai.Instance.botBase.GetPlayfieldValue(tmpPf);
+                float oldval = Ai.Instance.botBase.GetPlayfieldValue(tmpPlOld);
 
                 if (oldval > newval) return;
             }

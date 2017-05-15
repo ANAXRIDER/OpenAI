@@ -8,13 +8,13 @@ namespace OpenAI
 	{
 
 //    zauberschaden +1/. kampfschrei:/ zieht eine karte.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
            
             p.drawACard(CardDB.cardIDEnum.None, own.own);
 		}
 
-        public override void onAuraStarts(Playfield p, Minion m)
+        public override void OnAuraStarts(Playfield p, Minion m)
         {
             m.spellpower = 1;
             if (m.own)

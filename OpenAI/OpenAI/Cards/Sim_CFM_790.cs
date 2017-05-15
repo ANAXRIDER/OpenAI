@@ -10,7 +10,7 @@ namespace OpenAI
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_300); //Enchanted Raven
 
-        public override void getBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion m, Minion target, int choice)
         {
             int zonepos = (m.own) ? p.enemyMinions.Count : p.ownMinions.Count;
             if (p.enemyDeckSize >= 1) p.callKid(kid, zonepos, !m.own);

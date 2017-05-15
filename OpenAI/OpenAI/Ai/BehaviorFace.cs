@@ -6,7 +6,7 @@ namespace OpenAI
     {
         private PenalityManager penman = PenalityManager.Instance;
 
-        public override float getPlayfieldValue(Playfield p)
+        public override float GetPlayfieldValue(Playfield p)
         {
             if (p.value >= -2000000) return p.value;
             float retval = 0;
@@ -135,7 +135,7 @@ namespace OpenAI
 
                 foreach (Minion m in p.enemyMinions)
                 {
-                    retval -= this.getEnemyMinionValue(m, p);
+                    retval -= this.GetEnemyMinionValue(m, p);
                 }
             }
 
@@ -213,7 +213,7 @@ namespace OpenAI
             return retval;
         }
 
-        public override float getEnemyMinionValue(Minion m, Playfield p)
+        public override float GetEnemyMinionValue(Minion m, Playfield p)
         {
             int retval = 1;  // Give a base value of 1, so in the event of equal boards next turn vs this turn, minion removal is prioritzed earlier rather than later.;
             if (m.name == CardDB.cardName.cutpurse) retval += 40;

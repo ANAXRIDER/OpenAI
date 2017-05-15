@@ -8,13 +8,13 @@ namespace OpenAI
 	{
 		// Spell Damage +1
 
-        public override void onAuraStarts(Playfield p, Minion m)
+        public override void OnAuraStarts(Playfield p, Minion m)
         {
             if (m.own) p.spellpower++;
             else p.enemyspellpower++;
         }
 
-        public override void onAuraEnds(Playfield p, Minion m)
+        public override void OnAuraEnds(Playfield p, Minion m)
         {
             if (m.own) p.spellpower--;
             else p.enemyspellpower--;

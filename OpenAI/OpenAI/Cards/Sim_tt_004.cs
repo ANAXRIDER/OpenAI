@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    erhält jedes mal +1 angriff, wenn ein diener stirbt.
-        public override void onMinionDiedTrigger(Playfield p, Minion triggerEffectMinion, Minion diedMinion)
+        public override void OnMinionDiedTrigger(Playfield p, Minion triggerEffectMinion, Minion diedMinion)
         {
             p.minionGetBuffed(triggerEffectMinion, 1, 0);
         }

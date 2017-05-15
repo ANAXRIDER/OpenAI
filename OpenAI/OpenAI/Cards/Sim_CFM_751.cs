@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Battlecry: Deal 3 damage to all other characters.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.allCharsGetDamage(3);
         }

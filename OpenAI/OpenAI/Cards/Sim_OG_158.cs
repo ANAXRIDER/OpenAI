@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Deathrattle: Give a random friendly minion +1/+1.
 		
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             //List<Minion> temp = new List<Minion>(p.ownMinions);
             //temp.Sort((a, b) => a.Angr.CompareTo(b.Angr));//take the weakest

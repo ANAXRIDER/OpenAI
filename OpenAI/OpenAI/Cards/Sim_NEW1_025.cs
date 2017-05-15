@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ zieht 1 haltbarkeit von der waffe eures gegners ab.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.lowerWeaponDurability(1, !own.own);
 		}

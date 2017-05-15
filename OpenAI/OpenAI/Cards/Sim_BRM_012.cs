@@ -9,7 +9,7 @@ namespace OpenAI
 
         //    Battlecry: Gain 1-4 Attack. &lt;b&gt;Overload:&lt;/b&gt; (1)
        
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             p.changeRecall(own.own, 1);
             p.minionGetBuffed(own, 2, 0);

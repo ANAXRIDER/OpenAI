@@ -6,7 +6,7 @@ namespace OpenAI
     {
         private PenalityManager penman = PenalityManager.Instance;
 
-        public override float getPlayfieldValue(Playfield p)
+        public override float GetPlayfieldValue(Playfield p)
         {
             if (p.value >= -2000000) return p.value;
             float retval = 0;
@@ -148,7 +148,7 @@ namespace OpenAI
 
                 foreach (Minion m in p.enemyMinions)
                 {
-                    float currMinionValue = this.getEnemyMinionValue(m, p);
+                    float currMinionValue = this.GetEnemyMinionValue(m, p);
 
                     // Give a bonus for 1 hp minions as a mage, since we can remove it easier in the future with ping.
                     // But we make sure we only give this bonus once among all enemies. We also give another +1 bonus once if the atk >= 4.
@@ -243,7 +243,7 @@ namespace OpenAI
             return retval;
         }
 
-        public override float getEnemyMinionValue(Minion m, Playfield p)
+        public override float GetEnemyMinionValue(Minion m, Playfield p)
         {
             int retval = 1;  // Give a base value of 1, so in the event of equal boards next turn vs this turn, minion removal is prioritzed earlier rather than later.
             if (p.enemyMinions.Count >= 4 || m.taunt || (m.handcard.card.targetPriority >= 1 && !m.silenced) || m.Angr >= 5)

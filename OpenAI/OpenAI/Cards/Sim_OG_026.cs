@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		//Battlecry: Unlock your Overloaded Mana Crystals.
 		
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (own != null && own.own)
             {

@@ -8,7 +8,7 @@ namespace OpenAI
 	{
         //Shuffle the Golden Monkey into your deck. Draw a card.
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             if (ownplay)
             {

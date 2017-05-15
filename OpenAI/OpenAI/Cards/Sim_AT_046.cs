@@ -18,7 +18,7 @@ namespace OpenAI
 //        CardDB.Card kid7 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_565);//flametongue
 //        CardDB.Card kid8 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_052);//golem
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int pos = own.zonepos;
 //            List<CardDB.Card> avail = new List<CardDB.Card>();

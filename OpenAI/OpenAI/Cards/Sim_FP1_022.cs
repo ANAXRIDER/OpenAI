@@ -9,7 +9,7 @@ namespace OpenAI
         CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_301);//felguard
 //    todesröcheln:/ legt einen zufälligen dämon aus eurer hand auf das schlachtfeld.
 
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             if (m.own)
             {

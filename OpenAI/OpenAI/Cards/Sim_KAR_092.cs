@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Battlecry: If you control a Secret, deal 3 damage.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (target != null && ((own.own) ? p.ownSecretsIDList.Count : p.enemySecretList.Count) >= 1)
             {

@@ -13,7 +13,7 @@ namespace OpenAI
         CardDB.Card kid3 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANc);//Stoneclaw Totem
         CardDB.Card kid4 = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANd);//Wrath of Air Totem
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int posi = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
             if (!ownplay)

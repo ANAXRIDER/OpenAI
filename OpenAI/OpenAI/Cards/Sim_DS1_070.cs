@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    kampfschrei:/ verleiht einem befreundeten wildtier +2/+2 und spott/.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (target != null)
             {

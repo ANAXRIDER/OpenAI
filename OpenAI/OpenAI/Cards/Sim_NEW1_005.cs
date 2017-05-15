@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    combo:/ lasst einen diener auf die hand seines besitzers zurückkehren.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+		public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (p.cardsPlayedThisTurn >= 1 && target != null) p.minionReturnToHand(target,target.own, 0);
 		}

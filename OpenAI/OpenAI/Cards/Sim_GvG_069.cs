@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Battlecry: Restore 8 Health to your hero.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

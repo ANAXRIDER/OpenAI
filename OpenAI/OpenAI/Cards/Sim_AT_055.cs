@@ -10,7 +10,7 @@ namespace OpenAI
         //   Restore #5 Health
     
 
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
 
             int heal = (ownplay) ? p.getSpellHeal(5) : p.getEnemySpellHeal(5);

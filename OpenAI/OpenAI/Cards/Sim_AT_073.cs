@@ -10,7 +10,7 @@ namespace OpenAI
         //    When your turn starts, give your minions +1/+1.
 
 
-        public override void onSecretPlay(Playfield p, bool ownplay, int number)
+        public override void OnSecretPlay(Playfield p, bool ownplay, int number)
         {
             foreach (Minion m in (ownplay) ? p.ownMinions : p.enemyMinions)
             {

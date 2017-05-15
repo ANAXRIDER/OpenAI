@@ -11,7 +11,7 @@ namespace OpenAI
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_050); //coldlight oracle
         CardDB.Card warleader = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_507); //murloc warleader
 
-        public override void onInspire(Playfield p, Minion m)
+        public override void OnInspire(Playfield p, Minion m)
         {
             int pos = (m.own) ? p.ownMinions.Count : p.enemyMinions.Count;
             

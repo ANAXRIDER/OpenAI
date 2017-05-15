@@ -9,7 +9,7 @@ namespace OpenAI
 
 //    tauscht zu beginn eures zuges diesen diener gegen einen zufälligen diener auf eurer hand aus.
 
-        public override void onTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
+        public override void OnTurnStartTrigger(Playfield p, Minion triggerEffectMinion, bool turnStartOfOwner)
         {
             if (turnStartOfOwner && triggerEffectMinion.own == turnStartOfOwner)
             {

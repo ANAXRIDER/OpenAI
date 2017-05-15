@@ -8,12 +8,12 @@ namespace OpenAI
 	{
 
 //    wutanfall:/ +5 angriff.
-        public override void onEnrageStart(Playfield p, Minion m)
+        public override void OnEnrageStart(Playfield p, Minion m)
         {
             p.minionGetBuffed(m, 5, 0);
         }
 
-        public override void  onEnrageStop(Playfield p, Minion m)
+        public override void  OnEnrageStop(Playfield p, Minion m)
         {
             p.minionGetBuffed(m, -5, 0);
         }

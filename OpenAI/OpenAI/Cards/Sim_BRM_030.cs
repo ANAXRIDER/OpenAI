@@ -8,7 +8,7 @@ namespace OpenAI
     {
         //TODO
         //   Add 2 random spells to your hand (from your opponent's class).
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             if (own.own)
             {

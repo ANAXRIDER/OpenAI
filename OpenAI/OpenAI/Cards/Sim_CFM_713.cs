@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 		// Summon a Jade Golem. Gain an empty Mana Crystal.
         
-        public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
+        public override void OnCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             int place = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
             p.callKid(p.getNextJadeGolem(ownplay), place, ownplay, false);

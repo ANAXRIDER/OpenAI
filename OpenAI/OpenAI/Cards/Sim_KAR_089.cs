@@ -8,7 +8,7 @@ namespace OpenAI
     {
         // Whenever you discard a card, draw a card.
 
-        public override void onCardWasDiscarded(Playfield p, bool wasOwnCard, Minion triggerEffectMinion)
+        public override void OnCardWasDiscarded(Playfield p, bool wasOwnCard, Minion triggerEffectMinion)
         {
             if (triggerEffectMinion.own == wasOwnCard)
             {

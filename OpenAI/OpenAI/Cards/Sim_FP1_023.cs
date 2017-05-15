@@ -7,7 +7,7 @@ namespace OpenAI
     class Sim_FP1_023 : SimTemplate// dark cultist
     {
         //todo list
-        public override void onDeathrattle(Playfield p, Minion m)
+        public override void OnDeathrattle(Playfield p, Minion m)
         {
             List<Minion> temp = new List<Minion>();
 

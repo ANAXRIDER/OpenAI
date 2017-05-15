@@ -9,7 +9,7 @@ namespace OpenAI
 
         // Battlecry: If you have a Mech, gain +1/+1 and add a Spare Part to your hand.  
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             List<Minion> temp = (own.own) ? p.ownMinions : p.enemyMinions;
 

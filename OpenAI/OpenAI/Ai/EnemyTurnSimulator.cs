@@ -40,7 +40,7 @@ namespace OpenAI
             if (print)
             {
                 Helpfunctions.Instance.ErrorLog("board at enemyturn start-----------------------------");
-                rootfield.value = botBase.getPlayfieldValue(rootfield);
+                rootfield.value = botBase.GetPlayfieldValue(rootfield);
                 rootfield.printBoard();
             }
             posmoves.Add(new Playfield(rootfield));
@@ -70,10 +70,10 @@ namespace OpenAI
             //playing aoe-effects if activated (and we didnt play loatheb)
             if (playaround && rootfield.anzOwnLoatheb == 0)
             {
-                float oldval = botBase.getPlayfieldValueEnemy(posmoves[0]);
+                float oldval = botBase.GetPlayfieldValueEnemy(posmoves[0]);
                 posmoves[0].value = int.MinValue;
                 enemMana = posmoves[0].EnemyCardPlaying(rootfield.enemyHeroName, enemMana, rootfield.enemyAnzCards, pprob, pprob2);
-                float newval = botBase.getPlayfieldValueEnemy(posmoves[0]);
+                float newval = botBase.GetPlayfieldValueEnemy(posmoves[0]);
                 posmoves[0].value = int.MinValue;
                 posmoves[0].enemyAnzCards--;
                 posmoves[0].triggerCardsChanged(false);
@@ -175,9 +175,9 @@ namespace OpenAI
 
                     p.endEnemyTurn();
                     //p.guessingHeroHP = rootfield.guessingHeroHP;
-                    if (botBase.getPlayfieldValueEnemy(p) < bestoldval) // want the best enemy-play-> worst for us
+                    if (botBase.GetPlayfieldValueEnemy(p) < bestoldval) // want the best enemy-play-> worst for us
                     {
-                        bestoldval = botBase.getPlayfieldValueEnemy(p);
+                        bestoldval = botBase.GetPlayfieldValueEnemy(p);
                         bestold = p;
                     }
                     posmoves.Remove(p);
@@ -212,7 +212,7 @@ namespace OpenAI
             {
                 p = posmoves[i];
                 //p.guessingHeroHP = rootfield.guessingHeroHP;
-                float val = botBase.getPlayfieldValueEnemy(p);
+                float val = botBase.GetPlayfieldValueEnemy(p);
                 if (bestval > val)// we search the worst value
                 {
                     bestplay = p;

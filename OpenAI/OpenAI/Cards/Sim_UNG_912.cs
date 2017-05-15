@@ -9,7 +9,7 @@ namespace OpenAI
 
         //Battlecry: Add a random Beast to your hand.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             p.CardToHand(CardDB.cardName.unknown, own.own);
         }

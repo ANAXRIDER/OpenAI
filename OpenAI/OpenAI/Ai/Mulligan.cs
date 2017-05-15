@@ -207,7 +207,7 @@ namespace OpenAI
             holdDB.Clear();
             concedelist.Clear();
             
-            string path = Settings.Instance.path;
+            string path = FolderPath.OpenAI;
             string cleanpath = "Silverfish" + Path.DirectorySeparatorChar;
             string datapath = path + "Data" + Path.DirectorySeparatorChar;
             string cleandatapath = cleanpath + "Data" + Path.DirectorySeparatorChar;
@@ -664,8 +664,7 @@ namespace OpenAI
             string[] lines = new string[] { };
             try
             {
-                string path = Settings.Instance.path;
-                lines = File.ReadAllLines(path + "mulltest.txt");
+                lines = File.ReadAllLines(FilePath.MullTest);
             }
             catch
             {

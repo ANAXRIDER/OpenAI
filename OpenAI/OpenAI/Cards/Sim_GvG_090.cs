@@ -9,7 +9,7 @@ namespace OpenAI
 
         //   Battlecry: Deal 6 damage randomly split between all other characters.
 
-        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+        public override void GetBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int anz = 6;
             for (int i = 0; i < anz; i++)

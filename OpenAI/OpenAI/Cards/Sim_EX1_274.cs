@@ -8,7 +8,7 @@ namespace OpenAI
 	{
 
 //    erhält +2/+2, wenn ihr am ende eures zuges über ein aktives geheimnis/ verfügt.
-        public override void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
+        public override void OnTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             if (triggerEffectMinion.own == turnEndOfOwner)
             {
