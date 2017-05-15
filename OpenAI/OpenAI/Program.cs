@@ -1,17 +1,18 @@
-﻿using System;
+﻿using HSRangerLib;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using HSRangerLib;
-using System.Diagnostics;
 
 namespace OpenAI
 {
     public class Bot : BotBase
     {
         private static Bot instance;
+
         public static Bot Instance
         {
             get
@@ -40,18 +41,14 @@ namespace OpenAI
         public int dontmultiactioncount = 0;
         public int POWERFULSINGLEACTION = 0;
 
-
-        Silverfish sf;
+        private Silverfish sf;
         public Behavior behave = new BehaviorControl();
         public List<Playfield> queuedMoveGuesses = new List<Playfield>();
 
-        int discovercounter = 0;
+        private int discovercounter = 0;
 
         public Bot()
         {
-
-            //it's very important to set HasBestMoveAI property to true
-            //or Hearthranger will never call OnQueryBestMove !
             base.HasBestMoveAI = true;
 
             StartTime = DateTime.Now;
@@ -82,7 +79,6 @@ namespace OpenAI
                 sf.startedexe = true;
                 Task.Run(() => StartExeAsync());
             }
-
 
             if (teststuff)//run autotester for developpers
             {
@@ -121,7 +117,6 @@ namespace OpenAI
             //reset it in case user closes exe
             sf.startedexe = false;
         }
-
 
         public override string Description
         {
@@ -213,7 +208,6 @@ namespace OpenAI
                     {
                         hascoin = true;
                     }
-
                 }
                 if (celist.Count >= 4) hascoin = true;
                 List<int> mullentities = Mulligan.Instance.whatShouldIMulligan(celist, ownName, enemName, hascoin);
@@ -226,7 +220,6 @@ namespace OpenAI
                         e.replace_list.Add(item);
                     }
                 }
-
             }
             else
             {
@@ -237,7 +230,6 @@ namespace OpenAI
                         Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because it cost is >= 4.");
 
                         e.replace_list.Add(item);
-
                     }
                     if (item.CardId == "EX1_308" || item.CardId == "EX1_622" || item.CardId == "EX1_005")
                     {
@@ -277,7 +269,6 @@ namespace OpenAI
             {
                 Hrtprozis.Instance.addCardToDecks(CardDB.Instance.cardIdstringToEnum(card.card_id), card.num);
             }
-
         }
 
         public override void OnGameOver(GameOverEventArgs e)
@@ -293,7 +284,6 @@ namespace OpenAI
 
         private HSRangerLib.BotActionType GetRangerActionType(Entity actor, Entity target, ActionType sf_action_type)
         {
-
             if (sf_action_type == ActionType.END_TURN)
             {
                 if (POWERFULSINGLEACTION >= 1) POWERFULSINGLEACTION = 0;
@@ -383,6 +373,7 @@ namespace OpenAI
             {
                 case ActionType.END_TURN:
                     break;
+
                 case ActionType.PLAY_CARD:
                     ranger_action.Actor = getCardWithNumber(moveTodo.card.entity);
 
@@ -400,10 +391,8 @@ namespace OpenAI
                             this.doMultipleThingsAtATime = false;
                             this.dontmultiactioncount++;
                             //Helpfunctions.Instance.ErrorLog("doMultipleThingsAtATime " + doMultipleThingsAtATime + " because IsPlayRandomEffect 찾는거");
-
                         }
                         else this.doMultipleThingsAtATime = true;
-
 
                         //if (daum.bestmove.card.card.name == CardDB.cardName.barnes) POWERFULSINGLEACTION++;
 
@@ -437,13 +426,11 @@ namespace OpenAI
                             || PenalityManager.Instance.discoverCards.ContainsKey(daum.bestmove.card.card.name)
                             || PenalityManager.Instance.randomEffects.ContainsKey(daum.bestmove.card.card.name)) this.POWERFULSINGLEACTION++;
 
-
                         //charge
                         if (daum.bestmove.card.card.Charge)
                         {
                             this.doMultipleThingsAtATime = false;
                             this.dontmultiactioncount++; break;
-
                         }
                         else
                         {
@@ -459,6 +446,7 @@ namespace OpenAI
                                     else break;
                                 case CardDB.cardName.southseadeckhand:
                                     break;
+
                                 case CardDB.cardName.spikedhogrider:
                                     if (Playfield.Instance.enemyMinions.Find(a => a.taunt) != null)
                                     {
@@ -487,7 +475,6 @@ namespace OpenAI
                             }
                         }
 
-
                         bool hasjuggler = false;
                         foreach (Minion m in Playfield.Instance.ownMinions)
                         {
@@ -511,13 +498,8 @@ namespace OpenAI
                             Helpfunctions.Instance.ErrorLog("찾는거 저글러 몹" + daum.bestmove.card.card.name);
                         }
 
-
-
-
-
                         if (daum.bestmove.card.card.type == CardDB.cardtype.SPELL)
                         {
-
                             if (daum.bestmove.card.card.name == CardDB.cardName.jadeidol &&
                                 (daum.bestmove.druidchoice == 2 || Playfield.Instance.ownMinions.Find(a => a.name == CardDB.cardName.fandralstaghelm && !a.silenced) != null))
                             {
@@ -548,6 +530,7 @@ namespace OpenAI
                                     Random_Spell_But_Can_Kill_Deathrattle_Card = true;
                                     this.dontmultiactioncount++;
                                     break;
+
                                 default: break;
                             }
 
@@ -591,7 +574,7 @@ namespace OpenAI
                             //    case CardDB.cardName.jadeidol:
                             //        this.POWERFULSINGLEACTION++; break;
                             //    default: break;
-                            //}                                           
+                            //}
                         }
 
                         foreach (Minion m in Playfield.Instance.ownMinions)
@@ -602,7 +585,6 @@ namespace OpenAI
                                 this.dontmultiactioncount++;
                             }
                         }
-
                     }
 
                     //if (moveTodo.card.card.type == CardDB.cardtype.MOB || moveTodo.card.card.name == CardDB.cardName.forbiddenritual)
@@ -629,7 +611,7 @@ namespace OpenAI
                     //{
                     //    case CardDB.cardName.defenderofargus:
                     //        if (this.EnemySecrets.Count >= 1) System.Threading.Thread.Sleep(1800);
-                    //        System.Threading.Thread.Sleep(4500); 
+                    //        System.Threading.Thread.Sleep(4500);
                     //        break;
                     //    case CardDB.cardName.abusivesergeant:
                     //        System.Threading.Thread.Sleep(900); break;
@@ -649,6 +631,7 @@ namespace OpenAI
 
                     if (ranger_action.Actor == null) return null;  // missing entity likely because new spawned minion
                     break;
+
                 case ActionType.ATTACK_WITH_HERO:
                     ranger_action.Actor = base.FriendHero;
                     //System.Threading.Thread.Sleep(1100);
@@ -663,9 +646,11 @@ namespace OpenAI
                     //}
 
                     break;
+
                 case ActionType.USE_HERO_POWER:
                     ranger_action.Actor = base.FriendHeroPower;
                     break;
+
                 case ActionType.ATTACK_WITH_MINION:
                     ranger_action.Actor = getEntityWithNumber(moveTodo.own.entityID);
 
@@ -692,6 +677,7 @@ namespace OpenAI
 
                     if (ranger_action.Actor == null) return null;  // missing entity likely because new spawned minion
                     break;
+
                 default:
                     break;
             }
@@ -701,7 +687,6 @@ namespace OpenAI
                 ranger_action.Target = getEntityWithNumber(moveTodo.target.entityID);
                 if (ranger_action.Target == null) return null;  // missing entity likely because new spawned minion
             }
-
 
             ranger_action.Type = GetRangerActionType(ranger_action.Actor, ranger_action.Target, moveTodo.actionType);
 
@@ -723,8 +708,6 @@ namespace OpenAI
                 Helpfunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
                                                  + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Target.CardId)
                                                  + " choice: " + moveTodo.druidchoice + " place" + moveTodo.place);
-
-
             }
             else
             {
@@ -736,10 +719,6 @@ namespace OpenAI
                 Helpfunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
                                                  + " choice: " + moveTodo.druidchoice + " place" + moveTodo.place);
             }
-
-
-
-
 
             if (moveTodo.actionType == ActionType.ATTACK_WITH_MINION)
             {
@@ -760,29 +739,24 @@ namespace OpenAI
                     this.dontmultiactioncount++;
                     POWERFULSINGLEACTION++;
                 }
-
                 else if (cultmaster && daum.bestmove.own.Hp <= daum.bestmove.target.Angr && !daum.bestmove.target.isHero)
                 {
                     this.doMultipleThingsAtATime = false;
                     this.dontmultiactioncount++;
                     POWERFULSINGLEACTION++;
                 }
-
                 else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp && !daum.bestmove.target.divineshild && daum.bestmove.own.name == CardDB.cardName.finjatheflyingstar)
                 {
                     this.doMultipleThingsAtATime = false;
                     this.dontmultiactioncount++;
                     POWERFULSINGLEACTION++;
                 }
-
                 else if ((daum.bestmove.own.Angr >= daum.bestmove.target.Hp || daum.bestmove.own.poisonous) && !daum.bestmove.target.divineshild && (daum.bestmove.target.name == CardDB.cardName.murlocwarleader || daum.bestmove.target.name == CardDB.cardName.southseacaptain))
                 {
                     this.doMultipleThingsAtATime = false;
                     this.dontmultiactioncount++;
                     POWERFULSINGLEACTION++;
                 }
-
-
                 else if (moveTodo.target != null && !ranger_action.Target.IsHero)
                 {
                     if (ranger_action.Target.HasDeathrattle && !ranger_action.Target.HasDivineShield) // target deathrattle
@@ -814,7 +788,6 @@ namespace OpenAI
                     this.doMultipleThingsAtATime = true;
                 }
             }
-
 
             if (this.EnemySecrets.Count >= 1)
             {
@@ -852,7 +825,6 @@ namespace OpenAI
                                     POWERFULSINGLEACTION++;
                                 }
                             }
-
                         }
                         else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp && !daum.bestmove.target.isHero)
                         {
@@ -867,7 +839,6 @@ namespace OpenAI
                         }
                     }
                 }
-
                 else if (moveTodo.actionType == ActionType.ATTACK_WITH_MINION)
                 {
                     foreach (SecretItem si in Probabilitymaker.Instance.enemySecrets)
@@ -878,7 +849,6 @@ namespace OpenAI
                             this.doMultipleThingsAtATime = false;
                             POWERFULSINGLEACTION++;
                         }
-
                         else if (daum.bestmove.target.isHero)
                         {
                             if (si.canBe_explosive
@@ -918,8 +888,6 @@ namespace OpenAI
                             }
                         }
                     }
-
-
                 }
 
                 if (moveTodo.actionType == ActionType.PLAY_CARD)
@@ -969,9 +937,7 @@ namespace OpenAI
                         }
                     }
                 }
-
             }
-
 
             if (moveTodo.actionType == ActionType.ATTACK_WITH_MINION && ranger_action.Target.IsHero && this.EnemyMinion.Count == 0)
             {
@@ -989,7 +955,6 @@ namespace OpenAI
 
         public override void OnQueryBestMove(QueryBestMoveEventArgs e)
         {
-
             //don't forget to set HasBestMoveAI property to true in class constructor.
             //or Hearthranger will never query best move !
             //base.HasBestMoveAI = true;
@@ -1054,12 +1019,10 @@ namespace OpenAI
                     BotAction trackingaction = new HSRangerLib.BotAction();
                     trackingaction.Actor = this.getEntityWithNumber(trackingchoice);
 
-
                     foreach (var item in Silverfish.Instance.choiceCards)
                     {
                         Helpfunctions.Instance.logg("" + item.ToString() + " " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.ToString()));
                     }
-
 
                     if (trackingaction.Actor != null)
                     {
@@ -1078,8 +1041,6 @@ namespace OpenAI
                     //Helpfunctions.Instance.logg("create errorfile " +  filename);
                     //this.gameState.SaveToXMLFile(filename);
                 }
-
-
                 else if (!doMultipleThingsAtATime || this.dontmultiactioncount >= 1)
                 {
                     discovercounter = 0;
@@ -1114,7 +1075,6 @@ namespace OpenAI
                     {
                         ShouldSendFakeAction = true;
                     }
-
 
                     Helpfunctions.Instance.ErrorLog("play action");
                     moveTodo.Print();
@@ -1156,8 +1116,6 @@ namespace OpenAI
                             else System.Threading.Thread.Sleep(5);
                             hasMoreActions = canQueueNextActions();
                             if (hasMoreActions) Ai.Instance.doNextCalcedMove();
-
-
                         }
                     }
                     while (hasMoreActions);
@@ -1182,7 +1140,6 @@ namespace OpenAI
             return;
         }
 
-
         public override void OnActionDone(ActionDoneEventArgs e)
         {
             NumExecsReceived++;
@@ -1198,9 +1155,7 @@ namespace OpenAI
                 default:
                     Helpfunctions.Instance.ErrorLog("HR action " + NumExecsReceived + " done <default>: " + e.action_id + " " + e.ToString()); break;
             }
-
         }
-
 
         private bool canQueueNextActions()
         {
@@ -1285,51 +1240,51 @@ namespace OpenAI
 
         public bool startedexe = false;
 
-        Playfield lastpf;
-        Settings sttngs = Settings.Instance;
+        private Playfield lastpf;
+        private Settings sttngs = Settings.Instance;
 
         public List<Minion> ownMinions = new List<Minion>();
         public List<Minion> enemyMinions = new List<Minion>();
-        List<Handmanager.Handcard> handCards = new List<Handmanager.Handcard>();
-        int ownPlayerController = 0;
-        List<string> ownSecretList = new List<string>();
-        int enemySecretCount = 0;
-        List<int> enemySecretList = new List<int>();
+        private List<Handmanager.Handcard> handCards = new List<Handmanager.Handcard>();
+        private int ownPlayerController = 0;
+        private List<string> ownSecretList = new List<string>();
+        private int enemySecretCount = 0;
+        private List<int> enemySecretList = new List<int>();
 
-        int currentMana = 0;
-        int ownMaxMana = 0;
-        int numOptionPlayedThisTurn = 0;
-        int numMinionsPlayedThisTurn = 0;
-        int cardsPlayedThisTurn = 0;
-        int ownOverload = 0;
+        private int currentMana = 0;
+        private int ownMaxMana = 0;
+        private int numOptionPlayedThisTurn = 0;
+        private int numMinionsPlayedThisTurn = 0;
+        private int cardsPlayedThisTurn = 0;
+        private int ownOverload = 0;
 
-        int enemyMaxMana = 0;
+        private int enemyMaxMana = 0;
 
-        string ownHeroWeapon = "";
-        int heroWeaponAttack = 0;
-        int heroWeaponDurability = 0;
+        private string ownHeroWeapon = "";
+        private int heroWeaponAttack = 0;
+        private int heroWeaponDurability = 0;
 
-        string enemyHeroWeapon = "";
-        int enemyWeaponAttack = 0;
-        int enemyWeaponDurability = 0;
+        private string enemyHeroWeapon = "";
+        private int enemyWeaponAttack = 0;
+        private int enemyWeaponDurability = 0;
 
-        string heroname = "";
-        string enemyHeroname = "";
+        private string heroname = "";
+        private string enemyHeroname = "";
 
-        CardDB.Card heroAbility = new CardDB.Card();
-        bool ownAbilityisReady = false;
-        CardDB.Card enemyAbility = new CardDB.Card();
+        private CardDB.Card heroAbility = new CardDB.Card();
+        private bool ownAbilityisReady = false;
+        private CardDB.Card enemyAbility = new CardDB.Card();
 
-        int anzcards = 0;
-        int enemyAnzCards = 0;
+        private int anzcards = 0;
+        private int enemyAnzCards = 0;
 
-        int ownHeroFatigue = 0;
-        int enemyHeroFatigue = 0;
-        int ownDecksize = 0;
-        int enemyDecksize = 0;
+        private int ownHeroFatigue = 0;
+        private int enemyHeroFatigue = 0;
+        private int ownDecksize = 0;
+        private int enemyDecksize = 0;
 
-        Minion ownHero;
-        Minion enemyHero;
+        private Minion ownHero;
+        private Minion enemyHero;
 
         private int anzOgOwnCThunHpBonus = 0;
         private int anzOgOwnCThunAngrBonus = 0;
@@ -1341,33 +1296,35 @@ namespace OpenAI
 
         // NEW VALUES--
 
-        int numberMinionsDiedThisTurn = 0;//todo need that value
-        int ownCurrentOverload = 0;//todo get them! = number of overloaded Manacrystals for CURRENT turn (NOT RECALL_OWED !)
-        int enemyOverload = 0;//todo need that value maybe
-        int ownDragonConsort = 0;
-        int enemyDragonConsort = 0;
-        int ownLoathebs = 0;// number of loathebs WE PLAYED (so enemy has the buff)
-        int enemyLoathebs = 0;
-        int ownMillhouse = 0; // number of millhouse-manastorm WE PLAYED (so enemy has the buff)
-        int enemyMillhouse = 0;
-        int ownKirintor = 0;
-        int ownPrepa = 0;
+        private int numberMinionsDiedThisTurn = 0;//todo need that value
+        private int ownCurrentOverload = 0;//todo get them! = number of overloaded Manacrystals for CURRENT turn (NOT RECALL_OWED !)
+        private int enemyOverload = 0;//todo need that value maybe
+        private int ownDragonConsort = 0;
+        private int enemyDragonConsort = 0;
+        private int ownLoathebs = 0;// number of loathebs WE PLAYED (so enemy has the buff)
+        private int enemyLoathebs = 0;
+        private int ownMillhouse = 0; // number of millhouse-manastorm WE PLAYED (so enemy has the buff)
+        private int enemyMillhouse = 0;
+        private int ownKirintor = 0;
+        private int ownPrepa = 0;
 
         // NEW VALUES#TGT#############################################################################################################
         // NEW VALUES#################################################################################################################
-        int heroPowerUsesThisTurn = 0;
-        int ownHeroPowerUsesThisGame = 0;
-        int enemyHeroPowerUsesThisGame = 0;
-        int lockandload = 0;
-        int Stampede = 0;
-        int ownsabo = 0;//number of saboteurplays  of our player (so enemy has the buff)
-        int enemysabo = 0;//number of saboteurplays  of enemy player (so we have the buff)
-        int ownFenciCoaches = 0; // number of Fencing Coach-debuffs on our player 
+        private int heroPowerUsesThisTurn = 0;
 
-        int enemyCursedCardsInHand = 0;
+        private int ownHeroPowerUsesThisGame = 0;
+        private int enemyHeroPowerUsesThisGame = 0;
+        private int lockandload = 0;
+        private int Stampede = 0;
+        private int ownsabo = 0;//number of saboteurplays  of our player (so enemy has the buff)
+        private int enemysabo = 0;//number of saboteurplays  of enemy player (so we have the buff)
+        private int ownFenciCoaches = 0; // number of Fencing Coach-debuffs on our player
+
+        private int enemyCursedCardsInHand = 0;
 
         //LOE stuff###############################################################################################################
         public List<CardDB.cardIDEnum> choiceCards = new List<CardDB.cardIDEnum>(); // here we save all available tracking/discover cards ordered from left to right
+
         public List<int> choiceCardsEntitys = new List<int>(); //list of entitys same order as choiceCards
 
         private static HSRangerLib.GameState latestGameState;
@@ -1431,6 +1388,7 @@ namespace OpenAI
                     case ActionType.END_TURN:
                         //Helpfunctions.Instance.logg("엔드턴 확인  ");
                         break;
+
                     case ActionType.ATTACK_WITH_HERO:
                         {
                             if (rangerbot.gameState.TimerState != TurnTimerState.COUNTDOWN)
@@ -1508,7 +1466,6 @@ namespace OpenAI
                                                     //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫13 time: " + time);
                                                 }
                                             }
-
                                         }
                                         else if (daum.bestmove.own.Angr >= daum.bestmove.target.Hp && !daum.bestmove.target.isHero)
                                         {
@@ -1523,14 +1480,7 @@ namespace OpenAI
                                             }
                                         }
                                     }
-
-
                                 }
-
-
-
-
-
                             }
                             break;
                         }
@@ -1580,19 +1530,11 @@ namespace OpenAI
                                     //Helpfunctions.Instance.ErrorLog("타겟 맞을떄마다 소환합니다 1200ms");
                                 }
 
-
-
-
-
-
                                 bool hastargetdeathrattle = (daum.bestmove.target.hasDeathrattle() || daum.bestmove.target.deathrattles.Count >= 1 || (daum.bestmove.target.handcard.card.deathrattle && !daum.bestmove.target.silenced)) && !daum.bestmove.target.isHero;
                                 //Helpfunctions.Instance.logg("hasdeathrattle " + hastargetdeathrattle);
 
                                 bool hasowndeathrattle = (daum.bestmove.own.hasDeathrattle() || daum.bestmove.own.deathrattles.Count >= 1 || (daum.bestmove.own.handcard.card.deathrattle && !daum.bestmove.own.silenced)) && !daum.bestmove.target.isHero;
                                 //Helpfunctions.Instance.logg("hasdeathrattle " + hasowndeathrattle);
-
-
-
 
                                 if (hastargetdeathrattle && daum.bestmove.own.Angr >= daum.bestmove.target.Hp && !daum.bestmove.target.isHero)
                                 {
@@ -1649,7 +1591,6 @@ namespace OpenAI
                                         }
                                     }
 
-
                                     //System.Threading.Thread.Sleep(1500);
                                     //Helpfunctions.Instance.logg("own minion's deathrattle detected sleep 1500ms");
                                     //Helpfunctions.Instance.ErrorLog("own minion's deathrattle detected sleep 1500ms");
@@ -1663,7 +1604,6 @@ namespace OpenAI
                                 //    Helpfunctions.Instance.ErrorLog("Target Taunt detected sleep 500ms");
                                 //    Helpfunctions.Instance.ErrorLog("Target Taunt detected sleep 500ms");
                                 //}
-
 
                                 bool hashyena = false;
                                 bool cultmaster = false;
@@ -1686,9 +1626,6 @@ namespace OpenAI
                                     System.Threading.Thread.Sleep(2200);
                                 }
 
-
-
-
                                 if (this.enemySecretCount >= 1)
                                 {
                                     int time = 5000 / this.enemySecretCount;
@@ -1701,7 +1638,6 @@ namespace OpenAI
                                             //Helpfunctions.Instance.logg("찾는거 덫발견 덫1 슬립 time: " + time * 4 / 3);
                                             //Helpfunctions.Instance.ErrorLog("찾는거 덫발견 덫1 time: " + time * 4 / 3);
                                         }
-
                                         else if (daum.bestmove.target.isHero)
                                         {
                                             if (si.canBe_explosive
@@ -1745,11 +1681,8 @@ namespace OpenAI
                                             }
                                         }
                                     }
-
-
                                 }
                             }
-
 
                             break;
                         }
@@ -1907,7 +1840,6 @@ namespace OpenAI
                                 }
                             }
 
-
                             if (daum.bestmove.card.card.type == CardDB.cardtype.SPELL)
                             {
                                 System.Threading.Thread.Sleep(1200);
@@ -1925,7 +1857,6 @@ namespace OpenAI
                                         int timing = PenalityManager.Instance.NeedSleepBecauseTimingMinionsDB[daum.bestmove.target.name] * 1050;
                                         System.Threading.Thread.Sleep(timing);
                                     }
-
                                 }
                                 if (daum.bestmove.card.card.name == CardDB.cardName.callofthewild)
                                 {
@@ -2000,7 +1931,6 @@ namespace OpenAI
                                 System.Threading.Thread.Sleep(1500);
                             }
 
-
                             if (PenalityManager.Instance.cardDrawBattleCryDatabase.ContainsKey(daum.bestmove.card.card.name)) //small sleep drawcards. sometimes just turn end
                             {
                                 System.Threading.Thread.Sleep(800);
@@ -2011,12 +1941,10 @@ namespace OpenAI
                             {
                                 System.Threading.Thread.Sleep(2800);
                             }
-
                         }
 
-
-
                         break;
+
                     case ActionType.USE_HERO_POWER:
                         //if (this.enemySecretCount >= 1)
                         //{
@@ -2034,11 +1962,11 @@ namespace OpenAI
                         //if (heroAbility.name == CardDB.cardName.shapeshift || heroAbility.name == CardDB.cardName.direshapeshift) System.Threading.Thread.Sleep(1200);
                         //if (rangerbot.gameState.TimerState != TurnTimerState.COUNTDOWN) System.Threading.Thread.Sleep(1800);
                         break;
+
                     default:
                         break;
                 }
             }
-
 
             Helpfunctions.Instance.ErrorLog("updateEverything");
             latestGameState = rangerbot.gameState;
@@ -2073,7 +2001,6 @@ namespace OpenAI
             Hrtprozis.Instance.setPlayereffects(this.ownDragonConsort, this.enemyDragonConsort, this.ownLoathebs, this.enemyLoathebs, this.ownMillhouse, this.enemyMillhouse, this.ownKirintor, this.ownPrepa, this.ownsabo, this.enemysabo, this.ownFenciCoaches, this.enemyCursedCardsInHand);
             Hrtprozis.Instance.updateSecretStuff(this.ownSecretList, this.enemySecretCount);
 
-
             Hrtprozis.Instance.updateOwnHero(this.ownHeroWeapon, this.heroWeaponAttack, this.heroWeaponDurability, this.heroname, this.heroAbility, this.ownAbilityisReady, this.ownHero, this.ownHeroPowerUsesThisGame);
             Hrtprozis.Instance.updateEnemyHero(this.enemyHeroWeapon, this.enemyWeaponAttack, this.enemyWeaponDurability, this.enemyHeroname, this.enemyMaxMana, this.enemyAbility, this.enemyHero, this.enemyHeroPowerUsesThisGame);
 
@@ -2090,7 +2017,6 @@ namespace OpenAI
             //learnmode :D
 
             Playfield p = new Playfield();
-
 
             if (!queueActions)
             {
@@ -2111,7 +2037,7 @@ namespace OpenAI
             }
             else
             {
-                //queue stuff 
+                //queue stuff
                 if (lastpf != null)
                 {
                     if (lastpf.isEqualf(p))
@@ -2127,7 +2053,6 @@ namespace OpenAI
                     Bot.Instance.POWERFULSINGLEACTION = 0;
                     Bot.Instance.doMultipleThingsAtATime = false;
                 }
-
             }
 
             lastpf = p;
@@ -2211,10 +2136,8 @@ namespace OpenAI
             return false;
         }
 
-
         private void getHerostuff(HSRangerLib.BotBase rangerbot)
         {
-
             //TODO GET HERO POWER USES!!!!!!
             //heroPowerUsesThisTurn = 0;
             //ownHeroPowerUsesThisGame = 0;
@@ -2234,7 +2157,6 @@ namespace OpenAI
             this.ownLoathebs = 0;
             this.enemyDragonConsort = 0;
             this.ownsabo = 0;
-
 
             Dictionary<int, Entity> allEntitys = new Dictionary<int, Entity>();
 
@@ -2282,7 +2204,6 @@ namespace OpenAI
             this.numMinionsPlayedThisTurn = rangerbot.gameState.NumMinionsPlayedThisTurn;
             this.cardsPlayedThisTurn = rangerbot.gameState.NumCardsPlayedThisTurn;
 
-
             //get weapon stuff
             this.ownHeroWeapon = "";
             this.heroWeaponAttack = 0;
@@ -2293,7 +2214,6 @@ namespace OpenAI
 
             this.ownDecksize = rangerbot.gameState.LocalDeckRemain;
             this.enemyDecksize = rangerbot.gameState.RemoteDeckRemain;
-
 
             //own hero stuff###########################
             int heroAtk = ownhero.ATK;
@@ -2308,7 +2228,6 @@ namespace OpenAI
             bool heroImmune = (ownhero.IsImmune);
 
             //Helpfunctions.Instance.ErrorLog(ownhero.GetName() + " ready params ex: " + exausted + " " + heroAtk + " " + numberofattacks + " " + herofrozen);
-
 
             if (rangerbot.FriendWeapon != null)
             {
@@ -2327,10 +2246,7 @@ namespace OpenAI
                 }
 
                 //Helpfunctions.Instance.ErrorLog("weapon: " + ownHeroWeapon + " " + heroWeaponAttack + " " + heroWeaponDurability);
-
             }
-
-
 
             //enemy hero stuff###############################################################
             this.enemyHeroname = Hrtprozis.Instance.heroIDtoName(enemyhero.CardId);
@@ -2351,7 +2267,6 @@ namespace OpenAI
                 this.enemyWeaponAttack = weapon.ATK;
                 this.enemyWeaponDurability = weapon.Durability - weapon.Damage;
             }
-
 
             //own hero power stuff###########################################################
 
@@ -2396,7 +2311,6 @@ namespace OpenAI
 
             this.ownHero.updateReadyness();
 
-
             //load enchantments of the heros
             List<miniEnch> miniEnchlist = new List<miniEnch>();
             foreach (Entity ent in allEntitys.Values)
@@ -2408,7 +2322,6 @@ namespace OpenAI
                     int creator = ent.CreatorId;
                     miniEnchlist.Add(new miniEnch(id, creator, controler));
                 }
-
             }
 
             this.ownHero.loadEnchantments(miniEnchlist, ownhero.ControllerId);
@@ -2424,7 +2337,6 @@ namespace OpenAI
                     int creator = ent.CreatorId;
                     miniEnchlist.Add(new miniEnch(id, creator, controler));
                 }
-
             }
 
             this.enemyHero.loadEnchantments(miniEnchlist, enemyhero.ControllerId);
@@ -2451,7 +2363,6 @@ namespace OpenAI
 
             //will not work in Hearthranger!
 
-
             foreach (Entity ent in allEntitys.Values)
             {
                 if (ent.Attached == owncontrollerblubb && ent.Zone == HSRangerLib.TAG_ZONE.PLAY) //1==play
@@ -2466,7 +2377,6 @@ namespace OpenAI
                     if (id == CardDB.cardIDEnum.UNG_916e) this.Stampede++;
                     if (id == CardDB.cardIDEnum.AT_086e) this.enemysabo++;
                     if (id == CardDB.cardIDEnum.AT_115e) this.ownFenciCoaches++;
-
                 }
 
                 if (ent.Attached == enemycontrollerblubb && ent.Zone == HSRangerLib.TAG_ZONE.PLAY) //1==play
@@ -2480,7 +2390,6 @@ namespace OpenAI
                     //if (id == CardDB.cardIDEnum.EX1_145o) this.enemyPrepa++;
                     if (id == CardDB.cardIDEnum.AT_086e) this.ownsabo++;
                 }
-
             }
             this.lockandload = (rangerbot.gameState.LocalPlayerLockAndLoad) ? 1 : 0;
             //this.Stampede = (rangerbot.gameState.LocalPlayerLockAndLoad) ? 1 : 0;
@@ -2492,7 +2401,6 @@ namespace OpenAI
 
             //TODO test Bolvar Fordragon but it will be on his card :D
             //Reading new values end################################
-
         }
 
         private void getMinions(HSRangerLib.BotBase rangerbot)
@@ -2531,9 +2439,7 @@ namespace OpenAI
                 list.Add(item);
             }
 
-
             List<Entity> enchantments = new List<Entity>();
-
 
             foreach (Entity item in list)
             {
@@ -2553,7 +2459,6 @@ namespace OpenAI
                     if (m.Hp <= 0) continue;
                     m.wounded = false;
                     if (m.maxHp > m.Hp) m.wounded = true;
-
 
                     m.exhausted = entity.IsExhausted;
 
@@ -2594,7 +2499,6 @@ namespace OpenAI
                     Helpfunctions.Instance.ErrorLog(m.entityID + " ." + entity.CardId + ". " + m.name + " ready params ex: " + m.exhausted + " charge: " + m.charge + " attcksthisturn: " + m.numAttacksThisTurn + " playedthisturn " + m.playedThisTurn);
                     //Helpfunctions.Instance.ErrorLog("spellpower check " + entitiy.SpellPowerAttack + " " + entitiy.SpellPowerHealing + " " + entitiy.SpellPower);
 
-
                     List<miniEnch> enchs = new List<miniEnch>();
                     /*foreach (Entity ent in allEntitys.Values)
                     {
@@ -2605,7 +2509,6 @@ namespace OpenAI
                             int controler = ent.ControllerId;
                             enchs.Add(new miniEnch(id, creator, controler));
                         }
-
                     }*/
 
                     foreach (Entity ent in item.Attachments)
@@ -2614,18 +2517,13 @@ namespace OpenAI
                         int creator = ent.CreatorId;
                         int controler = ent.ControllerId;
                         enchs.Add(new miniEnch(id, creator, controler));
-
                     }
 
                     m.loadEnchantments(enchs, entity.ControllerId);
 
-
-
-
                     m.Ready = false; // if exhausted, he is NOT ready
 
                     m.updateReadyness();
-
 
                     if (entity.ControllerId == this.ownPlayerController) // OWN minion
                     {
@@ -2637,7 +2535,6 @@ namespace OpenAI
                         m.own = false;
                         this.enemyMinions.Add(m);
                     }
-
                 }
                 // minions added
 
@@ -2651,8 +2548,6 @@ namespace OpenAI
                         this.heroWeaponAttack = entitiy.GetATK();
                         this.heroWeaponDurability = entitiy.GetDurability();
                         //this.heroImmuneToDamageWhileAttacking = false;
-
-
                     }
                     else
                     {
@@ -2664,12 +2559,9 @@ namespace OpenAI
 
                 if (entitiy.GetCardType() == HRCardType.ENCHANTMENT)
                 {
-
                     enchantments.Add(entitiy);
                 }
                  */
-
-
             }
 
             /*foreach (HRCard item in list)
@@ -2679,7 +2571,6 @@ namespace OpenAI
                     enchantments.Add(e);
                 }
             }
-
 
             // add enchantments to minions
             setEnchantments(enchantments);*/
@@ -2721,7 +2612,6 @@ namespace OpenAI
                     }
                     dalaranAspriant.spellpower++;
                 }
-
             }
         }
 
@@ -2744,7 +2634,6 @@ namespace OpenAI
                         m.enchantments.Add(ench);
                         //Helpfunctions.Instance.ErrorLog("add enchantment " +bhu.GetCardId()+" to: " + m.entitiyID);
                     }
-
                 }
 
                 foreach (Minion m in this.enemyMinions)
@@ -2753,9 +2642,7 @@ namespace OpenAI
                     {
                         m.enchantments.Add(ench);
                     }
-
                 }
-
             }
             */
         }
@@ -2770,7 +2657,6 @@ namespace OpenAI
             int elementalLastturn = 0;
             foreach (Entity item in list)
             {
-
                 Entity entitiy = item;
 
                 if (entitiy.ControllerId == this.ownPlayerController && entitiy.ZonePosition >= 1) // own handcard
@@ -2798,8 +2684,6 @@ namespace OpenAI
                     handCards.Add(hc);
                     this.anzcards++;
                 }
-
-
             }
             if (elementalLastturn > 0) Hrtprozis.Instance.updateElementals(elementalLastturn);
 
@@ -2809,7 +2693,6 @@ namespace OpenAI
             {
                 allEntitys.Add(item.EntityId, item);
             }
-
 
             foreach (Entity ent in allEntitys.Values)
             {
@@ -2836,12 +2719,7 @@ namespace OpenAI
                     }
                 }
             }
-
         }
-
-
-
-
 
         private void getDecks(HSRangerLib.BotBase rangerbot)
         {
@@ -2909,7 +2787,6 @@ namespace OpenAI
                             if (cardid == CardDB.cardIDEnum.UNG_067t1) OwnCrystalCore = 5;
                             if (cardid == CardDB.cardIDEnum.UNG_116t) ownMinionsCost0 = true;
                         }
-
                     }
                     else
                     {
@@ -2928,7 +2805,6 @@ namespace OpenAI
                                 Helpfunctions.Instance.ErrorLog("ENEMYCRYSTALCOREFOUND");
                             }
                         }
-
                     }
                 }
             }
@@ -2942,7 +2818,6 @@ namespace OpenAI
                 Ai.Instance.updateTwoTurnSim();
             }
             Probabilitymaker.Instance.setGraveYard(graveYard, isTurnStart);
-
         }
 
         private void updateBehaveString(Behavior botbase)
@@ -2992,13 +2867,10 @@ namespace OpenAI
             {
                 this.botbehave += " plcmnt";
             }
-
-
         }
 
         public static int getLastAffected(int entityid)
         {
-
             if (latestGameState != null)
             {
                 foreach (var item in latestGameState.GameEntityList)
@@ -3015,7 +2887,6 @@ namespace OpenAI
 
         public static int getCardTarget(int entityid)
         {
-
             if (latestGameState != null)
             {
                 foreach (var item in latestGameState.GameEntityList)
@@ -3026,7 +2897,6 @@ namespace OpenAI
                     }
                 }
             }
-
 
             return 0;
         }
@@ -3057,7 +2927,6 @@ namespace OpenAI
                 Helpfunctions.Instance.writeToBuffer(completeBoardString);
                 Helpfunctions.Instance.writeBufferToFile();
             }
-
         }
 
         public bool readActionFile(bool passiveWaiting = false)
@@ -3132,7 +3001,6 @@ namespace OpenAI
                             return false;
                         }
                     }
-
                 }
                 catch
                 {
@@ -3155,8 +3023,6 @@ namespace OpenAI
 
             return true;
         }
-
-
     }
 
     public sealed class Helpfunctions
@@ -3177,18 +3043,21 @@ namespace OpenAI
         }
 
         private bool writelogg = true;
+
         public void loggonoff(bool onoff)
         {
             //writelogg = onoff;
         }
 
         private bool filecreated = false;
+
         public void createNewLoggfile()
         {
             filecreated = false;
         }
 
         private List<string> loggBuffer = new List<string>(Settings.Instance.logBuffer + 1);
+
         public void logg(string s)
         {
             loggBuffer.Add(s);
@@ -3206,7 +3075,6 @@ namespace OpenAI
             }
             catch
             {
-
             }
         }
 
@@ -3219,6 +3087,7 @@ namespace OpenAI
         }
 
         private List<string> errorLogBuffer = new List<string>(Settings.Instance.logBuffer + 1);
+
         public void ErrorLog(string s)
         {
             if (!writelogg) return;
@@ -3237,7 +3106,6 @@ namespace OpenAI
             }
             catch
             {
-
             }
         }
 
@@ -3256,8 +3124,8 @@ namespace OpenAI
             }
         }
 
+        private string sendbuffer = "";
 
-        string sendbuffer = "";
         public void resetBuffer()
         {
             this.sendbuffer = "";
