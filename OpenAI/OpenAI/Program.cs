@@ -390,7 +390,6 @@ namespace OpenAI
                         {
                             this.doMultipleThingsAtATime = false;
                             this.dontmultiactioncount++;
-                            //Helpfunctions.Instance.ErrorLog("doMultipleThingsAtATime " + doMultipleThingsAtATime + " because IsPlayRandomEffect 찾는거");
                         }
                         else this.doMultipleThingsAtATime = true;
 
@@ -1590,20 +1589,7 @@ namespace OpenAI
                                             //Helpfunctions.Instance.ErrorLog("라이노 own minion's deathrattle detected sleep 500ms");
                                         }
                                     }
-
-                                    //System.Threading.Thread.Sleep(1500);
-                                    //Helpfunctions.Instance.logg("own minion's deathrattle detected sleep 1500ms");
-                                    //Helpfunctions.Instance.ErrorLog("own minion's deathrattle detected sleep 1500ms");
                                 }
-
-                                //if (daum.bestmove.target.taunt && daum.bestmove.own.Angr >= daum.bestmove.target.Hp && !daum.bestmove.target.isHero)
-                                //{
-                                //    System.Threading.Thread.Sleep(500);
-                                //    Helpfunctions.Instance.logg("Target Taunt detected sleep 500ms");
-                                //    Helpfunctions.Instance.logg("Target Taunt detected sleep 500ms");
-                                //    Helpfunctions.Instance.ErrorLog("Target Taunt detected sleep 500ms");
-                                //    Helpfunctions.Instance.ErrorLog("Target Taunt detected sleep 500ms");
-                                //}
 
                                 bool hashyena = false;
                                 bool cultmaster = false;
