@@ -7,12 +7,12 @@ namespace OpenAI
     using System.Collections.Generic;
     using System.IO;
 
-    public struct targett
+    public struct TargetInfo
     {
         public int target;
         public int targetEntity;
 
-        public targett(int targ, int ent)
+        public TargetInfo(int targ, int ent)
         {
             this.target = targ;
             this.targetEntity = ent;

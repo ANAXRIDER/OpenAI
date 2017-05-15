@@ -478,14 +478,14 @@ namespace OpenAI
             //posmoves.AddRange(Helpfunctions.TakeList(temp, takenumber));
         }
 
-        public List<targett> cutAttackTargets(List<targett> oldlist, Playfield p, bool own)
+        public List<TargetInfo> cutAttackTargets(List<TargetInfo> oldlist, Playfield p, bool own)
         {
-            List<targett> retvalues = new List<targett>();
+            List<TargetInfo> retvalues = new List<TargetInfo>();
             List<Minion> addedmins = new List<Minion>(8);
 
             bool priomins = false;
-            List<targett> retvaluesPrio = new List<targett>();
-            foreach (targett t in oldlist)
+            List<TargetInfo> retvaluesPrio = new List<TargetInfo>();
+            foreach (TargetInfo t in oldlist)
             {
                 if ((own && t.target == 200) || (!own && t.target == 100))
                 {
