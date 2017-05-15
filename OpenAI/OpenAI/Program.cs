@@ -393,8 +393,6 @@ namespace OpenAI
                         }
                         else this.doMultipleThingsAtATime = true;
 
-                        //if (daum.bestmove.card.card.name == CardDB.cardName.barnes) POWERFULSINGLEACTION++;
-
                         switch (daum.bestmove.card.card.name)
                         {
                             case CardDB.cardName.defenderofargus:
