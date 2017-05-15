@@ -1595,7 +1595,7 @@ namespace OpenAI
             for (int i = 0; i < this.owncards.Count; i++)
             {
                 Handmanager.Handcard dishc = this.owncards[i]; Handmanager.Handcard pishc = p.owncards[i];
-                if (dishc.position != pishc.position || dishc.entity != pishc.entity || dishc.getManaCost(this) != pishc.getManaCost(p))
+                if (dishc.position != pishc.position || dishc.entity != pishc.entity || dishc.getManaCost(this) != pishc.getManaCost(p) || dishc.addattack != pishc.addattack || dishc.addHp != pishc.addHp)
                 {
                     if (logg) Helpfunctions.Instance.logg("handcard changed: " + dishc.card.name);
                     return false;
@@ -1703,7 +1703,7 @@ namespace OpenAI
             for (int i = 0; i < this.owncards.Count; i++)
             {
                 Handmanager.Handcard dishc = this.owncards[i]; Handmanager.Handcard pishc = p.owncards[i];
-                if (dishc.position != pishc.position || dishc.entity != pishc.entity || dishc.manacost != pishc.manacost)
+                if (dishc.position != pishc.position || dishc.entity != pishc.entity || dishc.manacost != pishc.manacost || dishc.addattack != pishc.addattack || dishc.addHp != pishc.addHp)
                 {
                     return false;
                 }
