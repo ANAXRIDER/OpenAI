@@ -159,8 +159,7 @@
                 this.datareaded = false;
                 try
                 {
-                    string path = Settings.Instance.path;
-                    lines = File.ReadAllLines(path + "test.txt");
+                    lines = File.ReadAllLines(FilePath.Test);
                     this.datareaded = true;
                 }
                 catch

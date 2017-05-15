@@ -5,13 +5,7 @@ namespace OpenAI
 {
     public static class FilePath
     {
-        public static string Exe
-        {
-            get
-            {
-                return Path.Combine(FolderPath.OpenAI + "OpenAIConsole.exe");
-            }
-        }
+        /*** ROOT FOLDER ***/
 
         public static string CardDB
         {
@@ -21,13 +15,39 @@ namespace OpenAI
             }
         }
 
+        public static string Exe
+        {
+            get
+            {
+                return Path.Combine(FolderPath.OpenAI + "OpenAIConsole.exe");
+            }
+        }
+
+        public static string MullTest
+        {
+            get
+            {
+                return Path.Combine(FolderPath.OpenAI + "mulltest.txt");
+            }
+        }
+
         public static string Settings
         {
             get
             {
-                return Path.Combine(FolderPath.OpenAI + "_carddb.txt");
+                return Path.Combine(FolderPath.OpenAI + "settings.txt");
             }
         }
+
+        public static string Test
+        {
+            get
+            {
+                return Path.Combine(FolderPath.OpenAI + "test.txt");
+            }
+        }
+
+        /*** LOG FOLDER ***/
 
         public static string ErrorLog
         {
@@ -45,19 +65,21 @@ namespace OpenAI
             }
         }
 
-        public static string CrashTest
-        {
-            get
-            {
-                return Path.Combine(FolderPath.Common + "crashtest.txt");
-            }
-        }
+        /*** COMMON FOLDER ***/
 
         public static string ActionsToDo
         {
             get
             {
                 return Path.Combine(FolderPath.Common + "actionstodo.txt");
+            }
+        }
+
+        public static string CrashTest
+        {
+            get
+            {
+                return Path.Combine(FolderPath.Common + "crashtest.txt");
             }
         }
 
@@ -74,6 +96,14 @@ namespace OpenAI
             get
             {
                 return Path.Combine(FolderPath.Common + "curdeck.txt");
+            }
+        }
+
+        public static string NewCardDB
+        {
+            get
+            {
+                return Path.Combine(FolderPath.Common + "newCardDB.cs");
             }
         }
     }

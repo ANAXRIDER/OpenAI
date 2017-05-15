@@ -75,7 +75,7 @@ namespace OpenAI
             Helpfunctions.Instance.ErrorLog("----------------------------");
             //Helpfunctions.Instance.ErrorLog("test... " + Settings.Instance.logpath + Settings.Instance.logfile);
             if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
-            if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
+            if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + FolderPath.OpenAI);
 
             if (!sf.startedexe && set.useExternalProcess)
             {
@@ -98,7 +98,7 @@ namespace OpenAI
         private void StartExeAsync()
         {
             Process[] pname = Process.GetProcessesByName("OpenAIConsole");
-            string directory = Settings.Instance.path + "OpenAIConsole.exe";
+            string directory = FilePath.Exe;
             bool hasToOpen = true;
 
             if (pname.Length >= 1)
@@ -114,7 +114,7 @@ namespace OpenAI
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo(directory)
                 {
-                    WorkingDirectory = Settings.Instance.path
+                    WorkingDirectory = FolderPath.OpenAI
                 };
                 Process.Start(startInfo);
             }
@@ -1169,7 +1169,7 @@ namespace OpenAI
             }
             catch (Exception Exception)
             {
-                using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
+                using (StreamWriter sw = File.AppendText(FolderPath.Logs + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
                 {
                     sw.WriteLine(Exception.ToString());
                 }
@@ -3201,7 +3201,7 @@ namespace OpenAI
             if (loggBuffer.Count == 0) return;
             try
             {
-                File.AppendAllLines(Settings.Instance.logpath + Settings.Instance.logfile, loggBuffer);
+                File.AppendAllLines(FilePath.Log, loggBuffer);
                 loggBuffer.Clear();
             }
             catch
@@ -3232,7 +3232,7 @@ namespace OpenAI
             if (errorLogBuffer.Count == 0) return;
             try
             {
-                File.AppendAllLines(Settings.Instance.logpath + "Logging.txt", errorLogBuffer);
+                File.AppendAllLines(FilePath.ErrorLog, errorLogBuffer);
                 errorLogBuffer.Clear();
             }
             catch
@@ -3296,7 +3296,7 @@ namespace OpenAI
             {
                 try
                 {
-                    File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
+                    File.WriteAllText(FilePath.CurrentDeck, this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -3334,7 +3334,7 @@ namespace OpenAI
             {
                 try
                 {
-                    File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
+                    File.WriteAllText(FilePath.NewCardDB, this.sendbuffer);
                     writed = false;
                 }
                 catch
