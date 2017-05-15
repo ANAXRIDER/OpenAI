@@ -390,6 +390,7 @@ namespace OpenAI
                         {
                             this.doMultipleThingsAtATime = false;
                             this.dontmultiactioncount++;
+
                         }
                         else this.doMultipleThingsAtATime = true;
 
