@@ -1547,15 +1547,8 @@ namespace OpenAI
 
                                         }
                                     }
-<<<<<<< HEAD
-
                                 }
 
-
-=======
-                                }
-
->>>>>>> refs/remotes/SystemException/master
                                 bool hashyena = false;
                                 bool cultmaster = false;
                                 foreach (Minion mnn in this.ownMinions)
