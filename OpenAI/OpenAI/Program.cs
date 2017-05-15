@@ -1938,7 +1938,8 @@ namespace OpenAI
                             }
 
                             if (PenalityManager.Instance.AdaptDatabase.ContainsKey(daum.bestmove.card.card.name) ||
-                                PenalityManager.Instance.discoverCards.ContainsKey(daum.bestmove.card.card.name)) //small sleep adapt/discover cards.
+                                PenalityManager.Instance.discoverCards.ContainsKey(daum.bestmove.card.card.name) || 
+                                PenalityManager.Instance.randomEffects.ContainsKey(daum.bestmove.card.card.name)) //small sleep adapt/discover cards.
                             {
                                 System.Threading.Thread.Sleep(2800);
                             }

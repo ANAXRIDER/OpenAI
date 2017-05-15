@@ -1254,8 +1254,6 @@ namespace OpenAI
                         if ((m.name == CardDB.cardName.darkshirecouncilman || m.name == CardDB.cardName.tundrarhino) && m.Hp <= p.searchRandomMinion(p.enemyMinions, Playfield.searchmode.searchHighestAttack).Angr && m.Angr < p.searchRandomMinion(p.enemyMinions, Playfield.searchmode.searchHighestAttack).Hp) retval -= 5;
                         if (m.name == CardDB.cardName.darkshirecouncilman && (m.Hp <= enemypotentialattacktotal) && p.ownMaxMana <= 3) retval -= 10;
                         if (m.name == CardDB.cardName.tundrarhino && (m.Hp <= enemypotentialattacktotal) && p.ownMaxMana <= 5) retval -= 10;
-                        // 적미니언 공높은놈이랑 비교..
-                        // 적미니언 공높은놈보다 피 작고 (한방에죽음) + 적 미니언 공높은놈보다 공낮으면 -밸류;
                         if (m.name == CardDB.cardName.gadgetzanauctioneer && (m.Hp <= enemypotentialattacktotal) && p.ownMinions.Find(a => a.taunt) == null) retval -= 10;
                         if (m.name == CardDB.cardName.flametonguetotem && (m.Hp <= enemypotentialattacktotal) && p.ownMinions.Find(a => a.taunt) == null) retval -= 10;
                         if (m.name == CardDB.cardName.manatidetotem && (m.Hp <= enemypotentialattacktotal) && p.ownMinions.Find(a => a.taunt) == null && p.owncards.Count >= 3) retval -= 13;
@@ -1306,9 +1304,23 @@ namespace OpenAI
                         }
                     }
                     if (mulroccnt >= 2 && p.enemyMinions.Find(a => a.Hp <= m.Angr) != null && p.enemyMinions.Find(a => a.taunt) == null) retval += 10;
-                    else if (mulroccnt >= 2 && p.enemyMinions.Count == 0) retval += 4;
+                    else if (mulroccnt >= 2 && p.enemyMinions.Count == 0) retval += 6;
+
+                    int LagestATKValue = 0;
+                    foreach (Handmanager.Handcard hcc in p.owncards)
+                    {
+                        if (PenalityManager.Instance.attackBuffDatabase.ContainsKey(hcc.card.name) && (hcc.getManaCost(p) <= p.ownMaxMana + 1 && p.turnCounter == 0))
+                        {
+                            if (LagestATKValue < PenalityManager.Instance.attackBuffDatabase[hcc.card.name]) LagestATKValue = PenalityManager.Instance.attackBuffDatabase[hcc.card.name];
+                        }
+                        else if (hcc.card.name == CardDB.cardName.murlocwarleader)
+                        {
+                            if (LagestATKValue < 2) LagestATKValue = 2; //murlocwarleader buff
+                        }
+                    }
+                    if (LagestATKValue > 0) retval += LagestATKValue; // to add value. next turn attack buffs.
                 }
-                else if (m.name == CardDB.cardName.finjatheflyingstar && (m.Hp <= enemypotentialattacktotal) && !m.stealth) //special value for murloc warleader
+                else if (m.name == CardDB.cardName.finjatheflyingstar && (m.Hp <= enemypotentialattacktotal) && !m.stealth)
                 {
                     retval -= 8;
                 }
@@ -1317,7 +1329,7 @@ namespace OpenAI
                 {
                     foreach (Minion mnn in p.ownMinions)
                     {
-                        if (m.entityID != mnn.entityID && mnn.handcard.card.race == TAG_RACE.MURLOC) retval -= 3; //angr 2 *2 + hp = 3;
+                        if (m.entityID != mnn.entityID && mnn.handcard.card.race == TAG_RACE.MURLOC) retval -= 3;
                     }
                 }
 
