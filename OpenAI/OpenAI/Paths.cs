@@ -5,77 +5,23 @@ namespace OpenAI
 {
     public static class FilePath
     {
-        public static string Exe
-        {
-            get
-            {
-                return Path.Combine(FolderPath.OpenAI + "OpenAIConsole.exe");
-            }
-        }
+        public static string Exe => Path.Combine(FolderPath.OpenAI + "OpenAIConsole.exe");
 
-        public static string CardDB
-        {
-            get
-            {
-                return Path.Combine(FolderPath.OpenAI + "_carddb.txt");
-            }
-        }
+        public static string CardDB => Path.Combine(FolderPath.OpenAI + "_carddb.txt");
 
-        public static string Settings
-        {
-            get
-            {
-                return Path.Combine(FolderPath.OpenAI + "settings.txt");
-            }
-        }
+        public static string Settings => Path.Combine(FolderPath.OpenAI + "settings.txt");
 
-        public static string ErrorLog
-        {
-            get
-            {
-                return Path.Combine(FolderPath.Logs + "ErrorLog.txt");
-            }
-        }
+        public static string ErrorLog => Path.Combine(FolderPath.Logs + "ErrorLog.txt");
 
-        public static string Log
-        {
-            get
-            {
-                return Path.Combine(FolderPath.Logs + "Log.txt");
-            }
-        }
+        public static string Log => Path.Combine(FolderPath.Logs + "Log.txt");
 
-        public static string CrashTest
-        {
-            get
-            {
-                return Path.Combine(FolderPath.Common + "crashtest.txt");
-            }
-        }
+        public static string CrashTest => Path.Combine(FolderPath.Common + "crashtest.txt");
 
-        public static string ActionsToDo
-        {
-            get
-            {
-                return Path.Combine(FolderPath.Common + "actionstodo.txt");
-            }
-        }
+        public static string ActionsToDo => Path.Combine(FolderPath.Common + "actionstodo.txt");
 
-        public static string CurrentBoard
-        {
-            get
-            {
-                return Path.Combine(FolderPath.Common + "crrntbrd.txt");
-            }
-        }
+        public static string CurrentBoard => Path.Combine(FolderPath.Common + "crrntbrd.txt");
 
-        public static string CurrentDeck
-        {
-            get
-            {
-                return Path.Combine(FolderPath.Common + "curdeck.txt");
-            }
-        }
+        public static string CurrentDeck => Path.Combine(FolderPath.Common + "curdeck.txt");
     }
 
     public static class FolderPath
@@ -93,13 +39,7 @@ namespace OpenAI
             }
         }
 
-        public static string OpenAI
-        {
-            get
-            {
-                return Root;
-            }
-        }
+        public static string OpenAI => Root;
 
         public static string Common
         {
