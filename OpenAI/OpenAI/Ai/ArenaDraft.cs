@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Redfish.ai
+﻿namespace Redfish.ai
 {
-    class ArenaDraft
+    internal class ArenaDraft
     {
-
         //private int CountDeckCardNum(int cost,bool is_minion, bool is_spell,List<HSRangerLib.GameArenaDraftEventArgs.DeckCard> deck)
         //{
         //    int num = 0;
@@ -66,7 +59,7 @@ namespace Redfish.ai
         //    //No.4 choice
         //    if (def.Class == TAG_CLASS.PALADIN)
         //    {
-        //        return 4; 
+        //        return 4;
         //    }
 
         //    //No.5 choice
@@ -110,6 +103,5 @@ namespace Redfish.ai
 
         //    return best_hero_id;
         //}
-
     }
 }

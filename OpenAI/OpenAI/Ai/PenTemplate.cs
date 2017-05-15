@@ -1,15 +1,12 @@
 ﻿namespace OpenAI
 {
-   
     public class PenTemplate
     {
-
         private int enemyMinionAttackFactor = 2;
 
         private int enemyMinionBaseValue = 10;
 
         private int enemyMinionHPFactor = 2;
-
 
         //penalty if attacker-minion is attacking the target-minion
         public virtual float getAttackPenalty(Playfield p, Minion attacker, Minion target, bool isLethal)
@@ -40,7 +37,5 @@
         {
             return 5;
         }
-
-
     }
 }

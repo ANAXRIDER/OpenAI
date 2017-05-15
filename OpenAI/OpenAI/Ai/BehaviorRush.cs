@@ -4,7 +4,7 @@ namespace OpenAI
 {
     public class BehaviorRush : Behavior
     {
-        PenalityManager penman = PenalityManager.Instance;
+        private PenalityManager penman = PenalityManager.Instance;
 
         public override float getPlayfieldValue(Playfield p)
         {
@@ -52,7 +52,6 @@ namespace OpenAI
 
             //RR card draw value depending on the turn and distance to lethal
             //RR if lethal is close, carddraw value is increased
-
 
             if (p.turnCounter == 0 && Ai.Instance.lethalMissing <= 5) //RR
             {
@@ -207,7 +206,7 @@ namespace OpenAI
             {
                 //Helpfunctions.Instance.ErrorLog("turncounter " + p.turnCounter);
 
-                if (p.turnCounter == 0) // own turn 
+                if (p.turnCounter == 0) // own turn
                 {
                     //worst case: we die on own turn
                     retval += p.owncarddraw * 500;
@@ -226,9 +225,6 @@ namespace OpenAI
                         retval -= 100;
                     }
                 }
-
-
-
             }
 
             /*
@@ -265,7 +261,6 @@ namespace OpenAI
                 retval += m.handcard.card.rarity;
             }
 
-
             if (m.handcard.card.targetPriority >= 1 && !m.silenced) retval += m.handcard.card.targetPriority;
             if (!m.frozen && m.Angr >= 4) retval += 20 + m.Hp;
             if (!m.frozen && m.Angr >= 7)
@@ -281,8 +276,5 @@ namespace OpenAI
             if (m.name == CardDB.cardName.nerubianegg && m.Angr <= 3 && !m.taunt) retval = 0;
             return retval;
         }
-
-
     }
-
 }

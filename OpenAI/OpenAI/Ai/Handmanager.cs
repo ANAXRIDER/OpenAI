@@ -1,10 +1,9 @@
-﻿namespace OpenAI
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace OpenAI
+{
     public class Handmanager
     {
-
         public class Handcard
         {
             public int position;
@@ -24,6 +23,7 @@
             {
                 card = CardDB.Instance.unknownCard;
             }
+
             public Handcard(Handcard hc)
             {
                 this.position = hc.position;
@@ -36,6 +36,7 @@
                 this.elemPoweredUp = hc.elemPoweredUp;
                 this.powerup = hc.powerup;
             }
+
             public Handcard(CardDB.Card c)
             {
                 this.position = 0;
@@ -45,10 +46,12 @@
                 this.addHp = 0;
                 this.powerup = false;
             }
+
             public int getManaCost(Playfield p)
             {
                 return this.card.getManaCost(p, this.manacost);
             }
+
             public bool canplayCard(Playfield p)
             {
                 return this.card.canplayCard(p, this.manacost);
@@ -65,8 +68,8 @@
 
         private int ownPlayerController;
 
-        Helpfunctions help;
-        CardDB cdb = CardDB.Instance;
+        private Helpfunctions help;
+        private CardDB cdb = CardDB.Instance;
 
         private static Handmanager instance;
 
@@ -82,7 +85,6 @@
         {
             this.help = Helpfunctions.Instance;
         }
-
 
         public void clearAll()
         {
@@ -100,7 +102,7 @@
 
         public string getCardChoiceString()
         {
-            string retval ="";
+            string retval = "";
 
             if (handcardchoices.Count >= 1)
             {
@@ -150,7 +152,6 @@
             return handcardchoices.Count;
         }
 
-
         public void setHandcards(List<Handcard> hc, int anzowncards, int anzenemycards, List<CardDB.cardIDEnum> crdchcs)
         {
             this.handcardchoices.Clear();
@@ -177,7 +178,7 @@
             help.logg("Own Handcards: ");
             foreach (Handmanager.Handcard c in this.handCards)
             {
-                help.logg("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack +" " + c.elemPoweredUp);
+                help.logg("pos " + c.position + " " + c.card.name + " " + c.manacost + " entity " + c.entity + " " + c.card.cardIDenum + " " + c.addattack + " " + c.elemPoweredUp);
             }
             help.logg("Enemy cards: " + this.enemyAnzCards);
 
@@ -231,11 +232,7 @@
                 help.writeToBuffer("Enemy cards: " + this.enemyAnzCards);
 
                 //todo print died minions this turn!
-
             }
         }
-
-
     }
-
 }

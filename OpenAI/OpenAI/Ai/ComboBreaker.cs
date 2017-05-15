@@ -1,26 +1,17 @@
-﻿namespace OpenAI
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace OpenAI
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-
-
     public sealed class ComboBreaker
     {
-
-        enum combotype
-        {
-            combo,
-            target,
-            weaponuse
-        }
-
         private Dictionary<CardDB.cardIDEnum, int> playByValue = new Dictionary<CardDB.cardIDEnum, int>();
 
         private List<combo> combos = new List<combo>();
 
-        Handmanager hm = Handmanager.Instance;
-        Hrtprozis hp = Hrtprozis.Instance;
+        private Handmanager hm = Handmanager.Instance;
+        private Hrtprozis hp = Hrtprozis.Instance;
 
         public int attackFaceHP = -1;
 
@@ -28,10 +19,9 @@
         private string deckName = Hrtprozis.Instance.deckName;
         private string cleanPath = "";
 
-
-        class combo
+        private class combo
         {
-            public combotype type = combotype.combo;
+            public ComboType type = ComboType.COMBO;
             public int neededMana;
             public Dictionary<CardDB.cardIDEnum, int> combocards = new Dictionary<CardDB.cardIDEnum, int>();
             public Dictionary<CardDB.cardIDEnum, int> cardspen = new Dictionary<CardDB.cardIDEnum, int>();
@@ -48,13 +38,13 @@
             public int bonusForPlayingT0;
             public int bonusForPlayingT1;
             public CardDB.cardName requiredWeapon = CardDB.cardName.unknown;
-            public HeroEnum oHero = HeroEnum.None;
+            public HeroEnum oHero = HeroEnum.NONE;
 
             public combo(string s)
             {
                 this.neededMana = 0;
                 requiredWeapon = CardDB.cardName.unknown;
-                this.type = combotype.combo;
+                this.type = ComboType.COMBO;
                 this.twoTurnCombo = false;
                 bool fixmana = false;
                 if (s.Contains("nxttrn")) this.twoTurnCombo = true;
@@ -77,7 +67,7 @@
                         if (m >= 1) neededMana = m;
                     }
                 */
-                if (type == combotype.combo)
+                if (type == ComboType.COMBO)
                 {
                     this.combolength = 0;
                     this.combot0len = 0;
@@ -142,7 +132,6 @@
 
                         if (this.twoTurnCombo)
                         {
-
                             if (t1)
                             {
                                 if (this.combocardsTurn1.ContainsKey(CardDB.Instance.cardIdstringToEnum(crd)))
@@ -185,8 +174,6 @@
                                 this.combot0lenAll++;
                             }
                         }
-
-
                     }
                     if (!fixmana)
                     {
@@ -290,7 +277,6 @@
                 return 0;
             }
 
-
             public bool isMultiTurn1Card(CardDB.Card card)
             {
                 if (this.combocardsTurn1.ContainsKey(card.cardIDenum))
@@ -361,7 +347,6 @@
                 if (cardsincombo == this.combot1len) return this.bonusForPlayingT1;
                 return 0;
             }
-
         }
 
         private static ComboBreaker instance;
@@ -389,7 +374,7 @@
             deckName = Hrtprozis.Instance.deckName;
             lock (instance)
             {
-            readCombos();
+                readCombos();
             }
             if (attackFaceHP != -1)
             {
@@ -418,7 +403,6 @@
             string cleandeckpath = cleanclasspath + deckName + Path.DirectorySeparatorChar;
             const string filestring = "_combo.txt";
 
-
             if (deckName != "" && File.Exists(deckpath + filestring))
             {
                 path = deckpath;
@@ -444,7 +428,6 @@
                 return;
             }
             Helpfunctions.Instance.ErrorLog("[Combo] read " + cleanPath);
-
 
             try
             {
@@ -517,7 +500,7 @@
             int mana = Math.Max(hp.ownMaxMana, hp.currentMana);
             foreach (combo c in this.combos)
             {
-                if ((c.oHero == HeroEnum.None || c.oHero == p.ownHeroName) && c.isCardInCombo(crd))
+                if ((c.oHero == HeroEnum.NONE || c.oHero == p.ownHeroName) && c.isCardInCombo(crd))
                 {
                     int iia = c.isInCombo(hm.handCards, hp.ownMaxMana);//check if we have all cards for a combo, and if the choosen card is one
                     int iib = c.isMultiTurnComboTurn1(hm.handCards, mana, p.ownMinions, p.ownWeaponName);
@@ -531,11 +514,9 @@
                     if (iic == 1 && pen > c.cardspen[crd.cardIDenum]) pen = c.cardspen[crd.cardIDenum];//iic==1 will destroy combo
                     if (iic == 2) pen = 0;//card is ok to play
                 }
-
             }
             if (found) { return pen; }
             return 0;
-
         }
 
         public int checkIfComboWasPlayed(List<Action> alist, CardDB.cardName weapon, HeroEnum heroname)
@@ -553,7 +534,7 @@
                 //playedcards.Add(a.handcard);
                 foreach (combo c in this.combos)
                 {
-                    if ((c.oHero == HeroEnum.None || c.oHero == heroname) && c.isCardInCombo(crd))
+                    if ((c.oHero == HeroEnum.NONE || c.oHero == heroname) && c.isCardInCombo(crd))
                     {
                         int iia = c.isInCombo(hm.handCards, hp.ownMaxMana);
                         int iib = c.isMultiTurnComboTurn1(hm.handCards, mana, hp.ownMinions, weapon);
@@ -567,7 +548,6 @@
                             playedcards.Add(a.card); // add only the cards, which dont get a penalty
                         }
                     }
-
                 }
             }
 
@@ -590,7 +570,6 @@
 
             if (wholeComboPlayed) return bonus;
             return 250;
-
         }
 
         public int getPlayValue(CardDB.cardIDEnum ce)
@@ -601,10 +580,6 @@
                 return this.playByValue[ce];
             }
             return 0;
-
         }
-
     }
-
-
 }

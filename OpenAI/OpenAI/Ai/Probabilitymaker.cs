@@ -1,8 +1,8 @@
-﻿namespace OpenAI
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace OpenAI
+{
     public struct GraveYardItem
     {
         public bool own;
@@ -27,8 +27,6 @@
         public bool canbeTriggeredWithKillingMinion = true;
         public bool canbeTriggeredWithHeroPower = true;
 
-
-
         public bool canBe_snaketrap = true;
         public bool canBe_snipe = true; // few person use this.
         public bool canBe_explosive = true;
@@ -48,18 +46,19 @@
         public bool canBe_redemption = true;
         public bool canBe_repentance = true;
         public bool canBe_avenge = true;
-        
 
         //new TGT---
         public bool canBe_effigy = true;
+
         public bool canBe_beartrap = true;
         public bool canBe_competivespirit = true;
 
         // LOE
         public bool canBe_Trial = true;
+
         public bool canBe_Dart = true;//hunter
 
-		// Kara
+        // Kara
         public bool canBe_cattrick = true;
 
         public int entityId;
@@ -131,7 +130,6 @@
 
             this.canBe_cattrick = sec.canBe_cattrick;
 
-
             this.entityId = sec.entityId;
 
             //if (Playfield.enemyMinions.Count)
@@ -140,7 +138,7 @@
             {
                 Iceblockmage();
 
-               // Helpfunctions.Instance.logg("iceblockmage " + " " + iceblockmage);
+                // Helpfunctions.Instance.logg("iceblockmage " + " " + iceblockmage);
 
                 if (iceblockmage >= 2)
                 {
@@ -153,7 +151,7 @@
                     this.canBe_effigy = false;
                 }
             }
-            
+
             //standard - wild
 
             if (Settings.Instance.SecretStandard)
@@ -166,7 +164,6 @@
                 this.canBe_effigy = false;
                 this.canBe_Dart = false;
             }
-
         }
 
         public SecretItem(string secdata)
@@ -243,7 +240,6 @@
             this.canbeTriggeredWithPlayingMinion = false;
             this.canbeTriggeredWithKillingMinion = false;
             this.canbeTriggeredWithHeroPower = false;
-            
 
             if (this.canBe_snipe || this.canBe_mirrorentity || this.canBe_repentance) this.canbeTriggeredWithPlayingMinion = true;
 
@@ -254,8 +250,6 @@
             if (this.canBe_avenge || this.canBe_redemption || this.canBe_duplicate || this.canBe_effigy) this.canbeTriggeredWithKillingMinion = true;
 
             if (this.canBe_Dart) this.canbeTriggeredWithHeroPower = true;
-
-
         }
 
         public void usedTrigger_CharIsAttacked(bool DefenderIsHero, bool AttackerIsHero)
@@ -279,7 +273,6 @@
                 this.canBe_vaporize = false;
 
                 this.canBe_beartrap = false;
-
             }
             else if (!DefenderIsHero)
             {
@@ -429,10 +422,9 @@
             result = result && this.canBe_effigy == s.canBe_effigy && this.canBe_beartrap == s.canBe_beartrap && this.canBe_competivespirit == s.canBe_competivespirit;
             result = result && this.canBe_Trial == s.canBe_Trial && this.canBe_Dart == s.canBe_Dart;
             result = result && this.canBe_cattrick == s.canBe_cattrick;
-            
+
             return result;
         }
-
     }
 
     public class Probabilitymaker
@@ -442,10 +434,10 @@
         public Dictionary<CardDB.cardIDEnum, int> ownGraveyard = new Dictionary<CardDB.cardIDEnum, int>();
         public Dictionary<CardDB.cardIDEnum, int> enemyGraveyard = new Dictionary<CardDB.cardIDEnum, int>();
 
-        List<CardDB.Card> enemyDeckGuessed = new List<CardDB.Card>(); //what the enemy has played already
+        private List<CardDB.Card> enemyDeckGuessed = new List<CardDB.Card>(); //what the enemy has played already
 
         public List<GraveYardItem> turngraveyard = new List<GraveYardItem>();//MOBS only
-        List<GraveYardItem> graveyardTillTurnStart = new List<GraveYardItem>();
+        private List<GraveYardItem> graveyardTillTurnStart = new List<GraveYardItem>();
 
         public List<SecretItem> enemySecrets = new List<SecretItem>();
 
@@ -462,7 +454,6 @@
         public bool feugenDead;
         public bool stalaggDead;
 
-
         private static Probabilitymaker instance;
 
         public static Probabilitymaker Instance
@@ -473,9 +464,9 @@
             }
         }
 
-        public Probabilitymaker() { }
-
-
+        public Probabilitymaker()
+        {
+        }
 
         public void setOwnCards(List<CardDB.cardIDEnum> newGraveyardCards)
         {
@@ -510,7 +501,7 @@
             }
         }
 
-        public string printTurnGraveYard(bool writetobuffer = false, bool dontwrite=false)
+        public string printTurnGraveYard(bool writetobuffer = false, bool dontwrite = false)
         {
             /*string g = "";
             if (Probabilitymaker.Instance.feugenDead) g += " fgn";
@@ -572,7 +563,6 @@
                 string ent = s.Split(',')[1];
                 GraveYardItem gyi = new GraveYardItem(CardDB.Instance.cardIdstringToEnum(id), Convert.ToInt32(ent), false);
             }
-
         }
 
         public void setGraveYard(List<GraveYardItem> list, bool turnStart)
@@ -619,14 +609,12 @@
             this.turngraveyard.AddRange(list);
         }
 
-
         public bool hasEnemyThisCardInDeck(CardDB.cardIDEnum cardid)
         {
             if (this.enemyGraveyard.ContainsKey(cardid))
             {
                 if (this.enemyGraveyard[cardid] == 1)
                 {
-
                     return true;
                 }
                 return false;
@@ -644,13 +632,11 @@
             {
                 if (this.enemyGraveyard[cardid] == 1)
                 {
-
                     return 1;
                 }
                 return 0;
             }
             return ret;
-
         }
 
         public string printGraveyards(bool writetobuffer = false, bool dontwrite = false)
@@ -703,7 +689,6 @@
                 }
                 catch
                 {
-                    
                 }
                 if (cdbe == CardDB.cardIDEnum.None)
                 {
@@ -713,7 +698,6 @@
                     }
                     catch
                     {
-
                     }
                 }
                 this.ownGraveyard.Add(cdbe, anz);
@@ -733,11 +717,11 @@
             this.ownGraveYardCommonAttack = 0;
             this.ownGraveYardCommonAttack = 0;
             this.ownGraveYardCommonTaunt = 0;
-            if(tempamount>=1)
+            if (tempamount >= 1)
             {
-            this.ownGraveYardCommonAttack =  (int)(tempattack / tempamount);
-            this.ownGraveYardCommonHP = (int)(temphp / tempamount);
-            if (2 * temptaunt >= tempamount) this.ownGraveYardCommonTaunt = 1;
+                this.ownGraveYardCommonAttack = (int)(tempattack / tempamount);
+                this.ownGraveYardCommonHP = (int)(temphp / tempamount);
+                if (2 * temptaunt >= tempamount) this.ownGraveYardCommonTaunt = 1;
             }
 
             tempamount = 0;
@@ -759,7 +743,6 @@
                 }
                 catch
                 {
- 
                 }
 
                 if (cdbe == CardDB.cardIDEnum.None)
@@ -770,7 +753,6 @@
                     }
                     catch
                     {
-
                     }
                 }
 
@@ -786,7 +768,6 @@
                     temphp += tempcard.Health * anz;
                     if (tempcard.tank) temptaunt += anz;
                 }
-
             }
 
             this.enemyGraveYardCommonAttack = 0;
@@ -798,13 +779,11 @@
                 this.enemyGraveYardCommonHP = (int)(temphp / tempamount);
                 if (2 * temptaunt >= tempamount) this.enemyGraveYardCommonTaunt = 1;
             }
-
         }
 
         public int getProbOfEnemyHavingCardInHand(CardDB.cardIDEnum cardid, int handsize, int decksize)
         {
             //calculates probability \in [0,...,100]
-
 
             int cardsremaining = this.anzCardsInDeck(cardid);
             if (cardsremaining == 0) return 0;
@@ -860,7 +839,6 @@
             SecretItem sec = new SecretItem { entityId = entityid };
             if (enemyHeroName == HeroEnum.hunter)
             {
-
                 sec.canBe_counterspell = false;
                 sec.canBe_icebarrier = false;
                 sec.canBe_iceblock = false;
@@ -879,8 +857,6 @@
                 sec.canBe_effigy = false;
 
                 sec.canBe_Trial = false;
-                
-
 
                 //if (enemyGraveyard.ContainsKey(CardDB.cardIDEnum.EX1_554) && enemyGraveyard[CardDB.cardIDEnum.EX1_554] >= 2)
                 //{
@@ -1008,7 +984,6 @@
 
                 sec.canBe_cattrick = false;
 
-
                 //if (enemyGraveyard.ContainsKey(CardDB.cardIDEnum.EX1_132) && enemyGraveyard[CardDB.cardIDEnum.EX1_132] >= 2)
                 //{
                 //    sec.canBe_eyeforaneye = false;
@@ -1043,7 +1018,6 @@
                 //{
                 //    sec.canBe_Trial = false;
                 //}
-
             }
 
             if (enemyHeroName == HeroEnum.priest ||
@@ -1173,8 +1147,6 @@
 
                     sec.canBe_cattrick = false;
                 }
-
-
             }
             if (enemyHeroName == HeroEnum.druid ||
                 enemyHeroName == HeroEnum.warrior ||
@@ -1210,13 +1182,6 @@
 
                 sec.canBe_cattrick = false;
             }
-            
-
-
-
-
-
-
 
             return sec;
         }
@@ -1226,7 +1191,6 @@
             string retval = "";
             foreach (SecretItem si in this.enemySecrets)
             {
-
                 retval += si.returnAString();
             }
 
@@ -1238,13 +1202,11 @@
             string retval = "";
             foreach (SecretItem si in list)
             {
-
                 retval += si.returnAString();
             }
 
             return retval;
         }
-
 
         public void setEnemySecretData(List<SecretItem> enemySecretl)
         {
@@ -1276,7 +1238,6 @@
 
             this.enemySecrets.Clear();
             this.enemySecrets.AddRange(temp);
-
         }
 
         public void updateSecretList(Playfield p, Playfield old)
@@ -1405,7 +1366,6 @@
 
             foreach (SecretItem si in this.enemySecrets)
             {
-
                 if (attackedWithHero || attackedWithMob) si.usedTrigger_CharIsAttacked(attackTargetIsMinion == 1, attackedWithHero);
 
                 if (enemyHeroGotDmg) si.usedTrigger_HeroGotDmg();
@@ -1419,10 +1379,7 @@
                 if (endedTurn) si.usedTrigger_EndTurn();
 
                 if (usedHeropower) si.usedTrigger_HeroPower();
-
             }
         }
-
     }
-
 }

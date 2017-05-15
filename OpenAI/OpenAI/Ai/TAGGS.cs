@@ -1,6 +1,5 @@
 ﻿namespace OpenAI
 {
-
     public enum GAME_TAGs
     {
         TAG_SCRIPT_DATA_NUM_1 = 2,
@@ -319,7 +318,7 @@
         PIRATE = 23,
         DRAGON = 24
     }
-    
+
     public enum TAG_CARDTYPE
     {
         INVALID = 0,
@@ -376,6 +375,4 @@
         EPIC = 4,
         LEGENDARY = 5,
     }
-
-   
 }

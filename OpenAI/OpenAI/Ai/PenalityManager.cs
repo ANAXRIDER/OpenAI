@@ -1,56 +1,53 @@
-﻿using System.Security.Policy;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OpenAI
 {
-    using System;
-    using System.Collections.Generic;
-
     public sealed class PenalityManager
     {
         //todo acolyteofpain
         //todo better aoe-penality
 
-        ComboBreaker cb;
+        private ComboBreaker cb;
         public Dictionary<CardDB.cardName, int> anti_aoe_minion = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardIDEnum, int> TargetAbilitysDatabase = new Dictionary<CardDB.cardIDEnum, int>();
-        Dictionary<CardDB.cardName, int> HealTargetDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> HealHeroDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> HealAllDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> HealCardButCanUseFullHP = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> HealTargetDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> HealHeroDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> HealAllDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> HealCardButCanUseFullHP = new Dictionary<CardDB.cardName, int>();
 
         public Dictionary<CardDB.cardName, int> DamageAllDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> DamageHeroDatabase = new Dictionary<CardDB.cardName, int>(); //not used
         public Dictionary<CardDB.cardName, int> DamageRandomDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> DamageAllEnemysDatabase = new Dictionary<CardDB.cardName, int>();
 
-        Dictionary<CardDB.cardName, int> enrageDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> enrageDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> silenceDatabase = new Dictionary<CardDB.cardName, int>();
 
         public Dictionary<CardDB.cardName, int> heroAttackBuffDatabase = new Dictionary<CardDB.cardName, int>(); //not used
         public Dictionary<CardDB.cardName, int> attackBuffDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> healthBuffDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> tauntBuffDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> healthBuffDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> tauntBuffDatabase = new Dictionary<CardDB.cardName, int>();
 
         public Dictionary<CardDB.cardName, int> lethalHelpers = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> elementalLastTurnDependentDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> elementalLastTurnDependentDatabase = new Dictionary<CardDB.cardName, int>();
 
-        Dictionary<CardDB.cardName, int> backToHandDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> backToHandDatabase = new Dictionary<CardDB.cardName, int>();
 
-        Dictionary<CardDB.cardName, int> TransformCardDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> KillCardDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> TransformCardDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> KillCardDatabase = new Dictionary<CardDB.cardName, int>();
 
-        Dictionary<CardDB.cardName, int> cardDiscardDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> discardedCardCount = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> destroyOwnDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> cardDiscardDatabase = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> discardedCardCount = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> destroyOwnDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> destroyDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> buffingMinionsDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> buffing1TurnDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> randomEffects = new Dictionary<CardDB.cardName, int>();
 
-        Dictionary<CardDB.cardName, int> silenceTargets = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> silenceTargets = new Dictionary<CardDB.cardName, int>();
 
-
-        Dictionary<CardDB.cardName, int> priorityDatabase = new Dictionary<CardDB.cardName, int>(); //minions we want to keep around
+        private Dictionary<CardDB.cardName, int> priorityDatabase = new Dictionary<CardDB.cardName, int>(); //minions we want to keep around
 
         public Dictionary<CardDB.cardName, int> DamageTargetDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> DamageTargetSpecialDatabase = new Dictionary<CardDB.cardName, int>();
@@ -59,11 +56,11 @@ namespace OpenAI
         public Dictionary<CardDB.cardName, int> priorityTargets = new Dictionary<CardDB.cardName, int>(); //enemy minions we want to kill
         public Dictionary<CardDB.cardName, int> specialMinions = new Dictionary<CardDB.cardName, int>(); //minions with cardtext, but no battlecry
 
-        public  Dictionary<CardDB.cardName, int> discoverCards = new Dictionary<CardDB.cardName, int>();
+        public Dictionary<CardDB.cardName, int> discoverCards = new Dictionary<CardDB.cardName, int>();
 
-        Dictionary<CardDB.cardName, int> strongInspireEffectMinions = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> strongInspireEffectMinions = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> summonMinionSpellsDatabase = new Dictionary<CardDB.cardName, int>(); // spells/hero powers that summon minions immediately
-        Dictionary<CardDB.cardName, int> alsoEquipsWeaponDB = new Dictionary<CardDB.cardName, int>(); //cards that aren't weapons but equip one immediately
+        private Dictionary<CardDB.cardName, int> alsoEquipsWeaponDB = new Dictionary<CardDB.cardName, int>(); //cards that aren't weapons but equip one immediately
 
         public Dictionary<CardDB.cardName, int> AdaptDatabase = new Dictionary<CardDB.cardName, int>();
 
@@ -71,10 +68,12 @@ namespace OpenAI
         public float penaltylmanager_penalty = 0;
         private static readonly PenalityManager instance = new PenalityManager();
 
-        int doomsayerreturn = 0;
-        int cards = 0;
+        private int doomsayerreturn = 0;
+        private int cards = 0;
 
-        static PenalityManager() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        static PenalityManager()
+        {
+        } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static PenalityManager Instance
         {
@@ -109,7 +108,7 @@ namespace OpenAI
             setupStrongInspireMinions();
             setupSummonMinionSpellsDatabase();
             setupAlsoEquipsWeaponDB();
-			anti_aoe();
+            anti_aoe();
             setupNeedSleepBecauseTimingMinionsDB();
             AdaptMinionDB();
         }
@@ -131,7 +130,6 @@ namespace OpenAI
                 {
                     if (target.name == CardDB.cardName.whelp) return 500;
                 }
-
             }
 
             bool rockbiterMinion = p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == m.entityID) != null;
@@ -178,7 +176,7 @@ namespace OpenAI
                 if (totalAngr < target.Hp) return 500;
             }*/
 
-			bool juggleron = false;
+            bool juggleron = false;
             foreach (Minion mnn in p.ownMinions)
             {
                 if (mnn.name == CardDB.cardName.knifejuggler && !mnn.silenced) juggleron = true;
@@ -200,16 +198,14 @@ namespace OpenAI
 
             if (m.name == CardDB.cardName.darkshirecouncilman && !m.silenced)
             {
-                
             }
 
-            
             if (target.name == CardDB.cardName.doomsayer && !target.silenced)
             {
                 if (m.Angr >= target.Hp)
                 {
                     //Helpfunctions.Instance.ErrorLog("doomsayerturn" + doomsayerreturn);
-                    if (p.cardsPlayedThisTurn >= 1) 
+                    if (p.cardsPlayedThisTurn >= 1)
                     {
                         int playmobcardscount = 0;
                         foreach (Action a in p.playactions)
@@ -221,9 +217,6 @@ namespace OpenAI
                     }
                 }
             }
-
-
-
 
             if (m.destroyOnOwnTurnEnd && m.Angr > m.handcard.card.Attack)
             {
@@ -243,7 +236,6 @@ namespace OpenAI
                 }
             }
 
-
             //if (this.anti_aoe_minion.ContainsKey(m.name))
             //{
             //    if (m.Angr < target.Hp && m.Hp <= target.Angr && !target.isHero && !target.taunt && !priorityTargets.ContainsKey(target.name) && !target.divineshild) //혼자죽음
@@ -256,7 +248,6 @@ namespace OpenAI
             //        pen += this.anti_aoe_minion[m.name] / 2;
             //    }
             //}
-
 
             if (m.name == CardDB.cardName.lepergnome && !m.silenced)
             {
@@ -274,14 +265,10 @@ namespace OpenAI
                 }
             }
 
-
-
             foreach (Minion mnn in p.enemyMinions)
             {
-                if (juggleron && mnn.Hp == target.Hp && !target.taunt && mnn.Angr > target.Angr && !target.isHero && m.Hp <= target.Angr && anti_aoe_minion.ContainsKey(m.name)) pen += mnn.Angr-target.Angr;
+                if (juggleron && mnn.Hp == target.Hp && !target.taunt && mnn.Angr > target.Angr && !target.isHero && m.Hp <= target.Angr && anti_aoe_minion.ContainsKey(m.name)) pen += mnn.Angr - target.Angr;
             }
-
-
 
             if (target.name == CardDB.cardName.chillmaw && !target.silenced)
             {
@@ -297,7 +284,6 @@ namespace OpenAI
             //    //Helpfunctions.Instance.ErrorLog("(((((((((((((((((((((((((((((((((((((((");
             //    //if (m.Angr >= target.Hp) pen -= 5;
             //}
-
 
             if (m.name == CardDB.cardName.finjatheflyingstar)
             {
@@ -315,8 +301,7 @@ namespace OpenAI
                 //if (mulroccnt >= 1 && target.Hp <= m.Angr) pen -= 10;
             }
 
-
-            if (p.ownMinions.Find (a => a.name == CardDB.cardName.cultmaster && !a.silenced) != null) //cultmaster draw sequence
+            if (p.ownMinions.Find(a => a.name == CardDB.cardName.cultmaster && !a.silenced) != null) //cultmaster draw sequence
             {
                 if (!m.divineshild && m.Hp <= target.Angr || target.poisonous) pen += p.playactions.Count * 0.5f;
             }
@@ -324,9 +309,8 @@ namespace OpenAI
             return pen;
         }
 
+        private int enfacehp = -142;
 
-        int enfacehp = -142;
-        
         public float getAttackWithHeroPenality(Minion target, Playfield p, bool lethal)
         {
             if (enfacehp == -142) enfacehp = Settings.Instance.enfacehp;
@@ -342,7 +326,6 @@ namespace OpenAI
             bool rockbiterHero = p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null;
 
             if (target.name == CardDB.cardName.doomsayer && target.Hp > p.ownHero.Angr) return 10;
-
 
             if (target.isHero && !target.own)
             {
@@ -366,7 +349,6 @@ namespace OpenAI
                             //Helpfunctions.Instance.ErrorLog("pen" + pen);
                         }
                     }
-                    
                 }
                 //if (SecretItem.Instance.canBe_iceblock)
                 //{
@@ -385,10 +367,6 @@ namespace OpenAI
                 //    }
                 //}
             }
-            
-
-
-
 
             float jugglerpen = 0;
             bool juggleron = false;
@@ -402,13 +380,6 @@ namespace OpenAI
                 if (mnn.name == CardDB.cardName.acolyteofpain && !mnn.silenced && mnn.Hp >= 2) acolyte = true;
             }
             if (juggleron && !acolyte) jugglerpen -= (p.playactions.Count) * 0.01f;  // to attack with minion later
-
-
-
-
-
-
-
 
             if (!lethal && p.ownWeaponName == CardDB.cardName.swordofjustice)
             {
@@ -456,10 +427,6 @@ namespace OpenAI
                 int aontherweaponattack = 0;
                 int weaponcost = 0;
 
-
-
-
-
                 if (p.ownSecretsIDList.Count >= 1 && p.ownWeaponDurability == 1) return 3 + jugglerpen;
 
                 foreach (Handmanager.Handcard hc in p.owncards)
@@ -489,7 +456,7 @@ namespace OpenAI
                 if (target.isHero && hasanotherweapon)
                 {
                     if (p.enemyHero.Hp + p.enemyHero.armor + enemyHeroPowerDFE <= p.ownWeaponAttack + aontherweaponattack + ownHeroPowerATK) return 0;
-                    
+
                     if (weaponcost <= p.mana) return p.ownWeaponAttack;
                 }
 
@@ -509,7 +476,6 @@ namespace OpenAI
                 if (target.isHero && !target.own && rockbiterHero) return -1; //bonus to not waste rockbiter
             }
 
-
             if (p.ownWeaponName == CardDB.cardName.spiritclaws)
             {
                 bool hasweapon = false;
@@ -522,7 +488,7 @@ namespace OpenAI
                 if (target.isHero)
                 {
                     if (AttacksEnemyHeroCanTrigger) return jugglerpen;
-                    if (p.enemyMinions.Find (a => a.taunt) == null)
+                    if (p.enemyMinions.Find(a => a.taunt) == null)
                     {
                         if (p.enemyMinions.Find(a => a.Hp <= p.ownHero.Angr) != null) return 5 + jugglerpen;
                     }
@@ -530,7 +496,6 @@ namespace OpenAI
                 }
                 if (p.ownWeaponDurability >= 1)
                 {
-                    
                     if (hasweapon) retval = 0;
                 }
                 //if (target.Hp <= p.ownHero.Angr || target.divineshild) retval--;
@@ -542,7 +507,7 @@ namespace OpenAI
                 if (target.Hp > p.ownHero.Angr && !target.isHero && !(target.name == CardDB.cardName.frothingberserker && !target.silenced) && (!target.taunt || (target.taunt && target.Angr >= 1 && !target.handcard.card.Enrage))) retval += 2;
 
                 //wicked witchdoc
-                if (p.ownMinions.Find (a => a.name == CardDB.cardName.wickedwitchdoctor && !a.silenced) != null)
+                if (p.ownMinions.Find(a => a.name == CardDB.cardName.wickedwitchdoctor && !a.silenced) != null)
                 {
                     retval -= p.playactions.Count * 0.5f;
                 }
@@ -582,11 +547,10 @@ namespace OpenAI
                 return retval + jugglerpen;
             }
 
-
             //no penalty, but a bonus, if he has weapon on hand!
             if (target.isHero && !target.own && p.ownWeaponName == CardDB.cardName.gorehowl && p.ownWeaponAttack >= 3)
             {
-                return 10 +jugglerpen;
+                return 10 + jugglerpen;
             }
 
             //general weapon
@@ -597,7 +561,7 @@ namespace OpenAI
                 {
                     if (c.card.type == CardDB.cardtype.WEAPON || alsoEquipsWeaponDB.ContainsKey(c.card.name)) hasweapon++;
                 }
-                if (p.ownHeroAblility.card.name == CardDB.cardName.daggermastery || p.ownHeroAblility.card.name == CardDB.cardName.poisoneddaggers) hasweapon +=2;
+                if (p.ownHeroAblility.card.name == CardDB.cardName.daggermastery || p.ownHeroAblility.card.name == CardDB.cardName.poisoneddaggers) hasweapon += 2;
                 //if (hasweapon && target.name != CardDB.cardName.doomsayer) retval = -p.ownWeaponAttack - 1; // so he doesnt "lose" the weapon in evaluation :D
                 if (hasweapon <= 1 && target.isHero && p.ownWeaponDurability == 1 && p.ownWeaponAttack >= 2) retval += p.ownWeaponAttack;
                 else if (hasweapon <= 1 && target.isHero && p.ownWeaponName == CardDB.cardName.truesilverchampion && p.ownWeaponDurability >= 2) retval += p.ownWeaponAttack;
@@ -655,8 +619,8 @@ namespace OpenAI
             {
                 if (card.name == CardDB.cardName.upgrade)
                 {
-                    if (p.ownWeaponAttack >= 3 || p.ownWeaponDurability >= 2) return 0; 
-                } 
+                    if (p.ownWeaponAttack >= 3 || p.ownWeaponDurability >= 2) return 0;
+                }
                 return 25 * ((p.ownWeaponAttack * p.ownWeaponDurability) - (2 * alsoEquipsWeaponDB[card.name]));
             }
             return 0;
@@ -683,7 +647,7 @@ namespace OpenAI
             retval += getSilencePenality(name, target, p, choice, lethal);
             retval += getDamagePenality(name, target, p, choice, lethal);
             retval += getHealPenality(name, target, p, choice, lethal);
-            
+
             retval += getCardDrawPenality(name, target, p, choice, lethal);
             retval += getCardDrawofEffectMinions(card, p);
             retval += getCardDiscardPenality(name, p, lethal);
@@ -863,13 +827,13 @@ namespace OpenAI
                     //if (!m.taunt && hasownready) return 5 * attackBuffDatabase[name];
                     //else return attackBuffDatabase[name];
                 }
-                
+
                 if (m.Hp == 1 && !m.divineshild && !this.buffing1TurnDatabase.ContainsKey(name))
                 {
                     if (this.healthBuffDatabase.ContainsKey(name)) return 0;  // m.Hp no longer == 1
                     if (card.type == CardDB.cardtype.MOB) return 2 * attackBuffDatabase[name] + 1;  // only 1pt worse than playing vanilla minion with same stats and no atk buff
 
-                    return 2; 
+                    return 2;
                 }
                 if (card.name == CardDB.cardName.blessingofmight) return 6;
             }
@@ -883,13 +847,13 @@ namespace OpenAI
             if (name == CardDB.cardName.darkwispers && choice != 1) return 0;
             //buff enemy?
             if (!this.healthBuffDatabase.ContainsKey(name)) return 0;
-             if (target == null)
+            if (target == null)
             {
                 // penalize for lost buff
                 if (card.type == CardDB.cardtype.MOB) return healthBuffDatabase[name];
             }
 
-            if (target!=null && !target.own && !this.tauntBuffDatabase.ContainsKey(name))
+            if (target != null && !target.own && !this.tauntBuffDatabase.ContainsKey(name))
             {
                 return 500;
             }
@@ -897,11 +861,10 @@ namespace OpenAI
             return 0;
         }
 
-
         private int getTauntBuffPenality(Handmanager.Handcard hcard, Minion target, Playfield p, int choice)
         {
             int pen = 0;
-            //buff enemy? 
+            //buff enemy?
             if (!this.tauntBuffDatabase.ContainsKey(hcard.card.name)) return 0;
             if (hcard.card.name == CardDB.cardName.markofnature && choice != 2) return 0;
             if (hcard.card.name == CardDB.cardName.darkwispers && choice != 1) return 0;
@@ -944,7 +907,6 @@ namespace OpenAI
             {
                 if (name == CardDB.cardName.ironbeakowl || name == CardDB.cardName.spellbreaker)
                 {
-
                     return 30 - (3 * p.ownMaxMana);
                 }
                 return 0;
@@ -952,9 +914,6 @@ namespace OpenAI
 
             if (target.own)
             {
-
-                
-
                 if (this.silenceDatabase.ContainsKey(name))
                 {
                     if ((!target.silenced && (target.name == CardDB.cardName.wrathguard || target.name == CardDB.cardName.darnassusaspirant || target.name == CardDB.cardName.icehowl || target.name == CardDB.cardName.venturecomercenary)))
@@ -982,18 +941,13 @@ namespace OpenAI
                         return 0;
                     }
 
-
                     pen += 500;
                     if (name == CardDB.cardName.ironbeakowl || name == CardDB.cardName.spellbreaker)
                     {
-
                         return 30 - (3 * p.ownMaxMana);
                     }
                 }
-                
             }
-
-
 
             if (!target.own)
             {
@@ -1059,14 +1013,11 @@ namespace OpenAI
                         return 30;
                     }
 
-
-
                     return 5;
                 }
             }
 
             return pen;
-
         }
 
         private float getDamagePenality(CardDB.cardName name, Minion target, Playfield p, int choice, bool lethal)
@@ -1081,7 +1032,6 @@ namespace OpenAI
 
             if (this.DamageAllDatabase.ContainsKey(name) || (p.anzOwnAuchenaiSoulpriest >= 1 && HealAllDatabase.ContainsKey(name))) // aoe penality
             {
-
                 if (name == CardDB.cardName.ravagingghoul)
                 {
                     return 5;
@@ -1120,7 +1070,6 @@ namespace OpenAI
                     }
                 }
 
-
                 if (name == CardDB.cardName.sleepwiththefishes)
                 {
                     int ret = 12;
@@ -1137,7 +1086,6 @@ namespace OpenAI
                     ret = (owntargetcnt - enemytargetcnt) * 4;
                     return ret;
                 }
-
 
                 if (p.enemyMinions.Count <= 2)
                 {
@@ -1170,7 +1118,6 @@ namespace OpenAI
                     {
                         return 20;
                     }
-
                 }
                 if (name == CardDB.cardName.darkironskulker)
                 {
@@ -1215,7 +1162,7 @@ namespace OpenAI
                     if (p.enemyHeroName == HeroEnum.shaman) return 20 + p.playactions.Count * 0.1f - targets;
                     if (p.enemyMinions.Count <= 2)
                     {
-                        return 20 * (2 - p.enemyMinions.Count) +10 + p.playactions.Count * 0.1f - targets;
+                        return 20 * (2 - p.enemyMinions.Count) + 10 + p.playactions.Count * 0.1f - targets;
                     }
                     return 10 + p.playactions.Count * 0.1f - targets;
                 }
@@ -1226,7 +1173,6 @@ namespace OpenAI
                     if (p.enemyMinions.Count == 1 && p.ownMinions.Count >= 5) return 15 + p.playactions.Count * 0.5f;
 
                     int targets = p.enemyMinions.Count;
-
 
                     return 14 - targets + p.playactions.Count * 0.5f;
                 }
@@ -1258,9 +1204,7 @@ namespace OpenAI
                 {
                     pen = 20;
                 }
-
                 else if (name == CardDB.cardName.mortalstrike && p.ownHero.Hp > 12) pen = 30;
-
                 else if (name == CardDB.cardName.soulfire)
                 {
                     pen = 30;// && p.enemyHero.Hp > 4 + p.spellpower) pen = 50;
@@ -1290,14 +1234,12 @@ namespace OpenAI
                         if ((TAG_RACE)mnn.handcard.card.race == TAG_RACE.BEAST) haspet = true;
                     }
                     if (haspet && p.enemyHero.Hp + p.enemyHero.armor <= 10) pen -= 20;
-
                 }
 
                 if (name == CardDB.cardName.lavaburst) pen += 30;
                 if (name == CardDB.cardName.lightningbolt) pen += 30;
                 if (name == CardDB.cardName.jadelightning) pen += 10;
                 if (name == CardDB.cardName.eviscerate) pen += 20;
-
             }
 
             if (target.own && !target.isHero)
@@ -1392,7 +1334,6 @@ namespace OpenAI
 
                     if (name == CardDB.cardName.shieldslam) pen = 12;
 
-
                     if (name == CardDB.cardName.lavashock && p.owedRecall == 0 && p.currentRecall == 0) pen = 15;
 
                     if (name == CardDB.cardName.fireblast && !lethal && m.Hp == 1 && m.Angr >= 1) pen = -1;
@@ -1401,7 +1342,7 @@ namespace OpenAI
 
                     if (name == CardDB.cardName.quickshot && p.owncards.Count == 1) pen = p.playactions.Count * 0.1f;
 
-                    if (name == CardDB.cardName.killcommand) 
+                    if (name == CardDB.cardName.killcommand)
                     {
                         //pen = 0;
                         bool haspet = false;
@@ -1414,14 +1355,12 @@ namespace OpenAI
                         {
                             if (3 + p.spellpower < m.Hp) pen += 5;
                         }
-                        //else 
+                        //else
                         //{
-
                         //    if(target.Hp > p.spellpower + 5) pen += 10;
                         //}
 
                         pen += 15;
-
 
                         if (p.enemyHero.Hp + p.enemyHero.Angr <= 8) pen += 10;
                     }
@@ -1561,7 +1500,7 @@ namespace OpenAI
             }
 
             if (HealTargetDatabase.ContainsKey(name) || HealHeroDatabase.ContainsKey(name))
-             {
+            {
                 if (HealHeroDatabase.ContainsKey(name))
                 {
                     target = p.ownHero;
@@ -1614,8 +1553,6 @@ namespace OpenAI
 
                     pen = 500;
                 }
-
-
             }
 
             return pen + offset;
@@ -1629,11 +1566,6 @@ namespace OpenAI
             if (name == CardDB.cardName.wrath && choice != 2) return 0;
             if (name == CardDB.cardName.nourish && choice != 2) return 0;
             if (name == CardDB.cardName.grovetender && choice != 2) return 0;
-
-
-
-
-
 
             foreach (Action a in p.playactions)
             {
@@ -1658,11 +1590,6 @@ namespace OpenAI
                 //    }
                 //}
             }
-
-
-
-
-
 
             int carddraw = cardDrawBattleCryDatabase[name];
             if (name == CardDB.cardName.harrisonjones)
@@ -1713,9 +1640,9 @@ namespace OpenAI
                 Minion m = target;
                 carddraw = 0;
                 if (m != null && m.Hp <= 1 + p.spellpower) carddraw = 1;
-                //if (m.own) pen = 15; 
-                if (p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && (a.card.card.name == CardDB.cardName.soultap || a.card.card.name == CardDB.cardName.lifetap)) != null)  pen += p.playactions.Count * 12;
-                if (carddraw == 0) return 5 + pen; // todo sepefeets - factor in spell dmg 
+                //if (m.own) pen = 15;
+                if (p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && (a.card.card.name == CardDB.cardName.soultap || a.card.card.name == CardDB.cardName.lifetap)) != null) pen += p.playactions.Count * 12;
+                if (carddraw == 0) return 5 + pen; // todo sepefeets - factor in spell dmg
             }
 
             if (name == CardDB.cardName.tinkertowntechnician)
@@ -1741,7 +1668,6 @@ namespace OpenAI
                     {
                         cardOnLimit = true;
                     }
-
                 }
 
                 if ((Ai.Instance.botBase is BehaviorRush || Ai.Instance.botBase is BehaviorFace) && p.ownMaxMana <= 3 && cardOnLimit) return 6; //RR penalization for drawing the 3 first turns if we have a card in hand that we won't be able to play in Rush
@@ -1754,12 +1680,11 @@ namespace OpenAI
 
                     foreach (Handmanager.Handcard hc in p.owncards)
                     {
-                        if (hc.card.type == CardDB.cardtype.MOB && hc.canplayCard(p) && p.ownMaxMana <= 5) return 14 - 2 * p.ownMaxMana ;break;
+                        if (hc.card.type == CardDB.cardtype.MOB && hc.canplayCard(p) && p.ownMaxMana <= 5) return 14 - 2 * p.ownMaxMana; break;
                     }
 
                     //if (p.ownMaxMana >= 6) return 5 - p.ownMaxMana;
                     return 4;
-
                 }
 
                 if (p.owncards.Count + p.cardsPlayedThisTurn <= 5 && minmana > p.ownMaxMana) return 0;
@@ -1834,7 +1759,6 @@ namespace OpenAI
             bool hasCouncilman = false;
             bool hasThunderbluffV = false;
 
-
             foreach (Minion mnn in p.ownMinions)
             {
                 if (mnn.handcard.card.race == TAG_RACE.MECHANICAL) hasMech = true;
@@ -1847,7 +1771,6 @@ namespace OpenAI
                 if (mnn.name == CardDB.cardName.flamewaker) hasFlamewaker = true;
                 if (mnn.name == CardDB.cardName.darkshirecouncilman) hasCouncilman = true; //not actually random but needs to be played early as if it were
                 if (mnn.name == CardDB.cardName.thunderbluffvaliant) hasThunderbluffV = true; //not actually random but totemic call/slam are
-
             }
 
             //foreach (Action a in p.playactions) // penalty for "killing" combos (like had knifejuggler, traded him in last enemy-minion and then played a minion)
@@ -1863,12 +1786,12 @@ namespace OpenAI
 
             //        if (a.own.name == CardDB.cardName.starvingbuzzard)
             //        {
-            //            if (!hasBuzzard && card.race == TAG_RACE.BEAST) pen += 20; 
+            //            if (!hasBuzzard && card.race == TAG_RACE.BEAST) pen += 20;
             //        }
 
             //        if (a.own.name == CardDB.cardName.knifejuggler)
             //        {
-            //            if (!hasJuggler && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) pen += 1; 
+            //            if (!hasJuggler && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) pen += 1;
             //        }
 
             //        if (a.own.name == CardDB.cardName.flamewaker)
@@ -1908,7 +1831,7 @@ namespace OpenAI
             // Don't penalize for cases that don't actually have random outcomes
             // TODO: Add Lightning Storm + Elemental Destruction if all enemies hp < the minimum damage?
 
-            if (!this.randomEffects.ContainsKey(card.name) 
+            if (!this.randomEffects.ContainsKey(card.name)
                 && !this.cardDrawBattleCryDatabase.ContainsKey(card.name)
                 && !(hasJuggler && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name)) && p.enemyMinions.Count > 0)
                 && !(hasCouncilman && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name)))
@@ -1916,17 +1839,16 @@ namespace OpenAI
                 && !(hasFlamewaker && card.type == CardDB.cardtype.SPELL && p.enemyMinions.Count > 0)
                 && !(hasThunderbluffV && (TAG_RACE)card.race == TAG_RACE.TOTEM)
                 && !(hasBuzzard && (TAG_RACE)card.race == TAG_RACE.BEAST))
-             {
-                 return pen;
-             }
-
+            {
+                return pen;
+            }
 
             if (card.name == CardDB.cardName.brawl || ((card.name == CardDB.cardName.bouncingblade && p.enemyMinions.Count + p.ownMinions.Count == 1)
-                || ( (card.name == CardDB.cardName.goblinblastmage || card.name == CardDB.cardName.tinkertowntechnician) && !hasMech)
+                || ((card.name == CardDB.cardName.goblinblastmage || card.name == CardDB.cardName.tinkertowntechnician) && !hasMech)
                 || (card.name == CardDB.cardName.coghammer && p.ownMinions.Count == 1)))
-             {
-                 return pen;
-             }
+            {
+                return pen;
+            }
 
             // Don't penalize for cases that don't actually have random outcomes
             // TODO: Add Lightning Storm + Elemental Destruction if all enemies hp < the minimum damage?
@@ -1935,9 +1857,9 @@ namespace OpenAI
                 || card.name == CardDB.cardName.multishot
                 || card.name == CardDB.cardName.forkedlightning
                 || card.name == CardDB.cardName.darkbargain))
-             {
-                 return pen;
-             }
+            {
+                return pen;
+            }
 
             if (card.name == CardDB.cardName.deadlyshot)
             {
@@ -1951,18 +1873,18 @@ namespace OpenAI
             if (p.enemyMinions.Count == 1 && (card.name == CardDB.cardName.deadlyshot
                 || card.name == CardDB.cardName.flamecannon
                 || card.name == CardDB.cardName.bomblobber))
-             {
-                 return pen;
-             }
+            {
+                return pen;
+            }
 
-            if (p.enemyMinions.Count == 0 && (card.name == CardDB.cardName.arcanemissiles 
-                || card.name == CardDB.cardName.avengingwrath 
+            if (p.enemyMinions.Count == 0 && (card.name == CardDB.cardName.arcanemissiles
+                || card.name == CardDB.cardName.avengingwrath
                 || card.name == CardDB.cardName.goblinblastmage
                 || card.name == CardDB.cardName.flamejuggler))
-             {
+            {
                 pen = 5;
-                 return pen;
-             }
+                return pen;
+            }
 
             int cards = this.randomEffects.ContainsKey(card.name) ? this.randomEffects[card.name] : (this.cardDrawBattleCryDatabase.ContainsKey(card.name) ? this.cardDrawBattleCryDatabase[card.name] : 0);
 
@@ -1997,8 +1919,6 @@ namespace OpenAI
                     if (hasBuzzard && a.card.card.race == TAG_RACE.BEAST) continue;
                     if (hasThunderbluffV && a.card.card.race == TAG_RACE.TOTEM) continue;
 
-
-
                     // no penalty for spells or other cards that obtain bonuses from playing spells
                     if ((hasAuctioneer || hasFlamewaker) && (a.card.card.type == CardDB.cardtype.SPELL
                         || a.card.card.name == CardDB.cardName.gadgetzanauctioneer || a.card.card.name == CardDB.cardName.flamewaker
@@ -2008,10 +1928,10 @@ namespace OpenAI
                     {
                         continue;
                     }
-                    
+
                     //todo sepefeets - does this even do anything?
                     if (hasJuggler && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) //and others
-                     {
+                    {
                         if (card.name == CardDB.cardName.knifejuggler && mobsAfterKnife >= 1)
                         {
                             first = false;   // penalize playing 2nd knife juggler after other mobs
@@ -2035,7 +1955,6 @@ namespace OpenAI
                             continue;
                         }
                     }
-
                 }
                 cards += 2;
             }
@@ -2072,7 +1991,7 @@ namespace OpenAI
             int hasMalimp = 0;
             foreach (Minion m in p.ownMinions)
             {
-                if (m.name == CardDB.cardName.malchezaarsimp) hasMalimp ++;
+                if (m.name == CardDB.cardName.malchezaarsimp) hasMalimp++;
             }
 
             bool hasdiscardsynergy = false;
@@ -2094,8 +2013,6 @@ namespace OpenAI
 
                 if (lethal && discardedCount >= 1) pen -= p.playactions.Count * 100;
             }
-
-            
 
             return pen;
         }
@@ -2126,7 +2043,7 @@ namespace OpenAI
                             readyAngr -= enrageDatabase[m.name];
                         }
                     }
-                    
+
                     if (enrageDatabase.ContainsKey(m.name) && !m.wounded)
                     {
                         if (m.Angr + enrageDatabase[m.name] >= 5) highminion++;
@@ -2149,8 +2066,6 @@ namespace OpenAI
                     else return 0;
                 }
 
-
-
                 penalty = 35;
 
                 if (highminion >= 3 || veryhighminion >= 2 || readyAngr >= 9)
@@ -2158,9 +2073,8 @@ namespace OpenAI
                     penalty = 15;
                 }
 
-                
                 if (name == CardDB.cardName.brawl) penalty -= p.ownMinions.Count;
-                if (name == CardDB.cardName.brawl && p.ownMinions.Find(a => a.name == CardDB.cardName.dirtyrat && a.playedThisTurn ) != null && p.enemyDeckSize >= 1) penalty -= 5;
+                if (name == CardDB.cardName.brawl && p.ownMinions.Find(a => a.name == CardDB.cardName.dirtyrat && a.playedThisTurn) != null && p.enemyDeckSize >= 1) penalty -= 5;
 
                 return penalty;
             }
@@ -2182,7 +2096,6 @@ namespace OpenAI
                 }
                 else
                 {
-
                     return 500;
                 }
             }
@@ -2201,7 +2114,6 @@ namespace OpenAI
 
             if (!target.own && !target.isHero)
             {
-
                 // destroy others
                 Minion m = target;
 
@@ -2237,7 +2149,7 @@ namespace OpenAI
 
                 if (m.poisonous && p.ownMinions.Count >= 1) pen = 0;
 
-                if ( m.name == CardDB.cardName.doomsayer)
+                if (m.name == CardDB.cardName.doomsayer)
                 {
                     pen = 0;
                 }
@@ -2246,7 +2158,6 @@ namespace OpenAI
                 {
                     pen = 50;
                 }
-
             }
             //Helpfunctions.Instance.ErrorLog("pen = " + pen);
             return pen;
@@ -2256,7 +2167,7 @@ namespace OpenAI
         {
             // Penalize for playing Inspire minions without Inspire effect
 
-            CardDB.Card card = playhc.card;           
+            CardDB.Card card = playhc.card;
             CardDB.cardName name = card.name;
 
             if (!this.strongInspireEffectMinions.ContainsKey(name)) return 0;
@@ -2298,12 +2209,12 @@ namespace OpenAI
                 // dont destroy owns ;_; (except mins with deathrattle effects, with battlecry, or to heal)
                 Minion m = target;
                 pen = 500;
-                
+
                 if (m.handcard.card.deathrattle || m.handcard.card.battlecry || m.handcard.card.Charge || ((m.maxHp - m.Hp) >= 4))
                 {
                     pen = 0;
                 }
-                if (m.handcard.card.deathrattle || m.handcard.card.battlecry || m.handcard.card.Charge || ((m.maxHp - m.Hp )>=4))
+                if (m.handcard.card.deathrattle || m.handcard.card.battlecry || m.handcard.card.Charge || ((m.maxHp - m.Hp) >= 4))
                 {
                     pen = 0;
                 }
@@ -2316,7 +2227,6 @@ namespace OpenAI
             }
             if (!target.own && !target.isHero)
             {
-                
                 Minion m = target;
 
                 if (m.allreadyAttacked || m.shadowmadnessed) //dont sap shadow madness
@@ -2339,7 +2249,6 @@ namespace OpenAI
                 }
 
                 if (this.cardDrawBattleCryDatabase.ContainsKey(m.name)) pen += 10 * this.cardDrawBattleCryDatabase[m.name];
-
             }
 
             return pen;
@@ -2353,9 +2262,8 @@ namespace OpenAI
             // penalize playing hero power after spell dmg cards
             if (name == CardDB.cardName.totemiccall || name == CardDB.cardName.totemicslam || name == CardDB.cardName.tuskarrtotemic)  // shaman
             {
-
                 return p.playactions.FindAll(a => a.actionType == ActionType.PLAY_CARD && a.card.card.type == CardDB.cardtype.SPELL
-                    && (DamageTargetSpecialDatabase.ContainsKey(a.card.card.name) || DamageTargetDatabase.ContainsKey(a.card.card.name) 
+                    && (DamageTargetSpecialDatabase.ContainsKey(a.card.card.name) || DamageTargetDatabase.ContainsKey(a.card.card.name)
                         || DamageAllEnemysDatabase.ContainsKey(a.card.card.name) || DamageHeroDatabase.ContainsKey(a.card.card.name)
                         || DamageRandomDatabase.ContainsKey(a.card.card.name) || a.card.card.name == CardDB.cardName.elementaldestruction)).Count * 9;
             }
@@ -2364,7 +2272,6 @@ namespace OpenAI
             {
                 float pen = 0;
                 float prevpen;
-
 
                 foreach (Action a in p.playactions)
                 {
@@ -2380,7 +2287,7 @@ namespace OpenAI
 
                     //if (a.actionType == actionEnum.playcard)
                     //{
-                    //    if (a.target != null && a.target.isHero && !a.target.own && 
+                    //    if (a.target != null && a.target.isHero && !a.target.own &&
                     //        ((DamageTargetDatabase.ContainsKey(a.own.name) && DamageTargetDatabase[a.own.name] >= a.target.Hp + a.target.armor) ||
                     //        (DamageAllDatabase.ContainsKey(a.own.name) && DamageAllDatabase[a.own.name] >= a.target.Hp + a.target.armor) ||
                     //        (DamageAllEnemysDatabase.ContainsKey(a.own.name) && DamageAllEnemysDatabase[a.own.name] >= a.target.Hp + a.target.armor)))
@@ -2441,8 +2348,6 @@ namespace OpenAI
                 if (p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && a.card.card.name == CardDB.cardName.mortalcoil) != null) return pen;
                 if (p.playactions.Count == 0) pen -= 5;
 
-                
-
                 return pen + p.playactions.Count * 0.5f;
             }
             //// penalize playing shapeshift after other moves
@@ -2457,7 +2362,7 @@ namespace OpenAI
                 if (name == CardDB.cardName.tankup) return 1;
             }
 
-			bool juggleron = false;
+            bool juggleron = false;
             foreach (Minion mnn in p.ownMinions)
             {
                 if (mnn.name == CardDB.cardName.knifejuggler && !mnn.silenced) juggleron = true;
@@ -2496,17 +2401,14 @@ namespace OpenAI
                 return 0;
             }
 
-            return 2 -p.playactions.Count * 0.0003f;
+            return 2 - p.playactions.Count * 0.0003f;
             //return 0;
-			
         }
 
         private int getPlayMobPenalty(Handmanager.Handcard card, Minion target, Playfield p, bool lethal)
         {
             if (card.card.type != CardDB.cardtype.MOB && !this.summonMinionSpellsDatabase.ContainsKey(card.card.name)) return 0;
             int retval = 0;
-
-            
 
             if (card.card.name == CardDB.cardName.doomcaller && p.diedMinions != null && p.diedMinions.Find(ct => ct.own && ct.cardid == CardDB.cardIDEnum.OG_279).cardid == CardDB.cardIDEnum.OG_279) retval += 5; //OG_279 = cthun; penalize playing if cthun is not dead
             if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null || p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null)
@@ -2518,7 +2420,7 @@ namespace OpenAI
                 int enemydoomsayerMaxHp = 0;
                 foreach (Minion min in p.enemyMinions)
                 {
-                    if (min.name == CardDB.cardName.doomsayer && enemydoomsayerMaxHp <= min.Hp) enemydoomsayerMaxHp = min.Hp; 
+                    if (min.name == CardDB.cardName.doomsayer && enemydoomsayerMaxHp <= min.Hp) enemydoomsayerMaxHp = min.Hp;
                 }
                 //Helpfunctions.Instance.ErrorLog("enemydoomsayerMaxHp " + enemydoomsayerMaxHp);
 
@@ -2545,10 +2447,6 @@ namespace OpenAI
                 else return 500;
                 if (p.diedMinions != null && p.diedMinions.Find(ct => !ct.own && ct.cardid == CardDB.cardIDEnum.NEW1_021).cardid == CardDB.cardIDEnum.NEW1_021) cards = 0;//doomsayerreturn = 0;
 
-
-                
-
-
                 //cards = doomsayerreturn;
 
                 //doomsayerreturn = cards * 50;
@@ -2558,8 +2456,7 @@ namespace OpenAI
 
                 return doomsayerreturn;
             }
-            //else 
-
+            //else
 
             if (p.ownMinions.Find(m => m.name == CardDB.cardName.muklaschampion && !m.silenced) != null && p.playactions.Find(a => a.actionType == ActionType.USE_HERO_POWER) != null)
             {
@@ -2581,15 +2478,12 @@ namespace OpenAI
                 if (a.card.card.name == CardDB.cardName.metaltoothleaper) buffs++;
                 if (a.card.card.name == CardDB.cardName.enhanceomechano) buffs++;
                 if (card.card.tank && a.card.card.name == CardDB.cardName.bolster) buffs++;
-
             }
 
             if (buffs >= 1)
             {
                 retval += 5 * buffs;
             }
-
-
 
             if (p.enemyHeroName == HeroEnum.mage)
             {
@@ -2623,7 +2517,6 @@ namespace OpenAI
             return retval;
         }
 
-
         private int getPlaySpellPenalty(Handmanager.Handcard card, Minion target, Playfield p, bool lethal)
         {
             if (card.card.type != CardDB.cardtype.SPELL) return 0;
@@ -2636,12 +2529,9 @@ namespace OpenAI
             else if (DamageTargetSpecialDatabase.ContainsKey(card.card.name) && DamageTargetSpecialDatabase[card.card.name] >= p.enemyHero.Hp + p.enemyHero.armor && target.isHero) return 0;
             else if (heroAttackBuffDatabase.ContainsKey(card.card.name) && heroAttackBuffDatabase[card.card.name] + p.ownWeaponAttack >= p.enemyHero.Hp + p.enemyHero.armor && !p.ownHero.frozen) return 0;
 
-
-
             if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null || p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null)
             {
                 if (card.card.type == CardDB.cardtype.HEROPWR) return 0;
-
 
                 int enemydoomsayerMaxHp = 0;
                 foreach (Minion min in p.enemyMinions)
@@ -2668,8 +2558,6 @@ namespace OpenAI
                         destroyOwnDatabase.ContainsKey(card.card.name) ||
                         KillCardDatabase.ContainsKey(card.card.name)) return 5;
                 }
-
-
 
                 if (DamageAllDatabase.ContainsKey(card.card.name) && DamageAllDatabase[card.card.name] >= enemydoomsayerMaxHp) return 5;
                 else if (DamageAllEnemysDatabase.ContainsKey(card.card.name) && DamageAllEnemysDatabase[card.card.name] >= enemydoomsayerMaxHp) return 5;
@@ -2708,11 +2596,6 @@ namespace OpenAI
 
             return retval;
         }
-
-
-
-
-
 
         private float getSpecialCardComboPenalties(Handmanager.Handcard playedhcard, Minion target, Playfield p, bool lethal, int choice)
         {
@@ -2837,7 +2720,6 @@ namespace OpenAI
                 if (card.Attack >= 3 && card.Health >= 3) return -10;
                 if (card.Attack >= 3 && card.Health >= 2) return -5;
                 if (card.Health > 0) p.evaluatePenality += -2; //-card.Attack - card.Health; //nudge any minion playable
-
             }*/
 
             //if (p.ownMaxMana == 2 || (p.mana == 2 && p.ownMaxMana == 1)) //todo sepefeets - does coin raise ownMaxMana?
@@ -2856,7 +2738,6 @@ namespace OpenAI
                 return number;
             }
 
-
             switch (card.name)
             {
                 case CardDB.cardName.twilightdarkmender:
@@ -2866,8 +2747,6 @@ namespace OpenAI
                     if ((p.anzOgOwnCThunAngrBonus + 6) <= 9) return 5;
                     break;
             }
-
-
 
             //if (card.name == CardDB.cardName.unstableportal && p.owncards.Count <= 9) return -15;
 
@@ -2892,7 +2771,7 @@ namespace OpenAI
 
                 if (canplayweapon) ret += 5;
 
-                return ret;   
+                return ret;
             }
 
             if (card.name == CardDB.cardName.baronrivendare)
@@ -2944,15 +2823,15 @@ namespace OpenAI
                     if (mnn.Ready && mnn.numAttacksThisTurn == 0) hasownready = true;
                 }
                 if (hasvaluable3costminion && p.enemyMinions.Count == 0 && p.ownMaxMana == 1) return 15;
-                
+
                 if (p.ownHeroName == HeroEnum.druid && WGON) return 2;
                 if (has1manacard >= 2 && p.ownMaxMana == 1) return 2;
                 if (has2manacard >= 2 && p.ownMaxMana == 1) return 2;
                 if (hastotemgolem && p.ownMaxMana == 1) return 2;
                 if (has3manacard >= 2 && p.ownMaxMana == 2) return 2;
-                
+
                 if ((has3manacard == 2 || (has1manacard == 1 && has2manacard == 1)) && p.ownMaxMana == 2) return 2;
-                
+
                 if (hasPalSecret && hassecretkepper && (p.enemyMinions.Count >= 1 || p.enemyWeaponAttack >= 2)) return 2;
 
                 if (hasMaelstrom && p.enemyMinions.Count >= 2) return 2;
@@ -2965,7 +2844,6 @@ namespace OpenAI
                 if (hasvaluable3costminion && p.ownMaxMana == 2) return 5;
                 if (hasownready && hasabusive && p.enemyMinions.Count >= 1) return 5;
 
-                
                 // if (!WGON || (has2manamob <= 1 && p.ownMaxMana == 1) || (has2manamob+has3manamob <= 1 && p.ownMaxMana == 2)) return 500;   //몹없고, 무기있고 적몹있는경우 아니거나, 급속성장 없으면 페널티.
                 return 20;
             }
@@ -2981,7 +2859,6 @@ namespace OpenAI
                 return 10 - p.playactions.Count * 0.3f;
             }
 
-
             if (card.name == CardDB.cardName.innervate)
             {
                 if (p.ownMinions.Find(a => a.name == CardDB.cardName.gadgetzanauctioneer && !a.silenced) != null)
@@ -2992,7 +2869,6 @@ namespace OpenAI
                 return 6;
             }
 
-
             /*//rule for coin on early game
             if (p.ownMaxMana < 3 && card.name == CardDB.cardName.thecoin)
             {
@@ -3000,7 +2876,6 @@ namespace OpenAI
                 {
                     if (hc.card.type == CardDB.cardtype.MOB && hc.canplayCard(p)) return 5;
                 }
-
             }*/
 
             // spare parts need a base penalty so the bot does not waste them
@@ -3017,7 +2892,6 @@ namespace OpenAI
                     if (p.enemySecretCount >= 1) ret = 0;
                     if (p.enemySecretCount >= 1 && p.playactions.Count == 0) ret = -10;
                 }
-
 
                 return ret;
             }
@@ -3085,7 +2959,6 @@ namespace OpenAI
                     if (!target.Ready && !target.handcard.card.isSpecialMinion) { return 10; }
                     if (!target.Ready && !target.handcard.card.isSpecialMinion && target.Angr <= 2 && target.Hp <= 2) { return 15; }
                 }
-
             }
 
             if (name == CardDB.cardName.facelessmanipulator)
@@ -3124,15 +2997,12 @@ namespace OpenAI
 
                 //if (p.enemyMinions.Count > 0 && choice == 2) return 40;
                 //if ((p.enemyMinions.Count == 0 || p.enemyWeaponAttack >= 2) && choice == 1 ) return 40;
-
             }
 
             if (name == CardDB.cardName.gangup && target != null)
             {
                 if (target.handcard.card.isToken) return 20;
                 if (target.handcard.card.isSpecialMinion) return -20;
-
-
             }
 
             if (name == CardDB.cardName.theblackknight)
@@ -3144,7 +3014,7 @@ namespace OpenAI
                 if (target != null)
                 {
                     ret = 5;
-                }           
+                }
 
                 foreach (Minion mnn in p.enemyMinions)
                 {
@@ -3225,7 +3095,6 @@ namespace OpenAI
                     if (m.handcard.card.Charge && ((m.numAttacksThisTurn == 1 && !m.windfury) || (m.numAttacksThisTurn == 2 && m.windfury))) return 0;
                     if (m.wounded || m.Angr < m.handcard.card.Attack || (m.silenced && instance.specialMinions.ContainsKey(m.name))) return 0;
 
-
                     bool hasOnMinionDiesMinion = false;
                     foreach (Minion mnn in p.ownMinions)
                     {
@@ -3244,11 +3113,8 @@ namespace OpenAI
                     if (m.Angr > m.handcard.card.Attack || m.Hp > m.handcard.card.Health) return 0;
                     if (m.name == CardDB.cardName.abomination || m.name == CardDB.cardName.zombiechow || m.name == CardDB.cardName.unstableghoul || m.name == CardDB.cardName.dancingswords) return 0;
                     return 500;
-
                 }
-
             }
-
 
             if (name == CardDB.cardName.madbomber || name == CardDB.cardName.madderbomber)
             {
@@ -3279,8 +3145,6 @@ namespace OpenAI
                 }
                 */
             }
-
-
 
             if (name == CardDB.cardName.mechwarper)
             {
@@ -3351,7 +3215,6 @@ namespace OpenAI
                 }
             }
 
-
             if (card.name == CardDB.cardName.knifejuggler)
             {
                 float retval = 3;
@@ -3407,7 +3270,6 @@ namespace OpenAI
                     {
                         ret += 5; hasimpgangboss = true; break;
                     }
-
                 }
                 //int enemypotentialattack = 0;
                 //foreach (Minion mnn in p.enemyMinions)
@@ -3418,7 +3280,6 @@ namespace OpenAI
 
                 //foreach (Minion mnn in p.ownMinions)
                 //{
-
                 //}
 
                 //if (enemypotentialattack >= 5) ret += 8;
@@ -3435,11 +3296,9 @@ namespace OpenAI
 
                 if (p.ownMaxMana <= 2) ret -= 10;
 
-                if ((p.enemyHeroName == HeroEnum.hunter || p.enemyHeroName == HeroEnum.mage ) && p.ownMaxMana <= 3 && p.enemySecretCount == 0) ret -= 12;
+                if ((p.enemyHeroName == HeroEnum.hunter || p.enemyHeroName == HeroEnum.mage) && p.ownMaxMana <= 3 && p.enemySecretCount == 0) ret -= 12;
                 return ret;
             }
-
-
 
             if (card.name == CardDB.cardName.flametonguetotem)
             {
@@ -3449,7 +3308,7 @@ namespace OpenAI
                 bool hastaunt = false;
                 foreach (Minion mnn in p.ownMinions)
                 {
-                    if (mnn.allreadyAttacked || mnn.exhausted || (mnn.playedThisTurn && mnn.charge == 0)) readycount --;
+                    if (mnn.allreadyAttacked || mnn.exhausted || (mnn.playedThisTurn && mnn.charge == 0)) readycount--;
                     if (mnn.taunt) hastaunt = true;
                 }
                 if (p.enemyMinions.Count == 0 && p.ownMaxMana <= 4 && readycount <= 1) ret += 5;
@@ -3482,7 +3341,6 @@ namespace OpenAI
             if (name == CardDB.cardName.wildgrowth)
             {
                 if (p.ownMaxMana > 5 && p.ownMaxMana < 10 || p.ownMaxMana <= 1) return 500;
-
             }
 
             if (name == CardDB.cardName.nourish)
@@ -3517,7 +3375,6 @@ namespace OpenAI
                     if (this.specialMinions.ContainsKey(m.name)) return -5;
                     return 0;
                 }
-
             }
 
             if (name == CardDB.cardName.sylvanaswindrunner)
@@ -3533,9 +3390,6 @@ namespace OpenAI
                 if (m.Angr == 0) return 30;
                 if (p.enemyMinions.Count == 1) return 30;
             }
-
-
-
 
             if (heroAttackBuffDatabase.ContainsKey(name))
             {
@@ -3560,7 +3414,6 @@ namespace OpenAI
                 }
                 if (haspirate) return 0;
                 else return 10;
-
             }
 
             if (name == CardDB.cardName.coldblood)
@@ -3568,7 +3421,6 @@ namespace OpenAI
                 if (lethal) return 0;
                 return 25;
             }
-
 
             if (name == CardDB.cardName.frostbolt)
             {
@@ -3589,7 +3441,6 @@ namespace OpenAI
                 return 10;
             }
 
-
             if (name == CardDB.cardName.poweroverwhelming || name == CardDB.cardName.nightmare)
             {
                 int ret = 15;
@@ -3599,8 +3450,6 @@ namespace OpenAI
                     if (target.name == CardDB.cardName.sylvanaswindrunner) return 100;
                     return 500;
                 }
-                
-                
 
                 if (p.enemyMinions.Find(ms => ms.name == CardDB.cardName.doomsayer && !ms.silenced) != null)
                 {
@@ -3675,7 +3524,6 @@ namespace OpenAI
                 {
                     if (!target.own && !target.isHero)
                     {
-
                         // combo for killing with innerfire and biggamehunter
                         if (p.owncards.Find(x => x.card.name == CardDB.cardName.biggamehunter) != null && p.owncards.Find(x => x.card.name == CardDB.cardName.innerfire) != null && m.Hp >= 4)
                         {
@@ -3683,23 +3531,17 @@ namespace OpenAI
                         }
                         return 500;
                     }
-
                 }
 
                 if (target.own && !target.isHero)
                 {
-
                     if (m.Hp >= 4)
                     {
                         return 0;
                     }
                     return 15;
                 }
-
             }
-
-
-
 
             if ((name == CardDB.cardName.polymorph || name == CardDB.cardName.hex))
             {
@@ -3730,7 +3572,6 @@ namespace OpenAI
                 }
             }
 
-
             if (name == CardDB.cardName.defenderofargus || name == CardDB.cardName.sunfuryprotector)
             {
                 switch (p.ownMinions.Count)
@@ -3740,7 +3581,6 @@ namespace OpenAI
                     default: return 0;
                 }
             }
-
 
             if (card.name == CardDB.cardName.unleashthehounds)
             {
@@ -3752,7 +3592,7 @@ namespace OpenAI
                 bool synergyavailable = false;
                 foreach (Handmanager.Handcard hcc in p.owncards)
                 {
-                    if (hcc.card.name == CardDB.cardName.houndmaster && hcc.getManaCost(p)  + card.getManaCost(p, 3) <= p.mana)
+                    if (hcc.card.name == CardDB.cardName.houndmaster && hcc.getManaCost(p) + card.getManaCost(p, 3) <= p.mana)
                     {
                         synergyavailable = true;
                     }
@@ -3801,8 +3641,6 @@ namespace OpenAI
                 return ret;
             }
 
-
-
             if (name == CardDB.cardName.innerfire)
             {
                 if (m.name == CardDB.cardName.lightspawn) return 500;
@@ -3818,7 +3656,6 @@ namespace OpenAI
                 else return 5;
             }
 
-
             if ((name == CardDB.cardName.aldorpeacekeeper || name == CardDB.cardName.humility))
             {
                 if (target != null)
@@ -3831,7 +3668,7 @@ namespace OpenAI
                     if (target.name == CardDB.cardName.tarcreeper && target.Angr == 3 ||
                         target.name == CardDB.cardName.tarlord && target.Angr == 5 ||
                         target.name == CardDB.cardName.tarlurker && target.Angr == 4 ||
-                        target.name == CardDB.cardName.lightspawn && !target.silenced) 
+                        target.name == CardDB.cardName.lightspawn && !target.silenced)
                     {
                         return 6;
                     }
@@ -3841,8 +3678,6 @@ namespace OpenAI
                     return 10;
                 }
             }
-
-
 
             if (name == CardDB.cardName.defiasringleader && p.cardsPlayedThisTurn == 0)
             { pen = 10; }
@@ -3886,7 +3721,7 @@ namespace OpenAI
                 if (p.ownMaxMana >= 7) ret = 0;
                 return ret;
             }
-            if (name == CardDB.cardName.abusivesergeant || name == CardDB.cardName.darkirondwarf) 
+            if (name == CardDB.cardName.abusivesergeant || name == CardDB.cardName.darkirondwarf)
             {
                 Playfield tmpPf = new Playfield();
                 int ret = 5;
@@ -3895,7 +3730,6 @@ namespace OpenAI
 
                 if (p.enemyMinions.Count == 0) ret += 2;
                 if (target == null) ret += 15 - p.ownMaxMana;
-                
 
                 //if (target.angr )
 
@@ -3919,7 +3753,6 @@ namespace OpenAI
 
             if (p.turnCounter >= 1 && name == CardDB.cardName.reversingswitch && target.Angr == target.Hp) return 500;
 
-            
             if (name == CardDB.cardName.voidwalker && p.ownMaxMana == 1 && p.enemyMinions.Count == 0)
             {
                 foreach (Handmanager.Handcard mnn in p.owncards)
@@ -3940,11 +3773,10 @@ namespace OpenAI
             {
                 if (target.isHero)
                 {
-                    if (target.Hp <= 4 + p.spellpower) return -1; 
+                    if (target.Hp <= 4 + p.spellpower) return -1;
                 }
                 return -p.playactions.Count * 0.1f;
             }
-
 
             if (name == CardDB.cardName.quickshot)
             {
@@ -3953,15 +3785,14 @@ namespace OpenAI
                 else if (target.Angr >= 4 && target.Hp <= 3 + p.spellpower) ret = 5;
 
                 if (p.owncards.Count == 1) ret = -1;
-                
+
                 return ret;
             }
 
             if (name == CardDB.cardName.kingselekk)
             {
-                return  p.playactions.Count * 0.5f;
+                return p.playactions.Count * 0.5f;
             }
-
 
             if (name == CardDB.cardName.barnes)
             {
@@ -3981,7 +3812,6 @@ namespace OpenAI
 
                 return ret + p.playactions.Count * 0.1f;
             }
-
 
             if (name == CardDB.cardName.kindlygrandmother)
             {
@@ -4022,7 +3852,6 @@ namespace OpenAI
                 return 5;
             }
 
-
             if (name == CardDB.cardName.savannahhighmane)
             {
                 if (p.ownMaxMana <= 6) return -2;
@@ -4037,7 +3866,6 @@ namespace OpenAI
             {
                 if (p.ownMaxMana <= 5) return -5;
             }
-
 
             if (name == CardDB.cardName.tuskarrtotemic)
             {
@@ -4106,7 +3934,7 @@ namespace OpenAI
                 {
                     if (target.isHero) ret += 6;
                     if (target.isHero && p.enemyMinions.Count >= 1) ret += 3;
-                    if (target.Angr == 0 && target.Hp <= 2 && 
+                    if (target.Angr == 0 && target.Hp <= 2 &&
                         p.ownMinions.Find(a => !a.frozen && a.canAttackNormal && a.Angr <= 2 && target.Hp <= a.Angr && (!a.playedThisTurn || a.charge >= 1)) != null) ret += 5;
                     if (target.Hp >= 4 && !target.isHero) ret += 0.5f;
                 }
@@ -4135,7 +3963,6 @@ namespace OpenAI
                 return ret;
             }
 
-
             if (card.type == CardDB.cardtype.WEAPON)
             {
                 float ret = card.Attack * 0.5f;
@@ -4162,7 +3989,6 @@ namespace OpenAI
             {
                 return 10;
             }
-
 
             if (name == CardDB.cardName.dreadcorsair)
             {
@@ -4194,7 +4020,7 @@ namespace OpenAI
                     }
                     if (c.type == CardDB.cardtype.WEAPON) hasweaponIndecks++;
                 }
-         
+
                 //foreach (Handmanager.Handcard hc in Hrtprozis.Instance.deckCard)
                 //{
                 //    if (hc.card.type == CardDB.cardtype.WEAPON) hasweaponIndecks++;
@@ -4232,7 +4058,7 @@ namespace OpenAI
 
             if (name == CardDB.cardName.emperorthaurissan)
             {
-                return - p.owncards.Count;
+                return -p.owncards.Count;
             }
 
             if (name == CardDB.cardName.shieldblock)
@@ -4253,7 +4079,6 @@ namespace OpenAI
 
             if (name == CardDB.cardName.menageriewarden)
             {
-                
                 bool hasBeast = false;
                 bool hasBeastIndecks = false;
                 foreach (Handmanager.Handcard hc in p.owncards)
@@ -4264,7 +4089,6 @@ namespace OpenAI
                 {
                     if (target == null) return 10;
                 }
-
                 else
                 {
                     foreach (Handmanager.Handcard hc in Hrtprozis.Instance.deckCard)
@@ -4305,7 +4129,7 @@ namespace OpenAI
                 else return -10;
             }
 
-            if (name == CardDB.cardName.dirtyrat) return  - 1 + p.playactions.Count * 0.01f;
+            if (name == CardDB.cardName.dirtyrat) return -1 + p.playactions.Count * 0.01f;
 
             if (name == CardDB.cardName.grimscalechum)
             {
@@ -4371,7 +4195,6 @@ namespace OpenAI
                 return ret;
             }
 
-
             return pen;
         }
 
@@ -4410,20 +4233,20 @@ namespace OpenAI
 
         //not used-----------------------------------------------------------------------
         ///secret strategys pala
-        /// -Attack lowest enemy. If you can’t, use noncombat means to kill it. 
-        /// -attack with something able to withstand 2 damage. 
-        /// -Then play something that had low health to begin with to dodge Repentance. 
-        /// 
+        /// -Attack lowest enemy. If you can’t, use noncombat means to kill it.
+        /// -attack with something able to withstand 2 damage.
+        /// -Then play something that had low health to begin with to dodge Repentance.
+        ///
         ///secret strategys hunter
         /// - kill enemys with your minions with 2 or less heal.
-        ///  - Use the smallest minion available for the first attack 
-        ///  - Then smack them in the face with whatever’s left. 
+        ///  - Use the smallest minion available for the first attack
+        ///  - Then smack them in the face with whatever’s left.
         ///  - If nothing triggered until then, it’s a Snipe, so throw something in front of it that won’t die or is expendable.
-        /// 
+        ///
         ///secret strategys mage
         /// - Play a small minion to trigger Mirror Entity.
-        /// Then attack the mage directly with the smallest minion on your side. 
-        /// If nothing triggered by that point, it’s either Spellbender or Counterspell, so hold your spells until you can (and have to!) deal with either. 
+        /// Then attack the mage directly with the smallest minion on your side.
+        /// If nothing triggered by that point, it’s either Spellbender or Counterspell, so hold your spells until you can (and have to!) deal with either.
 
         private float getPlayCardSecretPenality(CardDB.Card c, Playfield p)
         {
@@ -4432,7 +4255,6 @@ namespace OpenAI
             {
                 return 0;
             }
-
 
             bool hasHighHealthMinion = false;
 
@@ -4471,7 +4293,7 @@ namespace OpenAI
             // only penalize for playing cards if we have better options
             if (p.enemyHeroName == HeroEnum.hunter)
             {
-                if (c.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(c.name) || (c.type == CardDB.cardtype.HEROPWR && (c.name== CardDB.cardName.totemiccall || c.name == CardDB.cardName.totemicslam || c.name == CardDB.cardName.silverhandrecruit || c.name == CardDB.cardName.thesilverhand)))
+                if (c.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(c.name) || (c.type == CardDB.cardtype.HEROPWR && (c.name == CardDB.cardName.totemiccall || c.name == CardDB.cardName.totemicslam || c.name == CardDB.cardName.silverhandrecruit || c.name == CardDB.cardName.thesilverhand)))
                 {
                     Minion m = new Minion
                     {
@@ -4487,11 +4309,11 @@ namespace OpenAI
                         if ((TAG_RACE)mnn.handcard.card.race == TAG_RACE.BEAST) haspetunder2hp = true;
                     }
 
-                    foreach(SecretItem si in Probabilitymaker.Instance.enemySecrets)
+                    foreach (SecretItem si in Probabilitymaker.Instance.enemySecrets)
                     {
                         if (si.canBe_explosive)
                         {
-                            if (canattack > 0 && p.enemyMinions.Find (a => a.taunt) == null && p.playactions.Find(a => (a.actionType == ActionType.ATTACK_WITH_HERO || a.actionType == ActionType.ATTACK_WITH_MINION) && a.target.isHero) == null) pen += 20;
+                            if (canattack > 0 && p.enemyMinions.Find(a => a.taunt) == null && p.playactions.Find(a => (a.actionType == ActionType.ATTACK_WITH_HERO || a.actionType == ActionType.ATTACK_WITH_MINION) && a.target.isHero) == null) pen += 20;
                             if (this.healthBuffDatabase.ContainsKey(c.name) || c.name == CardDB.cardName.defenderofargus) pen = 0;
                             if (haspetunder2hp && c.name == CardDB.cardName.houndmaster) pen = 0;
                         }
@@ -4499,12 +4321,10 @@ namespace OpenAI
                         {
                             pen += c.calculateManaCost(p);
                             if (c.cost <= 3) pen = 0;
-                            if (c.deathrattle && c.name != CardDB.cardName.darnassusaspirant && c.name != CardDB.cardName.dancingswords || c.Shield) pen -= 1;                        
+                            if (c.deathrattle && c.name != CardDB.cardName.darnassusaspirant && c.name != CardDB.cardName.dancingswords || c.Shield) pen -= 1;
                         }
                     }
-                    
 
-                    
                     //if (c.Health <= 4 && c.deathrattle && c.name != CardDB.cardName.darnassusaspirant && c.name != CardDB.cardName.dancingswords) pen -= 5;
                 }
             }
@@ -4535,7 +4355,6 @@ namespace OpenAI
                         }
                     }
 
-
                     if (si.canBe_iceblock)
                     {
                         int ownHeroPowerATK = 0;
@@ -4557,8 +4376,6 @@ namespace OpenAI
                         }
                     }
                 }
-
-                
 
                 // should not penalize playing spells unless 1) we know we have other options, and 2) we know it's a high value spell
                 //if (c.type == CardDB.cardtype.SPELL && p.cardsPlayedThisTurn == p.mobsplayedThisTurn)
@@ -4621,7 +4438,7 @@ namespace OpenAI
                     if (si.canBe_freezing)
                     {
                         //if (p.ownMinions.Find(a => m.Angr + m.Hp > a.Angr + a.Hp) != null) pen += 10;
-                        
+
                         //if (hasMinionsWithLowHeal(p)) pen += 20; //penality if we didn't attack minions before
                         if (attackedbefore == 0 && islow) pen -= 1;
                         //if (attackedbefore == 0 && !islow) pen += 10;
@@ -4637,7 +4454,6 @@ namespace OpenAI
 
                         if (target.isHero && !target.own && hasHPbuff)
                         {
-
                             foreach (Minion mnn in p.ownMinions)
                             {
                                 if (!mnn.divineshild && !mnn.hasDeathrattle() && mnn.Hp <= 2) pen += 10;
@@ -4656,8 +4472,6 @@ namespace OpenAI
                         }
                     }
                 }
-                    
-
             }
 
             if (p.enemyHeroName == HeroEnum.mage)
@@ -4666,7 +4480,7 @@ namespace OpenAI
 
                 bool islow = isOwnLowest(m, p);
 
-                if(target.isHero && !target.own)
+                if (target.isHero && !target.own)
                 {
                     foreach (SecretItem si in Probabilitymaker.Instance.enemySecrets)
                     {
@@ -4699,7 +4513,7 @@ namespace OpenAI
                                 //Helpfunctions.Instance.ErrorLog("pen" + pen);
                             }
                         }
-                        else if(si.canBe_iceblock)
+                        else if (si.canBe_iceblock)
                         {
                             if (target.Hp + target.armor <= m.Angr && p.enemyHero.Hp >= 1)
                             {
@@ -4714,8 +4528,6 @@ namespace OpenAI
                             }
                         }
                     }
-
-                        
                 }
             }
 
@@ -4733,7 +4545,6 @@ namespace OpenAI
                 }
             }
 
-
             return pen;
         }
 
@@ -4746,7 +4557,7 @@ namespace OpenAI
             int Deckdragoncount = 0;
             foreach (Handmanager.Handcard hc in p.owncards)
             {
-                if ((TAG_RACE)hc.card.race == TAG_RACE.DRAGON) 
+                if ((TAG_RACE)hc.card.race == TAG_RACE.DRAGON)
                 {
                     hasdragon = true;
                     HandDragonCount++;
@@ -4773,10 +4584,11 @@ namespace OpenAI
                 {
                     case CardDB.cardName.blackwingtechnician:
                         dragonPen = 2; break;
-                    case CardDB.cardName.blackwingcorruptor:                        
+                    case CardDB.cardName.blackwingcorruptor:
                         dragonPen = 6;
                         if (p.enemyHero.Hp + p.enemyHero.armor <= 3) dragonPen += 20;
                         break;
+
                     case CardDB.cardName.bookwyrm:
                         dragonPen = 8; break;
                     case CardDB.cardName.wyrmrestagent:
@@ -4823,16 +4635,16 @@ namespace OpenAI
                     if (100 * Deckdragoncount / p.ownDeckSize >= 10) return 5;
                 }
                 else return 0;
-                
             }
-
 
             switch (name)
             {
                 case CardDB.cardName.brannbronzebeard: //play brann before good battlecries
                     return p.playactions.Find(a => a.actionType == ActionType.PLAY_CARD && a.card.card.battlecry && a.card.card.name != CardDB.cardName.flameimp) != null ? 20 : 0;
+
                 case CardDB.cardName.dream:
                     return 6;
+
                 case CardDB.cardName.reliquaryseeker:
                     return (p.ownMinions.Count == 6) ? 0 : 5;
                 //case CardDB.cardName.lifetap:
@@ -4841,21 +4653,24 @@ namespace OpenAI
                 //    return p.playactions.Count * 2;
                 case CardDB.cardName.silverwaregolem:
                     return 8;
+
                 case CardDB.cardName.malchezaarsimp:
                     return 3;
+
                 case CardDB.cardName.bloodmagethalnos:
                     {
                         if (p.ownMaxMana >= 10) return 2;
-                        if(p.ownWeaponName == CardDB.cardName.spiritclaws && p.ownWeaponAttack == 1 && p.enemyMinions.Count == 0)
+                        if (p.ownWeaponName == CardDB.cardName.spiritclaws && p.ownWeaponAttack == 1 && p.enemyMinions.Count == 0)
                         {
                             return 12;
                         }
-                        
+
                         return 8;
                     }
-                    
+
                 case CardDB.cardName.thunderbluffvaliant:
                     return 0;
+
                 case CardDB.cardName.jadeidol:
                     if (p.ownHeroName == HeroEnum.druid && p.anzOwnJadeGolem >= 1)
                     {
@@ -4863,15 +4678,16 @@ namespace OpenAI
                         if (choice == 2 && Hrtprozis.Instance.turnDeck.ContainsKey(CardDB.cardIDEnum.CFM_602)) return 50; //don't shuffle more in if some still in deck
                     }
                     return 0;
+
                 case CardDB.cardName.arcanemissiles:
                     return 10;
+
                 default:
                     return 0;
             }
         }
 
-
-        private float getPlayOrder (CardDB.cardName name, Playfield p, int choice)
+        private float getPlayOrder(CardDB.cardName name, Playfield p, int choice)
         {
             float ret = 0;
             if (AdaptDatabase.ContainsKey(name)) ret += p.playactions.Count * 0.1f;
@@ -4879,13 +4695,11 @@ namespace OpenAI
             return ret;
         }
 
-
-
         private int getValueOfMinion(Minion m)
         {
             int ret = 0;
             ret += 2 * m.Angr + m.Hp;
-            if (m.taunt) ret ++;
+            if (m.taunt) ret++;
             //if (this.priorityDatabase.ContainsKey(m.name)) ret += 20 + priorityDatabase[m.name];
             return ret;
         }
@@ -4970,7 +4784,6 @@ namespace OpenAI
             if (dmg != 0) dmg = (ownplay) ? p.getSpellDamageDamage(dmg) : p.getEnemySpellDamageDamage(dmg);
             return dmg;
         }
-
 
         private void setupEnrageDatabase()
         {
@@ -5082,7 +4895,7 @@ namespace OpenAI
             DamageAllDatabase.Add(CardDB.cardName.felfirepotion, 5);
             DamageAllDatabase.Add(CardDB.cardName.abyssalenforcer, 3);
             DamageAllDatabase.Add(CardDB.cardName.sleepwiththefishes, 3);
-            
+
             DamageAllEnemysDatabase.Add(CardDB.cardName.arcaneexplosion, 1);
             DamageAllEnemysDatabase.Add(CardDB.cardName.bladeflurry, 1);
             DamageAllEnemysDatabase.Add(CardDB.cardName.blizzard, 2);
@@ -5228,7 +5041,6 @@ namespace OpenAI
             DamageTargetDatabase.Add(CardDB.cardName.grievousbite, 2);
             DamageTargetDatabase.Add(CardDB.cardName.feedingtime, 3);
 
-
             DamageTargetSpecialDatabase.Add(CardDB.cardName.bash, 3); //+3 armor
             DamageTargetSpecialDatabase.Add(CardDB.cardName.crueltaskmaster, 1); // gives 2 attack
             DamageTargetSpecialDatabase.Add(CardDB.cardName.deathbloom, 5);
@@ -5246,7 +5058,7 @@ namespace OpenAI
             DamageTargetSpecialDatabase.Add(CardDB.cardName.slam, 2);//draw card if it survives
             DamageTargetSpecialDatabase.Add(CardDB.cardName.soulfire, 4);//delete a card
             DamageTargetSpecialDatabase.Add(CardDB.cardName.quickshot, 3); //draw a card
-            DamageTargetSpecialDatabase.Add(CardDB.cardName.bloodtoichor, 1); 
+            DamageTargetSpecialDatabase.Add(CardDB.cardName.bloodtoichor, 1);
             DamageTargetSpecialDatabase.Add(CardDB.cardName.baneofdoom, 2);
 
             DamageTargetSpecialDatabase.Add(CardDB.cardName.flamegeyser, 2);
@@ -5368,7 +5180,7 @@ namespace OpenAI
             priorityDatabase.Add(CardDB.cardName.wickedwitchdoctor, 3);
             priorityDatabase.Add(CardDB.cardName.wilfredfizzlebang, 5);
             priorityDatabase.Add(CardDB.cardName.ysera, 10);
-            
+
             priorityDatabase.Add(CardDB.cardName.grimestreetenforcer, 10);
             priorityDatabase.Add(CardDB.cardName.shakuthecollector, 5);
             priorityDatabase.Add(CardDB.cardName.kabaltrafficker, 5);
@@ -5404,11 +5216,11 @@ namespace OpenAI
             attackBuffDatabase.Add(CardDB.cardName.explorershat, 1);
             attackBuffDatabase.Add(CardDB.cardName.innerrage, 2);
             attackBuffDatabase.Add(CardDB.cardName.lancecarrier, 2);
-            attackBuffDatabase.Add(CardDB.cardName.markofnature, 4); //choice1 
+            attackBuffDatabase.Add(CardDB.cardName.markofnature, 4); //choice1
             attackBuffDatabase.Add(CardDB.cardName.markofthewild, 2);
             attackBuffDatabase.Add(CardDB.cardName.metaltoothleaper, 2);
             attackBuffDatabase.Add(CardDB.cardName.nightmare, 5); //destroy minion on next turn
-            attackBuffDatabase.Add(CardDB.cardName.rampage, 3); //only damaged minion 
+            attackBuffDatabase.Add(CardDB.cardName.rampage, 3); //only damaged minion
             attackBuffDatabase.Add(CardDB.cardName.rockbiterweapon, 3);
             attackBuffDatabase.Add(CardDB.cardName.screwjankclunker, 2);
             attackBuffDatabase.Add(CardDB.cardName.sealofchampions, 3);
@@ -5423,7 +5235,7 @@ namespace OpenAI
             attackBuffDatabase.Add(CardDB.cardName.powerwordtentacles, 2);
             attackBuffDatabase.Add(CardDB.cardName.primalfusion, 1);
             attackBuffDatabase.Add(CardDB.cardName.poweroverwhelming, 4);
-			attackBuffDatabase.Add(CardDB.cardName.silvermoonportal, 2);
+            attackBuffDatabase.Add(CardDB.cardName.silvermoonportal, 2);
             attackBuffDatabase.Add(CardDB.cardName.zoobot, 1);
             attackBuffDatabase.Add(CardDB.cardName.menageriemagician, 2);
             //attackBuffDatabase.Add(CardDB.cardName.powerofthewild, 1); //choice 1
@@ -5489,7 +5301,6 @@ namespace OpenAI
 
         private void setupCardDrawBattlecry()
         {
-
             cardDrawBattleCryDatabase.Add(CardDB.cardName.solemnvigil, 2);
 
             cardDrawBattleCryDatabase.Add(CardDB.cardName.wrath, 1); //choice=2
@@ -5542,7 +5353,7 @@ namespace OpenAI
             cardDrawBattleCryDatabase.Add(CardDB.cardName.ambush, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.soultap, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.lockandload, 1);
-            //cardDrawBattleCryDatabase.Add(CardDB.cardName.kingselekk, 1);  // only if we win joust 
+            //cardDrawBattleCryDatabase.Add(CardDB.cardName.kingselekk, 1);  // only if we win joust
 
             cardDrawBattleCryDatabase.Add(CardDB.cardName.tinkertowntechnician, 1); // if we have a mech
             cardDrawBattleCryDatabase.Add(CardDB.cardName.toshley, 1);
@@ -5563,7 +5374,7 @@ namespace OpenAI
 
             cardDrawBattleCryDatabase.Add(CardDB.cardName.babblingbook, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.thecurator, 1);
-            
+
             //cardDrawBattleCryDatabase.Add(CardDB.cardName.quickshot, 1);
 
             cardDrawBattleCryDatabase.Add(CardDB.cardName.fightpromoter, 2);
@@ -5577,9 +5388,6 @@ namespace OpenAI
             cardDrawBattleCryDatabase.Add(CardDB.cardName.tolvirwarden, 1); //0-2
             cardDrawBattleCryDatabase.Add(CardDB.cardName.mimicpod, 2);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.ungoropack, 5);
-
-
-
 
             cardDrawDeathrattleDatabase.Add(CardDB.cardName.bloodmagethalnos, 1);
             cardDrawDeathrattleDatabase.Add(CardDB.cardName.clockworkgnome, 1);
@@ -5602,8 +5410,6 @@ namespace OpenAI
             //ungoro
             cardDrawDeathrattleDatabase.Add(CardDB.cardName.crystallineoracle, 1);
 
-
-
             //add discover minions
             foreach (CardDB.cardName discoverCard in this.discoverCards.Keys)
             {
@@ -5619,7 +5425,6 @@ namespace OpenAI
             cardDiscardDatabase.Add(CardDB.cardName.darkbargain, 2);
             cardDiscardDatabase.Add(CardDB.cardName.darkshirelibrarian, 1);
             cardDiscardDatabase.Add(CardDB.cardName.lakkarifelhound, 4);
-
 
             discardedCardCount.Add(CardDB.cardName.doomguard, 2);
             discardedCardCount.Add(CardDB.cardName.soulfire, 1);
@@ -5669,7 +5474,6 @@ namespace OpenAI
             this.destroyOwnDatabase.Add(CardDB.cardName.shatter, 0); //frozen
             this.destroyOwnDatabase.Add(CardDB.cardName.execute, 0); //hurt
 
-
             this.destroyDatabase.Add(CardDB.cardName.brawl, 0);
             this.destroyDatabase.Add(CardDB.cardName.deathwing, 0);
             this.destroyDatabase.Add(CardDB.cardName.twistingnether, 0);
@@ -5700,7 +5504,6 @@ namespace OpenAI
             this.destroyDatabase.Add(CardDB.cardName.rendblackhand, 0); //a legendary if holding dragon
             this.destroyDatabase.Add(CardDB.cardName.blastcrystalpotion, 0);
 
-
             this.backToHandDatabase.Add(CardDB.cardName.sap, 0);
             this.backToHandDatabase.Add(CardDB.cardName.timerewinder, 0);
             this.backToHandDatabase.Add(CardDB.cardName.ancientbrewmaster, 0);
@@ -5714,10 +5517,8 @@ namespace OpenAI
             this.backToHandDatabase.Add(CardDB.cardName.gadgetzanferryman, 0); //combo
         }
 
-
         private void setupSpecialMins()
         {
-
             //== everything with an effect (other than battlecry and normal stuff like taunt, charge, divshield)
             //also deathrattles?
             this.specialMinions.Add(CardDB.cardName.amaniberserker, 0);
@@ -5962,7 +5763,7 @@ namespace OpenAI
             specialMinions.Add(CardDB.cardName.moroes, 0);
             specialMinions.Add(CardDB.cardName.priestofthefeast, 0);
             this.specialMinions.Add(CardDB.cardName.possessedvillager, 0);
-			specialMinions.Add(CardDB.cardName.kindlygrandmother, 0);
+            specialMinions.Add(CardDB.cardName.kindlygrandmother, 0);
             specialMinions.Add(CardDB.cardName.wickedwitchdoctor, 0);
             specialMinions.Add(CardDB.cardName.moatlurker, 0);
             specialMinions.Add(CardDB.cardName.hugetoad, 0);
@@ -5970,7 +5771,6 @@ namespace OpenAI
             specialMinions.Add(CardDB.cardName.pollutedhoarder, 0);
             //specialMinions.Add(CardDB.cardName.darkshirelibrarian, 0);
 
-            
             //MSG
             specialMinions.Add(CardDB.cardName.ratpack, 0);
             specialMinions.Add(CardDB.cardName.shakyzipgunner, 0);
@@ -6058,7 +5858,6 @@ namespace OpenAI
             buffingMinionsDatabase.Add(CardDB.cardName.hobartgrapplehammer, 0);
             buffingMinionsDatabase.Add(CardDB.cardName.grimestreetpawnbroker, 0);
             buffingMinionsDatabase.Add(CardDB.cardName.nagacorsair, 0);
-            
 
             buffing1TurnDatabase.Add(CardDB.cardName.abusivesergeant, 0);
             buffing1TurnDatabase.Add(CardDB.cardName.darkirondwarf, 0);
@@ -6150,8 +5949,6 @@ namespace OpenAI
             priorityTargets.Add(CardDB.cardName.shadeofnaxxramas, 10);
             priorityTargets.Add(CardDB.cardName.undertaker, 4);
 
-
-
             //GVG
             this.priorityTargets.Add(CardDB.cardName.ironsensei, 6);
             this.priorityTargets.Add(CardDB.cardName.mechwarper, 4);
@@ -6165,7 +5962,7 @@ namespace OpenAI
             this.priorityTargets.Add(CardDB.cardName.mogortheogre, 10);
             this.priorityTargets.Add(CardDB.cardName.foereaper4000, 10);
             this.priorityTargets.Add(CardDB.cardName.troggzortheearthinator, 10);
-            
+
             //BRM
             this.priorityTargets.Add(CardDB.cardName.flamewaker, 10);
             this.priorityTargets.Add(CardDB.cardName.impgangboss, 5);
@@ -6221,7 +6018,7 @@ namespace OpenAI
             priorityTargets.Add(CardDB.cardName.moroes, 5);
             priorityTargets.Add(CardDB.cardName.priestofthefeast, 4);
             priorityTargets.Add(CardDB.cardName.wickedwitchdoctor, 8);
-            priorityTargets.Add(CardDB.cardName.malchezaarsimp, 3); 
+            priorityTargets.Add(CardDB.cardName.malchezaarsimp, 3);
             priorityTargets.Add(CardDB.cardName.violetillusionist, 6);
 
             //killing target
@@ -6277,7 +6074,6 @@ namespace OpenAI
             //
             lethalHelpers.Add(CardDB.cardName.cultsorcerer, 0);
             lethalHelpers.Add(CardDB.cardName.evolvedkobold, 0);
-
         }
 
         private void setupSilenceTargets()
@@ -6355,7 +6151,6 @@ namespace OpenAI
             this.silenceTargets.Add(CardDB.cardName.webspinner, 0);
             this.silenceTargets.Add(CardDB.cardName.ironsensei, 0);
             this.silenceTargets.Add(CardDB.cardName.vitalitytotem, 0);
-
 
             this.silenceTargets.Add(CardDB.cardName.malganis, 0);
             this.silenceTargets.Add(CardDB.cardName.malorne, 0);
@@ -6445,7 +6240,6 @@ namespace OpenAI
             silenceTargets.Add(CardDB.cardName.usherofsouls, 0);
             silenceTargets.Add(CardDB.cardName.wobblingrunts, 0);
             silenceTargets.Add(CardDB.cardName.yshaarjrageunbound, 0);
-
         }
 
         private void setupRandomCards()
@@ -6641,11 +6435,10 @@ namespace OpenAI
             discoverCards.Add(CardDB.cardName.hydrologist, 1);
             discoverCards.Add(CardDB.cardName.shadowvisions, 1);
             discoverCards.Add(CardDB.cardName.primalfinlookout, 1);
-            discoverCards.Add(CardDB.cardName.servantofkalimos, 1); // when drop elemental last turn 
+            discoverCards.Add(CardDB.cardName.servantofkalimos, 1); // when drop elemental last turn
             discoverCards.Add(CardDB.cardName.primordialglyph, 1);
             discoverCards.Add(CardDB.cardName.hallucination, 1);
         }
-
 
         private void setupStrongInspireMinions()
         {
@@ -6665,9 +6458,9 @@ namespace OpenAI
             strongInspireEffectMinions.Add(CardDB.cardName.silverhandregent, 0);
         }
 
-		private void anti_aoe()
+        private void anti_aoe()
         {
-            this.anti_aoe_minion.Add(CardDB.cardName.nerubianegg, 12); 
+            this.anti_aoe_minion.Add(CardDB.cardName.nerubianegg, 12);
             this.anti_aoe_minion.Add(CardDB.cardName.hauntedcreeper, 9);
             this.anti_aoe_minion.Add(CardDB.cardName.voidcaller, 10);
             this.anti_aoe_minion.Add(CardDB.cardName.pilotedshredder, 12);
@@ -6689,7 +6482,6 @@ namespace OpenAI
             this.anti_aoe_minion.Add(CardDB.cardName.dragonegg, 7);
             this.anti_aoe_minion.Add(CardDB.cardName.ayablackpaw, 8);
             this.anti_aoe_minion.Add(CardDB.cardName.cairnebloodhoof, 10);
-
         }
 
         public void setupSummonMinionSpellsDatabase()
@@ -6745,9 +6537,9 @@ namespace OpenAI
             alsoEquipsWeaponDB.Add(CardDB.cardName.malkorok, 3); //random weapon so be conservative
             alsoEquipsWeaponDB.Add(CardDB.cardName.musterforbattle, 1);
             alsoEquipsWeaponDB.Add(CardDB.cardName.nzothsfirstmate, 1);
-            alsoEquipsWeaponDB.Add(CardDB.cardName.upgrade, 1); //if we don't have a weapon        
+            alsoEquipsWeaponDB.Add(CardDB.cardName.upgrade, 1); //if we don't have a weapon
             alsoEquipsWeaponDB.Add(CardDB.cardName.medivhtheguardian, 1);
-		}
+        }
 
         public void setupNeedSleepBecauseTimingMinionsDB()
         {

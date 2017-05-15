@@ -1,8 +1,8 @@
-﻿namespace OpenAI
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace OpenAI
+{
     public class MiniSimulatorNextTurn
     {
         //#####################################################################################################################
@@ -18,7 +18,7 @@
 
         public bool doEnemySecondTurn;
 
-        List<Playfield> posmoves = new List<Playfield>(7000);
+        private List<Playfield> posmoves = new List<Playfield>(7000);
 
         public Action bestmove;
         public float bestmoveValue;
@@ -29,14 +29,11 @@
 
         private bool simulateSecondTurn = false;
 
-        Movegenerator movegen = Movegenerator.Instance;
-
+        private Movegenerator movegen = Movegenerator.Instance;
 
         public MiniSimulatorNextTurn()
         {
         }
-
-
 
         private void addToPosmoves(Playfield pf, int totalboards)
         {
@@ -71,11 +68,9 @@
         //    }
         //    p.complete = true;
         //}
-        
 
         public float doallmoves(Playfield playf, bool isLethalCheck, bool print = false)
         {
-
             //todo only one time!
             this.doEnemySecondTurn = Settings.Instance.simEnemySecondTurn;
             int totalboards = Settings.Instance.nextTurnTotalBoards;
@@ -84,7 +79,6 @@
             bool playaround = Settings.Instance.playarround;
             int playaroundprob = Settings.Instance.playaroundprob;
             int playaroundprob2 = Settings.Instance.playaroundprob2;
-
 
             //Helpfunctions.Instance.logg("NXTTRN" + playf.mana);
             if (botBase == null) botBase = Ai.Instance.botBase;
@@ -107,7 +101,6 @@
                 float bestoldval = -20000000;
                 foreach (Playfield p in temp)
                 {
-
                     if (p.complete || p.ownHero.Hp <= 0)
                     {
                         continue;
@@ -121,7 +114,6 @@
                         pf.doAction(a);
                         addToPosmoves(pf, totalboards);
                     }
-
 
                     if (isLethalCheck)
                     {
@@ -210,7 +202,6 @@
                         bestval = val;
                         bestanzactions = p.playactions.Count;
                     }
-
                 }
                 this.bestboard = new Playfield(bestplay);
 
@@ -222,7 +213,6 @@
                     //bestplay.sEnemTurn = this.doEnemySecondTurn;
                     //Ai.Instance.enemySecondTurnSim[this.thread].simulateEnemysTurn(bestplay, false, playaround, false, playaroundprob, playaroundprob2);
                     //Ai.Instance.enemySecondTurnSim.simulateEnemysTurn(bestplay, false, false, true, 100, 100); //dont play arround in enemys second turn
-
                 }
                 this.bestmove = bestplay.getNextAction();
                 this.bestmoveValue = bestval;
@@ -273,10 +263,7 @@
                     if (!found) temp.Add(p);
                     //i++;
                     //if (i >= this.maxwide) break;
-
                 }
-
-
             }
             else
             {
@@ -286,7 +273,6 @@
             posmoves.AddRange(temp.GetRange(0, Math.Min(maxwide, temp.Count)));
             //posmoves.Clear();
             //posmoves.AddRange(Helpfunctions.TakeList(temp, takenumber));
-
         }
 
         public List<targett> cutAttackTargets(List<targett> oldlist, Playfield p, bool own)
@@ -317,7 +303,6 @@
                         continue;
                     }*/
 
-
                     bool goingtoadd = true;
                     List<Minion> temp = new List<Minion>(addedmins);
                     bool isSpecial = m.handcard.card.isSpecialMinion;
@@ -344,7 +329,6 @@
                             if (mnn.Angr == m.Angr && mnn.Hp == m.Hp && mnn.divineshild == m.divineshild && mnn.taunt == m.taunt && mnn.poisonous == m.poisonous) goingtoadd = false;
                             continue;
                         }
-
                     }
 
                     if (goingtoadd)
@@ -358,7 +342,6 @@
                         //help.logg(m.name + " is not needed to attack");
                         continue;
                     }
-
                 }
             }
             //help.logg("end targetcutting");
@@ -374,8 +357,5 @@
                 p.printBoard();
             }
         }
-
     }
-
-
 }

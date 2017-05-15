@@ -1,11 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OpenAI
 {
-    using System;
-    using System.Collections.Generic;
-
-    public struct triggerCounter
+    public struct TriggerCounter
     {
         public int minionsGotHealed;
         public int ownMinionsGotHealed;
@@ -59,7 +57,7 @@ namespace OpenAI
 
         public int nextEntity;
 
-        public triggerCounter tempTrigger;
+        public TriggerCounter tempTrigger;
         private Hrtprozis prozis = Hrtprozis.Instance;
         public PenalityManager penman = PenalityManager.Instance;
 
@@ -262,8 +260,8 @@ namespace OpenAI
         public List<GraveYardItem> diedMinions;
         public int anzMinionsDiedThisTurn;
 
-        public Questmanager.QuestItem ownQuest = new Questmanager.QuestItem();
-        public Questmanager.QuestItem enemyQuest = new Questmanager.QuestItem();
+        public QuestManager.QuestItem ownQuest = new QuestManager.QuestItem();
+        public QuestManager.QuestItem enemyQuest = new QuestManager.QuestItem();
 
         public int numPlayerMinionsAtTurnStart;
         public int loathebLastTurn;  // only checked for turn 2 bonus
@@ -427,8 +425,8 @@ namespace OpenAI
             adaptTargetEntity = 0;
             enemyHeroStartClass = TAG_CLASS.INVALID;
             ownHeroStartClass = TAG_CLASS.INVALID;
-            enemyHeroName = HeroEnum.None;
-            ownHeroName = HeroEnum.None;
+            enemyHeroName = HeroEnum.NONE;
+            ownHeroName = HeroEnum.NONE;
             enemySecretList = new List<SecretItem>();
             ownSecretsIDList = new List<CardDB.cardIDEnum>();
             value = Int32.MinValue;
@@ -601,8 +599,8 @@ namespace OpenAI
             this.lockAndLoads = prozis.lockAndLoads;
             this.Stampede = prozis.Stampede;
 
-            this.ownQuest = Questmanager.Instance.ownQuest;
-            this.enemyQuest = Questmanager.Instance.enemyQuest; 
+            this.ownQuest = QuestManager.Instance.ownQuest;
+            this.enemyQuest = QuestManager.Instance.enemyQuest; 
             this.mobsPlayedThisTurn = prozis.numMinionsPlayedThisTurn;
             this.cardsPlayedThisTurn = prozis.cardsPlayedThisTurn;
             this.spellsplayedSinceRecalc = 0;
@@ -1021,8 +1019,8 @@ namespace OpenAI
             adaptTargetEntity = 0;
             enemyHeroStartClass = TAG_CLASS.INVALID;
             ownHeroStartClass = TAG_CLASS.INVALID;
-            enemyHeroName = HeroEnum.None;
-            ownHeroName = HeroEnum.None;
+            enemyHeroName = HeroEnum.NONE;
+            ownHeroName = HeroEnum.NONE;
             enemySecretList = new List<SecretItem>();
             ownSecretsIDList = new List<CardDB.cardIDEnum>();
             value = Int32.MinValue;
@@ -4204,7 +4202,7 @@ namespace OpenAI
                 }
                 if (this.ownHero.entityID == newTarget) target = this.ownHero;
                 if (this.enemyHero.entityID == newTarget) target = this.enemyHero;
-                if (this.ownQuest.Id != CardDB.cardIDEnum.None && c.type == CardDB.cardtype.SPELL && !this.isadapt(c)) this.ownQuest.trigger_SpellWasPlayed(target, hc.entity);
+                if (this.ownQuest.Id != CardDB.cardIDEnum.None && c.type == CardDB.cardtype.SPELL && !this.isadapt(c)) this.ownQuest.SpellWasPlayed(target, hc.entity);
             }
             if (newTarget != -2) // trigger spell-secrets!
             {
@@ -5675,7 +5673,7 @@ namespace OpenAI
         {
             if (mnn.own)
             {
-                if (this.ownQuest.Id != CardDB.cardIDEnum.None) this.ownQuest.trigger_MinionWasSummoned(mnn);
+                if (this.ownQuest.Id != CardDB.cardIDEnum.None) this.ownQuest.MinionWasSummoned(mnn);
                 foreach (Minion m in this.ownMinions)
                 {
                     if (m.silenced) continue;
@@ -5689,7 +5687,7 @@ namespace OpenAI
             }
             else
             {
-                if (this.enemyQuest.Id != CardDB.cardIDEnum.None) this.enemyQuest.trigger_MinionWasSummoned(mnn);
+                if (this.enemyQuest.Id != CardDB.cardIDEnum.None) this.enemyQuest.MinionWasSummoned(mnn);
                 foreach (Minion m in this.enemyMinions)
                 {
                     if (m.silenced) continue;
@@ -7024,7 +7022,7 @@ namespace OpenAI
             addMinionToBattlefield(m, false);
 
             secretTrigger_MinionIsPlayed(m);
-            if (this.ownQuest.Id != CardDB.cardIDEnum.None) ownQuest.trigger_MinionWasPlayed(m);
+            if (this.ownQuest.Id != CardDB.cardIDEnum.None) ownQuest.MinionWasPlayed(m);
 
             if (logging) Helpfunctions.Instance.logg("added " + m.handcard.card.name);
         }
@@ -8942,7 +8940,7 @@ namespace OpenAI
             data += "cthunbonus: " + this.anzOgOwnCThunAngrBonus + " " + this.anzOgOwnCThunHpBonus + " " + this.anzOgOwnCThunTaunt + "\r\n";
             data += "jadegolems: " + this.anzOwnJadeGolem + " " + this.anzEnemyJadeGolem + "\r\n";
             data += "elementals: " + this.anzOwnElementalsLastTurn +"\r\n";
-            data += Questmanager.Instance.getQuestsString() + "\r\n";
+            data += QuestManager.Instance.GetQuestsString() + "\r\n";
             data += "crystal: " + this.ownCrystalCore + " " + this.enemyCrystalCore + " " + (this.ownMinionsCost0 ? 1 : 0) + "\r\n";
             data += "enemyhero:"+ "\r\n";
             data += Hrtprozis.heroEnumtoName(this.enemyHeroName) + " " + this.enemyHero.Hp + " " + this.enemyHero.maxHp + " " + this.enemyHero.armor + " " + this.enemyHero.frozen + " " + this.enemyHero.immune + " " + this.enemyHero.entityID+ "\r\n";
@@ -9070,7 +9068,7 @@ namespace OpenAI
                         }
                         this.owncards.RemoveAt(0);
                         this.triggerACardWasDiscarded(true);
-                        if (this.ownQuest.Id != CardDB.cardIDEnum.None) this.ownQuest.trigger_WasDiscard(1);
+                        if (this.ownQuest.Id != CardDB.cardIDEnum.None) this.ownQuest.WasDiscarded(1);
                     }
 
 

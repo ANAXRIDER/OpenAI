@@ -21,6 +21,14 @@ namespace OpenAI
             }
         }
 
+        public static string Settings
+        {
+            get
+            {
+                return Path.Combine(FolderPath.OpenAI + "_carddb.txt");
+            }
+        }
+
         public static string ErrorLog
         {
             get
@@ -121,5 +129,4 @@ namespace OpenAI
             }
         }
     }
-
 }

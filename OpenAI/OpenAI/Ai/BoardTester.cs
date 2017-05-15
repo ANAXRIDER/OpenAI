@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-
-namespace OpenAI
+﻿namespace OpenAI
 {
     using System;
     using System.Collections.Generic;
@@ -10,116 +8,117 @@ namespace OpenAI
     {
         public int boardToSimulate = -1;
         public string evalFunction = "aggrowarlock";
-        int maxwide = 3000;
-        int twoturnsim = 256;
-        bool simEnemy2Turn;
-        int pprob1 = 50;
-        int pprob2 = 80;
-        bool playarround;
+        private int maxwide = 3000;
+        private int twoturnsim = 256;
+        private bool simEnemy2Turn;
+        private int pprob1 = 50;
+        private int pprob2 = 80;
+        private bool playarround;
 
-        int ownPlayer = 1;
-        int enemmaxman;
+        private int ownPlayer = 1;
+        private int enemmaxman;
 
-        Minion ownHero;
-        Minion enemyHero;
+        private Minion ownHero;
+        private Minion enemyHero;
 
-        int ownHEntity;
-        int enemyHEntity = 1;
+        private int ownHEntity;
+        private int enemyHEntity = 1;
 
-        int mana;
-        int maxmana;
-        string ownheroname = "";
-        int ownherohp;
-        int ownheromaxhp = 30;
-        int enemyheromaxhp = 30;
-        int ownherodefence;
-        bool ownheroready;
-        bool ownHeroimmunewhileattacking;
-        int ownheroattacksThisRound;
-        int ownHeroAttack;
-        int ownHeroTempAttack;
-        string ownHeroWeapon = "";
-        int ownHeroWeaponAttack;
-        int ownHeroWeaponDurability;
-        int numOptionPlayedThisTurn;
-        int numMinionsPlayedThisTurn;
-        int cardsPlayedThisTurn;
-        int overdrive;
-        int numberMinionsDiedThisturn;
-        int owncurrentRecall;
-        int enemyRecall;
+        private int mana;
+        private int maxmana;
+        private string ownheroname = "";
+        private int ownherohp;
+        private int ownheromaxhp = 30;
+        private int enemyheromaxhp = 30;
+        private int ownherodefence;
+        private bool ownheroready;
+        private bool ownHeroimmunewhileattacking;
+        private int ownheroattacksThisRound;
+        private int ownHeroAttack;
+        private int ownHeroTempAttack;
+        private string ownHeroWeapon = "";
+        private int ownHeroWeaponAttack;
+        private int ownHeroWeaponDurability;
+        private int numOptionPlayedThisTurn;
+        private int numMinionsPlayedThisTurn;
+        private int cardsPlayedThisTurn;
+        private int overdrive;
+        private int numberMinionsDiedThisturn;
+        private int owncurrentRecall;
+        private int enemyRecall;
 
-        int ownDragonConsort;
-        int enemyDragonConsort;
-        int ownLoathebs;
-        int enemyLoathebs;
-        int ownMillhouse;
-        int enemyMillhouse;
-        int ownKirintor;
-        int ownPrep;
+        private int ownDragonConsort;
+        private int enemyDragonConsort;
+        private int ownLoathebs;
+        private int enemyLoathebs;
+        private int ownMillhouse;
+        private int enemyMillhouse;
+        private int ownKirintor;
+        private int ownPrep;
 
-        int ownSab;
-        int enemySab;
-        
-        int anzOgOwnCThunHpBonus;
-        int anzOgOwnCThunAngrBonus;
-        int anzOgOwnCThunTaunt;
-        int anzOwnJadeGolem;
-        int anzEnemyJadeGolem;
-        int anzOwnElementalsLastTurn;
-        int ownCrystalCore;
-        int enemyCrystalCore;
-        bool ownMinionsCost0;
+        private int ownSab;
+        private int enemySab;
 
-        int ownDecksize = 30;
-        int enemyDecksize = 30;
-        int ownFatigue;
-        int enemyFatigue;
+        private int anzOgOwnCThunHpBonus;
+        private int anzOgOwnCThunAngrBonus;
+        private int anzOgOwnCThunTaunt;
+        private int anzOwnJadeGolem;
+        private int anzEnemyJadeGolem;
+        private int anzOwnElementalsLastTurn;
+        private int ownCrystalCore;
+        private int enemyCrystalCore;
+        private bool ownMinionsCost0;
 
-        bool heroImmune;
-        bool enemyHeroImmune;
+        private int ownDecksize = 30;
+        private int enemyDecksize = 30;
+        private int ownFatigue;
+        private int enemyFatigue;
 
-        int enemySecretAmount;
+        private bool heroImmune;
+        private bool enemyHeroImmune;
+
+        private int enemySecretAmount;
         public List<SecretItem> enemySecrets = new List<SecretItem>();
 
         public List<CardDB.cardIDEnum> choiceCards = new List<CardDB.cardIDEnum>();
 
-        bool ownHeroFrozen;
+        private bool ownHeroFrozen;
 
-        List<string> ownsecretlist = new List<string>();
-        string enemyheroname = "";
-        int enemyherohp;
-        int enemyherodefence;
-        bool enemyFrozen;
-        int enemyWeaponAttack;
-        int enemyWeaponDur;
-        string enemyWeapon = "";
-        int enemyNumberHand = 5;
+        private List<string> ownsecretlist = new List<string>();
+        private string enemyheroname = "";
+        private int enemyherohp;
+        private int enemyherodefence;
+        private bool enemyFrozen;
+        private int enemyWeaponAttack;
+        private int enemyWeaponDur;
+        private string enemyWeapon = "";
+        private int enemyNumberHand = 5;
 
-        int enemyCursedCards;
+        private int enemyCursedCards;
 
-        List<Minion> ownminions = new List<Minion>();
-        List<Minion> enemyminions = new List<Minion>();
-        List<Handmanager.Handcard> handcards = new List<Handmanager.Handcard>();
-        List<CardDB.cardIDEnum> enemycards = new List<CardDB.cardIDEnum>();
-        List<GraveYardItem> turnGraveYard = new List<GraveYardItem>();
+        private List<Minion> ownminions = new List<Minion>();
+        private List<Minion> enemyminions = new List<Minion>();
+        private List<Handmanager.Handcard> handcards = new List<Handmanager.Handcard>();
+        private List<CardDB.cardIDEnum> enemycards = new List<CardDB.cardIDEnum>();
+        private List<GraveYardItem> turnGraveYard = new List<GraveYardItem>();
 
-        int ownFenci;
+        private int ownFenci;
 
-        int ownHeropowerUsesThisGame;
-        int enemyHeropowerUsesThisGame;
-        int heropowerUsesThisTurn;
-        int locknload;
-        int stampede;
+        private int ownHeropowerUsesThisGame;
+        private int enemyHeropowerUsesThisGame;
+        private int heropowerUsesThisTurn;
+        private int locknload;
+        private int stampede;
 
-        bool feugendead;
-        bool stalaggdead;
+        private bool feugendead;
+        private bool stalaggdead;
         public bool datareaded;
 
-        CardDB.cardIDEnum lastplayedcard;
+        private CardDB.cardIDEnum lastplayedcard;
         public int adapttargetentity;
 
         private static BoardTester instance;
+
         public static BoardTester Instance
         {
             get
@@ -128,7 +127,6 @@ namespace OpenAI
             }
         }
 
-
         public string td = "";
 
         public BoardTester(string data = "")
@@ -136,7 +134,6 @@ namespace OpenAI
             this.boardToSimulate = -1;
             string og = "";
             string eg = "";
-            
 
             string omd = "";
             string emd = "";
@@ -319,7 +316,6 @@ namespace OpenAI
                         Settings.Instance.enemyTurnMaxWideSecondTime = ets2;
                     }
 
-
                     if (s.Contains(" ents "))
                     {
                         this.simEnemy2Turn = true;
@@ -343,7 +339,6 @@ namespace OpenAI
                         alpha = Convert.ToInt32(alphaval.Split(' ')[0]);
                     }
 
-
                     if (s.Contains(" plcmnt"))
                     {
                         Settings.Instance.simulatePlacement = true;
@@ -364,7 +359,6 @@ namespace OpenAI
                             if (sec == "" || sec == String.Empty || sec == " ") continue;
                             this.enemySecrets.Add(new SecretItem(sec));
                         }
-
                     }
                     continue;
                 }
@@ -430,8 +424,8 @@ namespace OpenAI
                 if (s.StartsWith("quests: "))
                 {
                     String[] ss = s.Split(' ');
-                    Questmanager.Instance.updateQuestStuff(ss[1], Convert.ToInt32(ss[2]), Convert.ToInt32(ss[3]), true);
-                    Questmanager.Instance.updateQuestStuff(ss[4], Convert.ToInt32(ss[5]), Convert.ToInt32(ss[6]), false);
+                    QuestManager.Instance.UpdateQuestProgress(ss[1], Convert.ToInt32(ss[2]), Convert.ToInt32(ss[3]), true);
+                    QuestManager.Instance.UpdateQuestProgress(ss[4], Convert.ToInt32(ss[5]), Convert.ToInt32(ss[6]), false);
                 }
 
                 if (s.StartsWith("crystal: "))
@@ -441,7 +435,6 @@ namespace OpenAI
                     this.enemyCrystalCore = Convert.ToInt32(ss[2]);
                     this.ownMinionsCost0 = Convert.ToInt32(ss[3]) == 1 ? true : false;
                 }
-
 
                 if (s.StartsWith("ownDiedMinions: "))
                 {
@@ -454,8 +447,6 @@ namespace OpenAI
                     emd = s;
                     continue;
                 }
-
-
 
                 if (s.StartsWith("probs: "))
                 {
@@ -562,23 +553,19 @@ namespace OpenAI
                         this.numberMinionsDiedThisturn = Convert.ToInt32(s.Split(' ')[4]);
                         this.owncurrentRecall = Convert.ToInt32(s.Split(' ')[5]);
                         this.enemyRecall = Convert.ToInt32(s.Split(' ')[6]);
-                       
                     }
                     catch
                     {
-
                     }
                     try
                     {
                         //for old log files a try and catch :D
                         this.heropowerUsesThisTurn = Convert.ToInt32(s.Split(' ')[7]);
-                        this.locknload = Convert.ToInt32(s.Split(' ')[8]); 
+                        this.locknload = Convert.ToInt32(s.Split(' ')[8]);
                         this.stampede = Convert.ToInt32(s.Split(' ')[9]);
-
                     }
                     catch
                     {
-
                     }
                 }
 
@@ -597,26 +584,19 @@ namespace OpenAI
                     {
                         this.ownSab = Convert.ToInt32(s.Split(' ')[8]);
                         this.enemySab = Convert.ToInt32(s.Split(' ')[9]);
-                        this.ownFenci = Convert.ToInt32(s.Split(' ')[10]); 
-
+                        this.ownFenci = Convert.ToInt32(s.Split(' ')[10]);
                     }
                     catch
                     {
-
                     }
 
                     try
                     {
                         this.enemyCursedCards = Convert.ToInt32(s.Split(' ')[11]);
-
                     }
                     catch
                     {
-
                     }
-
-
-
                 }
 
                 if (readstate == 1 && counter == 1) // class + hp + defence + immunewhile attacking + immune
@@ -633,7 +613,6 @@ namespace OpenAI
                     ownHeroFrozen = (s.Split(' ')[9] == "True") ? true : false;
                     ownHeroAttack = Convert.ToInt32(s.Split(' ')[10]);
                     ownHeroTempAttack = Convert.ToInt32(s.Split(' ')[11]);
-
                 }
 
                 if (readstate == 1 && counter == 2) // own hero weapon
@@ -658,11 +637,9 @@ namespace OpenAI
                     {
                         //for old log files a try and catch :D
                         this.ownHeropowerUsesThisGame = Convert.ToInt32(s.Split(' ')[3]);
-
                     }
                     catch
                     {
-
                     }
                 }
 
@@ -697,7 +674,6 @@ namespace OpenAI
                     {
                         this.enemyWeapon = s.Split(' ')[3];
                     }
-
                 }
                 if (readstate == 2 && counter == 3) // ability
                 {
@@ -706,11 +682,9 @@ namespace OpenAI
                     {
                         //for old log files a try and catch :D
                         this.enemyHeropowerUsesThisGame = Convert.ToInt32(s.Split(' ')[3]);
-
                     }
                     catch
                     {
-
                     }
                 }
                 if (readstate == 2 && counter == 4) // fatigue
@@ -725,7 +699,6 @@ namespace OpenAI
                 {
                     if (s.Contains(" zp:"))
                     {
-
                         string minionname = s.Split(' ')[0];
                         string minionid = s.Split(' ')[1];
                         int zp = Convert.ToInt32(s.Split(new string[] { " zp:" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(' ')[0]);
@@ -758,7 +731,6 @@ namespace OpenAI
                         bool cntlower = s.Contains(" cantLowerHpBelowOne");
                         bool cnttrgt = s.Contains(" canttarget");
                         //optional params (ints)
-
 
                         int chrg = 0;//charge
                         if (s.Contains(" chrg(")) chrg = Convert.ToInt32(s.Split(new string[] { " chrg(" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(')')[0]);
@@ -870,18 +842,13 @@ namespace OpenAI
                         if (maxhp > hp) tempminion.wounded = true;
                         tempminion.updateReadyness();
                         this.ownminions.Add(tempminion);
-
-
-
                     }
-
                 }
 
                 if (readstate == 4) // minion or enchantment
                 {
                     if (s.Contains(" zp:"))
                     {
-
                         string minionname = s.Split(' ')[0];
                         string minionid = s.Split(' ')[1];
                         int zp = Convert.ToInt32(s.Split(new string[] { " zp:" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(' ')[0]);
@@ -915,7 +882,6 @@ namespace OpenAI
                         bool cnttrgt = s.Contains(" canttarget");
 
                         //optional params (ints)
-
 
                         int chrg = 0;//charge
                         if (s.Contains(" chrg(")) chrg = Convert.ToInt32(s.Split(new string[] { " chrg(" }, StringSplitOptions.RemoveEmptyEntries)[1].Split(')')[0]);
@@ -1024,16 +990,11 @@ namespace OpenAI
                         if (maxhp > hp) tempminion.wounded = true;
                         tempminion.updateReadyness();
                         this.enemyminions.Add(tempminion);
-
-
                     }
-
-
                 }
 
                 if (readstate == 5) // minion or enchantment
                 {
-
                     Handmanager.Handcard card = new Handmanager.Handcard();
 
                     string minionname = s.Split(' ')[2];
@@ -1055,25 +1016,17 @@ namespace OpenAI
                     }
                     catch
                     {
-
                     }
                     card.manacost = mana;
                     card.position = pos;
 
                     handcards.Add(card);
-
                 }
-
-
-
-
-
 
                 counter++;
                 j++;
             }
             Helpfunctions.Instance.logg("rdy");
-
 
             Hrtprozis.Instance.setOwnPlayer(ownPlayer);
             Handmanager.Instance.setOwnPlayer(ownPlayer);
@@ -1084,7 +1037,6 @@ namespace OpenAI
             {
                 this.numOptionPlayedThisTurn += m.numAttacksThisTurn;
             }
-
 
             Hrtprozis.Instance.updatePlayer(this.maxmana, this.mana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.overdrive, ownHEntity, enemyHEntity, this.numberMinionsDiedThisturn, this.owncurrentRecall, this.enemyRecall, this.heropowerUsesThisTurn, this.locknload, this.stampede);
             Hrtprozis.Instance.setPlayereffects(this.ownDragonConsort, this.enemyDragonConsort, this.ownLoathebs, this.enemyLoathebs, this.ownMillhouse, this.enemyMillhouse, this.ownKirintor, this.ownPrep, this.ownSab, this.enemySab, this.ownFenci, this.enemyCursedCards);
@@ -1130,12 +1082,9 @@ namespace OpenAI
 
             this.ownHero.updateReadyness();
 
-
             //set Simulation stuff
 
             Ai.Instance.botBase = new BehaviorAggroWarlock();
-
-
 
             if (this.evalFunction == "rush") Ai.Instance.botBase = new BehaviorRush();
             if (this.evalFunction == "face") Ai.Instance.botBase = new BehaviorFace();
@@ -1185,11 +1134,8 @@ namespace OpenAI
 
             Settings.Instance.useSecretsPlayArround = dosecrets;
 
-            Settings.Instance.setWeights(alpha);
-
+            Settings.Instance.SetWeights(alpha);
         }
-
-
 
         public Minion createNewMinion(Handmanager.Handcard hc, int zonepos, bool own)
         {
@@ -1226,10 +1172,5 @@ namespace OpenAI
             }
             return m;
         }
-
-
-
-
     }
-
 }

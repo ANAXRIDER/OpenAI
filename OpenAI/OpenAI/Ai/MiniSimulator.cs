@@ -1,27 +1,26 @@
-﻿namespace OpenAI
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading;
+﻿using System;
+using System.Collections.Generic;
 
+namespace OpenAI
+{
     public class MiniSimulator
     {
         //#####################################################################################################################
         private int maxdeep = 6;
+
         private int maxwide = 10;
         private int totalboards = 50;
         private bool usePenalityManager = true;
         private bool useCutingTargets = true;
         private bool useComparison = true;
 
-
         private bool printNormalstuff;
 
         public int boardindexToSimulate;
-        List<Playfield> posmoves = new List<Playfield>(7000);
-        List<Playfield> twoturnfields = new List<Playfield>(500);
+        private List<Playfield> posmoves = new List<Playfield>(7000);
+        private List<Playfield> twoturnfields = new List<Playfield>(500);
 
-        List<List<Playfield>> threadresults = new List<List<Playfield>>(64);
+        private List<List<Playfield>> threadresults = new List<List<Playfield>>(64);
         private int dirtyTwoTurnSim = 256;
 
         public Action bestmove;
@@ -38,14 +37,13 @@
         private bool playaround;
         private int playaroundprob = 50;
         private int playaroundprob2 = 80;
-        
-        
 
-        PenalityManager pen = PenalityManager.Instance;
+        private PenalityManager pen = PenalityManager.Instance;
 
         public MiniSimulator()
         {
         }
+
         public MiniSimulator(int deep, int wide, int ttlboards)
         {
             this.maxdeep = deep;
@@ -86,7 +84,6 @@
                 if (pf.isEqual(p, false)) return;
             }*/
 
-
             //if (pf.playactions.Count >= 8)
             //{
             //    foreach (Playfield p in this.posmoves)
@@ -97,10 +94,6 @@
             //        }
             //    }
             //}
-
-
-
-
 
             this.posmoves.Add(pf);
 
@@ -120,7 +113,6 @@
                 //p.prepareNextTurn(p.isOwnTurn);
 
                 //Ai.Instance.enemyTurnSim[0].simulateEnemysTurn(p, simulateTwoTurns, playaround, print, playaroundprob, playaroundprob2);
-
             }
             p.complete = true;
         }
@@ -150,7 +142,6 @@
                 float bestoldval = -20000000;
                 foreach (Playfield p in temp)
                 {
-
                     if (p.complete || p.ownHero.Hp <= 0)
                     {
                         continue;
@@ -272,7 +263,6 @@
                         bestval = val;
                         bestanzactions = p.playactions.Count;
                     }
-
                 }
                 this.bestmove = bestplay.getNextAction();
                 this.bestmoveValue = bestval;
@@ -295,17 +285,16 @@
             int thread = 0;
             //DateTime started = DateTime.Now;
 
-            //set maxwide of enemyturnsimulator's to second step (this value is higher than the maxwide in first step) 
+            //set maxwide of enemyturnsimulator's to second step (this value is higher than the maxwide in first step)
             //foreach (EnemyTurnSimulator ets in Ai.Instance.enemyTurnSim)
             //{
-             //   ets.setMaxwideSecondStep(true);
+            //   ets.setMaxwideSecondStep(true);
             //}
 
             if (Settings.Instance.numberOfThreads == 1)
             {
                 foreach (Playfield p in this.twoturnfields)
                 {
-
                     if (p.ownHero.Hp >= 1 && p.enemyHero.Hp >= 1)
                     {
                         p.value = int.MinValue;
@@ -337,7 +326,6 @@
                     this.threadresults.Add(new List<Playfield>());
                 }
 
-
                 int k = 0;
                 for (k = 0; k < Settings.Instance.numberOfThreads; k++)
                 {
@@ -348,7 +336,6 @@
                     threadl.Start((object)i);
 
                     tasks.Add(threadl);
-
                 }
 
                 System.Threading.Thread.Sleep(50);
@@ -358,8 +345,6 @@
                     tasks[j].Join();
                     posmoves.AddRange(this.threadresults[j]);
                 }
-
-
             }
 
             //just for debugging
@@ -379,7 +364,7 @@
                 {
                     //if(threadnumber ==0)Helpfunctions.Instance.ErrorLog("no " + threadnumber + " calculates " + i);
                     Playfield p = this.twoturnfields[i];
-                    if (p.ownHero.Hp >= 1 && p.enemyHero.Hp>=1)
+                    if (p.ownHero.Hp >= 1 && p.enemyHero.Hp >= 1)
                     {
                         p.value = int.MinValue;
                         //simulateEnemysTurn(simulateTwoTurns, playaround, print, pprob, pprob2);
@@ -392,16 +377,11 @@
                         //p.value = -10000;
                     }
                     //Ai.Instance.enemyTurnSim.simulateEnemysTurn(p, true, this.playaround, false, this.playaroundprob, this.playaroundprob2);
-                    
 
                     this.threadresults[threadnumber].Add(p);
-
                 }
             }
-
         }
-
-
 
         public void cuttingposibilities()
         {
@@ -440,10 +420,7 @@
                     if (!found) temp.Add(p);
                     //i++;
                     //if (i >= this.maxwide) break;
-
                 }
-
-
             }
             else
             {
@@ -490,16 +467,8 @@
                     if (!found) twoturnfields.Add(p);
                     //i++;
                     //if (i >= this.maxwide) break;
-
                 }
-
-
             }
-
-
-
-
-
 
             //this.twoturnfields.AddRange(temp.GetRange(0, Math.Min(this.dirtyTwoTurnSim, temp.Count)));
 
@@ -507,7 +476,6 @@
 
             //posmoves.Clear();
             //posmoves.AddRange(Helpfunctions.TakeList(temp, takenumber));
-
         }
 
         public List<targett> cutAttackTargets(List<targett> oldlist, Playfield p, bool own)
@@ -538,7 +506,6 @@
                         continue;
                     }*/
 
-
                     bool goingtoadd = true;
                     List<Minion> temp = new List<Minion>(addedmins);
                     bool isSpecial = m.handcard.card.isSpecialMinion;
@@ -565,7 +532,6 @@
                             if (mnn.Angr == m.Angr && mnn.Hp == m.Hp && mnn.divineshild == m.divineshild && mnn.taunt == m.taunt && mnn.poisonous == m.poisonous) goingtoadd = false;
                             continue;
                         }
-
                     }
 
                     if (goingtoadd)
@@ -579,7 +545,6 @@
                         //help.logg(m.name + " is not needed to attack");
                         continue;
                     }
-
                 }
             }
             //help.logg("end targetcutting");
@@ -609,7 +574,5 @@
             boardindexToSimulate = 0;
             return this.bestboard;
         }
-
     }
-
 }

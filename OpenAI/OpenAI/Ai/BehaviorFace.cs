@@ -4,7 +4,7 @@ namespace OpenAI
 {
     public class BehaviorFace : Behavior
     {
-        PenalityManager penman = PenalityManager.Instance;
+        private PenalityManager penman = PenalityManager.Instance;
 
         public override float getPlayfieldValue(Playfield p)
         {
@@ -43,7 +43,6 @@ namespace OpenAI
 
             //RR card draw value depending on the turn and distance to lethal
             //RR if lethal is close, carddraw value is increased
-
 
             if (p.turnCounter == 0 && Ai.Instance.lethalMissing <= 5) //RR
             {
@@ -178,7 +177,7 @@ namespace OpenAI
             {
                 //Helpfunctions.Instance.ErrorLog("turncounter " + p.turnCounter);
 
-                if (p.turnCounter == 0) // own turn 
+                if (p.turnCounter == 0) // own turn
                 {
                     //worst case: we die on own turn
                     retval += p.owncarddraw * 500;
@@ -197,9 +196,6 @@ namespace OpenAI
                         retval -= 100;
                     }
                 }
-
-
-
             }
 
             /*if (p.enemyHero.Hp >= 1 && p.ownHero.Hp <= 0)
@@ -219,7 +215,6 @@ namespace OpenAI
 
         public override float getEnemyMinionValue(Minion m, Playfield p)
         {
-
             int retval = 1;  // Give a base value of 1, so in the event of equal boards next turn vs this turn, minion removal is prioritzed earlier rather than later.;
             if (m.name == CardDB.cardName.cutpurse) retval += 40;
             if (m.taunt || (m.handcard.card.targetPriority >= 1 && !m.silenced))
@@ -235,7 +230,6 @@ namespace OpenAI
                 if (m.frozen) retval -= 1; // because its bad for enemy :D
                 if (m.poisonous) retval += 4;
                 retval += m.handcard.card.rarity;
-
 
                 if (!m.frozen && m.Angr >= 4) retval += 20 + m.Hp;
                 if (!m.frozen && m.Angr >= 7)
@@ -253,11 +247,7 @@ namespace OpenAI
 
             if (m.handcard.card.targetPriority >= 1 && !m.silenced) retval += m.handcard.card.targetPriority;
 
-
             return retval;
         }
-
-
     }
-
 }

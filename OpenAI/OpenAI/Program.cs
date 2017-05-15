@@ -40,11 +40,11 @@ namespace OpenAI
         public int dontmultiactioncount = 0;
         public int POWERFULSINGLEACTION = 0;
 
-        
+
         Silverfish sf;
         public Behavior behave = new BehaviorControl();
         public List<Playfield> queuedMoveGuesses = new List<Playfield>();
-        
+
         int discovercounter = 0;
 
         public Bot()
@@ -59,7 +59,7 @@ namespace OpenAI
             Settings set = Settings.Instance;
             this.sf = Silverfish.Instance;
             behave = set.behave;
-            sf.setnewLoggFile();
+            sf.SetNewLogFile();
             CardDB cdb = CardDB.Instance;
             if (cdb.installedWrong)
             {
@@ -76,7 +76,7 @@ namespace OpenAI
             //Helpfunctions.Instance.ErrorLog("test... " + Settings.Instance.logpath + Settings.Instance.logfile);
             if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
             if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
-            
+
             if (!sf.startedexe && set.useExternalProcess)
             {
                 sf.startedexe = true;
@@ -119,7 +119,7 @@ namespace OpenAI
                 Process.Start(startInfo);
             }
             //reset it in case user closes exe
-            sf.startedexe = false; 
+            sf.startedexe = false;
         }
 
 
@@ -177,11 +177,11 @@ namespace OpenAI
                     Helpfunctions.Instance.ErrorLog("New Enemy Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(enemyHeroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname) + "\"");
                 }
 
-                behave = Settings.Instance.updateInstance();
+                behave = Settings.Instance.UpdateInstance();
             }
-            
-            sf.setnewLoggFile();
-            Settings.Instance.loggCleanPath();
+
+            sf.SetNewLogFile();
+            Settings.Instance.LogCleanPath();
             Mulligan.Instance.loggCleanPath();
             Discovery.Instance.LogCleanPath();
             ComboBreaker.Instance.loggCleanPath();
@@ -293,13 +293,13 @@ namespace OpenAI
 
             if (e.loss || e.concede)
                 NumLoses++;
-            
+
             Helpfunctions.Instance.ErrorLog("#info: win:" + NumWins + " lose:" + NumLoses + " real winrate:" + (NumWins * 100 / (NumWins + NumLoses)));
         }
 
         private HSRangerLib.BotActionType GetRangerActionType(Entity actor, Entity target, ActionType sf_action_type)
         {
-            
+
             if (sf_action_type == ActionType.END_TURN)
             {
                 if (POWERFULSINGLEACTION >= 1) POWERFULSINGLEACTION = 0;
@@ -321,7 +321,8 @@ namespace OpenAI
                 if (actor.Zone == HSRangerLib.TAG_ZONE.HAND && actor.IsMinion)
                 {
                     return BotActionType.CAST_MINION;// that should not occour >_>
-                }else if (actor.Zone == HSRangerLib.TAG_ZONE.PLAY && actor.IsMinion)
+                }
+                else if (actor.Zone == HSRangerLib.TAG_ZONE.PLAY && actor.IsMinion)
                 {
                     return BotActionType.MINION_ATTACK;
                 }
@@ -334,19 +335,23 @@ namespace OpenAI
                     if (actor.IsMinion)
                     {
                         return BotActionType.CAST_MINION;
-                    }else if (actor.IsWeapon)
+                    }
+                    else if (actor.IsWeapon)
                     {
                         return BotActionType.CAST_WEAPON;
-                    }else
+                    }
+                    else
                     {
                         return BotActionType.CAST_SPELL;
-                    }                    
-                }else if (actor.Zone == HSRangerLib.TAG_ZONE.PLAY)
+                    }
+                }
+                else if (actor.Zone == HSRangerLib.TAG_ZONE.PLAY)
                 {
                     if (actor.IsMinion)
                     {
                         return BotActionType.MINION_ATTACK;
-                    }else if (actor.IsWeapon)
+                    }
+                    else if (actor.IsWeapon)
                     {
                         return BotActionType.HERO_ATTACK;
                     }
@@ -358,7 +363,8 @@ namespace OpenAI
                 Helpfunctions.Instance.ErrorLog("GetActionType: wrong action type! " +
                                             sf_action_type.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(actor.CardId)
                                                          + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(target.CardId));
-            }else
+            }
+            else
             {
                 Helpfunctions.Instance.ErrorLog("GetActionType: wrong action type! " +
                                             sf_action_type.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(actor.CardId)
@@ -424,7 +430,7 @@ namespace OpenAI
                             || PenalityManager.Instance.discoverCards.ContainsKey(daum.bestmove.card.card.name))
                         {
                             this.doMultipleThingsAtATime = false;
-                            this.dontmultiactioncount++; break;                            
+                            this.dontmultiactioncount++; break;
                         }
                         if (PenalityManager.Instance.AdaptDatabase.ContainsKey(daum.bestmove.card.card.name)
                             || PenalityManager.Instance.discoverCards.ContainsKey(daum.bestmove.card.card.name)
@@ -500,8 +506,8 @@ namespace OpenAI
                             if (hasdamageeffectminion) this.POWERFULSINGLEACTION++;
                         }
 
-                        
-                        
+
+
 
 
                         if (daum.bestmove.card.card.type == CardDB.cardtype.SPELL)
@@ -524,16 +530,17 @@ namespace OpenAI
                                 case CardDB.cardName.arcanemissiles:
                                 case CardDB.cardName.forkedlightning:
                                 case CardDB.cardName.brawl:
-                                case CardDB.cardName.bouncingblade:      
+                                case CardDB.cardName.bouncingblade:
                                 case CardDB.cardName.darkbargain:
                                 case CardDB.cardName.avengingwrath:
                                 case CardDB.cardName.multishot:
                                 case CardDB.cardName.fistofjaraxxus:
-                                case CardDB.cardName.deadlyshot: 
+                                case CardDB.cardName.deadlyshot:
                                 case CardDB.cardName.sabotage:
                                 case CardDB.cardName.spreadingmadness:
-                                case CardDB.cardName.flamecannon: 
-                                case CardDB.cardName.cleave: Random_Spell_But_Can_Kill_Deathrattle_Card = true;
+                                case CardDB.cardName.flamecannon:
+                                case CardDB.cardName.cleave:
+                                    Random_Spell_But_Can_Kill_Deathrattle_Card = true;
                                     this.dontmultiactioncount++;
                                     break;
                                 default: break;
@@ -566,8 +573,8 @@ namespace OpenAI
                                     m.name == CardDB.cardName.dragonegg ||
                                     m.name == CardDB.cardName.hoggerdoomofelwynn ||
                                     m.name == CardDB.cardName.grimpatron) hasdamageeffectminion = true;
-                            }                            
-                            if ((daum.bestmove.target != null && (hastargetdeathrattle || targethasdamageeffect) || 
+                            }
+                            if ((daum.bestmove.target != null && (hastargetdeathrattle || targethasdamageeffect) ||
                                 ((hasenemydeathrattle || hasdamageeffectminion) && (Random_Spell_But_Can_Kill_Deathrattle_Card || PenalityManager.Instance.DamageAllDatabase.ContainsKey(daum.bestmove.card.card.name) || PenalityManager.Instance.DamageAllEnemysDatabase.ContainsKey(daum.bestmove.card.card.name)))))
                             {
                                 this.dontmultiactioncount++;
@@ -691,39 +698,39 @@ namespace OpenAI
             }
 
 
-             ranger_action.Type = GetRangerActionType(ranger_action.Actor, ranger_action.Target, moveTodo.actionType);
+            ranger_action.Type = GetRangerActionType(ranger_action.Actor, ranger_action.Target, moveTodo.actionType);
 
-             if (moveTodo.druidchoice >= 1)
-             {
-                 ranger_action.Choice = moveTodo.druidchoice;//1=leftcard, 2= rightcard
-             }
+            if (moveTodo.druidchoice >= 1)
+            {
+                ranger_action.Choice = moveTodo.druidchoice;//1=leftcard, 2= rightcard
+            }
 
-             ranger_action.Index = moveTodo.place;
-             if (moveTodo.place >= 1) ranger_action.Index = moveTodo.place - 1;
+            ranger_action.Index = moveTodo.place;
+            if (moveTodo.place >= 1) ranger_action.Index = moveTodo.place - 1;
 
-             if (moveTodo.target != null)
-             {
-                 //ranger stuff :D
-                 ranger_action.ID = moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId);
+            if (moveTodo.target != null)
+            {
+                //ranger stuff :D
+                ranger_action.ID = moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId);
 
-                 Helpfunctions.Instance.ErrorLog(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
-                                                  + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Target.CardId));
-                 Helpfunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
-                                                  + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Target.CardId)
-                                                  + " choice: " + moveTodo.druidchoice + " place" + moveTodo.place);
+                Helpfunctions.Instance.ErrorLog(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
+                                                 + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Target.CardId));
+                Helpfunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
+                                                 + " target: " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Target.CardId)
+                                                 + " choice: " + moveTodo.druidchoice + " place" + moveTodo.place);
 
 
-             }
-             else
-             {
-                 //ranger stuff :D
-                 ranger_action.ID = moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId);
+            }
+            else
+            {
+                //ranger stuff :D
+                ranger_action.ID = moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId);
 
-                 Helpfunctions.Instance.ErrorLog(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
-                                                  + " target nothing");
-                 Helpfunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
-                                                  + " choice: " + moveTodo.druidchoice + " place" + moveTodo.place);
-             }
+                Helpfunctions.Instance.ErrorLog(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
+                                                 + " target nothing");
+                Helpfunctions.Instance.logg(moveTodo.actionType.ToString() + ": " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(ranger_action.Actor.CardId)
+                                                 + " choice: " + moveTodo.druidchoice + " place" + moveTodo.place);
+            }
 
 
 
@@ -763,7 +770,7 @@ namespace OpenAI
                     POWERFULSINGLEACTION++;
                 }
 
-                else if ((daum.bestmove.own.Angr >= daum.bestmove.target.Hp || daum.bestmove.own.poisonous ) && !daum.bestmove.target.divineshild && (daum.bestmove.target.name == CardDB.cardName.murlocwarleader || daum.bestmove.target.name == CardDB.cardName.southseacaptain))
+                else if ((daum.bestmove.own.Angr >= daum.bestmove.target.Hp || daum.bestmove.own.poisonous) && !daum.bestmove.target.divineshild && (daum.bestmove.target.name == CardDB.cardName.murlocwarleader || daum.bestmove.target.name == CardDB.cardName.southseacaptain))
                 {
                     this.doMultipleThingsAtATime = false;
                     this.dontmultiactioncount++;
@@ -775,7 +782,7 @@ namespace OpenAI
                 {
                     if (ranger_action.Target.HasDeathrattle && !ranger_action.Target.HasDivineShield) // target deathrattle
                     {
-                        if ((ranger_action.Target.Health - ranger_action.Target.Damage) <= ranger_action.Actor.ATK || 
+                        if ((ranger_action.Target.Health - ranger_action.Target.Damage) <= ranger_action.Actor.ATK ||
                             ranger_action.Target.IsPoisonous || ranger_action.Actor.IsPoisonous)
                         {
                             this.doMultipleThingsAtATime = false;
@@ -796,7 +803,7 @@ namespace OpenAI
                 {
                     this.doMultipleThingsAtATime = false;
                 }
-                else 
+                else
                 {
                     dontmultiactioncount = 0;
                     this.doMultipleThingsAtATime = true;
@@ -966,7 +973,7 @@ namespace OpenAI
                 this.doMultipleThingsAtATime = true;
                 this.dontmultiactioncount = 0;
             }
-            if (POWERFULSINGLEACTION >= 1) 
+            if (POWERFULSINGLEACTION >= 1)
             {
                 this.doMultipleThingsAtATime = false;
                 dontmultiactioncount++;
@@ -1367,7 +1374,7 @@ namespace OpenAI
         int enemyHeroPowerUsesThisGame = 0;
         int lockandload = 0;
         int Stampede = 0;
-        int ownsabo=0;//number of saboteurplays  of our player (so enemy has the buff)
+        int ownsabo = 0;//number of saboteurplays  of our player (so enemy has the buff)
         int enemysabo = 0;//number of saboteurplays  of enemy player (so we have the buff)
         int ownFenciCoaches = 0; // number of Fencing Coach-debuffs on our player 
 
@@ -1376,9 +1383,9 @@ namespace OpenAI
         //LOE stuff###############################################################################################################
         public List<CardDB.cardIDEnum> choiceCards = new List<CardDB.cardIDEnum>(); // here we save all available tracking/discover cards ordered from left to right
         public List<int> choiceCardsEntitys = new List<int>(); //list of entitys same order as choiceCards
-        
+
         private static HSRangerLib.GameState latestGameState;
-        
+
         private static Silverfish instance;
 
         public static Silverfish Instance
@@ -1391,57 +1398,30 @@ namespace OpenAI
 
         private Silverfish()
         {
-            this.singleLog = Settings.Instance.writeToSingleFile;
-            string path = FolderPath.OpenAI + "SilverLogs" + Path.DirectorySeparatorChar;
-            Directory.CreateDirectory(path);
-            sttngs.setFilePath(FolderPath.OpenAI);
-
-            if (singleLog)
-            {
-                sttngs.setLoggPath(FolderPath.Logs + Path.DirectorySeparatorChar);
-                sttngs.setLoggFile("SilverLog.txt");
-                Helpfunctions.Instance.createNewLoggfile();
-            }
-            else
-            {
-                sttngs.setLoggPath(path);
-            }
-            
-            Helpfunctions.Instance.ErrorLog("init Silverfish");
-            Helpfunctions.Instance.ErrorLog("setlogpath to:" + path);
+            Helpfunctions.Instance.ErrorLog("Started OpenAI");
+            Helpfunctions.Instance.ErrorLog("Paths:");
+            Helpfunctions.Instance.ErrorLog("   Assembly:");
+            Helpfunctions.Instance.ErrorLog("      - " + FolderPath.OpenAI);
+            Helpfunctions.Instance.ErrorLog("   Common:");
+            Helpfunctions.Instance.ErrorLog("      - " + FolderPath.Common);
+            Helpfunctions.Instance.ErrorLog("   Logs:");
+            Helpfunctions.Instance.ErrorLog("      - " + FolderPath.Logs);
 
             PenalityManager.Instance.setCombos();
-            Mulligan m = Mulligan.Instance; // read the mulligan list
-            Discovery d = Discovery.Instance; // read the discover list
-            Settings.Instance.setSettings();
+            Mulligan m = Mulligan.Instance;
+            Discovery d = Discovery.Instance;
+            Settings.Instance.SetSettings();
             Helpfunctions.Instance.startFlushingLogBuffers();
         }
 
-        public void setnewLoggFile()
+        public void SetNewLogFile()
         {
-            Questmanager.Instance.Reset();
+            QuestManager.Instance.Reset();
             OwnCrystalCore = 0;
             EnemyCrystalCore = 0;
             ownMinionsCost0 = false;
 
-            Helpfunctions.Instance.flushLogg(); // flush the buffer before creating a new log
-            if (!singleLog)
-            {
-                sttngs.setLoggFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
-                Helpfunctions.Instance.createNewLoggfile();
-                Helpfunctions.Instance.ErrorLog("#######################################################");
-                Helpfunctions.Instance.ErrorLog("fight is logged in: " + sttngs.logpath + sttngs.logfile);
-                Helpfunctions.Instance.ErrorLog("#######################################################");
-            }
-            else
-            {
-                sttngs.setLoggFile("UILogg.txt");
-            }
-        }
-
-        public void setNewGame()
-        {
-            //todo sepefeets - move stuff here to make things more consistant between HR/HB versions
+            Helpfunctions.Instance.flushLogg();
         }
 
         public bool updateEverything(HSRangerLib.BotBase rangerbot, Behavior botbase, bool queueActions, bool runExtern = false, bool passiveWait = false)
@@ -1733,7 +1713,7 @@ namespace OpenAI
                                 }
                             }
 
-                            
+
                             break;
                         }
                     case ActionType.PLAY_CARD:
@@ -1832,7 +1812,7 @@ namespace OpenAI
                                 if (juggler_councilman_count >= 1 && this.enemyMinions.Count >= 1)
                                 {
                                     int time = 2100 * juggler_councilman_count;
-                                    if (juggleronfield) time = time *  13/ 10;
+                                    if (juggleronfield) time = time * 13 / 10;
                                     if (daum.bestmove.card.card.name == CardDB.cardName.forbiddenritual)
                                     {
                                         time = time * (Math.Min(7 - this.ownMinions.Count, this.currentMana));
@@ -1957,7 +1937,7 @@ namespace OpenAI
                                 System.Threading.Thread.Sleep(800);
                             }
 
-                            if (PenalityManager.Instance.AdaptDatabase.ContainsKey(daum.bestmove.card.card.name) || 
+                            if (PenalityManager.Instance.AdaptDatabase.ContainsKey(daum.bestmove.card.card.name) ||
                                 PenalityManager.Instance.discoverCards.ContainsKey(daum.bestmove.card.card.name)) //small sleep adapt/discover cards.
                             {
                                 System.Threading.Thread.Sleep(2800);
@@ -1965,7 +1945,7 @@ namespace OpenAI
 
                         }
 
-                            
+
 
                         break;
                     case ActionType.USE_HERO_POWER:
@@ -2005,7 +1985,7 @@ namespace OpenAI
                 if (m.Hp >= 1) this.numOptionPlayedThisTurn += m.numAttacksThisTurn;
             }
 
-            Hrtprozis.Instance.updatePlayer(this.ownMaxMana, this.currentMana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.ownOverload, ownHero.entityID, enemyHero.entityID, this.numberMinionsDiedThisTurn, this.ownCurrentOverload, this.enemyOverload, this.heroPowerUsesThisTurn,this.lockandload,this.Stampede);
+            Hrtprozis.Instance.updatePlayer(this.ownMaxMana, this.currentMana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.ownOverload, ownHero.entityID, enemyHero.entityID, this.numberMinionsDiedThisTurn, this.ownCurrentOverload, this.enemyOverload, this.heroPowerUsesThisTurn, this.lockandload, this.Stampede);
             Hrtprozis.Instance.setPlayereffects(this.ownDragonConsort, this.enemyDragonConsort, this.ownLoathebs, this.enemyLoathebs, this.ownMillhouse, this.enemyMillhouse, this.ownKirintor, this.ownPrepa, this.ownsabo, this.enemysabo, this.ownFenciCoaches, this.enemyCursedCardsInHand);
             Hrtprozis.Instance.updateSecretStuff(this.ownSecretList, this.enemySecretCount);
 
@@ -2036,7 +2016,7 @@ namespace OpenAI
                     {
                         return false;
                     }
-                    
+
                     //board changed we update secrets!
                     //if(Ai.Instance.nextMoveGuess!=null) Probabilitymaker.Instance.updateSecretList(Ai.Instance.nextMoveGuess.enemySecretList);
                     Probabilitymaker.Instance.updateSecretList(p, lastpf);
@@ -2113,10 +2093,10 @@ namespace OpenAI
                 }
                 else
                 {
-                    List < Handmanager.Handcard > newcards = p.getNewHandCards(Ai.Instance.nextMoveGuess);
+                    List<Handmanager.Handcard> newcards = p.getNewHandCards(Ai.Instance.nextMoveGuess);
                     foreach (var card in newcards)
                     {
-                        if (!isCardCreated(card)) Hrtprozis.Instance.removeCardFromTurnDeck(card.card.cardIDenum);
+                        if (!IsCardCreated(card)) Hrtprozis.Instance.removeCardFromTurnDeck(card.card.cardIDenum);
                     }
 
                     printstuff(p, true);
@@ -2128,13 +2108,13 @@ namespace OpenAI
                 printstuff(p, false);
                 Ai.Instance.dosomethingclever(botbase);
             }
-            
+
             Helpfunctions.Instance.ErrorLog("calculating ended! " + DateTime.Now.ToString("HH:mm:ss.ffff"));
 
             return true;
         }
 
-        public bool isCardCreated(Handmanager.Handcard handcard)
+        public bool IsCardCreated(Handmanager.Handcard handcard)
         {
             foreach (var card in latestGameState.GameEntityList)
             {
@@ -2197,7 +2177,7 @@ namespace OpenAI
             {
                 if (item.GetTagValue((int)GAME_TAG.QUEST) >= 1)
                 {
-                    Questmanager.Instance.updateQuestStuff(item.CardId, item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS), item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS_TOTAL), false);
+                    QuestManager.Instance.UpdateQuestProgress(item.CardId, item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS), item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS_TOTAL), false);
                     continue;
                 }
                 enemySecretList.Add(item.EntityId);
@@ -2209,7 +2189,7 @@ namespace OpenAI
             {
                 if (item.GetTagValue((int)GAME_TAG.QUEST) >= 1)
                 {
-                    Questmanager.Instance.updateQuestStuff(item.CardId, item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS), item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS_TOTAL), true);
+                    QuestManager.Instance.UpdateQuestProgress(item.CardId, item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS), item.GetTagValue((int)GAME_TAG.QUEST_PROGRESS_TOTAL), true);
                     continue;
                 }
                 this.ownSecretList.Add(item.CardId);
@@ -2217,7 +2197,7 @@ namespace OpenAI
 
             this.numMinionsPlayedThisTurn = rangerbot.gameState.NumMinionsPlayedThisTurn;
             this.cardsPlayedThisTurn = rangerbot.gameState.NumCardsPlayedThisTurn;
-            
+
 
             //get weapon stuff
             this.ownHeroWeapon = "";
@@ -2373,7 +2353,7 @@ namespace OpenAI
             //ToDo:
 
             this.numberMinionsDiedThisTurn = rangerbot.gameState.NumMinionsKilledThisTurn;
-            
+
             //this should work (hope i didnt oversee a value :D)
 
             this.ownCurrentOverload = rangerbot.gameState.RecalledCrystalsOwedNextTurn;// ownhero.GetTag(HRGameTag.RECALL);
@@ -2418,7 +2398,7 @@ namespace OpenAI
                 }
 
             }
-            this.lockandload = (rangerbot.gameState.LocalPlayerLockAndLoad)? 1 : 0;
+            this.lockandload = (rangerbot.gameState.LocalPlayerLockAndLoad) ? 1 : 0;
             //this.Stampede = (rangerbot.gameState.LocalPlayerLockAndLoad) ? 1 : 0;
 
             //saboteur test:
@@ -2434,7 +2414,7 @@ namespace OpenAI
         private void getMinions(HSRangerLib.BotBase rangerbot)
         {
             Dictionary<int, Entity> allEntitys = new Dictionary<int, Entity>();
-            
+
             //TEST....................
             /*
             Helpfunctions.Instance.ErrorLog("# all");
@@ -2525,7 +2505,7 @@ namespace OpenAI
 
                     m.entityID = entity.EntityId;
 
-                    if(m.name == CardDB.cardName.unknown) Helpfunctions.Instance.ErrorLog("unknown card error");
+                    if (m.name == CardDB.cardName.unknown) Helpfunctions.Instance.ErrorLog("unknown card error");
 
                     Helpfunctions.Instance.ErrorLog(m.entityID + " ." + entity.CardId + ". " + m.name + " ready params ex: " + m.exhausted + " charge: " + m.charge + " attcksthisturn: " + m.numAttacksThisTurn + " playedthisturn " + m.playedThisTurn);
                     //Helpfunctions.Instance.ErrorLog("spellpower check " + entitiy.SpellPowerAttack + " " + entitiy.SpellPowerHealing + " " + entitiy.SpellPower);
@@ -2625,14 +2605,14 @@ namespace OpenAI
         {
             int ownspellpower = rangerbot.gameState.LocalPlayerSpellPower;
             int spellpowerfield = 0;
-            int numberDalaranAspirant=0;
+            int numberDalaranAspirant = 0;
             foreach (Minion mnn in this.ownMinions)
             {
-                if(mnn.name == CardDB.cardName.dalaranaspirant) numberDalaranAspirant++;
+                if (mnn.name == CardDB.cardName.dalaranaspirant) numberDalaranAspirant++;
                 spellpowerfield += mnn.spellpower;
             }
             int missingSpellpower = ownspellpower - spellpowerfield;
-            if (missingSpellpower != 0 )
+            if (missingSpellpower != 0)
             {
                 Helpfunctions.Instance.ErrorLog("spellpower correction: " + ownspellpower + " " + spellpowerfield + " " + numberDalaranAspirant);
             }
@@ -2708,7 +2688,7 @@ namespace OpenAI
             {
 
                 Entity entitiy = item;
-           
+
                 if (entitiy.ControllerId == this.ownPlayerController && entitiy.ZonePosition >= 1) // own handcard
                 {
                     CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(entitiy.CardId));
@@ -2981,7 +2961,7 @@ namespace OpenAI
         {
             string dtimes = DateTime.Now.ToString("HH:mm:ss:ffff");
             String completeBoardString = p.getCompleteBoardForSimulating(this.botbehave, this.versionnumber, dtimes);
-            
+
             Helpfunctions.Instance.logg(completeBoardString);
 
             if (runEx)
@@ -3013,7 +2993,7 @@ namespace OpenAI
                     string data = "";
                     System.Threading.Thread.Sleep(5);
                     data = File.ReadAllText(FilePath.ActionsToDo);
-                    
+
                     //if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
                     //if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");
                     //if (!data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: missing <EoF>");
@@ -3023,10 +3003,10 @@ namespace OpenAI
                         //Helpfunctions.Instance.ErrorLog($"[Program] Message Data:\r\n{data}");
                         data = data.Replace("<EoF>", "");
                         //Helpfunctions.Instance.ErrorLog(data);
-      
+
                         Helpfunctions.Instance.resetBuffer();
                         Helpfunctions.Instance.writeBufferToActionFile();
-                        
+
                         alist.AddRange(data.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
                         string board = alist[0];
                         if (board.StartsWith("board "))
@@ -3281,9 +3261,4 @@ namespace OpenAI
             this.sendbuffer = "";
         }
     }
-
-
-    // the ai :D
-    //please ask/write me if you use this in your project
-
 }
